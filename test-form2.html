@@ -1,0 +1,219 @@
+<html>
+    <head>
+        <title>first test form</title>
+        <link type="text/css" rel="stylesheet" href="ext-3.2.1/resources/css/ext-all.css"/>
+        <link type="text/css" rel="stylesheet" href="ext-3.2.1/resources/css/xtheme-blue.css"/>
+        <!-- extension library styles -->
+        <link type="text/css" rel="stylesheet" href="ext-3.2.1/ux/css/MultiSelect.css"/>
+        <link type="text/css" rel="stylesheet" href="ext-3.2.1/ux/css/data-view.css"/>
+         <link type="text/css" rel="stylesheet" href="ext-3.2.1/ux/css/fileuploadfield.css"/>
+        <style type="text/css">
+            .tabs {
+                background-image:url( ../desktop/images/tabs.gif ) !important;
+            }
+        </style>
+        
+        <script src="ext-3.2.1/adapter/ext/ext-base-debug-w-comments.js" type="text/javascript"></script>
+        <script src="ext-3.2.1/ext-all-debug-w-comments.js" type="text/javascript"></script>
+        <!-- extensions libraries -->
+        <script src="ext-3.2.1/ux/MultiSelect.js" type="text/javascript"></script>
+        <script src="ext-3.2.1/ux/DataView-more.js" type="text/javascript"></script>
+        <script src="ext-3.2.1/ux/FileUploadField.js" type="text/javascript"></script>
+        
+        <!-- Pete's abstractions -->
+        <script src="client-scripts/location-form.js" type="text/javascript"></script>
+        <script src="client-scripts/cellline-window.js" type="text/javascript"></script>
+        <script src="client-scripts/basalmedia-window.js" type="text/javascript"></script>
+        <script src="client-scripts/cellline-form.js" type="text/javascript"></script>
+        <script src="client-scripts/xml-reader.js" type="text/javascript"></script>
+        
+        <script src="client-scripts/cell-sample-editor-grid.js" type="text/javascript"></script>
+        
+        <script src="client-scripts/new-cellline-form.js" type="text/javascript"></script>
+        
+        <script src="ext-3.2.1/ux/FitToParent.js" type="text/javascript"></script>
+                
+        <script language="javascript">
+        Ext.onReady(function() {
+                                       
+                       
+            var location = new Ext.slims.LocationForm({'slims-group': 2});
+            
+            var cellline = new Ext.slims.CellLineForm();
+            
+            var editor = new Ext.slims.CellSampleEditorGrid({
+                id: 'editor-grid',
+                cls: 'overflow: hidden;',
+                collapsible: true,
+                style:'padding: 5px 0 0 0',
+                autoWidth: true,
+                celllineEditor: new Ext.form.ComboBox(Ext.getCmp('cellname').cloneConfig()),
+                passageNumberEditor: new Ext.form.TextField(Ext.getCmp('passage-number').cloneConfig()),
+                commentEditor: new Ext.form.TextArea(Ext.getCmp('comment').cloneConfig()),
+                dateEditor: new Ext.form.DateField(Ext.getCmp('operation-date').cloneConfig()),
+                basalMediaEditor: new Ext.form.ComboBox(Ext.getCmp('basal-media-combo').cloneConfig()),
+                operationEditor: new Ext.form.ComboBox(Ext.getCmp('operation').cloneConfig()),
+                addSelectionHandler: function() {
+                    editor.Clear();
+                    var positions = location.getPositions();
+                    if(positions && positions.length !== 0) {
+                        var dewar = location.getDewar();
+                        var stack = location.getStack();
+                        var box = location.getBox();
+                        var celllinename = cellline.getCellLineName();
+                        var passagenumber = cellline.getPassageNumber();
+                        var basalmedia = cellline.getBasalMedia();
+                        var opdate = cellline.getOperationDate();
+                        var operation = cellline.getOperation();
+                        
+                        for(var i = 0, length = positions.length; i < length; i++) {
+                            var position = positions[i];
+                            var record = {
+                                id: dewar + "-" + stack + "-" + box + "-" + position,
+                                Dewar: dewar,
+                                Stack: stack,
+                                Box: box,
+                                Position: position,
+                                'Cell Line': celllinename,
+                                'Passage Number': passagenumber,
+                                'Basal Media': basalmedia,
+                                Comment: '',
+                                Date: opdate,
+                                Operation: operation
+                            };
+                            editor.addRecord(record);
+                        }
+                    }
+                },
+                plugins: [
+                    new Ext.ux.FitToParent({
+                        parent: 'all',
+                        offsets: [50, 50]
+                    })
+                ]
+            });
+           
+            var page = new Ext.TabPanel({
+                activeTab: 0,
+                tabPosition: 'top',
+                plain: false,
+                frame: false,
+                // width: 715,
+                autoWidth: true,
+                autoHeight: true,
+                defaults: { autoHeight: true },
+                anchorSize: { width: 715},
+                items: [{
+                    id: 'all',
+                    frame: false,
+                    border: false,
+                    layout: 'hbox',
+                    title: 'Sample Entry',
+                    buttonAlign: 'right',
+                buttons: ['->',{
+                    text: 'Clear',
+                    listeners: {
+                        click: {
+                            fn: function() {
+                                cellline.Clear();
+                                location.Clear();
+                                editor.Clear();
+                                return true;
+                            }
+                        }
+                    }
+                },{
+                    text: 'Submit',
+                    listeners: {
+                        click: {
+                            fn: function() {
+                                var mask = new Ext.LoadMask(Ext.getBody(), { waitMsg: 'Saving...'});
+                                
+                                Ext.Ajax.on('beforerequest', function(connection, options) {
+                                    mask.show();
+                                    return true;
+                                });
+                                
+                                Ext.Ajax.on('requestcomplete', function(connection, response, options) {
+                                    mask.hide();
+                                    return true;
+                                });
+                                
+                                var reader = new Ext.slims.XmlReader();
+                                       
+                                
+                                var store = editor.getStore();
+                                writer = store.writer;
+                                var params = {};
+                                writer.apply(params, {}, "create", store.getRange());
+                                
+                                var config = {
+                                    url: '/slims/queries/add-sample.php',
+                                    method: 'post',
+                                    disableCaching: true,
+                                    params: params,
+                                    callback: function(options, success, response) {
+                                        var data = reader.read(response);
+                                        if(data.success) {
+                                            Ext.MessageBox.show({
+                                                text: 'Added successfully',
+                                                icon: Ext.MessageBox.INFO
+                                            });
+                                        } else {
+                                            Ext.MessageBox.show({
+                                                title: 'Add Sample: Fail',
+                                                text: 'Error adding records. No records added<br/>' + data.message,
+                                                icon: Ext.MessageBox.ERROR
+                                            });
+                                            return false;
+                                        }
+                                    }
+                                }
+                                
+                                Ext.Ajax.request(config);
+                                
+                            }
+                        }
+                    }
+                }],
+                    items: [{
+                        layout: 'form',
+                        border: false,
+                        frame: false,
+                        plain: true,
+                        items: [
+                            location,
+                            cellline
+                        ]
+                    },
+                    editor
+                    ]
+                },
+                new Ext.slims.NewCellLineForm({
+                    id: 'new-cellline-form-tab',
+                    store: cellline.getCellLineStore()
+                }),
+                
+            ]
+            });
+            
+            cellline.setNewCellLineButtonHandler(function() {
+                page.activate('new-cellline-form-tab');
+            });
+            
+            var view = new Ext.Viewport({
+                layout: 'anchor',
+                //anchor: '10 10',
+                items: page
+            });
+            
+            view.render(document.getElementById('location-form'));
+        });
+        </script>
+    </head>
+    <body>
+        <noscript>To view SLIMS, one must enable JavaScript</noscript>
+        <div id="location-form"></div>
+        <div id="editor-form"></div>
+    </body>
+</html>

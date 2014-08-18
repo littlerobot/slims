@@ -1,0 +1,127 @@
+/*!
+ * Ext JS Library 3.2.1
+ * Copyright(c) 2006-2010 Ext JS, Inc.
+ * licensing@extjs.com
+ * http://www.extjs.com/license
+ */
+ 
+.location-images-view x-panel-body * {
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.location-images-view .x-panel-body {
+	background: white;
+	font: 10px Arial, Helvetica, sans-serif;
+}
+.location-images-view .thumb {
+	background: #dddddd;
+	height: 16px;
+	width: 16px;
+	margin: 1px;
+}
+.location-images-view .thumb img {
+	height: 12px;
+	width: 12px;
+	padding: 2px;
+}
+
+.location-images-view .thumb-empty {
+	margin: 1px;
+	padding: 1px;
+}
+.location-images-view .thumb-empty div {
+	background: #CCCCCC;
+	width: 14px;
+	height: 14px;
+}
+
+.location-images-view .thumb-wrap {
+	float: left;
+	
+}
+.location-images-view .thumb-wrap span {
+	display: block;
+	overflow: hidden;
+	text-align: center;
+}
+
+.location-images-view .x-view-over {
+	margin: 0;
+	padding: 0;
+	border:1px solid #dddddd;
+	background: #efefef url(images/row-over.gif) repeat-x left top;
+}
+
+.location-images-view .x-view-selected {
+	background: #eff5fb url(images/selected.gif) no-repeat right bottom;
+	border:1px solid #99bbe8;
+	padding: 0;
+	margin: 1px;
+	width: 14px;
+	height: 14px;
+}
+
+
+.location-images-view .x-view-selected .thumb {
+	background:transparent;
+}
+
+.location-images-view .loading-indicator {
+	font-size:11px;
+	background-image:url(images/loading.gif);
+	background-repeat: no-repeat;
+	background-position: left;
+	padding-left:20px;
+	margin:10px;
+}
+
+.location-images-view .x-view-selected .thumb  {
+	height: 12px;
+	width: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+.location-images-view .x-view-selected .thumb-empty  {
+	height: 12px;
+	width: 12px;
+	padding: 0;
+	margin: 0;
+}
+
+.location-images-view .x-view-over .thumb  {
+	padding: 0;
+	margin: 0;
+}
+
+.location-images-view .x-view-over .thumb-empty {
+	margin: 0;
+	padding: 1px;
+}
+
+
+.location-images-view .x-view-selected.x-view-over .thumb {
+	margin: 0;
+	padding: 0;
+}
+
+.location-images-view .x-view-selected.x-view-over .thumb-empty {
+	margin: 0;
+	padding: 0;
+}
+
+.location-images-view .x-view-selected.x-view-over img {
+	margin: 0;
+	padding: 1px;
+}
+
+.location-images-view .x-view-selected img {
+	margin: 0;
+	padding: 1px;
+}
+
+
+
+

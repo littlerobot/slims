@@ -1,0 +1,62 @@
+<html>
+	<head>
+		<title>test grid</title>
+		<link rel="stylesheet" type="text/css" href="ext-3.2.1/resources/css/ext-all.css"/>
+		<script type="text/javascript" src="ext-3.2.1/adapter/ext/ext-base.js"></script>
+		<script type="text/javascript" src="ext-3.2.1/ext-all.js"></script>
+		<script language="javascript">
+		Ext.onReady(function() {
+			var store = new Ext.data.Store({
+				url: 'test.php',
+				reader: new Ext.data.XmlReader({
+					record: 'row'
+				},
+				[ { name: 'Dewar'}, 'Stack', 'Box', 'Position', 'CellLine', 'PassageNumber', 'Basalmedia', 'ActivityDate', 'Operation' ])
+			});
+
+		var grid = new Ext.grid.GridPanel({
+			store: store,
+			columns: [
+				{header: "Dewar", width: 120, dataIndex: 'Dewar', sortable: true},
+				{header: "Stack", width: 180, dataIndex: 'Stack', sortable: true},
+				{header: "Box", width: 115, dataIndex: 'Box', sortable: true},
+				{header: "Position", width: 100, dataindex: 'Position', sortable: true},
+				{header: "Cell Line", width: 180, dataIndex: 'CellLine', sortable: true},
+				{header: "Passage Number", width: 120, dataIndex: 'PassageNumber', sortable: true},
+				{header: "Basal Media", width: 120, dataIndex: 'BasalMedia', sortable: true},
+				{header: "Operation Date", width: 120, dataIndex: 'ActivityDate', sortable: true, renderer: function(value) {
+						var d = new Date(value * 1000);
+					    	return d.getDay() + '/' + (d.getMonth() + 1) + '/' + d.getYear();	
+					}	
+				},
+				{header: "Operation", width: 120, dataIndex: 'Operation', sortable: true}
+				],
+				renderTo: 'test-grid',
+				autoFit: true,
+				height: 500 
+		});
+	store.load();
+});
+		</script>
+		<script type="text/css">
+			
+		</script>
+	</head>
+	<body>
+		<div id="header" style="padding:20px;">
+			<h1>SLIMS</h1>
+			<h2>Sally's Laboratory Information Management System</h1>
+		</div>
+		<div id="left-border" style="float:left;width:200px;padding:20px;">
+			<div id="option">
+				<a href="#">About...</a>
+			</div>
+			<div id="option">
+				<a href="#">View Contents</a>
+			</div>
+		</div>
+
+		<div id="test-grid"></div>
+		<div id="footer"><a href="#">Contact</a> | Copyright 2010</div>
+	</body>
+</html>
