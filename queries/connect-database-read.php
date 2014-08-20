@@ -1,7 +1,7 @@
 <?php
     $dbh = null;
-    $user = "read-user";
-    $pass = "";
+    $user = "slims";
+    $pass = "slims";
     try {
 	$dbh = new PDO('mysql:host=localhost;dbname=slims', $user, $pass, array(PDO::ATTR_PERSISTENT => true));
     } catch(PDOException $e) {
