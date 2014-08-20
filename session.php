@@ -8,7 +8,7 @@
     *   non-admin can add/remove samples from their own stacks, add new cell lines etc
     *   admin can do the same as non-admin, but can update anyone's stacks. admin also has access to the User, Stack and History tables
     */
- 
+    $_SERVER['REMOTE_USER'] = 'ab1';
     error_reporting(E_ALL);
     ini_set("display_errors", 1);
     
@@ -31,7 +31,7 @@
         
         // the user's id should always be in $_SERVER['REMOTE_USER'] if Raven
         // is working. for testing, it will be in the $_SESSION['REMOTE_USER']
-        if($_SERVER["SERVER_ADDR"] != "192.168.1.55") {
+        if($_SERVER["SERVER_ADDR"] != "192.168.56.1") {
             $id = $_SERVER['REMOTE_USER'];
         } else {
             if(!isset($_SESSION['REMOTE_USER']))
