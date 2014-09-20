@@ -4,7 +4,7 @@
         "Read more about it at http://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "0f5bf28fac35560dbdb2e597d32df056",
+    "hash": "883e5289e16a1eb3ee96813759310d91",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -796,6 +796,63 @@
                 "minification"
             ],
             "time": "2013-07-19 00:03:27"
+        },
+        {
+            "name": "misd/raven-bundle",
+            "version": "v1.1.0",
+            "target-dir": "Misd/RavenBundle",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/misd-service-development/raven-bundle.git",
+                "reference": "af5015d8456dedbcee6c3a2e24115fbd95b0f4e9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/misd-service-development/raven-bundle/zipball/af5015d8456dedbcee6c3a2e24115fbd95b0f4e9",
+                "reference": "af5015d8456dedbcee6c3a2e24115fbd95b0f4e9",
+                "shasum": ""
+            },
+            "require": {
+                "ext-openssl": "*",
+                "php": ">=5.3.3",
+                "symfony/framework-bundle": "~2.2",
+                "symfony/security-bundle": "~2.2"
+            },
+            "require-dev": {
+                "symfony/browser-kit": "~2.2",
+                "symfony/form": "~2.2",
+                "symfony/process": "~2.2",
+                "symfony/yaml": "~2.2"
+            },
+            "type": "symfony-bundle",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "1.1-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Misd\\RavenBundle": ""
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Chris Wilkinson",
+                    "email": "chris.wilkinson@admin.cam.ac.uk"
+                }
+            ],
+            "description": "Adds Raven authentication to your Symfony2 application",
+            "homepage": "https://github.com/misd-service-development/raven-bundle",
+            "keywords": [
+                "Authentication",
+                "University of Cambridge",
+                "bundle"
+            ],
+            "time": "2013-03-08 16:07:07"
         },
         {
             "name": "monolog/monolog",

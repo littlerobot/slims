@@ -1,7 +1,7 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        raven:
+            id: raven.user_provider
 
     firewalls:
         dev:
@@ -9,4 +9,5 @@ security:
             security: false
 
         default:
-            anonymous: ~
+            pattern: ^/
+            raven: true

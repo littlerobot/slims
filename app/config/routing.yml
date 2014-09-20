@@ -1,0 +1,4 @@
+cscr_slims:
+    resource: "@CscrSlimsBundle/Controller/"
+    type:     annotation
+    prefix:   /
