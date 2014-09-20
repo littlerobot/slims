@@ -71,3 +71,14 @@ swiftmailer:
 # Raven
 misd_raven:
     description: SLIMS
+
+# FOS REST
+fos_rest:
+    view:
+        view_response_listener: 'force'
+    format_listener:
+            rules:
+                - { path: '^/api', priorities: ['json', 'xml'], fallback_format: json, prefer_extension: false }
+
+sensio_framework_extra:
+    view: { annotations: false }

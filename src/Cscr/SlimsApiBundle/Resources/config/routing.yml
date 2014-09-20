@@ -1,0 +1,5 @@
+users:
+    type:     rest
+    resource: Cscr\SlimsApiBundle\Controller\UsersController
+    prefix: users/
+    name_prefix: api_users_
