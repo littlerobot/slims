@@ -1,6 +1,6 @@
 <?php
 
-namespace Cscr\SlimsBundle\Controller;
+namespace Cscr\SlimsUserBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

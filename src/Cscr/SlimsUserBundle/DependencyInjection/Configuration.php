@@ -1,6 +1,6 @@
 <?php
 
-namespace Cscr\SlimsBundle\DependencyInjection;
+namespace Cscr\SlimsUserBundle\DependencyInjection;
 
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;

@@ -6,11 +6,11 @@
 
     <!--
     <parameters>
-        <parameter key="cscr_slims.example.class">Cscr\SlimsBundle\Example</parameter>
+        <parameter key="cscr_slims_user.example.class">Cscr\SlimsUserBundle\Example</parameter>
     </parameters>
 
     <services>
-        <service id="cscr_slims.example" class="%cscr_slims.example.class%">
+        <service id="cscr_slims_user.example" class="%cscr_slims_user.example.class%">
             <argument type="service" id="service_id" />
             <argument>plain_value</argument>
             <argument>%parameter_name%</argument>
