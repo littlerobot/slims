@@ -15,6 +15,6 @@ class UsersController extends FOSRestController
     public function getCurrentAction()
     {
         $user = $this->getUser();
-        return $user;
+        return ['data' => $user];
     }
 }

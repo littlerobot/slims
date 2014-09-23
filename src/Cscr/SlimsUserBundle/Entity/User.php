@@ -4,6 +4,7 @@ namespace Cscr\SlimsUserBundle\Entity;
 
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * Class User
@@ -19,6 +20,8 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue("AUTO")
+     *
+     * @JMS\Exclude()
      */
     private $id;
 
