@@ -9,7 +9,7 @@ use FOS\RestBundle\Controller\Annotations\View;
 class UsersController extends FOSRestController
 {
     /**
-     * @Route("current")
+     * @Route("/current")
      * @View()
      */
     public function getCurrentAction()

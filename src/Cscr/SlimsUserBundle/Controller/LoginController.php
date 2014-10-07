@@ -17,4 +17,3 @@ class LoginController extends Controller
         return array();
     }
 }
- 

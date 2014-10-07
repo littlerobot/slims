@@ -1,6 +1,6 @@
 <?php
 
-namespace Cscr\SlimsUserBundle\ValueObject;
+namespace Cscr\SlimsApiBundle\ValueObject;
 
 use JMS\Serializer\Annotation as JMS;
 

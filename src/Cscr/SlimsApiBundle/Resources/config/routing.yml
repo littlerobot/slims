@@ -1,5 +1,11 @@
 users:
-    type:     rest
-    resource: Cscr\SlimsApiBundle\Controller\UsersController
-    prefix: users/
-    name_prefix: api_users_
+    type:           rest
+    resource:       Cscr\SlimsApiBundle\Controller\UsersController
+    prefix:         users
+    name_prefix:    api_users_
+
+containers:
+    type:           rest
+    resource:       Cscr\SlimsApiBundle\Controller\ContainersController
+    prefix:         containers
+    name_prefix:    api_containers_
