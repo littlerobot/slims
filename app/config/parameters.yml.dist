@@ -12,7 +12,7 @@ parameters:
     mailer_password:   ~
 
     locale:            en
-    secret:            ThisTokenIsNotSoSecretChangeIt
+    secret:            EAC7939A2AC8ADDEA2EB86D7656ECD3CC2B9B6E5E79E6079DF7A8A31CA16F59F
 
     debug_toolbar:          true
     debug_redirects:        false
