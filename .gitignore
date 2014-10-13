@@ -11,3 +11,4 @@ puphpet/files/dot/ssh
 /vendor/
 /bin/
 /composer.phar
+web/ext-*

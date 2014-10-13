@@ -32,7 +32,7 @@ vagrantfile-local:
             FEDpb0BhwUGa:
                 source: ./
                 target: /var/www
-                sync_type: default
+                sync_type: nfs
                 rsync:
                     args:
                         - '--verbose'

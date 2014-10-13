@@ -1,12 +1,15 @@
 security:
     providers:
-        in_memory:
-            memory: ~
+        database:
+            entity:
+                class: CscrSlimsUserBundle:User
+        raven:
+            id: raven.user_provider
 
     firewalls:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-
         default:
-            anonymous: ~
+            pattern: ^/
+            raven: true

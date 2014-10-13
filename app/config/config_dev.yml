@@ -34,3 +34,7 @@ assetic:
 
 #swiftmailer:
 #    delivery_address: me@example.com
+
+# Raven
+misd_raven:
+    use_test_service: true
