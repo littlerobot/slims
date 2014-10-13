@@ -2,7 +2,7 @@
 
 namespace Cscr\SlimsUserBundle\Entity;
 
-use Cscr\SlimsUserBundle\ValueObject\ResearchGroup;
+use Cscr\SlimsApiBundle\ValueObject\ResearchGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
