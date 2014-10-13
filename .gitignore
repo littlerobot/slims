@@ -1,6 +1,7 @@
 puphpet/files/dot/ssh
 /web/bundles/
 /app/bootstrap.php.cache
+/web/ext-4.2
 /app/cache/*
 /app/config/parameters.yml
 /app/logs/*
