@@ -1,0 +1,55 @@
+{
+    "data": [
+        {
+            "id": 1,
+            "name": "My department",
+            "owner": "CSCR",
+            "data": [
+                {
+                    "id": 3,
+                    "name": "Big lab",
+                    "data": [
+                        {
+                            "id": 7,
+                            "name": "Room 1",
+                            "data": [
+                                {
+                                    "id": 9,
+                                    "name": "Sample container 1A",
+                                    "leaf": true
+                                },
+                                {
+                                    "id": 11,
+                                    "name": "Sample container 1B",
+                                    "leaf": true
+                                }
+                            ]
+                        },
+                        {
+                            "id": 6,
+                            "name": "Room 2",
+                            "data": [
+                                {
+                                    "id": 10,
+                                    "name": "Sample container 2A",
+                                    "leaf": true
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": 2,
+                    "name": "Small lab",
+                    "data": [
+                        {
+                            "id": 8,
+                            "name": "Sample container",
+                            "leaf": true
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

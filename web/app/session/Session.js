@@ -41,7 +41,8 @@ Ext.define('App.session.Session', {
         var session = this.getSessionModel();
         if (Ext.isFunction(session.getUser)) {
             console.log("TODO: This triggers 'undefined is not a function' in the ModelManager");
-            return session.getUser();
+            //return session.getUser();
+            return null;
         }
         return null;
     },
