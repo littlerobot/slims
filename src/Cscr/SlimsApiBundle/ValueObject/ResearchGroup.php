@@ -25,4 +25,3 @@ class ResearchGroup
         return $this->name;
     }
 }
- 
