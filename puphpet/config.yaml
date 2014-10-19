@@ -29,7 +29,7 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            FEDpb0BhwUGa:
+            slims:
                 source: ./
                 target: /var/www
                 sync_type: nfs
@@ -58,7 +58,9 @@ vagrantfile-local:
         host: detect
 server:
     install: '1'
-    packages: {  }
+    packages:
+        - vim
+        - htop
 firewall:
     install: '1'
     rules: null
@@ -98,7 +100,7 @@ nginx:
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
     vhosts:
-        NnTPCFJC5G8U:
+        hski0Tj7SeKu:
             server_name: awesome.dev
             server_aliases:
                 - www.awesome.dev
@@ -125,14 +127,13 @@ php:
             - intl
             - mcrypt
         pear: {  }
-        pecl:
-            - pecl_http
+        pecl: {  }
     ini:
         display_errors: On
         error_reporting: '-1'
         session.save_path: /var/lib/php/session
     timezone: Europe/London
-    mod_php: 0
+    mod_php: '1'
 hhvm:
     install: '0'
     nightly: 0
@@ -154,7 +155,7 @@ xdebug:
         xdebug.remote_enable: '1'
         xdebug.remote_handler: dbgp
         xdebug.remote_port: '9000'
-        xdebug.max_nesting_level: 250
+        xdebug.max_nesting_level: '250'
 xhprof:
     install: '0'
 drush:
@@ -163,7 +164,7 @@ drush:
 ruby:
     install: '1'
     versions:
-        kqcdTcRTPau7:
+        CRHVZxXdTFvT:
             version: ''
 nodejs:
     install: '0'
@@ -172,7 +173,7 @@ python:
     install: '1'
     packages: {  }
     versions:
-        pG4WlDcOWv3t:
+        Y93W9TRe0APm:
             version: ''
 mysql:
     install: '1'
