@@ -127,7 +127,9 @@ class User implements UserInterface, \Serializable
     {
         return serialize([
             $this->id,
+            $this->username,
             $this->name,
+            $this->researchGroup,
             $this->isActive,
         ]);
     }
@@ -137,7 +139,7 @@ class User implements UserInterface, \Serializable
      */
     public function unserialize($serialized)
     {
-        list($this->id, $this->name, $this->isActive) = unserialize($serialized);
+        list($this->id, $this->username, $this->name, $this->researchGroup, $this->isActive) = unserialize($serialized);
     }
 
     /**
