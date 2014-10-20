@@ -21,8 +21,13 @@ Ext.define('App.proxy.Rest', {
         //me.fireEvent( 'requestcomplete', request, success );
     },
     afterRequest: function( request, success ) {
-        var me = this;
-        // fire requestcomplete event
-        //me.fireEvent( 'requestcomplete', request, success );
+        if (false === success) {
+            if (request.operation &&
+                request.operation.error &&
+                request.operation.error.status === 401
+            ) {
+                App.getApplication().fireEvent('apiresponse401', request);
+            }
+        }
     }
 });

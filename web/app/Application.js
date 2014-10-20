@@ -5,7 +5,8 @@ Ext.application({
     appFolder: 'app',
     autoCreateViewport: true,
     controllers: [
-        'Session'
+        'Session',
+        'Login'
     ],
     launch: function() {
     }
