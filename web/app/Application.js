@@ -1,4 +1,4 @@
-Ext.Loader.setConfig('disableCaching', false);
+Ext.Loader.setConfig('disableCaching', false, 'paths', {'App': '/app'});
 
 Ext.application({
     name: 'App',
@@ -8,6 +8,6 @@ Ext.application({
         'Session',
         'Login'
     ],
-    launch: function() {
+    launch: function () {
     }
 });
