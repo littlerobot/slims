@@ -8,11 +8,7 @@ Ext.define('App.model.Session', {
     ],
     idProperty: 'sessionId',
     proxy: Ext.create('App.proxy.Rest', {
-        url: App.router.API.getRoute('session'),
-        reader: {
-            type: 'myreader',
-            root: 'data'
-        }
+        url: App.router.API.getRoute('session')
     }),
     fields: [
         // id field
