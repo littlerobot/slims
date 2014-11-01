@@ -1,13 +1,16 @@
-Ext.Loader.setConfig('disableCaching', false);
+Ext.Loader.setConfig({
+    enabled: true,
+    disableCaching: false
+});
 
 Ext.application({
     name: 'App',
-    appFolder: 'app',
+    appFolder: '/app',
     autoCreateViewport: true,
     controllers: [
         'Session',
         'Login'
     ],
-    launch: function() {
+    launch: function () {
     }
 });

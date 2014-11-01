@@ -1,9 +1,9 @@
+cscr_slims_app:
+    resource: "@CscrSlimsAppBundle/Controller/"
+    type:     annotation
+    prefix:   /
+
 cscr_slims_api:
     type: rest
     prefix: /api
     resource: "@CscrSlimsApiBundle/Resources/config/routing.yml"
-
-cscr_slims:
-    resource: "@CscrSlimsUserBundle/Controller/"
-    type:     annotation
-    prefix:   /

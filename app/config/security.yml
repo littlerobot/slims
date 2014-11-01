@@ -10,6 +10,9 @@ security:
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
-        default:
-            pattern: ^/
+        raven:
+            pattern: ^/(app|api)
             raven: true
+        home:
+            pattern: ^/
+            security: false
