@@ -52,9 +52,9 @@ Ext.define('App.view.tree.TreeGrid', {
                 width: 55,
                 menuDisabled: true,
                 xtype: 'actioncolumn',
-                tooltip: 'Edit task',
+                tooltip: 'Edit',
                 align: 'center',
-                icon: '/web/images/edit_icon.png',
+                icon: '/images/edit_icon.png',
                 handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
                     Ext.Msg.alert('Action', 'This is a sample action that can be performed on "' + record.get('name') + '"');
                 },
