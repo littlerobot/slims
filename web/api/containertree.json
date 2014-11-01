@@ -2,50 +2,167 @@
     "data": [
         {
             "id": 1,
-            "name": "My department",
-            "owner": "CSCR",
+            "name": "Huey",
+            "owner": "Sally's department",
             "data": [
                 {
-                    "id": 3,
-                    "name": "Big lab",
+                    "id": 11,
+                    "name": "Stack 1",
                     "data": [
                         {
-                            "id": 7,
-                            "name": "Room 1",
+                            "id": 111,
+                            "name": "Box 1",
+                            "leaf": true
+                        },
+                        {
+                            "id": 112,
+                            "name": "Box 2",
+                            "leaf": true
+                        },
+                        {
+                            "id": 113,
+                            "name": "Box 3",
+                            "leaf": true
+                        }
+                    ]
+                },
+
+                {
+                    "id": 12,
+                    "name": "Stack 2",
+                    "data": [
+                        {
+                            "id": 121,
+                            "name": "Box 1",
+                            "leaf": true
+                        },
+                        {
+                            "id": 122,
+                            "name": "Box 2",
+                            "leaf": true
+                        },
+                        {
+                            "id": 123,
+                            "name": "Box 3",
+                            "leaf": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "name": "Dewey",
+            "owner": "Sally's department",
+            "data": [
+                {
+                    "id": 21,
+                    "name": "Stack 1",
+                    "data": [
+                        {
+                            "id": 211,
+                            "name": "Box 1",
+                            "leaf": true
+                        },
+                        {
+                            "id": 212,
+                            "name": "Box 2",
+                            "leaf": true
+                        },
+                        {
+                            "id": 213,
+                            "name": "Box 3",
+                            "leaf": true
+                        }
+                    ]
+                },
+
+                {
+                    "id": 22,
+                    "name": "Stack 2",
+                    "data": [
+                        {
+                            "id": 221,
+                            "name": "Box 1",
+                            "leaf": true
+                        },
+                        {
+                            "id": 222,
+                            "name": "Box 2",
+                            "leaf": true
+                        },
+                        {
+                            "id": 223,
+                            "name": "Box 3",
+                            "leaf": true
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Bill's dewar",
+            "owner": "Bill's department",
+            "data": [
+                {
+                    "id": 31,
+                    "name": "Canister 1",
+                    "data": [
+                        {
+                            "id": 311,
+                            "name": "Goblet 1",
                             "data": [
                                 {
-                                    "id": 9,
-                                    "name": "Sample container 1A",
+                                    "id": 3111,
+                                    "name": "Cassette 1",
                                     "leaf": true
                                 },
                                 {
-                                    "id": 11,
-                                    "name": "Sample container 1B",
+                                    "id": 3112,
+                                    "name": "Cassette 2",
                                     "leaf": true
                                 }
                             ]
                         },
                         {
-                            "id": 6,
-                            "name": "Room 2",
+                            "id": 312,
+                            "name": "Goblet 2",
                             "data": [
                                 {
-                                    "id": 10,
-                                    "name": "Sample container 2A",
+                                    "id": 3121,
+                                    "name": "Cassette 1",
+                                    "leaf": true
+                                },
+                                {
+                                    "id": 3122,
+                                    "name": "Cassette 2",
                                     "leaf": true
                                 }
                             ]
                         }
+
                     ]
                 },
                 {
-                    "id": 2,
-                    "name": "Small lab",
+                    "id": 32,
+                    "name": "Canister 2",
                     "data": [
                         {
-                            "id": 8,
-                            "name": "Sample container",
-                            "leaf": true
+                            "id": 321,
+                            "name": "Goblet 1",
+                            "data": [
+                                {
+                                    "id": 3211,
+                                    "name": "Cassette 1",
+                                    "leaf": true
+                                },
+                                {
+                                    "id": 3212,
+                                    "name": "Cassette 2",
+                                    "leaf": true
+                                }
+                            ]
                         }
                     ]
                 }
