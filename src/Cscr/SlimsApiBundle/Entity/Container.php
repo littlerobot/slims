@@ -77,6 +77,13 @@ class Container
     private $comment;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=6, nullable=true)
+     */
+    private $colour;
+
+    /**
      * @var Container[]
      *
      * @ORM\OneToMany(targetEntity="Container", mappedBy="parent")
