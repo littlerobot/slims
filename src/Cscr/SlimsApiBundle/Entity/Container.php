@@ -29,6 +29,8 @@ class Container
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @JMS\Exclude()
      */
     private $name;
 
@@ -98,6 +100,8 @@ class Container
     }
 
     /**
+     * A container is a leaf if it stores samples; it does not have any children.
+     *
      * @return bool
      *
      * @JMS\VirtualProperty()
@@ -106,5 +110,40 @@ class Container
     public function isLeaf()
     {
         return static::STORES_SAMPLES === $this->stores;
+    }
+
+    /**
+     * Returns the sample capacity of all the children (and, if appropriate, their children) of this container.
+     *
+     * @return int The total sample capacity of all child containers.
+     */
+    public function getSampleCapacity()
+    {
+        // This container stores samples so won't have any children.
+        if (static::STORES_SAMPLES === $this->stores) {
+            return $this->rows * $this->columns;
+        }
+
+        // Container doesn't store samples so may have children that do.
+        $childCapacity = 0;
+
+        foreach ($this->children as $child) {
+            $childCapacity += $child->getSampleCapacity();
+        }
+
+        return $childCapacity;
+    }
+
+    /**
+     * The name of the container plus the sample storage capacity of its children and the number of samples stored.
+     *
+     * @return string
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("name")
+     */
+    public function getNameIncludingCapacity()
+    {
+        return sprintf('%s (Samples: 0/%d)', $this->name, $this->getSampleCapacity());
     }
 }
