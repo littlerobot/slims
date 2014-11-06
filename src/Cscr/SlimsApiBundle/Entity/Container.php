@@ -22,8 +22,6 @@ class Container
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
-     *
-     * @JMS\Exclude()
      */
     private $id;
 
@@ -82,11 +80,24 @@ class Container
      * @var Container[]
      *
      * @ORM\OneToMany(targetEntity="Container", mappedBy="parent")
+     *
+     * @JMS\SerializedName("data")
      */
     private $children;
 
     public function __construct()
     {
         $this->children = new ArrayCollection();
+    }
+
+    /**
+     * @return bool
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("leaf")
+     */
+    public function isLeaf()
+    {
+        return static::STORES_SAMPLES === $this->stores;
     }
 }
