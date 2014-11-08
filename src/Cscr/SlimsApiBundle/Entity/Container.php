@@ -2,7 +2,6 @@
 
 namespace Cscr\SlimsApiBundle\Entity;
 
-use Cscr\SlimsApiBundle\ValueObject\ResearchGroup;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -44,7 +43,7 @@ class Container
     private $parent;
 
     /**
-     * @var ResearchGroup
+     * @var string
      *
      * @ORM\Column(name="research_group", type="string", length=255, nullable=true)
      */
@@ -94,8 +93,13 @@ class Container
      */
     private $children;
 
-    public function __construct()
+    public function __construct($name, $rows, $columns, $stores)
     {
+        $this->name = $name;
+        $this->rows = $rows;
+        $this->columns = $columns;
+        $this->stores = $stores;
+
         $this->children = new ArrayCollection();
     }
 
@@ -145,5 +149,60 @@ class Container
     public function getNameIncludingCapacity()
     {
         return sprintf('%s (Samples: 0/%d)', $this->name, $this->getSampleCapacity());
+    }
+
+    /**
+     * Store a child container inside this one.
+     *
+     * Will not add a container that is already a child of this container. There are no checks to ensure the container
+     * is not already stored elsewhere.
+     *
+     * @param Container $container
+     * @return $this
+     */
+    public function storeContainerInside(Container $container)
+    {
+        if (!$this->children->contains($container)) {
+            $this->children->add($container);
+            $container->parent = $this;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Specify the owner of the container.
+     *
+     * @param string $researchGroup Research group name.
+     * @return $this
+     */
+    public function specifyOwner($researchGroup)
+    {
+        $this->researchGroup = $researchGroup;
+        return $this;
+    }
+
+    /**
+     * Specify a comment for the container.
+     *
+     * @param string $comment
+     * @return $this
+     */
+    public function setComment($comment)
+    {
+        $this->comment = $comment;
+        return $this;
+    }
+
+    /**
+     * Specify the colour of the container.
+     *
+     * @param string $colour A hexadecimal colour, prefixed with #
+     * @return $this
+     */
+    public function setColour($colour)
+    {
+        $this->colour = $colour;
+        return $this;
     }
 }

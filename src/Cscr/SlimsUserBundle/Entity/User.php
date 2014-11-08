@@ -2,7 +2,6 @@
 
 namespace Cscr\SlimsUserBundle\Entity;
 
-use Cscr\SlimsApiBundle\ValueObject\ResearchGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -41,7 +40,7 @@ class User implements UserInterface, \Serializable
     private $name;
 
     /**
-     * @var ResearchGroup
+     * @var string
      *
      * @ORM\Column(name="research_group", type="string", length=255)
      */
@@ -172,16 +171,5 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // Credentials managed in Raven - nothing to do
-    }
-
-    /**
-     * @param ResearchGroup $researchGroup
-     *
-     * @return User
-     */
-    public function setResearchGroup(ResearchGroup $researchGroup)
-    {
-        $this->researchGroup = $researchGroup->getName();
-        return $this;
     }
 }

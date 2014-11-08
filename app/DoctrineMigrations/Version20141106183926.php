@@ -17,7 +17,7 @@ class Version20141106183926 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        $this->addSql('ALTER TABLE container ADD colour VARCHAR(6) DEFAULT NULL');
+        $this->addSql('ALTER TABLE container ADD colour VARCHAR(7) DEFAULT NULL');
     }
 
     public function down(Schema $schema)
