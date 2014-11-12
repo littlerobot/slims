@@ -1,0 +1,6 @@
+Cscr\SlimsUserBundle\Entity\User:
+  user{1..9}:
+    username: test000<current()>
+    name: <name()>
+    researchGroup: <text(20)>
+    isActive: true
