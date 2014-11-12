@@ -1,3 +1,15 @@
-{% include '::base.html.twig' %}
-<h1>Welcome</h1>
-<p><a href="{{ url('app_app') }}">Login to SLIMS</a></p>
+{% extends '::base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/bootstrap-theme.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" />
+<link rel="stylesheet" href="{{ asset('css/local.css') }}" />
+{% endblock %}
+{% block body %}
+<div class="jumbotron">
+    <div class="container">
+        <h1><img src="{{ asset('images/icon.svg') }}" style="vertical-align: text-bottom; height: 1.1em" alt="Test tube" /> SLIMS</h1>
+        <p>Manage the full lifecycle of your laboratory samples.</p>
+        <p><a class="btn btn-primary btn-lg" href="{{ url('app_app') }}" role="button">Login</a></p>
+    </div>
+</div>
+{% endblock %}
