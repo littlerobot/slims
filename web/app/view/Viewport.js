@@ -4,7 +4,7 @@ Ext.define('App.view.Viewport', {
         'Ext.tab.Panel',
         'App.router.API',
         'App.store.User',
-        'App.view.tree.TreeGrid',
+        'App.view.tree.ContainerGrid',
         'Ext.layout.container.Fit'
     ],
     layout: 'fit',
@@ -16,7 +16,7 @@ Ext.define('App.view.Viewport', {
             items: [
                 {
                     title: 'Container demo',
-                    xtype: 'tree-grid'
+                    xtype: 'container-grid'
                 }
             ]
         }

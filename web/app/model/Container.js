@@ -10,12 +10,30 @@ Ext.define('App.model.Container', {
             type: 'integer'
         },
         {
+            name: 'rows',
+            type: 'integer'
+        },
+        {
+            name: 'columns',
+            type: 'integer'
+        },
+        {
             name: 'name',
             type: 'string',
             useNull : true
         },
         {
-            name: 'owner',
+            name: 'research_group',
+            type: 'string',
+            useNull : true
+        },
+        {
+            name: 'stores',
+            type: 'string',
+            useNull : true
+        },
+        {
+            name: 'colour',
             type: 'string',
             useNull : true
         }
