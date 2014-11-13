@@ -28,6 +28,8 @@ class Container
      * @var string
      *
      * @ORM\Column(type="string", length=255)
+     *
+     * @JMS\Exclude()
      */
     private $name;
 
