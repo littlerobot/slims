@@ -18,6 +18,9 @@ Ext.define('App.controller.ResearchGroups', {
             'researchgroups-grid': {
                 deleterecord: this.confirmDeleteAction,
                 editrecord: this.openEditGroupDialog
+            },
+            'researchgroups-window': {
+                save: this.saveGroup
             }
         });
     },
@@ -41,13 +44,50 @@ Ext.define('App.controller.ResearchGroups', {
             msg = Ext.String.format('Are you sure you want to delete group "{0}"?', group.get('name'));
 
         Ext.Msg.confirm(title, msg, function(btn) {
-            if (btn == 'ok') {
+            if (btn == 'yes') {
                 this.deleteGroup(group);
             }
         }, this);
     },
 
     deleteGroup: function(group) {
+        this.getGroupsGrid().setLoading(true);
 
+        Ext.Ajax.request({
+            url: '/deletegroup',
+            method: 'POST',
+            params: {
+                id: group.getId()
+            },
+            scope: this,
+            success: function() {
+                this.getGroupsGrid().getStore().load();
+                this.getGroupsGrid().setLoading(false);
+            },
+            failure: function() {
+                this.getGroupsGrid().setLoading(false);
+                Ext.Msg.alert('Error', 'Server returned error');
+            }
+        });
+    },
+
+    saveGroup: function(group, dialog) {
+        dialog.setLoading(true);
+
+        Ext.Ajax.request({
+            url: '/savegroup',
+            method: 'POST',
+            params: group.data,
+            scope: this,
+            success: function() {
+                this.getGroupsGrid().getStore().load();
+                dialog.setLoading(false);
+                dialog.close();
+            },
+            failure: function() {
+                dialog.setLoading(false);
+                Ext.Msg.alert('Error', 'Server returned error');
+            }
+        });
     }
 });

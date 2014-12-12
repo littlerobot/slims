@@ -32,7 +32,18 @@ Ext.define('App.view.groups.Window', {
             '->', {
             text: 'Save',
             icon: 'images/save.png',
-            name: 'save'
+            name: 'save',
+            scope: this,
+            handler: function() {
+                var group = this.record;
+                if (!group) {
+                    group = Ext.create('App.model.ResearchGroup');
+                }
+
+                group.set('name', this.down('textfield').getValue());
+
+                this.fireEvent('save', group, this);
+            }
         }, '-', {
             text: 'Cancel',
             icon: 'images/delete.gif',

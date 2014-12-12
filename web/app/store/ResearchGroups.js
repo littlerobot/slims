@@ -7,6 +7,9 @@ Ext.define('App.store.ResearchGroups', {
     //     type: 'json',
     //     url: 'getresearchgroupslist'
     // },
+    proxy: {
+        type: 'memory'
+    },
     data: [{
         id: 1,
         name: 'Group name #1'
