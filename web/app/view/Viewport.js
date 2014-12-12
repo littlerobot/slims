@@ -5,7 +5,8 @@ Ext.define('App.view.Viewport', {
         'App.router.API',
         'App.store.User',
         'App.view.tree.ContainerGrid',
-        'Ext.layout.container.Fit'
+        'Ext.layout.container.Fit',
+        'App.view.groups.Grid'
     ],
     layout: 'fit',
     title: 'Slims',
@@ -17,6 +18,10 @@ Ext.define('App.view.Viewport', {
                 {
                     title: 'Container demo',
                     xtype: 'container-grid'
+                },
+                {
+                    title: 'Research Groups',
+                    xtype: 'researchgroups-grid'
                 }
             ]
         }
