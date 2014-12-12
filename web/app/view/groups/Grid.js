@@ -5,17 +5,7 @@ Ext.define('App.view.groups.Grid', {
     requires: ['Ext.grid.column.Action'],
 
     initComponent: function() {
-        // TODO: store to separated class
-        this.store = Ext.create('Ext.data.Store', {
-            fields: ['id', 'name'],
-            data: [{
-                id: 1,
-                name: 'Group name #1'
-            }, {
-                id: 2,
-                name: 'Group name #2'
-            }]
-        });
+        this.store = Ext.create('App.store.ResearchGroups');
 
         this.columns = [{
             text: 'Name',
@@ -27,16 +17,22 @@ Ext.define('App.view.groups.Grid', {
             items: [{
                 icon: 'images/edit_icon.png',
                 tooltip: 'Edit',
+                scope:  this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
-                    alert("Edit " + rec.get('name'));
+                    this.fireEvent('editrecord', rec);
                 }
             },{
                 icon: 'images/delete.gif',
                 tooltip: 'Delete',
+                getClass: function(v, meta) {
+                    meta.style = 'padding-left: 10px;';
+                    return v;
+                },
+                scope:  this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
-                    alert("Terminate " + rec.get('name'));
+                    this.fireEvent('deleterecord', rec);
                 }
             }]
         }];
@@ -44,11 +40,7 @@ Ext.define('App.view.groups.Grid', {
         this.tbar = [{
             text: 'Add group',
             icon: 'images/add.png',
-            style: 'padding-left: 5px;',
-            scope: this,
-            handler: function(btn) {
-                this.fireEvent('addgroup', this, btn);
-            }
+            name: 'addGroup'
         }];
 
         this.callParent();
