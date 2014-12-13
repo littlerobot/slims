@@ -44,4 +44,22 @@ class ResearchGroup
         $this->name = $name;
         return $this;
     }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * @param int $id
+     * @return ResearchGroup
+     */
+    public function setId($id)
+    {
+        $this->id = $id;
+        return $this;
+    }
 }
