@@ -9,3 +9,9 @@ containers:
     resource:       Cscr\SlimsApiBundle\Controller\ContainersController
     prefix:         containers
     name_prefix:    api_containers_
+
+research_groups:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/ResearchGroupsController.php
+    prefix:         research-groups
+    name_prefix:    api_research_groups_
