@@ -5,7 +5,7 @@ Ext.Loader.setConfig({
 
 Ext.application({
     name: 'App',
-    appFolder: 'app',
+    appFolder: '/app',
     autoCreateViewport: true,
     controllers: [
         'Session',

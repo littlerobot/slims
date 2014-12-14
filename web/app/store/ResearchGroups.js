@@ -3,18 +3,12 @@ Ext.define('App.store.ResearchGroups', {
 
     model: 'App.model.ResearchGroup',
 
-    // proxy: {
-    //     type: 'json',
-    //     url: 'getresearchgroupslist'
-    // },
     proxy: {
-        type: 'memory'
-    },
-    data: [{
-        id: 1,
-        name: 'Group name #1'
-    }, {
-        id: 2,
-        name: 'Group name #2'
-    }]
+        type: 'ajax',
+        url: App.Url.getRoute('getgroups'),
+        reader: {
+            type: 'json',
+            root: 'data'
+        }
+    }
 });

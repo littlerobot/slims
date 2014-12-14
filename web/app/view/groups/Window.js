@@ -31,7 +31,7 @@ Ext.define('App.view.groups.Window', {
         this.bbar = [
             '->', {
             text: 'Save',
-            icon: 'images/save.png',
+            icon: '/images/save.png',
             name: 'save',
             scope: this,
             handler: function() {
@@ -46,7 +46,7 @@ Ext.define('App.view.groups.Window', {
             }
         }, '-', {
             text: 'Cancel',
-            icon: 'images/delete.gif',
+            icon: '/images/delete.gif',
             scope: this,
             handler: this.close
         }];

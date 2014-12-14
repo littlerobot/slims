@@ -54,7 +54,7 @@ Ext.define('App.controller.ResearchGroups', {
         this.getGroupsGrid().setLoading(true);
 
         Ext.Ajax.request({
-            url: '/deletegroup',
+            url: App.Url.getRoute('deletegroup'),
             method: 'POST',
             params: {
                 id: group.getId()
@@ -74,10 +74,19 @@ Ext.define('App.controller.ResearchGroups', {
     saveGroup: function(group, dialog) {
         dialog.setLoading(true);
 
+        var url;
+        if (group.getId()) {
+            url = Ext.String.format(App.Url.getRoute('setgroup'), group.getId());
+        } else {
+            url = App.Url.getRoute('creategroup');
+        }
+
         Ext.Ajax.request({
-            url: '/savegroup',
+            url: url,
             method: 'POST',
-            params: group.data,
+            params: {
+                name: group.get('name')
+            },
             scope: this,
             success: function() {
                 this.getGroupsGrid().getStore().load();

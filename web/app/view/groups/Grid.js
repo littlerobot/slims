@@ -15,7 +15,7 @@ Ext.define('App.view.groups.Grid', {
             xtype: 'actioncolumn',
             width: 50,
             items: [{
-                icon: 'images/edit_icon.png',
+                icon: '/images/edit_icon.png',
                 tooltip: 'Edit',
                 scope:  this,
                 handler: function(grid, rowIndex, colIndex) {
@@ -23,7 +23,7 @@ Ext.define('App.view.groups.Grid', {
                     this.fireEvent('editrecord', rec);
                 }
             },{
-                icon: 'images/delete.gif',
+                icon: '/images/delete.gif',
                 tooltip: 'Delete',
                 getClass: function(v, meta) {
                     meta.style = 'padding-left: 10px;';
@@ -39,10 +39,16 @@ Ext.define('App.view.groups.Grid', {
 
         this.tbar = [{
             text: 'Add group',
-            icon: 'images/add.png',
+            icon: '/images/add.png',
             name: 'addGroup'
         }];
 
         this.callParent();
+
+        this.on('afterrender', this.loadData, this);
+    },
+
+    loadData: function() {
+        this.getStore().load();
     }
 });
