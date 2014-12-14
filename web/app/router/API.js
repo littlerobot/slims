@@ -16,7 +16,7 @@ Ext.define('App.router.API', {
             case 'creategroup':
                 return routePrefix + '/research-group';
             case 'deletegroup':
-                return routePrefix + '/';
+                return routePrefix + '/delete-research-group';
             default:
                 throw 'Unknown route: ' + routeName;
         }
