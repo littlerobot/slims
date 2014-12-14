@@ -10,7 +10,7 @@ Ext.define('App.router.API', {
             case 'session':
                 return routePrefix + '/session';
             case 'getgroups':
-                return routePrefix + '/research-group';
+                return routePrefix + '/research-groups';
             case 'setgroup':
                 return routePrefix + '/research-group/{0}';
             case 'creategroup':
