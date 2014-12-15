@@ -11,45 +11,62 @@ use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResearchGroupsController extends Controller
 {
     /**
-     * @Rest\Route("")
+     * @Rest\Get("")
      * @Rest\View()
      */
-    public function getAction()
+    public function listAction()
     {
         $groups = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:ResearchGroup')->findAll();
+
         return new ResearchGroupCollectionResponse($groups);
     }
 
     /**
-     * @Rest\Route("")
+     * @Rest\Post("")
+     *
      * @param Request $request
-     * @return \FOS\RestBundle\View\View
+     *
+     * @return View
      */
-    public function postAction(Request $request)
+    public function createAction(Request $request)
     {
         $group = new ResearchGroup();
 
-        if ($params = $request->request->get('params')) {
-            $id = $params['id'];
-            $repository = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:ResearchGroup');
+        return $this->processForm($group, $request);
+    }
 
-            if ($existingGroup = $repository->find($id)) {
-                $group = $existingGroup;
-            }
+    /**
+     * @Rest\Post("/{id}")
+     *
+     * @param int     $id
+     * @param Request $request
+     *
+     * @return View
+     */
+    public function updateAction($id, Request $request)
+    {
+        if (!$group = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:ResearchGroup')->find($id)) {
+            throw new NotFoundHttpException(sprintf("No research group with ID '%d' available.", $id));
         }
 
         return $this->processForm($group, $request);
     }
 
+    /**
+     * @param  ResearchGroup $group
+     * @param  Request       $request
+     * @return View
+     */
     private function processForm(ResearchGroup $group, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('params', new ResearchGroupType(), $group);
+        $form = $this->get('form.factory')->createNamed('', new ResearchGroupType(), $group);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

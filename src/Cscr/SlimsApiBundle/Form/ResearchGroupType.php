@@ -14,10 +14,6 @@ class ResearchGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            // Required for now to allow existing entities to be updated if ID is in request params
-            ->add('id', 'integer', [
-                'required' => false,
-            ])
             ->add('name', 'text');
     }
 
