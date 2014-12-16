@@ -1,6 +1,7 @@
 Ext.define('Slims.view.tree.TreeGrid', {
     extend: 'Ext.tree.Panel',
 
+    // TODO: check nesessary of such requres list
     requires: [
         'Ext.data.*',
         'Ext.grid.*',

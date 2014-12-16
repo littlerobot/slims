@@ -1,11 +1,10 @@
 Ext.define('Slims.view.tree.ContainerGrid', {
     extend: 'Slims.view.tree.TreeGrid',
-    requires: [
-        'Slims.proxy.Rest'
-    ],
     xtype: 'container-grid',
     title: 'Container management',
+
     height: 300,
+
     initComponent: function() {
         Ext.apply(this, {
             // TODO: extract this store
@@ -53,13 +52,13 @@ Ext.define('Slims.view.tree.ContainerGrid', {
                     return '<div style="width: 15px; height: 15px; background-color: '+value+'; border: 1px solid black;">&nbsp;</div>';
                 }
             }, {
-                text: 'Action',
+                xtype: 'actioncolumn',
+                icon: '/images/edit_icon.png',
                 width: 55,
                 menuDisabled: true,
-                xtype: 'actioncolumn',
-                tooltip: 'Edit',
                 align: 'center',
-                icon: '/images/edit_icon.png',
+                text: 'Action',
+                tooltip: 'Edit',
                 handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
                     Ext.Msg.alert('Action', 'This is a sample action that can be performed on "' + record.get('name') + '"');
                 },

@@ -3,15 +3,29 @@ Ext.Loader.setConfig({
     disableCaching: false
 });
 
-Ext.application({
+Ext.define('Slims.Application', {
     name: 'Slims',
-    appFolder: '/app',
-    autoCreateViewport: true,
+
+    extend: 'Ext.app.Application',
+
+    requires: [
+        'Slims.router.API'
+    ],
+
+    views: [
+        // TODO: add views here
+    ],
+
     controllers: [
-        'Session',
-        'Login',
         'ResearchGroups'
     ],
-    launch: function () {
-    }
+
+    stores: [
+        'ResearchGroups'
+    ],
+
+    models: [
+        'Container',
+        'ResearchGroup'
+    ]
 });
