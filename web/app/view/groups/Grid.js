@@ -13,7 +13,7 @@ Ext.define('Slims.view.groups.Grid', {
             flex: 1
         }, {
             xtype: 'actioncolumn',
-            width: 50,
+            width: 30,
             items: [{
                 icon: '/resources/images/edit.png',
                 tooltip: 'Edit',
