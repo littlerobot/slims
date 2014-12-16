@@ -19,6 +19,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.core.DomHelper": "ext/src/dom/Helper.js",
   "Ext.core.DomQuery": "ext/src/dom/Query.js",
   "Ext.rtl.EventObjectImpl": "ext/src/rtl/EventObject.js",
+  "ExtThemeNeptune": "ext/packages/ext-theme-neptune/overrides",
   "Slims": "app"
 });
 
@@ -840,6 +841,22 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.window.Window": [
     "Ext.Window"
   ],
+  "ExtThemeNeptune.Component": [],
+  "ExtThemeNeptune.container.ButtonGroup": [],
+  "ExtThemeNeptune.form.field.HtmlEditor": [],
+  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.grid.column.RowNumberer": [],
+  "ExtThemeNeptune.layout.component.Dock": [],
+  "ExtThemeNeptune.menu.Menu": [],
+  "ExtThemeNeptune.menu.Separator": [],
+  "ExtThemeNeptune.panel.Panel": [],
+  "ExtThemeNeptune.panel.Table": [],
+  "ExtThemeNeptune.panel.Tool": [],
+  "ExtThemeNeptune.picker.Month": [],
+  "ExtThemeNeptune.resizer.Splitter": [],
+  "ExtThemeNeptune.tab.Tab": [],
+  "ExtThemeNeptune.toolbar.Paging": [],
+  "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.view.Main": [],
@@ -1832,6 +1849,22 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.window.Window": [
     "widget.window"
   ],
+  "ExtThemeNeptune.Component": [],
+  "ExtThemeNeptune.container.ButtonGroup": [],
+  "ExtThemeNeptune.form.field.HtmlEditor": [],
+  "ExtThemeNeptune.grid.RowEditor": [],
+  "ExtThemeNeptune.grid.column.RowNumberer": [],
+  "ExtThemeNeptune.layout.component.Dock": [],
+  "ExtThemeNeptune.menu.Menu": [],
+  "ExtThemeNeptune.menu.Separator": [],
+  "ExtThemeNeptune.panel.Panel": [],
+  "ExtThemeNeptune.panel.Table": [],
+  "ExtThemeNeptune.panel.Tool": [],
+  "ExtThemeNeptune.picker.Month": [],
+  "ExtThemeNeptune.resizer.Splitter": [],
+  "ExtThemeNeptune.tab.Tab": [],
+  "ExtThemeNeptune.toolbar.Paging": [],
+  "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.view.Main": [
@@ -1841,7 +1874,7 @@ Ext.ClassManager.addNameAliasMappings({
 });
 
 Ext.setVersion("ext-theme-base", "4.2.1");
-Ext.setVersion("ext-theme-classic", "4.2.1");
+Ext.setVersion("ext-theme-neptune", "4.2.1");
 Ext.setVersion("ext-theme-neutral", "4.2.1");
 
 /**
@@ -1849,6 +1882,22 @@ Ext.setVersion("ext-theme-neutral", "4.2.1");
  * provided to support globbing requires, custom xtypes, and other
  * metadata-driven class system features
  */
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/Component.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/toolbar/Toolbar.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/layout/component/Dock.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/panel/Panel.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/container/ButtonGroup.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/toolbar/Paging.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/picker/Month.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/form/field/HtmlEditor.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/panel/Table.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/grid/RowEditor.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/grid/column/RowNumberer.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/resizer/Splitter.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/menu/Separator.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/menu/Menu.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/panel/Tool.js', Ext.emptyFn);
+Ext.Loader.loadScriptFile('ext/packages/ext-theme-neptune/overrides/tab/Tab.js', Ext.emptyFn);
 
 
 /**
