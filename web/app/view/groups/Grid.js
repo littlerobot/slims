@@ -15,7 +15,7 @@ Ext.define('Slims.view.groups.Grid', {
             xtype: 'actioncolumn',
             width: 50,
             items: [{
-                icon: '/images/edit_icon.png',
+                icon: '/resources/images/edit_icon.png',
                 tooltip: 'Edit',
                 scope:  this,
                 handler: function(grid, rowIndex, colIndex) {
@@ -23,7 +23,7 @@ Ext.define('Slims.view.groups.Grid', {
                     this.fireEvent('editrecord', rec);
                 }
             },{
-                icon: '/images/delete.gif',
+                icon: '/resources/images/delete.gif',
                 tooltip: 'Delete',
                 hidden: true,
                 getClass: function(v, meta) {
@@ -40,7 +40,7 @@ Ext.define('Slims.view.groups.Grid', {
 
         this.tbar = [{
             text: 'Add group',
-            icon: '/images/add.png',
+            icon: '/resources/images/add.png',
             name: 'addGroup'
         }];
 

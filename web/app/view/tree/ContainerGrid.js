@@ -53,7 +53,7 @@ Ext.define('Slims.view.tree.ContainerGrid', {
                 }
             }, {
                 xtype: 'actioncolumn',
-                icon: '/images/edit_icon.png',
+                icon: '/resources/images/edit_icon.png',
                 width: 55,
                 menuDisabled: true,
                 align: 'center',
