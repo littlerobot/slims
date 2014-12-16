@@ -17,5 +17,5 @@ puphpet/files/dot/ssh
 
 # ExtJS
 web/ext-*
-web/app2/build/.sass-cache/
-web/app2/build/temp/
+web/build/.sass-cache/
+web/build/temp/
