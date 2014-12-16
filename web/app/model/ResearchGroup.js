@@ -1,4 +1,4 @@
-Ext.define('App.model.ResearchGroup', {
+Ext.define('Slims.model.ResearchGroup', {
     extend: 'Ext.data.Model',
     idProprerty: 'id',
     fields: [{

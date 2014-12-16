@@ -1,4 +1,4 @@
-Ext.define('App.proxy.Rest', {
+Ext.define('Slims.proxy.Rest', {
     extend: 'Ext.data.proxy.Rest',
     alias: 'proxy.baserest',
     format: 'json',
@@ -26,7 +26,7 @@ Ext.define('App.proxy.Rest', {
                 request.operation.error &&
                 request.operation.error.status === 401
             ) {
-                App.getApplication().fireEvent('apiresponse401', request);
+                Slims.getApplication().fireEvent('apiresponse401', request);
             }
         }
     }

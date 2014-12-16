@@ -1,4 +1,4 @@
-Ext.define('App.controller.Login', {
+Ext.define('Slims.controller.Login', {
     extend: 'Ext.app.Controller',
     init: function() {
         this.application.on('apiresponse401', this.on401);

@@ -4,7 +4,7 @@ Ext.Loader.setConfig({
 });
 
 Ext.application({
-    name: 'App',
+    name: 'Slims',
     appFolder: '/app',
     autoCreateViewport: true,
     controllers: [

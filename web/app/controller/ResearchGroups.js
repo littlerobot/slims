@@ -1,4 +1,4 @@
-Ext.define('App.controller.ResearchGroups', {
+Ext.define('Slims.controller.ResearchGroups', {
     extend: 'Ext.app.Controller',
 
     models: ['ResearchGroup'],
@@ -26,7 +26,7 @@ Ext.define('App.controller.ResearchGroups', {
     },
 
     openEditGroupDialog: function(group) {
-        var editGroupWindow = Ext.create('App.view.groups.Window', {
+        var editGroupWindow = Ext.create('Slims.view.groups.Window', {
             record: group
         });
 
@@ -34,7 +34,7 @@ Ext.define('App.controller.ResearchGroups', {
     },
 
     openAddGroupDialog: function() {
-        var addGroupWindow = Ext.create('App.view.groups.Window');
+        var addGroupWindow = Ext.create('Slims.view.groups.Window');
 
         addGroupWindow.show();
     },
@@ -54,7 +54,7 @@ Ext.define('App.controller.ResearchGroups', {
         this.getGroupsGrid().setLoading(true);
 
         Ext.Ajax.request({
-            url: App.Url.getRoute('deletegroup'),
+            url: Slims.Url.getRoute('deletegroup'),
             method: 'POST',
             params: {
                 id: group.getId()
@@ -76,9 +76,9 @@ Ext.define('App.controller.ResearchGroups', {
 
         var url;
         if (group.getId()) {
-            url = Ext.String.format(App.Url.getRoute('setgroup'), group.getId());
+            url = Ext.String.format(Slims.Url.getRoute('setgroup'), group.getId());
         } else {
-            url = App.Url.getRoute('creategroup');
+            url = Slims.Url.getRoute('creategroup');
         }
 
         Ext.Ajax.request({

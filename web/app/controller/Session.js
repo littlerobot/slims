@@ -1,13 +1,13 @@
-Ext.define('App.controller.Session', {
+Ext.define('Slims.controller.Session', {
     extend: 'Ext.app.Controller',
     requires: [
-        'App.router.API',
-        'App.session.Session'
+        'Slims.router.API',
+        'Slims.session.Session'
     ],
     init: function() {
-        App.session.Session.start(this.onSessionStart);
+        Slims.session.Session.start(this.onSessionStart);
     },
     onSessionStart: function() {
-        console.log(App.session.Session.getCurrentUser());
+        console.log(Slims.session.Session.getCurrentUser());
     }
 });

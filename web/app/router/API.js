@@ -1,5 +1,5 @@
-Ext.define('App.router.API', {
-    alternateClassName: 'App.Url',
+Ext.define('Slims.router.API', {
+    alternateClassName: 'Slims.Url',
     singleton: true,
 
     getRoute: function(routeName, params) {

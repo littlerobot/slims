@@ -1,4 +1,4 @@
-Ext.define('App.reader.HasOneReader', {
+Ext.define('Slims.reader.HasOneReader', {
     extend: 'Ext.data.reader.Json',
     alias: 'reader.hasone',
     extractData: function(root) {

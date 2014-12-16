@@ -1,4 +1,4 @@
-Ext.define('App.view.groups.Window', {
+Ext.define('Slims.view.groups.Window', {
     extend: 'Ext.window.Window',
     xtype: 'researchgroups-window',
 
@@ -37,7 +37,7 @@ Ext.define('App.view.groups.Window', {
             handler: function() {
                 var group = this.record;
                 if (!group) {
-                    group = Ext.create('App.model.ResearchGroup');
+                    group = Ext.create('Slims.model.ResearchGroup');
                 }
 
                 group.set('name', this.down('textfield').getValue());

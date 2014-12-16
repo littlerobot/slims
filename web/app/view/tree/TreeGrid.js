@@ -1,4 +1,4 @@
-Ext.define('App.view.tree.TreeGrid', {
+Ext.define('Slims.view.tree.TreeGrid', {
     extend: 'Ext.tree.Panel',
 
     requires: [
@@ -6,7 +6,7 @@ Ext.define('App.view.tree.TreeGrid', {
         'Ext.grid.*',
         'Ext.tree.*',
         'Ext.ux.CheckColumn',
-        'App.model.Container'
+        'Slims.model.Container'
     ],
     xtype: 'tree-grid',
     reserveScrollbar: true,

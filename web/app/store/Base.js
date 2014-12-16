@@ -1,7 +1,7 @@
-Ext.define('App.store.Base', {
+Ext.define('Slims.store.Base', {
     extend: 'Ext.data.Store',
     requires: [
-        'App.proxy.Rest'
+        'Slims.proxy.Rest'
     ],
     /**
      * @cfg {String} restPath End point for store requests

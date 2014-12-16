@@ -1,11 +1,11 @@
-Ext.define('App.store.ResearchGroups', {
+Ext.define('Slims.store.ResearchGroups', {
     extend: 'Ext.data.Store',
 
-    model: 'App.model.ResearchGroup',
+    model: 'Slims.model.ResearchGroup',
 
     proxy: {
         type: 'ajax',
-        url: App.Url.getRoute('getgroups'),
+        url: Slims.Url.getRoute('getgroups'),
         reader: {
             type: 'json',
             root: 'groups'

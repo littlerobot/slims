@@ -1,10 +1,10 @@
-Ext.define('App.session.Session', {
+Ext.define('Slims.session.Session', {
     singleton: true,
     extend: 'Ext.Base',
     requires: [
-        'App.reader.MyReader',
-        'App.reader.HasOneReader',
-        'App.model.Session'
+        'Slims.reader.MyReader',
+        'Slims.reader.HasOneReader',
+        'Slims.model.Session'
     ],
     mixins: {
         observable: 'Ext.util.Observable'
@@ -22,7 +22,7 @@ Ext.define('App.session.Session', {
     start: function(callback) {
         var me = this;
         if (!this.getSessionStarted()) {
-            App.model.Session.load(null, {
+            Slims.model.Session.load(null, {
                 success: function(user) {
                     me.setSessionModel(user);
                     me.setSessionStarted(true);

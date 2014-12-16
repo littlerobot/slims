@@ -1,7 +1,7 @@
-Ext.define('App.view.tree.ContainerGrid', {
-    extend: 'App.view.tree.TreeGrid',
+Ext.define('Slims.view.tree.ContainerGrid', {
+    extend: 'Slims.view.tree.TreeGrid',
     requires: [
-        'App.proxy.Rest'
+        'Slims.proxy.Rest'
     ],
     xtype: 'container-grid',
     title: 'Container management',
@@ -9,10 +9,10 @@ Ext.define('App.view.tree.ContainerGrid', {
     initComponent: function() {
         Ext.apply(this, {
             store: new Ext.data.TreeStore({
-                model: App.model.Container,
+                model: Slims.model.Container,
                 proxy: {
                     type: 'baserest',
-                    url: App.router.API.getRoute('containers'),
+                    url: Slims.router.API.getRoute('containers'),
                     reader: {
                         type: 'json',
                         root: 'data',

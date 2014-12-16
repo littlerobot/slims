@@ -1,11 +1,11 @@
-Ext.define('App.view.groups.Grid', {
+Ext.define('Slims.view.groups.Grid', {
     extend: 'Ext.grid.Panel',
     xtype: 'researchgroups-grid',
 
     requires: ['Ext.grid.column.Action'],
 
     initComponent: function() {
-        this.store = Ext.create('App.store.ResearchGroups');
+        this.store = Ext.create('Slims.store.ResearchGroups');
 
         this.columns = [{
             text: 'Name',

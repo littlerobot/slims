@@ -1,4 +1,4 @@
-Ext.define('App.model.Container', {
+Ext.define('Slims.model.Container', {
     extend: 'Ext.data.TreeModel',
     idProperty: 'id',
     requires: [

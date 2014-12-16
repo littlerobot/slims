@@ -1,15 +1,15 @@
-Ext.define('App.auth.Auth', {
+Ext.define('Slims.auth.Auth', {
     singleton: true,
     extend: 'Ext.Component',
     requires: [
-        'App.model.CurrentUser'
+        'Slims.model.CurrentUser'
     ],
     config: {
         currentUser: null
     },
     constructor: function(config) {
         this.initConfig(config);
-        App.model.Session.load(null, {
+        Slims.model.Session.load(null, {
             success: function(user) {
                 console.log(user.getId()); //logs 123
             },

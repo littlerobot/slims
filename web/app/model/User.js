@@ -1,5 +1,5 @@
-Ext.define('App.model.User', {
-    extend: 'App.model.Base',
+Ext.define('Slims.model.User', {
+    extend: 'Slims.model.Base',
     idProperty: 'crsid',
     requires: [
         'Ext.data.Request'

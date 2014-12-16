@@ -1,12 +1,12 @@
-Ext.define('App.view.Viewport', {
+Ext.define('Slims.view.Viewport', {
     extend: 'Ext.container.Viewport',
     requires: [
         'Ext.tab.Panel',
-        'App.router.API',
-        'App.store.User',
-        'App.view.tree.ContainerGrid',
+        'Slims.router.API',
+        'Slims.store.User',
+        'Slims.view.tree.ContainerGrid',
         'Ext.layout.container.Fit',
-        'App.view.groups.Grid'
+        'Slims.view.groups.Grid'
     ],
     layout: 'fit',
     title: 'Slims',

@@ -1,4 +1,4 @@
-Ext.define('App.reader.MyReader', {
+Ext.define('Slims.reader.MyReader', {
     extend: 'Ext.data.reader.Json',
     alias: 'reader.myreader',
     readAssociated: function(record, data) {

@@ -1,12 +1,12 @@
 /**
  * Store for managing staff
  */
-Ext.define('App.store.User', {
-    extend: 'App.store.Base',
+Ext.define('Slims.store.User', {
+    extend: 'Slims.store.Base',
     alias: 'store.user',
     requires: [
-        'App.model.User'
+        'Slims.model.User'
     ],
     restPath: '/api/staff',
-    model: 'App.model.User'
+    model: 'Slims.model.User'
 });

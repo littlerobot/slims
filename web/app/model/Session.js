@@ -1,14 +1,14 @@
-Ext.define('App.model.Session', {
-    extend: 'App.model.Base',
+Ext.define('Slims.model.Session', {
+    extend: 'Slims.model.Base',
     requires: [
         'Ext.data.Request',
-        'App.model.User',
+        'Slims.model.User',
         'Ext.data.association.HasOne',
-        'App.reader.HasOneReader'
+        'Slims.reader.HasOneReader'
     ],
     idProperty: 'sessionId',
-    proxy: Ext.create('App.proxy.Rest', {
-        url: App.router.API.getRoute('session')
+    proxy: Ext.create('Slims.proxy.Rest', {
+        url: Slims.router.API.getRoute('session')
     }),
     fields: [
         // id field
@@ -20,7 +20,7 @@ Ext.define('App.model.Session', {
     ],
     associations: [
         {
-            model: 'App.model.User',
+            model: 'Slims.model.User',
             type: 'hasOne',
             associationKey: 'User',
             associatedName: 'User',

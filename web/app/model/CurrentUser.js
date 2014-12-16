@@ -1,6 +1,6 @@
-Ext.define('App.model.CurrentUser', {
-    extend: 'App.model.User',
+Ext.define('Slims.model.CurrentUser', {
+    extend: 'Slims.model.User',
     requires: [
-        'App.proxy.Rest'
+        'Slims.proxy.Rest'
     ]
 });
