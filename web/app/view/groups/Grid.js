@@ -15,27 +15,29 @@ Ext.define('Slims.view.groups.Grid', {
             xtype: 'actioncolumn',
             width: 50,
             items: [{
-                icon: '/resources/images/edit_icon.png',
+                icon: '/resources/images/edit.png',
                 tooltip: 'Edit',
                 scope:  this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
                 }
-            },{
-                icon: '/resources/images/delete.gif',
-                tooltip: 'Delete',
-                hidden: true,
-                getClass: function(v, meta) {
-                    meta.style = 'padding-left: 10px;';
-                    return v;
-                },
-                scope:  this,
-                handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('deleterecord', rec);
-                }
-            }]
+            },
+            // {
+            //     icon: '/resources/images/cancel.png',
+            //     tooltip: 'Delete',
+            //     hidden: true,
+            //     getClass: function(v, meta) {
+            //         meta.style = 'padding-left: 10px;';
+            //         return v;
+            //     },
+            //     scope:  this,
+            //     handler: function(grid, rowIndex, colIndex) {
+            //         var rec = grid.getStore().getAt(rowIndex);
+            //         this.fireEvent('deleterecord', rec);
+            //     }
+            // }
+            ]
         }];
 
         this.tbar = [{

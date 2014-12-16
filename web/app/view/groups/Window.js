@@ -46,7 +46,7 @@ Ext.define('Slims.view.groups.Window', {
             }
         }, '-', {
             text: 'Cancel',
-            icon: '/resources/images/delete.gif',
+            icon: '/resources/images/cancel.png',
             scope: this,
             handler: this.close
         }];
