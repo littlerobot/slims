@@ -25,6 +25,7 @@ Ext.define('App.view.groups.Grid', {
             },{
                 icon: '/images/delete.gif',
                 tooltip: 'Delete',
+                hidden: true,
                 getClass: function(v, meta) {
                     meta.style = 'padding-left: 10px;';
                     return v;
