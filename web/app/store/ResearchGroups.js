@@ -8,7 +8,7 @@ Ext.define('App.store.ResearchGroups', {
         url: App.Url.getRoute('getgroups'),
         reader: {
             type: 'json',
-            root: 'data'
+            root: 'groups'
         }
     }
 });
