@@ -22,7 +22,7 @@ Ext.define('Slims.view.groups.Grid', {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
                 }
-            },
+            }
             // {
             //     icon: '/resources/images/cancel.png',
             //     tooltip: 'Delete',
