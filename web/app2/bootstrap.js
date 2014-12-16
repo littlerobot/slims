@@ -859,8 +859,18 @@ Ext.ClassManager.addNameAlternateMappings({
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Main": [],
-  "Slims.view.Main": [],
-  "Slims.view.Viewport": []
+  "Slims.controller.ResearchGroups": [],
+  "Slims.model.Container": [],
+  "Slims.model.ResearchGroup": [],
+  "Slims.router.API": [
+    "Slims.Url"
+  ],
+  "Slims.store.ResearchGroups": [],
+  "Slims.view.Viewport": [],
+  "Slims.view.groups.Grid": [],
+  "Slims.view.groups.Window": [],
+  "Slims.view.tree.ContainerGrid": [],
+  "Slims.view.tree.TreeGrid": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1867,10 +1877,24 @@ Ext.ClassManager.addNameAliasMappings({
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Main": [],
-  "Slims.view.Main": [
-    "widget.app-main"
+  "Slims.controller.ResearchGroups": [],
+  "Slims.model.Container": [],
+  "Slims.model.ResearchGroup": [],
+  "Slims.router.API": [],
+  "Slims.store.ResearchGroups": [],
+  "Slims.view.Viewport": [],
+  "Slims.view.groups.Grid": [
+    "widget.researchgroups-grid"
   ],
-  "Slims.view.Viewport": []
+  "Slims.view.groups.Window": [
+    "widget.researchgroups-window"
+  ],
+  "Slims.view.tree.ContainerGrid": [
+    "widget.container-grid"
+  ],
+  "Slims.view.tree.TreeGrid": [
+    "widget.tree-grid"
+  ]
 });
 
 Ext.setVersion("ext-theme-base", "4.2.1");
