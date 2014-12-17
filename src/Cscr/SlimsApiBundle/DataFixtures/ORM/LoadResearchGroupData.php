@@ -17,8 +17,10 @@ class LoadResearchGroupData extends AbstractFixture implements FixtureInterface
         foreach (range('A', 'F') as $letter) {
             $group = new ResearchGroup();
             $group->setName(sprintf('Research group %s', $letter));
+            $this->setReference(sprintf('group_%s', $letter), $group);
             $manager->persist($group);
         }
+
         $manager->flush();
     }
 }

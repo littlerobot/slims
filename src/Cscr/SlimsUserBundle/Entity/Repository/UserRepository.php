@@ -2,6 +2,7 @@
 
 namespace Cscr\SlimsUserBundle\Entity\Repository;
 
+use Cscr\SlimsUserBundle\Entity\User;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
@@ -53,5 +54,26 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     {
         return $this->getEntityName() === $class
         || is_subclass_of($class, $this->getEntityName());
+    }
+
+    /**
+     * Find all users and order them by username.
+     *
+     * @return User[]|null
+     */
+    public function findAll()
+    {
+        $q = $this
+            ->createQueryBuilder('u')
+            ->orderBy('u.username')
+            ->getQuery();
+
+        try {
+            $groups = $q->getResult();
+        } catch (NoResultException $e) {
+            return;
+        }
+
+        return $groups;
     }
 }

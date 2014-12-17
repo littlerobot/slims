@@ -2,6 +2,7 @@
 
 namespace Cscr\SlimsUserBundle\Entity;
 
+use Cscr\SlimsApiBundle\Entity\ResearchGroup;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -9,7 +10,7 @@ use JMS\Serializer\Annotation as JMS;
 /**
  * Class User
  *
- * @ORM\Table(name="user")
+ * @ORM\Table(name="slims_user")
  * @ORM\Entity(repositoryClass="Cscr\SlimsUserBundle\Entity\Repository\UserRepository")
  */
 class User implements UserInterface, \Serializable
@@ -20,8 +21,6 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue("AUTO")
-     *
-     * @JMS\Exclude()
      */
     private $id;
 
@@ -40,18 +39,19 @@ class User implements UserInterface, \Serializable
     private $name;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="research_group", type="string", length=255)
-     */
-    private $researchGroup;
-
-    /**
      * @var boolean
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
     private $isActive;
+
+    /**
+     * @var ResearchGroup
+     *
+     * @ORM\ManyToOne(targetEntity="Cscr\SlimsApiBundle\Entity\ResearchGroup")
+     * @ORM\JoinColumn(name="research_group_id", referencedColumnName="id")
+     */
+    private $researchGroup;
 
     /**
      * @return int
@@ -77,6 +77,7 @@ class User implements UserInterface, \Serializable
     public function setIsActive($isActive)
     {
         $this->isActive = $isActive;
+
         return $this;
     }
 
@@ -96,6 +97,7 @@ class User implements UserInterface, \Serializable
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -115,9 +117,9 @@ class User implements UserInterface, \Serializable
     public function setUsername($username)
     {
         $this->username = $username;
+
         return $this;
     }
-
 
     /**
      * {@inheritdoc}
@@ -154,7 +156,7 @@ class User implements UserInterface, \Serializable
      */
     public function getPassword()
     {
-        return null;
+        return;
     }
 
     /**
@@ -162,7 +164,7 @@ class User implements UserInterface, \Serializable
      */
     public function getSalt()
     {
-        return null;
+        return;
     }
 
     /**
@@ -171,5 +173,24 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
         // Credentials managed in Raven - nothing to do
+    }
+
+    /**
+     * @return ResearchGroup
+     */
+    public function getResearchGroup()
+    {
+        return $this->researchGroup;
+    }
+
+    /**
+     * @param  ResearchGroup $researchGroup
+     * @return User
+     */
+    public function setResearchGroup(ResearchGroup $researchGroup)
+    {
+        $this->researchGroup = $researchGroup;
+
+        return $this;
     }
 }
