@@ -7,7 +7,9 @@
 Ext.application({
     name: 'Slims',
 
+    appFolder: '/app',
+
     extend: 'Slims.Application',
-    
+
     autoCreateViewport: true
 });
