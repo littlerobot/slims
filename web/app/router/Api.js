@@ -29,7 +29,7 @@ Ext.define('Slims.router.Api', {
 
     getTestRoute: function(routeName, params) {
         var routePrefix = 'api/',
-            devController = 'app_dev.php/';
+            devController = '/app_dev.php/';
 
         switch (routeName) {
             case 'containers':
