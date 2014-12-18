@@ -29,15 +29,18 @@ Ext.define('Slims.view.users.Window', {
             items: [{
                 xtype: 'textfield',
                 fieldLabel: 'Username',
+                name: 'username',
                 maxLength: 10,
                 allowBlank: false
             }, {
                 xtype: 'textfield',
+                name: 'name',
                 fieldLabel: 'Name',
                 maxLength: 255,
                 allowBlank: false
             }, {
                 xtype: 'combobox',
+                name: 'research_group',
                 fieldLabel: 'Research Group',
                 store: Ext.StoreMgr.get('researchGroups'),
                 queryMode: 'local',
@@ -53,18 +56,16 @@ Ext.define('Slims.view.users.Window', {
             name: 'save',
             scope: this,
             handler: function() {
-                var group = this.record;
+                var user = this.record;
 
-                if (!this.down('textfield').isValid())
+                if (!this.down('form').getForm().isValid())
                     return;
 
-                if (!group) {
-                    group = Ext.create('Slims.model.ResearchGroup');
+                if (!user) {
+                    user = Ext.create('Slims.model.User', this.down('form').getForm().getValues());
                 }
 
-                group.set('name', this.down('textfield').getValue());
-
-                this.fireEvent('save', group, this);
+                this.fireEvent('save', user, this);
             }
         }, '-', {
             text: 'Cancel',
@@ -73,6 +74,20 @@ Ext.define('Slims.view.users.Window', {
             handler: this.close
         }];
 
+        this.on('afterrender', this.setupData, this);
+
         this.callParent();
+    },
+
+    setupData: function() {
+        if (this.record == null)
+            return;
+
+        var user = this.record.getData();
+
+        // prepare data for combobox
+        user.research_group = user.research_group ? user.research_group.id : '';
+
+        this.down('form').getForm().setValues(user);
     }
 });

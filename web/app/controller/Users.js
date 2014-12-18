@@ -14,6 +14,12 @@ Ext.define('Slims.controller.Users', {
         this.control({
             'usersgrid button[name=addUser]': {
                 click: this.openAddUserWindow
+            },
+            'usersgrid': {
+                'editrecord': this.openEditUserWindow
+            },
+            'userwindow': {
+                save: this.saveUser
             }
         });
     },
@@ -22,5 +28,17 @@ Ext.define('Slims.controller.Users', {
         var addUserWindow = Ext.create('Slims.view.users.Window');
 
         addUserWindow.show();
+    },
+
+    openEditUserWindow: function(user) {
+        var editUserWindow = Ext.create('Slims.view.users.Window', {
+            record: user
+        });
+
+        editUserWindow.show();
+    },
+
+    saveUser: function() {
+
     }
 });
