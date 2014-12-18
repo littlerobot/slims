@@ -425,7 +425,6 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "Ext.grid.RowEditor": [],
   "Ext.grid.RowEditorButtons": [],
-  "Ext.grid.Scroller": [],
   "Ext.grid.View": [],
   "Ext.grid.ViewDropZone": [],
   "Ext.grid.column.Action": [
@@ -874,7 +873,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.groups.Window": [],
   "Slims.view.tree.ContainerGrid": [],
   "Slims.view.tree.TreeGrid": [],
-  "Slims.view.users.Grid": []
+  "Slims.view.users.Grid": [],
+  "Slims.view.users.Window": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1313,7 +1313,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.grid.RowEditorButtons": [
     "widget.roweditorbuttons"
   ],
-  "Ext.grid.Scroller": [],
   "Ext.grid.View": [
     "widget.gridview"
   ],
@@ -1894,7 +1893,7 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.groupsgrid"
   ],
   "Slims.view.groups.Window": [
-    "widget.researchgroups-window"
+    "widget.groupwindow"
   ],
   "Slims.view.tree.ContainerGrid": [
     "widget.container-grid"
@@ -1904,6 +1903,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.users.Grid": [
     "widget.usersgrid"
+  ],
+  "Slims.view.users.Window": [
+    "widget.userwindow"
   ]
 });
 

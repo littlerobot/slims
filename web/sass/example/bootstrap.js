@@ -95,7 +95,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             return object;
         },
     /*
-     * The Boot loader class manages Request objects that contain one or
+     * The Boot loader class manages Request objects that contain one or 
      * more individual urls that need to be loaded.  Requests can be performed
      * synchronously or asynchronously, but will always evaluate urls in the
      * order specified on the request object.
@@ -110,7 +110,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             // or an array of callbacks to call once it loads.
             scripts: {
                 /*
-                 Entry objects
+                 Entry objects 
 
                  'http://foo.com/bar/baz/Thing.js': {
                  done: true,
@@ -683,7 +683,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             while (!stop) {
                 added = false;
 
-                // iterate the requirements for each index and
+                // iterate the requirements for each index and 
                 // accumulate in the index map
                 for (idx in indexMap) {
                     if (indexMap.hasOwnProperty(idx)) {
@@ -700,9 +700,9 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                             }
                             for (len = reqs.length, i = 0; i < len; i++) {
                                 ridx = reqs[i];
-                                // if we find a requirement that wasn't
-                                // already in the index map,
-                                // set the added flag to indicate we need to
+                                // if we find a requirement that wasn't 
+                                // already in the index map, 
+                                // set the added flag to indicate we need to 
                                 // reprocess
                                 if (!indexMap[ridx]) {
                                     indexMap[ridx] = true;
@@ -1201,7 +1201,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 head.removeChild(base);
 
             } else {
-                // Debugger friendly, file names are still shown even though they're
+                // Debugger friendly, file names are still shown even though they're 
                 // eval'ed code. Breakpoints work on both Firebug and Chrome's Web
                 // Inspector.
                 if (url) {
@@ -1227,7 +1227,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                     complete();
                 });
                 me.evaluateLoadElement();
-                // at this point, we need sequential evaluation,
+                // at this point, we need sequential evaluation, 
                 // which means we can't advance the load until
                 // this entry has fully completed
                 return false;
@@ -1268,18 +1268,18 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
             var me = this;
             if (!me.loaded) {
                 if(me.loading) {
-                    // if we're calling back through load and we're loading but haven't
-                    // yet loaded, then we should be in a sequential, cross domain
-                    // load scenario which means we can't continue the load on the
+                    // if we're calling back through load and we're loading but haven't 
+                    // yet loaded, then we should be in a sequential, cross domain 
+                    // load scenario which means we can't continue the load on the 
                     // request until this entry has fully evaluated, which will mean
                     // loaded = evaluated = done = true in one step.  For css files, this
-                    // will happen immediately upon <link> element creation / insertion,
+                    // will happen immediately upon <link> element creation / insertion, 
                     // but <script> elements will set this upon load notification
                     return false;
                 }
                 me.loading = true;
 
-                // for async modes, we have some options
+                // for async modes, we have some options 
                 if (!sync) {
                     // if cross domain, just inject the script tag and let the onload
                     // events drive the progression
@@ -1287,7 +1287,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                         return me.loadCrossDomain();
                     }
                     // for IE, use the readyStateChange allows us to load scripts in parallel
-                    // but serialize the evaluation by appending the script node to the
+                    // but serialize the evaluation by appending the script node to the 
                     // document
                     else if(!me.isCss() && Boot.hasReadyState) {
                         me.createLoadElement(function () {
@@ -2418,17 +2418,22 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Users": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
-  "Slims.router.API": [
+  "Slims.model.User": [],
+  "Slims.router.Api": [
     "Slims.Url"
   ],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
   "Slims.view.groups.Window": [],
   "Slims.view.tree.ContainerGrid": [],
-  "Slims.view.tree.TreeGrid": []
+  "Slims.view.tree.TreeGrid": [],
+  "Slims.view.users.Grid": [],
+  "Slims.view.users.Window": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -3435,22 +3440,31 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Users": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
-  "Slims.router.API": [],
+  "Slims.model.User": [],
+  "Slims.router.Api": [],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [
     "widget.groupsgrid"
   ],
   "Slims.view.groups.Window": [
-    "widget.researchgroups-window"
+    "widget.groupwindow"
   ],
   "Slims.view.tree.ContainerGrid": [
     "widget.container-grid"
   ],
   "Slims.view.tree.TreeGrid": [
     "widget.tree-grid"
+  ],
+  "Slims.view.users.Grid": [
+    "widget.usersgrid"
+  ],
+  "Slims.view.users.Window": [
+    "widget.userwindow"
   ]
 });
 
@@ -3489,3 +3503,4 @@ Ext.Boot.loadSync([
     "custom.js"
 ]);
 
+        
