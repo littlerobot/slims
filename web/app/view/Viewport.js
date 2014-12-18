@@ -16,9 +16,11 @@ Ext.define('Slims.view.Viewport', {
             xtype: 'container-grid'
         }, {
             title: 'Research Groups',
+            icon: '/resources/images/groups.png',
             xtype: 'researchgroups-grid'
         }, {
             title: 'Users',
+            icon: '/resources/images/users.png',
             xtype: 'users-grid'
         }]
     }]

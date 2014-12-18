@@ -10,7 +10,7 @@ Ext.define('Slims.view.users.Grid', {
         this.columns = [{
             text: 'Username',
             dataIndex: 'username',
-            flex: 1
+            width: 200
         }, {
             text: 'Name',
             dataIndex: 'name',
