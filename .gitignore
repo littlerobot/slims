@@ -19,3 +19,4 @@ puphpet/files/dot/ssh
 web/ext-*
 web/build/.sass-cache/
 web/build/temp/
+web/build/testing/
