@@ -1,6 +1,6 @@
-Ext.define('Slims.view.groups.Window', {
+Ext.define('Slims.view.users.Window', {
     extend: 'Ext.window.Window',
-    xtype: 'groupwindow',
+    xtype: 'userwindow',
 
     requires: [
         'Ext.form.field.Text',
@@ -8,25 +8,42 @@ Ext.define('Slims.view.groups.Window', {
     ],
 
     width: 400,
-    layout: 'vbox',
+    layout: 'fit',
     modal: true,
 
-    // group for editing
+    // user for editing
     record: null,
 
     initComponent: function() {
-        this.title = this.record == null ? 'Add new group' : 'Edit group';
+        this.title = this.record == null ? 'Add new user' : 'Edit user';
 
         this.items = [{
-            xtype: 'textfield',
-            fieldLabel: 'Group name',
-            labelStyle: 'margin-bottom: 3px;',
-            width: '100%',
-            labelAlign: 'top',
-            maxLength: 255,
-            margin: 10,
-            allowBlank: false,
-            value: this.record == null ? '' : this.record.get('name')
+            xtype: 'form',
+
+            defaults: {
+                labelStyle: 'margin-bottom: 3px;',
+                anchor: '100%',
+                labelAlign: 'top',
+                margin: 10
+            },
+            items: [{
+                xtype: 'textfield',
+                fieldLabel: 'Username',
+                maxLength: 10,
+                allowBlank: false
+            }, {
+                xtype: 'textfield',
+                fieldLabel: 'Name',
+                maxLength: 255,
+                allowBlank: false
+            }, {
+                xtype: 'combobox',
+                fieldLabel: 'Research Group',
+                store: Ext.StoreMgr.get('researchGroups'),
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'id'
+            }]
         }];
 
         this.bbar = [

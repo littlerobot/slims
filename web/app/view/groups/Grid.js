@@ -1,11 +1,12 @@
 Ext.define('Slims.view.groups.Grid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'researchgroups-grid',
+    xtype: 'groupsgrid',
 
     requires: ['Ext.grid.column.Action'],
 
+
     initComponent: function() {
-        this.store = Ext.create('Slims.store.ResearchGroups');
+        this.store = Ext.StoreMgr.get('researchGroups');
 
         this.columns = [{
             text: 'Name',
@@ -22,22 +23,7 @@ Ext.define('Slims.view.groups.Grid', {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
                 }
-            }
-            // {
-            //     icon: '/resources/images/cancel.png',
-            //     tooltip: 'Delete',
-            //     hidden: true,
-            //     getClass: function(v, meta) {
-            //         meta.style = 'padding-left: 10px;';
-            //         return v;
-            //     },
-            //     scope:  this,
-            //     handler: function(grid, rowIndex, colIndex) {
-            //         var rec = grid.getStore().getAt(rowIndex);
-            //         this.fireEvent('deleterecord', rec);
-            //     }
-            // }
-            ]
+            }]
         }];
 
         this.tbar = [{
@@ -47,11 +33,5 @@ Ext.define('Slims.view.groups.Grid', {
         }];
 
         this.callParent();
-
-        this.on('afterrender', this.loadData, this);
-    },
-
-    loadData: function() {
-        this.getStore().load();
     }
 });

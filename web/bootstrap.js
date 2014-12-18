@@ -860,17 +860,21 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Users": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
+  "Slims.model.User": [],
   "Slims.router.Api": [
     "Slims.Url"
   ],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
   "Slims.view.groups.Window": [],
   "Slims.view.tree.ContainerGrid": [],
-  "Slims.view.tree.TreeGrid": []
+  "Slims.view.tree.TreeGrid": [],
+  "Slims.view.users.Grid": []
 });
 
 Ext.ClassManager.addNameAliasMappings({
@@ -1878,13 +1882,16 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.Application": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Users": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
+  "Slims.model.User": [],
   "Slims.router.Api": [],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [
-    "widget.researchgroups-grid"
+    "widget.groupsgrid"
   ],
   "Slims.view.groups.Window": [
     "widget.researchgroups-window"
@@ -1894,6 +1901,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.tree.TreeGrid": [
     "widget.tree-grid"
+  ],
+  "Slims.view.users.Grid": [
+    "widget.usersgrid"
   ]
 });
 

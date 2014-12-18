@@ -1,6 +1,6 @@
 Ext.define('Slims.view.users.Grid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'users-grid',
+    xtype: 'usersgrid',
 
     requires: ['Ext.grid.column.Action'],
 

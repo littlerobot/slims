@@ -7,22 +7,32 @@ Ext.define('Slims.controller.ResearchGroups', {
 
     refs: [{
         ref: 'groupsGrid',
-        selector: 'researchgroups-grid'
+        selector: 'groupsgrid'
     }],
 
     init: function() {
         this.control({
-            'researchgroups-grid button[name=addGroup]': {
+            'groupsgrid button[name=addGroup]': {
                 click: this.openAddGroupDialog
             },
-            'researchgroups-grid': {
+            'groupsgrid': {
                 deleterecord: this.confirmDeleteAction,
                 editrecord: this.openEditGroupDialog
             },
-            'researchgroups-window': {
+            'groupwindow': {
                 save: this.saveGroup
             }
         });
+
+        this.createResearchGroupsStore();
+    },
+
+    createResearchGroupsStore: function() {
+        var store = Ext.create('Slims.store.ResearchGroups', {
+            storeId: 'researchGroups'
+        });
+
+        store.load();
     },
 
     openEditGroupDialog: function(group) {

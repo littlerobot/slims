@@ -17,11 +17,11 @@ Ext.define('Slims.view.Viewport', {
         }, {
             title: 'Research Groups',
             icon: '/resources/images/groups.png',
-            xtype: 'researchgroups-grid'
+            xtype: 'groupsgrid'
         }, {
             title: 'Users',
             icon: '/resources/images/users.png',
-            xtype: 'users-grid'
+            xtype: 'usersgrid'
         }]
     }]
 });
