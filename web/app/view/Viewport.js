@@ -17,6 +17,9 @@ Ext.define('Slims.view.Viewport', {
         }, {
             title: 'Research Groups',
             xtype: 'researchgroups-grid'
+        }, {
+            title: 'Users',
+            xtype: 'users-grid'
         }]
     }]
 });

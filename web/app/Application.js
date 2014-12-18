@@ -12,20 +12,21 @@ Ext.define('Slims.Application', {
         'Slims.router.Api'
     ],
 
-    views: [
-        // TODO: add views here
-    ],
+    views: [],
 
     controllers: [
-        'ResearchGroups'
+        'ResearchGroups',
+        'Users'
     ],
 
     stores: [
-        'ResearchGroups'
+        'ResearchGroups',
+        'Users'
     ],
 
     models: [
         'Container',
-        'ResearchGroup'
+        'ResearchGroup',
+        'User'
     ]
 });

@@ -20,10 +20,10 @@ Ext.define('Slims.router.Api', {
                 return routePrefix + '/research-groups/{0}';
             case 'creategroup':
                 return routePrefix + '/research-groups';
-            case 'deletegroup':
-                return routePrefix + '/delete-research-group';
+            case 'getusers':
+                return routePrefix + '/users';
             default:
-                throw 'Unknown route: ' + routeName;
+                return routeName;
         }
     },
 
@@ -42,8 +42,10 @@ Ext.define('Slims.router.Api', {
                 return devController + routePrefix + 'research-groups/{0}';
             case 'creategroup':
                 return devController + routePrefix + 'research-groups';
-            case 'deletegroup':
-                return devController + routePrefix + 'delete-research-groups';
+            case 'getusers':
+                return devController + routePrefix + 'users';
+            default:
+                return routeName;
         }
     }
 });
