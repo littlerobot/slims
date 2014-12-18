@@ -19,13 +19,14 @@ Ext.define('Slims.view.groups.Window', {
 
         this.items = [{
             xtype: 'textfield',
-            maxLength: 255,
             fieldLabel: 'Group name',
-            value: this.record == null ? '' : this.record.get('name'),
-            labelAlign: 'top',
             labelStyle: 'margin-bottom: 3px;',
             width: '100%',
-            margin: 10
+            labelAlign: 'top',
+            maxLength: 255,
+            margin: 10,
+            allowBlank: false,
+            value: this.record == null ? '' : this.record.get('name')
         }];
 
         this.bbar = [
@@ -36,6 +37,10 @@ Ext.define('Slims.view.groups.Window', {
             scope: this,
             handler: function() {
                 var group = this.record;
+
+                if (!this.down('textfield').isValid())
+                    return;
+
                 if (!group) {
                     group = Ext.create('Slims.model.ResearchGroup');
                 }
