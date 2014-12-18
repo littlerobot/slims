@@ -9,7 +9,7 @@ Ext.define('Slims.Application', {
     extend: 'Ext.app.Application',
 
     requires: [
-        'Slims.router.API'
+        'Slims.router.Api'
     ],
 
     views: [

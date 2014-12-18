@@ -1,4 +1,4 @@
-Ext.define('Slims.router.API', {
+Ext.define('Slims.router.Api', {
     alternateClassName: 'Slims.Url',
     singleton: true,
 

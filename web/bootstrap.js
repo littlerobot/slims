@@ -425,6 +425,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "Ext.grid.RowEditor": [],
   "Ext.grid.RowEditorButtons": [],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [],
   "Ext.grid.ViewDropZone": [],
   "Ext.grid.column.Action": [
@@ -861,7 +862,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
-  "Slims.router.API": [
+  "Slims.router.Api": [
     "Slims.Url"
   ],
   "Slims.store.ResearchGroups": [],
@@ -1308,6 +1309,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.grid.RowEditorButtons": [
     "widget.roweditorbuttons"
   ],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [
     "widget.gridview"
   ],
@@ -1878,7 +1880,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
-  "Slims.router.API": [],
+  "Slims.router.Api": [],
   "Slims.store.ResearchGroups": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [

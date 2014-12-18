@@ -2,7 +2,6 @@ Ext.define('Slims.view.Viewport', {
     extend: 'Ext.container.Viewport',
     requires: [
         'Ext.tab.Panel',
-        'Slims.router.API',
         'Slims.view.tree.ContainerGrid',
         'Ext.layout.container.Fit',
         'Slims.view.groups.Grid'
