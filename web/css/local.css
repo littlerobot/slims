@@ -1,0 +1,12 @@
+#title {
+    background: url("../images/favicon-32.png") no-repeat;
+    padding-left: 40px;
+    padding-bottom: 5px;
+    line-height: 38px;
+    font-size: 28px;
+    text-transform: uppercase;
+}
+
+.jumbotron {
+    margin-top: 30px;
+}
