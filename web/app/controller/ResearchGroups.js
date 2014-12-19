@@ -82,7 +82,6 @@ Ext.define('Slims.controller.ResearchGroups', {
     //         },
     //         failure: function() {
     //             this.getGroupsGrid().setLoading(false);
-    //             Ext.Msg.alert('Error', 'Server returned error');
     //         }
     //     });
     // },
@@ -111,7 +110,6 @@ Ext.define('Slims.controller.ResearchGroups', {
             },
             failure: function() {
                 dialog.setLoading(false);
-                Ext.Msg.alert('Error', 'Server returned error');
             }
         });
     },

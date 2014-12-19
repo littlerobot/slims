@@ -66,7 +66,6 @@ Ext.define('Slims.controller.Users', {
             },
             failure: function() {
                 dialog.setLoading(false);
-                Ext.Msg.alert('Error', 'Server returned an error');
             }
         });
     },
