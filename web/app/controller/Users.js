@@ -15,6 +15,9 @@ Ext.define('Slims.controller.Users', {
             'usersgrid button[name=addUser]': {
                 click: this.openAddUserWindow
             },
+            'usersgrid button[name=reloadGrid]': {
+                click: this.reloadGrid
+            },
             'usersgrid': {
                 'editrecord': this.openEditUserWindow
             },
@@ -66,5 +69,9 @@ Ext.define('Slims.controller.Users', {
                 Ext.Msg.alert('Error', 'Server returned an error');
             }
         });
+    },
+
+    reloadGrid: function() {
+        this.getUsersGrid().getStore().reload();
     }
 });

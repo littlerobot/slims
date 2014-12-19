@@ -47,6 +47,10 @@ Ext.define('Slims.view.users.Grid', {
             text: 'Add user',
             icon: '/resources/images/add.png',
             name: 'addUser'
+        }, '->', {
+            width: 25,
+            icon: '/resources/images/reload.png',
+            name: 'reloadGrid'
         }];
 
         this.callParent();

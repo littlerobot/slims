@@ -20,6 +20,9 @@ Ext.define('Slims.controller.ResearchGroups', {
                 // deleterecord: this.confirmDeleteAction,
                 editrecord: this.openEditGroupDialog
             },
+            'groupsgrid button[name=reloadGrid]': {
+                click: this.reloadGrid
+            },
             'groupwindow': {
                 save: this.saveGroup
             }
@@ -111,5 +114,9 @@ Ext.define('Slims.controller.ResearchGroups', {
                 Ext.Msg.alert('Error', 'Server returned error');
             }
         });
+    },
+
+    reloadGrid: function() {
+        this.getGroupsGrid().getStore().reload();
     }
 });
