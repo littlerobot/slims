@@ -23,6 +23,13 @@ Ext.define('Slims.view.users.Grid', {
                 return value ? value.name : '[No group selected]';
             }
         }, {
+            text: 'Active?',
+            dataIndex: 'is_active',
+            width: 100,
+            renderer: function(value) {
+                return value ? 'Yes' : 'No';
+            }
+        }, {
             xtype: 'actioncolumn',
             width: 30,
             items: [{

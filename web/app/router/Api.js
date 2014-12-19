@@ -22,28 +22,36 @@ Ext.define('Slims.router.Api', {
                 return routePrefix + '/research-groups';
             case 'getusers':
                 return routePrefix + '/users';
+            case 'setuser':
+                return routePrefix + '/users/{0}';
+            case 'createuser':
+                return routePrefix + '/users';
             default:
                 return routeName;
         }
     },
 
     getTestRoute: function(routeName, params) {
-        var routePrefix = 'api/',
-            devController = '/app_dev.php/';
+        var routePrefix = '/api',
+            devController = '/app_dev.php';
 
         switch (routeName) {
             case 'containers':
-                return devController + routePrefix + 'containers';
+                return devController + routePrefix + '/containers';
             case 'session':
-                return devController + routePrefix + 'session';
+                return devController + routePrefix + '/session';
             case 'getgroups':
-                return devController + routePrefix + 'research-groups';
+                return devController + routePrefix + '/research-groups';
             case 'setgroup':
-                return devController + routePrefix + 'research-groups/{0}';
+                return devController + routePrefix + '/research-groups/{0}';
             case 'creategroup':
-                return devController + routePrefix + 'research-groups';
+                return devController + routePrefix + '/research-groups';
             case 'getusers':
-                return devController + routePrefix + 'users';
+                return devController + routePrefix + '/users';
+            case 'setuser':
+                return devController + routePrefix + '/users/{0}';
+            case 'createuser':
+                return devController + routePrefix + '/users';
             default:
                 return routeName;
         }

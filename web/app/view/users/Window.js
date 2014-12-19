@@ -4,7 +4,8 @@ Ext.define('Slims.view.users.Window', {
 
     requires: [
         'Ext.form.field.Text',
-        'Ext.toolbar.Toolbar'
+        'Ext.toolbar.Toolbar',
+        'Ext.form.field.Checkbox'
     ],
 
     width: 400,
@@ -15,7 +16,7 @@ Ext.define('Slims.view.users.Window', {
     record: null,
 
     initComponent: function() {
-        this.title = this.record == null ? 'Add new user' : 'Edit user';
+        this.setWindowTitle();
 
         this.items = [{
             xtype: 'form',
@@ -46,6 +47,10 @@ Ext.define('Slims.view.users.Window', {
                 queryMode: 'local',
                 displayField: 'name',
                 valueField: 'id'
+            }, {
+                xtype: 'checkbox',
+                name: 'is_active',
+                fieldLabel: 'Is Active'
             }]
         }];
 
@@ -77,6 +82,15 @@ Ext.define('Slims.view.users.Window', {
         this.on('afterrender', this.setupData, this);
 
         this.callParent();
+    },
+
+    setWindowTitle: function() {
+        if (this.record == null) {
+            this.title = 'Add new user';
+        } else {
+            var username = this.record.get('username');
+            this.title = username ? Ext.String.format('Edit user "{0}"', username) : 'Edit user';
+        }
     },
 
     setupData: function() {

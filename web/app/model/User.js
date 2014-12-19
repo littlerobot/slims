@@ -7,6 +7,8 @@ Ext.define('Slims.model.User', {
     }, {
         name: 'name'
     }, {
-    	name: 'research_group'
+        name: 'research_group'
+    }, {
+        name: 'is_active'
     }]
 });
