@@ -1,2 +1,22 @@
+# PuPHPet
 puphpet/files/dot/ssh
+
+# Symfony2
+/web/bundles/
+/app/bootstrap.php.cache
+/app/cache/*
+/app/config/parameters.yml
+/app/logs/*
+!app/cache/.gitkeep
+!app/logs/.gitkeep
+/app/phpunit.xml
+/build/
+/vendor/
+/bin/
+/composer.phar
+
+# ExtJS
 web/ext-*
+web/build/.sass-cache
+web/build/temp
+web/build/testing

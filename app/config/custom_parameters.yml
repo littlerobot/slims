@@ -1,0 +1,2 @@
+parameters:
+    fos_rest.serializer.exception_wrapper_serialize_handler.class: Cscr\SlimsApiBundle\Serializer\ExtJsExceptionWrapperSerializeHandler

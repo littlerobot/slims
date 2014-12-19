@@ -9,10 +9,7 @@ vagrantfile-local:
         chosen_provider: virtualbox
         network:
             private_network: 192.168.56.101
-            forwarded_port:
-                B6MIqwS51xXC:
-                    host: '7581'
-                    guest: '22'
+            forwarded_port: {  }
         post_up_message: ''
         provider:
             virtualbox:
@@ -32,10 +29,10 @@ vagrantfile-local:
                     - '--hiera_config /vagrant/puphpet/puppet/hiera.yaml'
                     - '--parser future'
         synced_folder:
-            J6N464Hry8x1:
+            slims:
                 source: ./
                 target: /var/www
-                sync_type: default
+                sync_type: nfs
                 rsync:
                     args:
                         - '--verbose'
@@ -61,7 +58,9 @@ vagrantfile-local:
         host: detect
 server:
     install: '1'
-    packages: {  }
+    packages:
+        - vim
+        - htop
 firewall:
     install: '1'
     rules: null
@@ -77,9 +76,9 @@ apache:
     modules:
         - rewrite
     vhosts:
-        YEP0bu9YAt1D:
+        slims:
             servername: slims.dev
-            docroot: /var/www/
+            docroot: /var/www/web
             port: '80'
             override:
                 - All
@@ -101,7 +100,7 @@ nginx:
         proxy_buffer_size: 128k
         proxy_buffers: '4 256k'
     vhosts:
-        jNUoXcsh84G4:
+        hski0Tj7SeKu:
             server_name: awesome.dev
             server_aliases:
                 - www.awesome.dev
@@ -134,7 +133,7 @@ php:
         error_reporting: '-1'
         session.save_path: /var/lib/php/session
     timezone: Europe/London
-    mod_php: 0
+    mod_php: '1'
 hhvm:
     install: '0'
     nightly: 0
@@ -156,7 +155,7 @@ xdebug:
         xdebug.remote_enable: '1'
         xdebug.remote_handler: dbgp
         xdebug.remote_port: '9000'
-        xdebug.profiler_enable_trigger: '1'
+        xdebug.max_nesting_level: '250'
 xhprof:
     install: '0'
 drush:
@@ -165,7 +164,7 @@ drush:
 ruby:
     install: '1'
     versions:
-        HECEK7GuT1Nu:
+        CRHVZxXdTFvT:
             version: ''
 nodejs:
     install: '0'
@@ -174,21 +173,21 @@ python:
     install: '1'
     packages: {  }
     versions:
-        u6GGNOBDg20X:
+        Y93W9TRe0APm:
             version: ''
 mysql:
     install: '1'
     root_password: root
-    adminer: '1'
+    adminer: 0
     databases:
-        80uqKIAO0zXO:
+        slims:
             grant:
                 - ALL
             name: slims
             host: localhost
             user: slims
             password: slims
-            sql_file: /var/www/database/slims.sql
+            sql_file: ''
 postgresql:
     install: '0'
     settings:
@@ -219,14 +218,14 @@ redis:
     settings:
         conf_port: '6379'
 mailcatcher:
-    install: '0'
+    install: '1'
     settings:
         smtp_ip: 0.0.0.0
         smtp_port: 1025
         http_ip: 0.0.0.0
         http_port: '1080'
         mailcatcher_path: /usr/local/rvm/wrappers/default
-        from_email_method: inline
+        from_email_method: headers
 beanstalkd:
     install: '0'
     settings:

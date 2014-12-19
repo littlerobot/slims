@@ -1,0 +1,18 @@
+security:
+    providers:
+        database:
+            entity:
+                class: CscrSlimsUserBundle:User
+        raven:
+            id: raven.user_provider
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+        raven:
+            pattern: ^/(app|api)
+            raven: true
+        home:
+            pattern: ^/
+            security: false

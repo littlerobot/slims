@@ -1,0 +1,17 @@
+users:
+    type:           rest
+    resource:       Cscr\SlimsApiBundle\Controller\UsersController
+    prefix:         users
+    name_prefix:    api_users_
+
+containers:
+    type:           rest
+    resource:       Cscr\SlimsApiBundle\Controller\ContainersController
+    prefix:         containers
+    name_prefix:    api_containers_
+
+research_groups:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/ResearchGroupsController.php
+    prefix:         research-groups
+    name_prefix:    api_research_groups_
