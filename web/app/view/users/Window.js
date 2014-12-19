@@ -66,8 +66,12 @@ Ext.define('Slims.view.users.Window', {
                 if (!this.down('form').getForm().isValid())
                     return;
 
+                var formValues = this.down('form').getForm().getValues();
+
                 if (!user) {
-                    user = Ext.create('Slims.model.User', this.down('form').getForm().getValues());
+                    user = Ext.create('Slims.model.User', formValues);
+                } else {
+                    user.set(formValues);
                 }
 
                 this.fireEvent('save', user, this);

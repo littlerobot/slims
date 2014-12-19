@@ -1,6 +1,6 @@
 Ext.define('Slims.model.User', {
     extend: 'Ext.data.Model',
-    idProprerty: 'username',
+    idProprerty: 'id',
 
     fields: [{
         name: 'username'

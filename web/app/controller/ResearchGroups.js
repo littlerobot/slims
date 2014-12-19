@@ -16,7 +16,8 @@ Ext.define('Slims.controller.ResearchGroups', {
                 click: this.openAddGroupDialog
             },
             'groupsgrid': {
-                deleterecord: this.confirmDeleteAction,
+                // Waiting for client's answer
+                // deleterecord: this.confirmDeleteAction,
                 editrecord: this.openEditGroupDialog
             },
             'groupwindow': {
@@ -49,37 +50,39 @@ Ext.define('Slims.controller.ResearchGroups', {
         addGroupWindow.show();
     },
 
-    confirmDeleteAction: function(group) {
-        var title = 'Delete confirmation',
-            msg = Ext.String.format('Are you sure you want to delete group "{0}"?', group.get('name'));
+    // Waiting for client's answer
 
-        Ext.Msg.confirm(title, msg, function(btn) {
-            if (btn == 'yes') {
-                this.deleteGroup(group);
-            }
-        }, this);
-    },
+    // confirmDeleteAction: function(group) {
+    //     var title = 'Delete confirmation',
+    //         msg = Ext.String.format('Are you sure you want to delete group "{0}"?', group.get('name'));
 
-    deleteGroup: function(group) {
-        this.getGroupsGrid().setLoading(true);
+    //     Ext.Msg.confirm(title, msg, function(btn) {
+    //         if (btn == 'yes') {
+    //             this.deleteGroup(group);
+    //         }
+    //     }, this);
+    // },
 
-        Ext.Ajax.request({
-            url: Slims.Url.getRoute('deletegroup'),
-            method: 'POST',
-            params: {
-                id: group.getId()
-            },
-            scope: this,
-            success: function() {
-                this.getGroupsGrid().getStore().load();
-                this.getGroupsGrid().setLoading(false);
-            },
-            failure: function() {
-                this.getGroupsGrid().setLoading(false);
-                Ext.Msg.alert('Error', 'Server returned error');
-            }
-        });
-    },
+    // deleteGroup: function(group) {
+    //     this.getGroupsGrid().setLoading(true);
+
+    //     Ext.Ajax.request({
+    //         url: Slims.Url.getRoute('deletegroup'),
+    //         method: 'POST',
+    //         params: {
+    //             id: group.getId()
+    //         },
+    //         scope: this,
+    //         success: function() {
+    //             this.getGroupsGrid().getStore().load();
+    //             this.getGroupsGrid().setLoading(false);
+    //         },
+    //         failure: function() {
+    //             this.getGroupsGrid().setLoading(false);
+    //             Ext.Msg.alert('Error', 'Server returned error');
+    //         }
+    //     });
+    // },
 
     saveGroup: function(group, dialog) {
         dialog.setLoading(true);

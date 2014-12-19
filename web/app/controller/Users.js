@@ -38,7 +38,33 @@ Ext.define('Slims.controller.Users', {
         editUserWindow.show();
     },
 
-    saveUser: function() {
+    saveUser: function(user, dialog) {
+        dialog.setLoading(true);
 
+        var url;
+        if (user.getId()) {
+            url = Ext.String.format(Slims.Url.getRoute('setuser'), user.getId());
+        } else {
+            url = Slims.Url.getRoute('createuser');
+        }
+
+        var userData = user.getData();
+        delete userData.id;
+
+        Ext.Ajax.request({
+            url: url,
+            method: 'POST',
+            params: userData,
+            scope: this,
+            success: function() {
+                this.getUsersGrid().getStore().load();
+                dialog.setLoading(false);
+                dialog.close();
+            },
+            failure: function() {
+                dialog.setLoading(false);
+                Ext.Msg.alert('Error', 'Server returned an error');
+            }
+        });
     }
 });
