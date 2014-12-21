@@ -15,7 +15,7 @@
                 <option name="maxMessage">The username cannot be longer than {{ limit }} characters</option>
             </constraint>
             <constraint name="Regex">
-                <option name="pattern">/[a-z]+[0-9]+/</option>
+                <option name="pattern">/^[a-z]+[0-9]+$/</option>
                 <option name="message">Username must be in the form "abc123"</option>
             </constraint>
         </property>
