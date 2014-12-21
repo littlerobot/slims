@@ -43,6 +43,7 @@ Ext.define('Slims.view.users.Window', {
                 xtype: 'combobox',
                 name: 'research_group',
                 fieldLabel: 'Research Group',
+                editable: false,
                 store: Ext.StoreMgr.get('researchGroups'),
                 queryMode: 'local',
                 displayField: 'name',

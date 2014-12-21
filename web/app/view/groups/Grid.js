@@ -30,6 +30,10 @@ Ext.define('Slims.view.groups.Grid', {
             text: 'Add group',
             icon: '/resources/images/add.png',
             name: 'addGroup'
+        }, '->', {
+            width: 25,
+            icon: '/resources/images/reload.png',
+            name: 'reloadGrid'
         }];
 
         this.callParent();
