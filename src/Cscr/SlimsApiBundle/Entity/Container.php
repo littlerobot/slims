@@ -29,7 +29,6 @@ class Container
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @JMS\Exclude()
      */
     private $name;
 
@@ -117,11 +116,39 @@ class Container
     }
 
     /**
+     * Returns the number of samples stored all the children (and, if appropriate, their children) of this container.
+     *
+     * @return int The total number of samples stored in all child containers.
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("samples_stored")
+     */
+    public function getNumberOfStoredSamples()
+    {
+        // This container stores samples so won't have any children.
+        // FIXME: Add sample calculation when samples are actually being stored.
+        if (static::STORES_SAMPLES === $this->stores) {
+            return 0;
+        }
+
+        $childStored = 0;
+
+        foreach ($this->children as $child) {
+            $childStored += $child->getNumberOfStoredSamples();
+        }
+
+        return $childStored;
+    }
+
+    /**
      * Returns the sample capacity of all the children (and, if appropriate, their children) of this container.
      *
      * @return int The total sample capacity of all child containers.
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("sample_total_capacity")
      */
-    public function getSampleCapacity()
+    public function getTotalSampleCapacity()
     {
         // This container stores samples so won't have any children.
         if (static::STORES_SAMPLES === $this->stores) {
@@ -132,23 +159,24 @@ class Container
         $childCapacity = 0;
 
         foreach ($this->children as $child) {
-            $childCapacity += $child->getSampleCapacity();
+            $childCapacity += $child->getTotalSampleCapacity();
         }
 
         return $childCapacity;
     }
 
     /**
-     * The name of the container plus the sample storage capacity of its children and the number of samples stored.
+     * Returns the remaining sample capacity of all the children (and, if appropriate, their children) of this
+     * container.
      *
-     * @return string
+     * @return int The total remaining sample capacity of all child containers.
      *
      * @JMS\VirtualProperty()
-     * @JMS\SerializedName("name")
+     * @JMS\SerializedName("sample_remaining_capacity")
      */
-    public function getNameIncludingCapacity()
+    public function getSampleRemainingCapacity()
     {
-        return sprintf('%s (Samples: 0/%d)', $this->name, $this->getSampleCapacity());
+        return $this->getTotalSampleCapacity() - $this->getNumberOfStoredSamples();
     }
 
     /**
