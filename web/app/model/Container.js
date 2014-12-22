@@ -27,5 +27,9 @@ Ext.define('Slims.model.Container', {
         name: 'colour',
         type: 'string',
         useNull : true
+    }, {
+        name: 'sample_remaining_capacity'
+    }, {
+        name: 'sample_total_capacity'
     }]
 });

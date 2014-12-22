@@ -1,9 +1,17 @@
-Ext.define('Slims.view.tree.ContainerGrid', {
-    extend: 'Slims.view.tree.TreeGrid',
-    xtype: 'container-grid',
-    title: 'Container management',
+Ext.define('Slims.view.home.Grid', {
+    extend: 'Ext.tree.Panel',
+    xtype: 'containergrid',
 
-    height: 300,
+    requires: [
+        'Ext.Msg',
+        'Ext.ux.CheckColumn',
+        'Slims.model.Container'
+    ],
+
+    reserveScrollbar: true,
+    useArrows: true,
+    rootVisible: false,
+    multiSelect: true,
 
     initComponent: function() {
         Ext.apply(this, {
@@ -25,27 +33,38 @@ Ext.define('Slims.view.tree.ContainerGrid', {
             columns: [{
                 xtype: 'treecolumn', //this is so we know which column will show the tree
                 text: 'Container',
-                flex: 2,
+                flex: 3,
                 sortable: true,
                 dataIndex: 'name'
             }, {
                 text: 'Rows',
+                hidden: true,
                 flex: 0.5,
                 sortable: true,
                 dataIndex: 'rows'
             }, {
                 text: 'Columns',
+                hidden: true,
                 flex: 0.5,
                 sortable: true,
                 dataIndex: 'columns'
+            }, {
+                text: 'Remaining capacity',
+                hidden: true,
+                width: 140,
+                dataIndex: 'sample_remaining_capacity'
+            }, {
+                text: 'Total capacity',
+                hidden: true,
+                width: 120,
+                dataIndex: 'sample_total_capacity'
             }, {
                 text: 'Research group',
                 flex: 2,
                 sortable: true,
                 dataIndex: 'research_group'
             }, {
-                text: 'Colour',
-                flex: 1,
+                width: 30,
                 sortable: true,
                 dataIndex: 'colour',
                 renderer: function(value) {
@@ -54,10 +73,9 @@ Ext.define('Slims.view.tree.ContainerGrid', {
             }, {
                 xtype: 'actioncolumn',
                 icon: '/resources/images/edit.png',
-                width: 55,
+                width: 30,
                 menuDisabled: true,
                 align: 'center',
-                text: 'Action',
                 tooltip: 'Edit',
                 handler: function(grid, rowIndex, colIndex, actionItem, event, record, row) {
                     Ext.Msg.alert('Action', 'This is a sample action that can be performed on "' + record.get('name') + '"');
