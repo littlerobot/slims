@@ -9,7 +9,7 @@ class UserResponse extends ExtJsResponse
     /**
      * @var
      *
-     * @JMS\SerializedName("users")
+     * @JMS\SerializedName("user")
      */
     protected $data;
 }
