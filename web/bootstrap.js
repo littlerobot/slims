@@ -871,8 +871,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
   "Slims.view.groups.Window": [],
-  "Slims.view.tree.ContainerGrid": [],
-  "Slims.view.tree.TreeGrid": [],
+  "Slims.view.home.Grid": [],
+  "Slims.view.home.Panel": [],
+  "Slims.view.home.container.Window": [],
   "Slims.view.users.Grid": [],
   "Slims.view.users.Window": []
 });
@@ -1895,11 +1896,14 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.groups.Window": [
     "widget.groupwindow"
   ],
-  "Slims.view.tree.ContainerGrid": [
-    "widget.container-grid"
+  "Slims.view.home.Grid": [
+    "widget.containergrid"
   ],
-  "Slims.view.tree.TreeGrid": [
-    "widget.tree-grid"
+  "Slims.view.home.Panel": [
+    "widget.homepage"
+  ],
+  "Slims.view.home.container.Window": [
+    "widget.containerwindow"
   ],
   "Slims.view.users.Grid": [
     "widget.usersgrid"

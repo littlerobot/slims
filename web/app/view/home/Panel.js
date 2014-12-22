@@ -5,7 +5,8 @@ Ext.define('Slims.view.home.Panel', {
     layout: 'fit',
 
     requires: [
-        'Slims.view.home.Grid'
+        'Slims.view.home.Grid',
+        'Slims.view.home.container.Window'
     ],
 
     initComponent: function() {
@@ -19,13 +20,13 @@ Ext.define('Slims.view.home.Panel', {
                 xtype: 'containergrid',
                 height: '100%',
                 border: true,
-                split: true,
                 flex: 1
             }, {
                 xtype: 'panel',
                 height: '100%',
                 border: true,
-                flex: 2
+                html: '<center style="margin-top: 60px;"><h2>Here will be some new content...</h2></center>',
+                flex: 4
             }]
         }];
 
