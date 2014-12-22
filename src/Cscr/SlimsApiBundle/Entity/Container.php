@@ -80,7 +80,7 @@ class Container
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=6, nullable=true)
+     * @ORM\Column(type="string", length=7, nullable=true)
      */
     private $colour;
 
