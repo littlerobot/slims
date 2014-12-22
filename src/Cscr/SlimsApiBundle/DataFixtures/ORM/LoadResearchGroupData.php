@@ -5,9 +5,10 @@ namespace Cscr\SlimsApiBundle\DataFixtures\ORM;
 use Cscr\SlimsApiBundle\Entity\ResearchGroup;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 
-class LoadResearchGroupData extends AbstractFixture implements FixtureInterface
+class LoadResearchGroupData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     /**
      * {@inheritdoc}
@@ -22,5 +23,13 @@ class LoadResearchGroupData extends AbstractFixture implements FixtureInterface
         }
 
         $manager->flush();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 1;
     }
 }
