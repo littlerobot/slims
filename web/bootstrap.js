@@ -857,6 +857,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "ExtThemeNeptune.toolbar.Paging": [],
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
+  "Slims.controller.Home": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.Users": [],
@@ -866,6 +867,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.router.Api": [
     "Slims.Url"
   ],
+  "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],
   "Slims.store.Users": [],
   "Slims.view.Viewport": [],
@@ -1880,6 +1882,7 @@ Ext.ClassManager.addNameAliasMappings({
   "ExtThemeNeptune.toolbar.Paging": [],
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
+  "Slims.controller.Home": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.Users": [],
@@ -1887,6 +1890,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.model.ResearchGroup": [],
   "Slims.model.User": [],
   "Slims.router.Api": [],
+  "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],
   "Slims.store.Users": [],
   "Slims.view.Viewport": [],
@@ -1897,7 +1901,7 @@ Ext.ClassManager.addNameAliasMappings({
     "widget.groupwindow"
   ],
   "Slims.view.home.Grid": [
-    "widget.containergrid"
+    "widget.containersgrid"
   ],
   "Slims.view.home.Panel": [
     "widget.homepage"
