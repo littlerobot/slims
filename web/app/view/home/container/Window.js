@@ -47,12 +47,14 @@ Ext.define('Slims.view.home.container.Window', {
                 xtype: 'panel',
                 html: '<center style="margin: 40px;"><h4>Containers tree</h4></center>',
                 border: true,
-                height: 100,
+                height: 150,
                 width: 300,
                 style: 'margin-left: 20px;'
             }, {
                 xtype: 'radiogroup',
+                style: 'margin-top: 10px;',
                 layout: 'vbox',
+                labelAlign: 'top',
                 boxLabel: 'Belongs to',
                 items: [{
                     boxLabel: 'Nobody',
@@ -76,6 +78,33 @@ Ext.define('Slims.view.home.container.Window', {
                         displayField: 'name',
                         valueField: 'id'
                     }]
+                }]
+            }, {
+                xtype: 'fieldcontainer',
+                layout: 'hbox',
+                style: 'margin-top: 10px;',
+                width: '100%',
+                labelWidth: 130,
+                fieldLabel: 'Dimensions/capacity',
+                items: [{
+                    xtype: 'textfield',
+                    hideAlign: true,
+                    flex: 1
+                }, {
+                    xtype: 'label',
+                    style: 'margin-top: 4px; margin-left: 4px;',
+                    width: 50,
+                    text: 'rows by'
+                }, {
+                    xtype: 'textfield',
+                    hideAlign: true,
+                    flex: 1,
+                    labelAlign: 'right'
+                }, {
+                    xtype: 'label',
+                    style: 'margin-top: 4px; margin-left: 4px;',
+                    width: 50,
+                    text: 'columns'
                 }]
             }]
         }, {
