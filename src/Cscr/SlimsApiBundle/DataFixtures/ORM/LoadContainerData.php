@@ -3,13 +3,15 @@
 namespace Cscr\SlimsApiBundle\DataFixtures\ORM;
 
 use Cscr\SlimsApiBundle\Entity\Container;
+use Cscr\SlimsApiBundle\Entity\ResearchGroup;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
+use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use Faker\Factory;
 use Faker\Generator;
 
-class LoadContainerData extends AbstractFixture implements FixtureInterface
+class LoadContainerData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
     const NUMBER_OF_ROOT_CONTAINERS = 4;
     const NUMBER_OF_SECOND_LEVEL_CONTAINERS = 10;
@@ -56,7 +58,9 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface
                 ->setColour($this->faker->optional(0.5)->hexcolor)
             ;
             /** @var Container $parentContainer */
-            $parentContainer = $this->getReference(sprintf('root_container_%d', rand(1, self::NUMBER_OF_ROOT_CONTAINERS)));
+            $parentContainer = $this->getReference(
+                sprintf('root_container_%d', rand(1, self::NUMBER_OF_ROOT_CONTAINERS))
+            );
             $this->setReference(sprintf('second_level_container_%d', $id), $container);
             $parentContainer->storeContainerInside($container);
             $this->manager->persist($container);
@@ -82,11 +86,16 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface
         $rows = $this->faker->numberBetween(1, 10);
         $columns = $this->faker->numberBetween(1, 10);
         $stores = Container::STORES_SAMPLES;
-        $container = new Container($name, $rows, $columns, $stores);
+        $container = new Container();
         $container
-            ->specifyOwner($this->faker->optional(0.5)->name)
+            ->setName($name)
+            ->setRows($rows)
+            ->setColumns($columns)
+            ->setStores($stores)
+            ->setResearchGroup($this->getRandomResearchGroup())
             ->setColour($this->faker->optional(0.75)->hexcolor)
             ->setComment($this->faker->text(50));
+
         return $container;
     }
 
@@ -99,11 +108,37 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface
         $rows = $this->faker->numberBetween(1, 10);
         $columns = $this->faker->numberBetween(1, 10);
         $stores = Container::STORES_CONTAINERS;
-        $container = new Container($name, $rows, $columns, $stores);
+        $container = new Container();
         $container
-            ->specifyOwner($this->faker->optional(0.5)->name)
+            ->setName($name)
+            ->setRows($rows)
+            ->setColumns($columns)
+            ->setStores($stores)
+            ->setResearchGroup($this->getRandomResearchGroup())
             ->setColour($this->faker->optional(0.25)->hexcolor)
             ->setComment($this->faker->text(50));
+
         return $container;
+    }
+
+    /**
+     * @return ResearchGroup
+     */
+    private function getRandomResearchGroup()
+    {
+        $groups = range('A', 'F');
+        $groupIndex = array_rand($groups);
+        $groupReference = sprintf('group_%s', $groups[$groupIndex]);
+        $group = $this->getReference($groupReference);
+
+        return $group;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getOrder()
+    {
+        return 2;
     }
 }

@@ -4,12 +4,12 @@ namespace Cscr\SlimsApiBundle\Response;
 
 use JMS\Serializer\Annotation as JMS;
 
-class UserResponse extends ExtJsResponse
+class ContainerResponse extends ExtJsResponse
 {
     /**
      * @var
      *
-     * @JMS\SerializedName("user")
+     * @JMS\SerializedName("container")
      */
     protected $data;
 }
