@@ -17,7 +17,7 @@ Ext.define('Slims.view.home.Panel', {
             defauls: {
             },
             items: [{
-                xtype: 'containergrid',
+                xtype: 'containersgrid',
                 height: '100%',
                 border: true,
                 flex: 1
@@ -26,7 +26,9 @@ Ext.define('Slims.view.home.Panel', {
                 height: '100%',
                 border: true,
                 html: '<center style="margin-top: 60px;"><h2>Here will be some new content...</h2></center>',
-                flex: 4
+                // flex: 4
+                // for debugging
+                flex: 1
             }]
         }];
 

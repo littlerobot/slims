@@ -17,7 +17,6 @@ Ext.define('Slims.model.Container', {
         useNull : true
     }, {
         name: 'research_group',
-        type: 'string',
         useNull : true
     }, {
         name: 'stores',

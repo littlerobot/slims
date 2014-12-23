@@ -15,7 +15,7 @@ Ext.define('Slims.Application', {
     views: [],
 
     controllers: [
-        'Main',
+        'Home',
         'ResearchGroups',
         'Users'
     ],
