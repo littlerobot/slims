@@ -37,35 +37,19 @@ Ext.define('Slims.view.home.Grid', {
                 sortable: true,
                 dataIndex: 'name'
             }, {
-                text: 'Rows',
-                hidden: true,
-                flex: 0.5,
-                sortable: true,
-                dataIndex: 'rows'
-            }, {
-                text: 'Columns',
-                hidden: true,
-                flex: 0.5,
-                sortable: true,
-                dataIndex: 'columns'
-            }, {
                 text: 'Remaining capacity',
-                hidden: true,
                 width: 140,
                 dataIndex: 'sample_remaining_capacity'
             }, {
                 text: 'Total capacity',
-                hidden: true,
                 width: 120,
                 dataIndex: 'sample_total_capacity'
             }, {
                 text: 'Research group',
                 flex: 2,
-                sortable: true,
                 dataIndex: 'research_group'
             }, {
                 width: 30,
-                sortable: true,
                 dataIndex: 'colour',
                 renderer: function(value) {
                     return '<div style="width: 15px; height: 15px; background-color: '+value+'; border: 1px solid black;">&nbsp;</div>';
