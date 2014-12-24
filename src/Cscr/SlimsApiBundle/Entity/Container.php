@@ -52,14 +52,14 @@ class Container
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private $rows;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private $columns;
 
