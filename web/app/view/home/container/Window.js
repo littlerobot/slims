@@ -2,8 +2,6 @@ Ext.define('Slims.view.home.container.Window', {
     extend: 'Ext.window.Window',
     xtype: 'containerwindow',
 
-    requires: ['Ext.form.Panel'],
-
     layout: 'fit',
     width: 800,
     height: 500,
@@ -13,7 +11,11 @@ Ext.define('Slims.view.home.container.Window', {
         'Ext.form.field.Checkbox',
         'Ext.form.RadioGroup',
         'Ext.form.field.Number',
-        'Ext.form.field.Radio'
+        'Ext.form.field.Radio',
+        'Ext.form.Panel',
+        'Ext.form.field.ComboBox',
+        'Ext.form.Label',
+        'Ext.picker.Color'
     ],
 
     initComponent: function() {
@@ -158,18 +160,50 @@ Ext.define('Slims.view.home.container.Window', {
                         name: 'stores',
                         inputValue: '2'
                     }]
+                },{
+                    xtype: 'container',
+                    layout: {
+                        type: 'hbox',
+                        align: 'middle'
+                    },
+                    items: [{
+                        xtype: 'container',
+                        name: 'colorPalette',
+                        border: true,
+                        html: '<div style="background-color: red; height: 100%; width: 100%;"><div>',
+                        height: 24,
+                        width: 24
+                    }, {
+                        xtype: 'button',
+                        style: 'margin-left: 4px;',
+                        text: 'Color',
+                        width: 80,
+                        name: 'colorButton',
+                        menu: [{
+                            xtype: 'colorpicker',
+                            value: '000000',
+                            listeners: {
+                                scope: this,
+                                select: function(picker, selColor) {
+                                    picker.up('button[name=colorButton]').menu.hide();
+                                    this.down('container[name=colorPalette]').el.dom.style.setProperty('background-color', selColor);
+                                }
+                            }
+                        }]
+                    }]
                 }, {
                     xtype: 'textarea',
                     width: '100%',
                     fieldLabel: 'Comment',
                     labelAlign: 'top',
-                    height: 250
+                    height: 150
                 }, {
                     xtype: 'numberfield',
                     fieldLabel: 'Number of containers to create',
-                    labelAlign: 'top',
-                    width: 240,
-                    maxValue: 10,
+                    labelWidth: 190,
+                    width: 250,
+                    allowBlank: false,
+                    maxValue: 1,
                     minValue: 1,
                     value: 1
                 }]
