@@ -359,4 +359,12 @@ class Container
     {
         return $this->id;
     }
+
+    public static function getValidContainerTypes()
+    {
+        return [
+            self::STORES_CONTAINERS,
+            self::STORES_SAMPLES,
+        ];
+    }
 }

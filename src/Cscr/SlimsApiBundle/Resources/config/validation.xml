@@ -17,4 +17,61 @@
             </constraint>
         </property>
     </class>
+
+    <class name="Cscr\SlimsApiBundle\Entity\Container">
+        <property name="name">
+            <constraint name="NotBlank" />
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+                <option name="minMessage">The name must be at least {{ limit }} characters long</option>
+                <option name="maxMessage">The name cannot be longer than {{ limit }} characters</option>
+            </constraint>
+        </property>
+        <property name="parent">
+            <constraint name="Type">
+                <option name="type">Cscr\SlimsApiBundle\Entity\Container</option>
+                <option name="message">Parent container must be valid</option>
+            </constraint>
+        </property>
+        <property name="researchGroup">
+            <constraint name="Type">
+                <option name="type">Cscr\SlimsApiBundle\Entity\ResearchGroup</option>
+                <option name="message">Research group must be valid</option>
+            </constraint>
+        </property>
+        <property name="rows">
+            <constraint name="NotBlank" />
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">100</option>
+                <option name="minMessage">Number of rows must be greater than {{ limit }}</option>
+                <option name="maxMessage">Number of rows must be less than {{ limit }}</option>
+                <option name="invalidMessage">This must be a number</option>
+            </constraint>
+        </property>
+        <property name="columns">
+            <constraint name="NotBlank" />
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">100</option>
+                <option name="minMessage">Number of columns must be greater than {{ limit }}</option>
+                <option name="maxMessage">Number of columns must be less than {{ limit }}</option>
+                <option name="invalidMessage">This must be a number</option>
+            </constraint>
+        </property>
+        <property name="stores">
+            <constraint name="NotBlank" />
+            <constraint name="Choice">
+                <option name="callback">getValidContainerTypes</option>
+            </constraint>
+        </property>
+        <property name="colour">
+            <constraint name="Regex">
+                <option name="pattern">/^#[0-9A-F]{6}$/i</option>
+                <option name="message">Colour must be in hexadecimal format. E.g. #00ff33</option>
+            </constraint>
+        </property>
+    </class>
+
 </constraint-mapping>
