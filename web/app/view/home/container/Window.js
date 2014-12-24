@@ -168,9 +168,14 @@ Ext.define('Slims.view.home.container.Window', {
                     },
                     items: [{
                         xtype: 'container',
-                        name: 'colorPalette',
                         border: true,
-                        html: '<div style="background-color: red; height: 100%; width: 100%;"><div>',
+                        name: 'colorPalette',
+                        listeners: {
+                            afterrender: function(container) {
+                                container.el.dom.removeChild(container.el.dom.childNodes[0]);
+                                container.el.setStyle('border', '1px;');
+                            }
+                        },
                         height: 24,
                         width: 24
                     }, {
@@ -186,7 +191,7 @@ Ext.define('Slims.view.home.container.Window', {
                                 scope: this,
                                 select: function(picker, selColor) {
                                     picker.up('button[name=colorButton]').menu.hide();
-                                    this.down('container[name=colorPalette]').el.dom.style.setProperty('background-color', selColor);
+                                    this.down('container[name=colorPalette]').el.setStyle('background', '#'+selColor);
                                 }
                             }
                         }]
