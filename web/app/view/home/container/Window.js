@@ -15,7 +15,8 @@ Ext.define('Slims.view.home.container.Window', {
         'Ext.form.Panel',
         'Ext.form.field.ComboBox',
         'Ext.form.Label',
-        'Ext.picker.Color'
+        'Ext.picker.Color',
+        'Ext.tree.Panel'
     ],
 
     initComponent: function() {
@@ -49,13 +50,14 @@ Ext.define('Slims.view.home.container.Window', {
                         inputValue: '1'
                     }]
                 }, {
-                    xtype: 'panel',
-                    html: '<center style="margin: 40px;"><h4>Containers tree</h4></center>',
+                    xtype: 'treepanel',
+                    style: 'margin-left: 20px;',
                     border: true,
                     height: 150,
                     width: 300,
-                    bodyStyle: 'background: #C0C0C0;',
-                    style: 'margin-left: 20px;'
+                    displayField: 'name',
+                    store: Ext.create('Slims.store.Containers'),
+                    rootVisible: false
                 }, {
                     xtype: 'radiogroup',
                     style: 'margin-top: 10px;',
@@ -186,7 +188,7 @@ Ext.define('Slims.view.home.container.Window', {
                         name: 'colorButton',
                         menu: [{
                             xtype: 'colorpicker',
-                            value: '000000',
+                            value: 'FFFFFF',
                             listeners: {
                                 scope: this,
                                 select: function(picker, selColor) {
@@ -246,6 +248,14 @@ Ext.define('Slims.view.home.container.Window', {
         }];
 
         this.callParent();
-    }
+    },
+
+    getContainersTreeStore: function() {
+        var containersStore = Ext.create('Slims.store.Containers');
+        var containersStoreData = containersStore.getData(),
+            containersTreeData = [];
+
+
+    },
 
 });
