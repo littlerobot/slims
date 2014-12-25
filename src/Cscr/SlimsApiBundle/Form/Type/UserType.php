@@ -1,12 +1,12 @@
 <?php
 
-namespace Cscr\SlimsApiBundle\Form;
+namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class ResearchGroupType extends AbstractType
+class UserType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -14,7 +14,14 @@ class ResearchGroupType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('name', 'text');
+            ->add('name', 'text')
+            ->add('username', 'text')
+            ->add('research_group', 'entity', [
+                'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+                'property' => 'id',
+            ])
+            ->add('is_active', 'checkbox')
+        ;
     }
 
     /**
@@ -23,7 +30,7 @@ class ResearchGroupType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+            'data_class'      => 'Cscr\SlimsUserBundle\Entity\User',
             'csrf_protection' => false,
         ));
     }
@@ -33,6 +40,6 @@ class ResearchGroupType extends AbstractType
      */
     public function getName()
     {
-        return 'research_group';
+        return 'user';
     }
 }

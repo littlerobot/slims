@@ -1,6 +1,6 @@
 <?php
 
-namespace Cscr\SlimsApiBundle\Form;
+namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Cscr\SlimsApiBundle\Entity\Container;
 use Symfony\Component\Form\AbstractType;

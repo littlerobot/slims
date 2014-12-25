@@ -2,7 +2,7 @@
 
 namespace Cscr\SlimsApiBundle\Controller;
 
-use Cscr\SlimsApiBundle\Form\UserType;
+use Cscr\SlimsApiBundle\Form\Type\UserType;
 use Cscr\SlimsApiBundle\Response\UserCollectionResponse;
 use Cscr\SlimsApiBundle\Response\UserResponse;
 use Cscr\SlimsUserBundle\Entity\User;

@@ -3,8 +3,8 @@
 namespace Cscr\SlimsApiBundle\Controller;
 
 use Cscr\SlimsApiBundle\Entity\Container;
-use Cscr\SlimsApiBundle\Form\CreateContainerType;
-use Cscr\SlimsApiBundle\Form\UpdateContainerType;
+use Cscr\SlimsApiBundle\Form\Type\CreateContainerType;
+use Cscr\SlimsApiBundle\Form\Type\UpdateContainerType;
 use Cscr\SlimsApiBundle\Response\ContainerResponse;
 use Cscr\SlimsApiBundle\Response\ExtJsResponse;
 use FOS\RestBundle\Controller\FOSRestController;
