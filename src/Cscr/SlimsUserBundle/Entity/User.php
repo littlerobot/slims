@@ -64,19 +64,19 @@ class User implements UserInterface, \Serializable
     /**
      * @return boolean
      */
-    public function getIsActive()
+    public function isActive()
     {
         return $this->isActive;
     }
 
     /**
-     * @param boolean $isActive
+     * @param boolean $active
      *
      * @return User
      */
-    public function setIsActive($isActive)
+    public function setActive($active)
     {
-        $this->isActive = $isActive;
+        $this->isActive = $active;
 
         return $this;
     }
