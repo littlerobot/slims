@@ -127,6 +127,7 @@ php:
             - intl
             - mcrypt
             - curl
+            - sqlite
         pear: {  }
         pecl: {  }
     ini:
