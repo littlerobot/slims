@@ -6,6 +6,7 @@ Ext.define('Slims.view.home.container.Window', {
     width: 800,
     height: 500,
     resizable: false,
+    modal: true,
 
     requires: [
         'Ext.form.field.Checkbox',
@@ -33,12 +34,14 @@ Ext.define('Slims.view.home.container.Window', {
                 height: '100%',
                 items: [{
                     xtype: 'textfield',
+                    name: 'name',
                     allowBlank: false,
                     width: '100%',
                     labelWidth: 20,
                     fieldLabel: 'Name'
                 }, {
                     xtype: 'radiogroup',
+                    name: 'storedContainer',
                     layout: 'vbox',
                     items: [{
                         boxLabel: 'Only holds other containers',
@@ -52,10 +55,11 @@ Ext.define('Slims.view.home.container.Window', {
                     }]
                 }, {
                     xtype: 'treepanel',
-                    style: 'margin-left: 20px;',
+                    name: 'storesInside',
+                    style: 'padding-left: 20px;',
                     border: true,
                     height: 150,
-                    width: 300,
+                    width: '100%',
                     displayField: 'name',
                     store: Ext.create('Slims.store.Containers'),
                     rootVisible: false
@@ -71,6 +75,7 @@ Ext.define('Slims.view.home.container.Window', {
                 height: '100%',
                 items: [{
                     xtype: 'radiogroup',
+                    name: 'stores',
                     layout: 'vbox',
                     width: '100%',
                     labelAlign: 'top',
@@ -78,23 +83,25 @@ Ext.define('Slims.view.home.container.Window', {
                     items: [{
                         boxLabel: 'Samples',
                         name: 'stores',
-                        inputValue: '1',
+                        inputValue: 'samples',
                         checked: true
                     }, {
                         boxLabel: 'Other containers',
                         name: 'stores',
-                        inputValue: '2'
+                        inputValue: 'containers'
                     }]
                 },
                     this.getColorPickerCmp(),
                 {
                     xtype: 'textarea',
+                    name: 'comment',
                     width: '100%',
                     fieldLabel: 'Comment',
                     labelAlign: 'top',
                     height: 150
                 }, {
                     xtype: 'numberfield',
+                    name: 'numberContainers',
                     fieldLabel: 'Number of containers to create',
                     labelWidth: 190,
                     width: 250,
@@ -114,6 +121,7 @@ Ext.define('Slims.view.home.container.Window', {
     getResearchGroupRadioCmp: function() {
         return {
             xtype: 'radiogroup',
+            name: 'belongs_to',
             style: 'margin-top: 10px;',
             layout: 'vbox',
             width: '100%',
@@ -122,7 +130,7 @@ Ext.define('Slims.view.home.container.Window', {
             items: [{
                 boxLabel: 'Nobody',
                 name: 'belongs_to',
-                inputValue: '',
+                inputValue: 'no',
                 checked: true
             }, {
                 xtype: 'fieldcontainer',
@@ -131,9 +139,10 @@ Ext.define('Slims.view.home.container.Window', {
                 items: [{
                     xtype: 'radiofield',
                     name: 'belongs_to',
-                    inputValue: '3'
+                    inputValue: 'group'
                 }, {
                     xtype: 'combobox',
+                    name: 'research_group',
                     style: 'margin-left: 5px;',
                     flex: 1,
                     emptyText: 'Select research group',
@@ -149,10 +158,10 @@ Ext.define('Slims.view.home.container.Window', {
 
     getDimensionsCmp: function() {
         var updateTotal = function(cmp, val) {
-            var rowsCount = this.down('numberfield[name=rowsCount]').getValue() || 1;
-            var columnsCount = this.down('numberfield[name=columnsCount]').getValue() || 1;
+            var rows = this.down('numberfield[name=rows]').getValue() || 1;
+            var columns = this.down('numberfield[name=columns]').getValue() || 1;
 
-            this.down('label[name=totalCapacity]').setText(rowsCount*columnsCount);
+            this.down('label[name=totalCapacity]').setText(rows*columns);
         };
 
 
@@ -168,7 +177,7 @@ Ext.define('Slims.view.home.container.Window', {
             fieldLabel: 'Dimensions/capacity',
             items: [{
                 xtype: 'numberfield',
-                name: 'rowsCount',
+                name: 'rows',
                 minValue: 1,
                 value: 1,
                 listeners: {
@@ -183,7 +192,7 @@ Ext.define('Slims.view.home.container.Window', {
                 text: 'rows by'
             }, {
                 xtype: 'numberfield',
-                name: 'columnsCount',
+                name: 'columns',
                 value: 1,
                 minValue: 1,
                 flex: 1,
@@ -215,7 +224,7 @@ Ext.define('Slims.view.home.container.Window', {
                 text: 'Total capacity:'
             }, {
                 xtype: 'label',
-                text: '0',
+                text: '1',
                 style: 'margin-left: 4px;',
                 name: 'totalCapacity'
             }]
@@ -252,6 +261,7 @@ Ext.define('Slims.view.home.container.Window', {
                 name: 'colorButton',
                 menu: [{
                     xtype: 'colorpicker',
+                    name: 'colour',
                     value: 'FFFFFF',
                     listeners: {
                         scope: this,
@@ -270,31 +280,60 @@ Ext.define('Slims.view.home.container.Window', {
             '->', {
             text: 'Save',
             icon: '/resources/images/save.png',
+            width: 80,
             name: 'save',
             scope: this,
-            handler: function() {
-
-                if (!this.down('form').getForm().isValid())
-                    return;
-
-                var formValues = this.down('form').getForm().getValues();
-
-                // TODO: Add data preparation here
-                var container = this.record;
-                // check edit or add mode
-                if (container) {
-                    container.set(formValues);
-                } else {
-                    container = Ext.create('Slims.model.Container', formValues);
-                }
-
-                this.fireEvent('save', container, this);
-            }
-        }, '-', {
+            handler: this.saveContainer
+        }, {
             text: 'Cancel',
             icon: '/resources/images/cancel.png',
+            width: 80,
             scope: this,
             handler: this.close
         }];
+    },
+
+    saveContainer: function() {
+        var formPanel = this.down('form');
+
+        if (!formPanel.getForm().isValid())
+            return;
+
+        // check selected tree container
+        if (this.down('radiogroup[name=storedContainer]').getValue().holds_other_containers == '1') {
+            var rec = this.down('treepanel').selModel.selected.get(0);
+            if (!rec) {
+                Ext.Msg.alert('Select parent container', 'Parent container for "Stored Inside" field not selected.');
+                return;
+            }
+
+            var storedInside = rec.get('id');
+        }
+
+        if (this.down('radiogroup[name=belongs_to]').getValue().belongs_to == 'group') {
+            var research_group = this.down('combobox[name=research_group]').getValue();
+            if (!research_group) {
+                Ext.Msg.alert('Select research group', 'Please, select research group before saving.');
+                return;
+            }
+        }
+
+        var values = formPanel.getForm().getValues();
+
+            Ext.apply(values, {
+                colour: this.down('colorpicker').getValue(),
+                parent: storedInside || null
+            })
+
+        // TODO: Add data preparation here
+        var container = this.record;
+        // check edit or add mode
+        if (container) {
+            container.set(values);
+        } else {
+            container = Ext.create('Slims.model.Container', values);
+        }
+
+        this.fireEvent('save', container, this);
     }
 });

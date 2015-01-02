@@ -33,6 +33,7 @@ Ext.define('Slims.view.groups.Window', {
             '->', {
             text: 'Save',
             icon: '/resources/images/save.png',
+            width: 80,
             name: 'save',
             scope: this,
             handler: function() {
@@ -49,9 +50,10 @@ Ext.define('Slims.view.groups.Window', {
 
                 this.fireEvent('save', group, this);
             }
-        }, '-', {
+        }, {
             text: 'Cancel',
             icon: '/resources/images/cancel.png',
+            width: 80,
             scope: this,
             handler: this.close
         }];
