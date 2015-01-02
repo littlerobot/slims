@@ -34,7 +34,7 @@ Ext.define('Slims.view.home.container.Window', {
                     xtype: 'textfield',
                     allowBlank: false,
                     width: '100%',
-                    labelWidth: 40,
+                    labelWidth: 20,
                     fieldLabel: 'Name'
                 }, {
                     xtype: 'radiogroup',
@@ -82,6 +82,7 @@ Ext.define('Slims.view.home.container.Window', {
                             xtype: 'combobox',
                             style: 'margin-left: 5px;',
                             flex: 1,
+                            emptyText: 'Select research group',
                             editable: false,
                             store: Ext.StoreMgr.get('researchGroups'),
                             queryMode: 'local',
@@ -169,22 +170,25 @@ Ext.define('Slims.view.home.container.Window', {
                         align: 'middle'
                     },
                     items: [{
-                        xtype: 'container',
+                        xtype: 'panel',
                         border: true,
-                        name: 'colorPalette',
-                        listeners: {
-                            afterrender: function(container) {
-                                container.el.dom.removeChild(container.el.dom.childNodes[0]);
-                                container.el.setStyle('border', '1px;');
-                            }
-                        },
+                        layout: 'fit',
                         height: 24,
-                        width: 24
+                        width: 24,
+                        items: [{
+                            xtype: 'container',
+                            name: 'colorPalette',
+                            listeners: {
+                                afterrender: function(container) {
+                                    container.el.dom.removeChild(container.el.dom.childNodes[0]);
+                                }
+                            }
+                        }]
                     }, {
                         xtype: 'button',
-                        style: 'margin-left: 4px;',
-                        text: 'Color',
-                        width: 80,
+                        style: 'margin-left: 8px;',
+                        text: 'Select color',
+                        width: 110,
                         name: 'colorButton',
                         menu: [{
                             xtype: 'colorpicker',
@@ -224,18 +228,19 @@ Ext.define('Slims.view.home.container.Window', {
             name: 'save',
             scope: this,
             handler: function() {
-                var container = this.record;
 
                 if (!this.down('form').getForm().isValid())
                     return;
 
                 var formValues = this.down('form').getForm().getValues();
 
-                // TODO: Add data prepare here
-                if (!container) {
-                    container = Ext.create('Slims.model.Container', formValues);
-                } else {
+                // TODO: Add data preparation here
+                var container = this.record;
+                // check edit or add mode
+                if (container) {
                     container.set(formValues);
+                } else {
+                    container = Ext.create('Slims.model.Container', formValues);
                 }
 
                 this.fireEvent('save', container, this);
@@ -248,14 +253,5 @@ Ext.define('Slims.view.home.container.Window', {
         }];
 
         this.callParent();
-    },
-
-    getContainersTreeStore: function() {
-        var containersStore = Ext.create('Slims.store.Containers');
-        var containersStoreData = containersStore.getData(),
-            containersTreeData = [];
-
-
-    },
-
+    }
 });
