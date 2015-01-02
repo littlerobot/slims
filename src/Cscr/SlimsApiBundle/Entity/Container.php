@@ -85,7 +85,7 @@ class Container
     private $colour;
 
     /**
-     * @var Container[]
+     * @var ArrayCollection<Container>
      *
      * @ORM\OneToMany(targetEntity="Container", mappedBy="parent")
      *
