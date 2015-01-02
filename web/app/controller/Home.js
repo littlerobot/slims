@@ -20,7 +20,7 @@ Ext.define('Slims.controller.Home', {
             'containersgrid button[name=reloadGrid]': {
                 click: this.reloadGrid
             },
-            'containersgrid': {
+            'containersgrid actioncolumn': {
                 editrecord: this.openEditUserWindow
             },
             'containerwindow': {
@@ -44,6 +44,13 @@ Ext.define('Slims.controller.Home', {
     },
 
     saveContainer: function(container, dialog) {
+
+        // Ext.Ajax.request({
+        //     url: '',
+        //     scope: this,
+        //     success: function() {},
+        //     failure: function() {}
+        // })
 
     },
 

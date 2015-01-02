@@ -101,7 +101,7 @@ Ext.define('Slims.view.users.Window', {
     },
 
     setupData: function() {
-        if (this.record == null)
+        if (!this.record)
             return;
 
         var user = this.record.getData();

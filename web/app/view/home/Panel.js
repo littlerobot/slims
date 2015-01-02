@@ -6,7 +6,8 @@ Ext.define('Slims.view.home.Panel', {
 
     requires: [
         'Slims.view.home.Grid',
-        'Slims.view.home.container.Window'
+        'Slims.view.home.container.Window',
+        'Ext.tree.Panel'
     ],
 
     initComponent: function() {

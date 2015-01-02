@@ -21,8 +21,11 @@ Ext.define('Slims.view.home.container.Window', {
     ],
 
     initComponent: function() {
-        // TODO: new or edit title
-        this.title = 'New container';
+        if (this.record) {
+            this.title = Ext.String.format('Edit "{0}" container',this.record.get('name'));
+        } else {
+            this.title = 'New container';
+        }
 
         this.items = [{
             xtype: 'form',
@@ -114,6 +117,8 @@ Ext.define('Slims.view.home.container.Window', {
         }];
 
         this.bbar = this.getBbarCmpArray();
+
+        this.on('afterrender', this.setupData, this);
 
         this.callParent();
     },
@@ -321,7 +326,7 @@ Ext.define('Slims.view.home.container.Window', {
         var values = formPanel.getForm().getValues();
 
             Ext.apply(values, {
-                colour: this.down('colorpicker').getValue(),
+                colour: '#' + this.down('colorpicker').getValue(),
                 parent: storedInside || null
             })
 
@@ -335,5 +340,35 @@ Ext.define('Slims.view.home.container.Window', {
         }
 
         this.fireEvent('save', container, this);
+    },
+
+    setupData: function() {
+        if (!this.record)
+            return;
+
+        var container = this.record.getData();
+
+
+        if (container.research_group) {
+            this.down('radiogroup[name=belongs_to]').setValue({belongs_to: 'group'});
+            container.research_group = container.research_group.id;
+        }
+
+        if (container.colour) {
+            this.down('container[name=colorPalette]').el.setStyle('background', container.colour);
+            container.colour = container.colour.replace('#', '');
+            var picker = this.down('colorpicker');
+            if (picker.colors.indexOf(container.colour) == -1) {
+                picker.colors.push(container.colour);
+            }
+
+            picker.select(container.colour);
+        }
+
+        this.down('form').getForm().setValues(container);
+        console.log(container);
+
+
+
     }
 });
