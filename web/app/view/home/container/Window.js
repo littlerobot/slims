@@ -44,17 +44,17 @@ Ext.define('Slims.view.home.container.Window', {
                     fieldLabel: 'Name'
                 }, {
                     xtype: 'radiogroup',
-                    name: 'storedContainer',
+                    name: 'holds_other_containers',
                     layout: 'vbox',
                     items: [{
                         boxLabel: 'Only holds other containers',
                         name: 'holds_other_containers',
-                        inputValue: '2',
+                        inputValue: false,
                         checked: true
                     }, {
                         boxLabel: 'Stored inside',
                         name: 'holds_other_containers',
-                        inputValue: '1'
+                        inputValue: true
                     }]
                 }, {
                     xtype: 'treepanel',
@@ -304,17 +304,8 @@ Ext.define('Slims.view.home.container.Window', {
         if (!formPanel.getForm().isValid())
             return;
 
-        // check selected tree container
-        if (this.down('radiogroup[name=storedContainer]').getValue().holds_other_containers == '1') {
-            var rec = this.down('treepanel').selModel.selected.get(0);
-            if (!rec) {
-                Ext.Msg.alert('Select parent container', 'Parent container for "Stored Inside" field not selected.');
-                return;
-            }
 
-            var storedInside = rec.get('id');
-        }
-
+        // check research group selection
         if (this.down('radiogroup[name=belongs_to]').getValue().belongs_to == 'group') {
             var research_group = this.down('combobox[name=research_group]').getValue();
             if (!research_group) {
@@ -325,14 +316,22 @@ Ext.define('Slims.view.home.container.Window', {
 
         var values = formPanel.getForm().getValues();
 
+        var parentId = this.getParentContainerId();
+
+        // return if error
+        if (parentId === false)
+            return;
+
             Ext.apply(values, {
                 colour: '#' + this.down('colorpicker').getValue(),
-                parent: storedInside || null
+                parentId: parentId
             })
 
-        // TODO: Add data preparation here
         var container = this.record;
-        // check edit or add mode
+
+        // TODO: Add data preparation here
+
+        // edit or add mode
         if (container) {
             container.set(values);
         } else {
@@ -348,27 +347,56 @@ Ext.define('Slims.view.home.container.Window', {
 
         var container = this.record.getData();
 
-
         if (container.research_group) {
             this.down('radiogroup[name=belongs_to]').setValue({belongs_to: 'group'});
             container.research_group = container.research_group.id;
         }
 
-        if (container.colour) {
-            this.down('container[name=colorPalette]').el.setStyle('background', container.colour);
-            container.colour = container.colour.replace('#', '');
-            var picker = this.down('colorpicker');
-            if (picker.colors.indexOf(container.colour) == -1) {
-                picker.colors.push(container.colour);
-            }
-
-            picker.select(container.colour);
-        }
+        this.setColor(container.colour);
+        this.setParentContainer(container.parentId);
 
         this.down('form').getForm().setValues(container);
+
+        // DEBUG
         console.log(container);
+    },
 
+    setColor: function(color) {
+        if (!color)
+            return;
 
+        this.down('container[name=colorPalette]').el.setStyle('background', color);
+        color = color.replace('#', '');
+        var picker = this.down('colorpicker');
+        // add color if it isn't in palette yet for resolving exception
+        if (picker.colors.indexOf(color) == -1) {
+            picker.colors.push(color);
+        }
 
+        picker.select(color);
+    },
+
+    setParentContainer: function(parentId) {
+        if (!parentId)
+            return;
+
+        this.down('radiogroup[name=holds_other_containers]').setValue({holds_other_containers: true});
+        var treePanel = this.down('treepanel');
+        this.down('treepanel').expandPath(this.record.getPath(), 'id', '/', function() {
+            treePanel.selModel.select(treePanel.store.getNodeById(parentId));
+        });
+    },
+
+    getParentContainerId: function() {
+        if (this.down('radiogroup[name=storedContainer]').getValue().holds_other_containers != '1')
+            return null;
+
+        var container = this.down('treepanel').selModel.selected.get(0);
+        if (!container) {
+            Ext.Msg.alert('Select parent container', 'Parent container for "Stored Inside" field not selected.');
+            return false;
+        }
+
+        return container.get('id');
     }
 });

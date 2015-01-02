@@ -3,8 +3,7 @@ Ext.define('Slims.model.Container', {
     idProperty: 'id',
 
     fields: [{
-        name: 'id',
-        type: 'integer'
+        name: 'id'
     }, {
         name: 'rows',
         type: 'integer'
