@@ -104,7 +104,7 @@ Ext.define('Slims.view.home.container.Window', {
                     height: 150
                 }, {
                     xtype: 'numberfield',
-                    name: 'numberContainers',
+                    name: 'number',
                     fieldLabel: 'Number of containers to create',
                     labelWidth: 190,
                     width: 250,
@@ -324,8 +324,9 @@ Ext.define('Slims.view.home.container.Window', {
 
             Ext.apply(values, {
                 colour: '#' + this.down('colorpicker').getValue(),
-                parentId: parentId
-            })
+                parent: parentId,
+                owner: research_group || null
+            });
 
         var container = this.record;
 
@@ -357,8 +358,6 @@ Ext.define('Slims.view.home.container.Window', {
 
         this.down('form').getForm().setValues(container);
 
-        // DEBUG
-        console.log(container);
     },
 
     setColor: function(color) {
@@ -381,14 +380,13 @@ Ext.define('Slims.view.home.container.Window', {
             return;
 
         this.down('radiogroup[name=holds_other_containers]').setValue({holds_other_containers: true});
+
         var treePanel = this.down('treepanel');
-        this.down('treepanel').expandPath(this.record.getPath(), 'id', '/', function() {
-            treePanel.selModel.select(treePanel.store.getNodeById(parentId));
-        });
+        this.down('treepanel').expandPath(this.record.getPath(), 'id', '/', function() { treePanel.selModel.select(treePanel.store.getNodeById(parentId)); });
     },
 
     getParentContainerId: function() {
-        if (this.down('radiogroup[name=storedContainer]').getValue().holds_other_containers != '1')
+        if (this.down('radiogroup[name=holds_other_containers]').getValue().holds_other_containers != '1')
             return null;
 
         var container = this.down('treepanel').selModel.selected.get(0);

@@ -4,7 +4,7 @@ Ext.define('Slims.store.Containers', {
     model: 'Slims.model.Container',
     proxy: {
         type: 'ajax',
-        url: Slims.Url.getRoute('containers'),
+        url: Slims.Url.getRoute('getcontainers'),
         reader: {
             type: 'json',
             root: 'data',

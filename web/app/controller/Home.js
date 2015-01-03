@@ -44,14 +44,46 @@ Ext.define('Slims.controller.Home', {
     },
 
     saveContainer: function(container, dialog) {
+        dialog.setLoading('Please, wait...');
 
-        // Ext.Ajax.request({
-        //     url: '',
-        //     scope: this,
-        //     success: function() {},
-        //     failure: function() {}
-        // })
+        var url;
+        if (container.getId()) {
+            url = Ext.String.format(Slims.Url.getRoute('setcontainer'), container.getId());
+        } else {
+            url = Slims.Url.getRoute('createcontainer');
+        }
+        Ext.Ajax.request({
+            url: url,
+            method: 'POST',
+            params: this.extractContainerData(container),
+            scope: this,
+            success: function(xhr) {
+                var response = Ext.decode(xhr.responseText);
+                dialog.setLoading(false);
+                dialog.close();
+                this.reloadGrid();
+            },
+            failure: function() {
+                dialog.setLoading(false);
+            }
+        })
 
+    },
+
+    extractContainerData: function(container) {
+        var allData = container.getData(),
+            trueData = {
+                name: allData.name,
+                parent: allData.parent || null,
+                research_group: allData.research_group,
+                rows: allData.rows,
+                columns: allData.columns,
+                stores: allData.stores,
+                comment: allData.comment,
+                colour: allData.colour || null
+            }
+
+        return trueData;
     },
 
     reloadGrid: function() {
