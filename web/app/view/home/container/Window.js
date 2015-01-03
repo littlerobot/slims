@@ -2,12 +2,6 @@ Ext.define('Slims.view.home.container.Window', {
     extend: 'Ext.window.Window',
     xtype: 'containerwindow',
 
-    layout: 'fit',
-    width: 800,
-    height: 500,
-    resizable: false,
-    modal: true,
-
     requires: [
         'Ext.form.field.Checkbox',
         'Ext.form.RadioGroup',
@@ -20,8 +14,15 @@ Ext.define('Slims.view.home.container.Window', {
         'Ext.tree.Panel'
     ],
 
+    layout: 'fit',
+    width: 800,
+    height: 500,
+    resizable: false,
+    modal: true,
+    record: null,
+
     initComponent: function() {
-        if (this.record) {
+        if (this.isEditMode()) {
             this.title = Ext.String.format('Edit "{0}" container',this.record.get('name'));
         } else {
             this.title = 'New container';
@@ -44,6 +45,7 @@ Ext.define('Slims.view.home.container.Window', {
                     fieldLabel: 'Name'
                 }, {
                     xtype: 'radiogroup',
+                    disabled: this.isEditMode(),
                     name: 'holds_other_containers',
                     layout: 'vbox',
                     items: [{
@@ -58,6 +60,7 @@ Ext.define('Slims.view.home.container.Window', {
                     }]
                 }, {
                     xtype: 'treepanel',
+                    disabled: this.isEditMode(),
                     name: 'storesInside',
                     style: 'padding-left: 20px;',
                     border: true,
@@ -78,6 +81,7 @@ Ext.define('Slims.view.home.container.Window', {
                 height: '100%',
                 items: [{
                     xtype: 'radiogroup',
+                    disabled: this.isEditMode(),
                     name: 'stores',
                     layout: 'vbox',
                     width: '100%',
@@ -105,6 +109,7 @@ Ext.define('Slims.view.home.container.Window', {
                 }, {
                     xtype: 'numberfield',
                     name: 'number',
+                    disabled: this.isEditMode(),
                     fieldLabel: 'Number of containers to create',
                     labelWidth: 190,
                     width: 250,
@@ -127,6 +132,7 @@ Ext.define('Slims.view.home.container.Window', {
         return {
             xtype: 'radiogroup',
             name: 'belongs_to',
+            disabled: this.isEditMode(),
             style: 'margin-top: 10px;',
             layout: 'vbox',
             width: '100%',
@@ -183,6 +189,7 @@ Ext.define('Slims.view.home.container.Window', {
             items: [{
                 xtype: 'numberfield',
                 name: 'rows',
+                disabled: this.isEditMode(),
                 minValue: 1,
                 value: 1,
                 listeners: {
@@ -197,6 +204,7 @@ Ext.define('Slims.view.home.container.Window', {
                 text: 'rows by'
             }, {
                 xtype: 'numberfield',
+                disabled: this.isEditMode(),
                 name: 'columns',
                 value: 1,
                 minValue: 1,
@@ -396,5 +404,9 @@ Ext.define('Slims.view.home.container.Window', {
         }
 
         return container.get('id');
+    },
+
+    isEditMode: function() {
+        return !!this.record;
     }
 });

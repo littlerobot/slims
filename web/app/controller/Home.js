@@ -72,16 +72,24 @@ Ext.define('Slims.controller.Home', {
 
     extractContainerData: function(container) {
         var allData = container.data,
-            trueData = {
-                name: allData.name,
+            trueData = {};
+
+        trueData = {
+            name: allData.name,
+            comment: allData.comment,
+            colour: allData.colour
+        }
+
+        // if create mode
+        if (!container.data.id) {
+            Ext.apply(trueData, {
                 parent: allData.parent,
                 research_group: allData.research_group,
                 rows: allData.rows,
                 columns: allData.columns,
-                stores: allData.stores,
-                comment: allData.comment,
-                colour: allData.colour
-            }
+                stores: allData.stores
+            });
+        }
 
         return trueData;
     },
