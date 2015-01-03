@@ -31,5 +31,7 @@ Ext.define('Slims.model.Container', {
         name: 'sample_total_capacity'
     }, {
         name: 'comment'
+    }, {
+        name: 'parent'
     }]
 });
