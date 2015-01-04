@@ -71,5 +71,13 @@ Ext.define('Slims.view.home.Grid', {
         }];
 
         this.callParent();
+    },
+
+    reload: function(path) {
+        if (path) {
+            this.getStore().on('load', function() {
+                this.expandPath(path); }, this, {single: true})
+        }
+        this.getStore().reload();
     }
 });

@@ -347,6 +347,10 @@ Ext.define('Slims.view.home.container.Window', {
             container = Ext.create('Slims.model.Container', values);
         }
 
+        if (container.data.parent) {
+            this.setParentPath(container);
+        }
+
         this.fireEvent('save', container, this);
     },
 
@@ -366,6 +370,15 @@ Ext.define('Slims.view.home.container.Window', {
 
         this.down('form').getForm().setValues(container);
 
+    },
+
+    setParentPath: function(container) {
+        if (this.isEditMode()) {
+            container.set('parentPath', container.getPath());
+        } else {
+            // get path from selected tree record
+            container.set('parentPath', this.down('treepanel').selModel.selected.get(0).getPath());
+        }
     },
 
     setColor: function(color) {

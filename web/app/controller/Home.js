@@ -61,7 +61,8 @@ Ext.define('Slims.controller.Home', {
                 var response = Ext.decode(xhr.responseText);
                 dialog.setLoading(false);
                 dialog.close();
-                this.reloadGrid();
+                var parentPath = container.get('parentPath');
+                this.reloadGrid(parentPath);
             },
             failure: function() {
                 dialog.setLoading(false);
@@ -94,7 +95,7 @@ Ext.define('Slims.controller.Home', {
         return trueData;
     },
 
-    reloadGrid: function() {
-        this.getContainersGrid().getStore().reload();
+    reloadGrid: function(path) {
+        this.getContainersGrid().reload(path);
     }
 });
