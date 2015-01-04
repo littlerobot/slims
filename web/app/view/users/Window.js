@@ -59,6 +59,7 @@ Ext.define('Slims.view.users.Window', {
             '->', {
             text: 'Save',
             icon: '/resources/images/save.png',
+            width: 80,
             name: 'save',
             scope: this,
             handler: function() {
@@ -77,9 +78,10 @@ Ext.define('Slims.view.users.Window', {
 
                 this.fireEvent('save', user, this);
             }
-        }, '-', {
+        }, {
             text: 'Cancel',
             icon: '/resources/images/cancel.png',
+            width: 80,
             scope: this,
             handler: this.close
         }];
@@ -99,7 +101,7 @@ Ext.define('Slims.view.users.Window', {
     },
 
     setupData: function() {
-        if (this.record == null)
+        if (!this.record)
             return;
 
         var user = this.record.getData();

@@ -1,12 +1,13 @@
 <?php
 
-namespace Cscr\SlimsApiBundle\Form;
+namespace Cscr\SlimsApiBundle\Form\Type;
 
+use Cscr\SlimsApiBundle\Entity\Container;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class UserType extends AbstractType
+class CreateContainerType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,12 +16,25 @@ class UserType extends AbstractType
     {
         $builder
             ->add('name', 'text')
-            ->add('username', 'text')
+            ->add('parent', 'integer')
+            ->add('parent', 'entity', [
+                'class' => 'Cscr\SlimsApiBundle\Entity\Container',
+                'property' => 'id',
+            ])
             ->add('research_group', 'entity', [
                 'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
                 'property' => 'id',
             ])
-            ->add('is_active', 'checkbox')
+            ->add('rows', 'integer')
+            ->add('columns', 'integer')
+            ->add('stores', 'choice', [
+                'choices' => [
+                    Container::STORES_CONTAINERS => 'Containers',
+                    Container::STORES_SAMPLES => 'Samples',
+                ]
+            ])
+            ->add('comment', 'text')
+            ->add('colour', 'text')
         ;
     }
 
@@ -30,7 +44,7 @@ class UserType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Cscr\SlimsUserBundle\Entity\User',
+            'data_class'      => 'Cscr\SlimsApiBundle\Entity\Container',
             'csrf_protection' => false,
         ));
     }
@@ -40,6 +54,6 @@ class UserType extends AbstractType
      */
     public function getName()
     {
-        return 'user';
+        return 'create_container';
     }
 }

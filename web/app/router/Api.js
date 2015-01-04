@@ -10,7 +10,11 @@ Ext.define('Slims.router.Api', {
         var routePrefix = 'api';
 
         switch (routeName) {
-            case 'containers':
+            case 'getcontainers':
+                return routePrefix + '/containers';
+            case 'setcontainer':
+                return routePrefix + '/containers/{0}';
+            case 'createcontainer':
                 return routePrefix + '/containers';
             case 'session':
                 return routePrefix + '/session';
@@ -27,7 +31,7 @@ Ext.define('Slims.router.Api', {
             case 'createuser':
                 return routePrefix + '/users';
             default:
-                return routeName;
+                return routePrefix + '/' + routeName;
         }
     },
 
@@ -36,7 +40,11 @@ Ext.define('Slims.router.Api', {
             devController = '/app_dev.php';
 
         switch (routeName) {
-            case 'containers':
+            case 'getcontainers':
+                return devController + routePrefix + '/containers';
+            case 'setcontainer':
+                return devController + routePrefix + '/containers/{0}';
+            case 'createcontainer':
                 return devController + routePrefix + '/containers';
             case 'session':
                 return devController + routePrefix + '/session';
@@ -53,7 +61,7 @@ Ext.define('Slims.router.Api', {
             case 'createuser':
                 return devController + routePrefix + '/users';
             default:
-                return routeName;
+                return devController + routePrefix + '/' + routeName;
         }
     }
 });

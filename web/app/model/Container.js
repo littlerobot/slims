@@ -3,8 +3,7 @@ Ext.define('Slims.model.Container', {
     idProperty: 'id',
 
     fields: [{
-        name: 'id',
-        type: 'integer'
+        name: 'id'
     }, {
         name: 'rows',
         type: 'integer'
@@ -17,7 +16,6 @@ Ext.define('Slims.model.Container', {
         useNull : true
     }, {
         name: 'research_group',
-        type: 'string',
         useNull : true
     }, {
         name: 'stores',
@@ -27,5 +25,13 @@ Ext.define('Slims.model.Container', {
         name: 'colour',
         type: 'string',
         useNull : true
+    }, {
+        name: 'sample_remaining_capacity'
+    }, {
+        name: 'sample_total_capacity'
+    }, {
+        name: 'comment'
+    }, {
+        name: 'parent'
     }]
 });

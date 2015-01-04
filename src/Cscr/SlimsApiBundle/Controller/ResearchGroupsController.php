@@ -3,7 +3,7 @@
 namespace Cscr\SlimsApiBundle\Controller;
 
 use Cscr\SlimsApiBundle\Entity\ResearchGroup;
-use Cscr\SlimsApiBundle\Form\ResearchGroupType;
+use Cscr\SlimsApiBundle\Form\Type\ResearchGroupType;
 use Cscr\SlimsApiBundle\Response\ResearchGroupCollectionResponse;
 use Cscr\SlimsApiBundle\Response\ResearchGroupResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;

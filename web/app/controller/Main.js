@@ -2,10 +2,10 @@ Ext.define('Slims.controller.Main', {
     extend: 'Ext.app.Controller',
 
     init: function() {
-    	Ext.Ajax.on('requestexception', this.initAjaxErrorsHandler, this);
+    	Ext.Ajax.on('requestexception', this.handleAjaxErrors, this);
     },
 
-    initAjaxErrorsHandler: function(conn, xhr) {
+    handleAjaxErrors: function(conn, xhr) {
     	var response = Ext.decode(xhr.responseText);
 
     	var title = response.errors.message || 'Internal error',

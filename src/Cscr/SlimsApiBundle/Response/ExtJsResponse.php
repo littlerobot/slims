@@ -11,6 +11,11 @@ class ExtJsResponse
      */
     protected $success = false;
 
+    /**
+     * @var mixed
+     *
+     * @JMS\SerializedName("data")
+     */
     protected $data;
 
     public function __construct($data)

@@ -35,7 +35,7 @@ Ext.define('Slims.view.users.Grid', {
             items: [{
                 icon: '/resources/images/edit.png',
                 tooltip: 'Edit',
-                scope:  this,
+                scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);

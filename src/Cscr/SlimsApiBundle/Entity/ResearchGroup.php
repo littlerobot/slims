@@ -3,7 +3,6 @@
 namespace Cscr\SlimsApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Table(name="research_group")

@@ -29,7 +29,6 @@ class Container
      *
      * @ORM\Column(type="string", length=255)
      *
-     * @JMS\Exclude()
      */
     private $name;
 
@@ -43,23 +42,24 @@ class Container
     private $parent;
 
     /**
-     * @var string
+     * @var ResearchGroup
      *
-     * @ORM\Column(name="research_group", type="string", length=255, nullable=true)
+     * @ORM\ManyToOne(targetEntity="ResearchGroup")
+     * @ORM\JoinColumn(name="research_group_id")
      */
     private $researchGroup;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private $rows;
 
     /**
      * @var integer
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="smallint")
      */
     private $columns;
 
@@ -80,12 +80,12 @@ class Container
     /**
      * @var string
      *
-     * @ORM\Column(type="string", length=6, nullable=true)
+     * @ORM\Column(type="string", length=7, nullable=true)
      */
     private $colour;
 
     /**
-     * @var Container[]
+     * @var ArrayCollection<Container>
      *
      * @ORM\OneToMany(targetEntity="Container", mappedBy="parent")
      *
@@ -93,13 +93,8 @@ class Container
      */
     private $children;
 
-    public function __construct($name, $rows, $columns, $stores)
+    public function __construct()
     {
-        $this->name = $name;
-        $this->rows = $rows;
-        $this->columns = $columns;
-        $this->stores = $stores;
-
         $this->children = new ArrayCollection();
     }
 
@@ -117,11 +112,28 @@ class Container
     }
 
     /**
+     * Returns the remaining sample capacity of all the children (and, if appropriate, their children) of this
+     * container.
+     *
+     * @return int The total remaining sample capacity of all child containers.
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("sample_remaining_capacity")
+     */
+    public function getSampleRemainingCapacity()
+    {
+        return $this->getTotalSampleCapacity() - $this->getNumberOfStoredSamples();
+    }
+
+    /**
      * Returns the sample capacity of all the children (and, if appropriate, their children) of this container.
      *
      * @return int The total sample capacity of all child containers.
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("sample_total_capacity")
      */
-    public function getSampleCapacity()
+    public function getTotalSampleCapacity()
     {
         // This container stores samples so won't have any children.
         if (static::STORES_SAMPLES === $this->stores) {
@@ -132,23 +144,35 @@ class Container
         $childCapacity = 0;
 
         foreach ($this->children as $child) {
-            $childCapacity += $child->getSampleCapacity();
+            $childCapacity += $child->getTotalSampleCapacity();
         }
 
         return $childCapacity;
     }
 
     /**
-     * The name of the container plus the sample storage capacity of its children and the number of samples stored.
+     * Returns the number of samples stored all the children (and, if appropriate, their children) of this container.
      *
-     * @return string
+     * @return int The total number of samples stored in all child containers.
      *
      * @JMS\VirtualProperty()
-     * @JMS\SerializedName("name")
+     * @JMS\SerializedName("samples_stored")
      */
-    public function getNameIncludingCapacity()
+    public function getNumberOfStoredSamples()
     {
-        return sprintf('%s (Samples: 0/%d)', $this->name, $this->getSampleCapacity());
+        // This container stores samples so won't have any children.
+        // FIXME: Add sample calculation when samples are actually being stored.
+        if (static::STORES_SAMPLES === $this->stores) {
+            return 0;
+        }
+
+        $childStored = 0;
+
+        foreach ($this->children as $child) {
+            $childStored += $child->getNumberOfStoredSamples();
+        }
+
+        return $childStored;
     }
 
     /**
@@ -157,7 +181,7 @@ class Container
      * Will not add a container that is already a child of this container. There are no checks to ensure the container
      * is not already stored elsewhere.
      *
-     * @param Container $container
+     * @param  Container $container
      * @return $this
      */
     public function storeContainerInside(Container $container)
@@ -171,38 +195,176 @@ class Container
     }
 
     /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param  string    $name
+     * @return Container
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return Container
+     */
+    public function getParent()
+    {
+        return $this->parent;
+    }
+
+    /**
+     * @param  Container $parent
+     * @return Container
+     */
+    public function setParent($parent)
+    {
+        $this->parent = $parent;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getResearchGroup()
+    {
+        return $this->researchGroup;
+    }
+
+    /**
      * Specify the owner of the container.
      *
-     * @param string $researchGroup Research group name.
+     * @param  ResearchGroup $researchGroup The research group.
      * @return $this
      */
-    public function specifyOwner($researchGroup)
+    public function setResearchGroup(ResearchGroup $researchGroup)
     {
         $this->researchGroup = $researchGroup;
+
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRows()
+    {
+        return $this->rows;
+    }
+
+    /**
+     * @param  int       $rows
+     * @return Container
+     */
+    public function setRows($rows)
+    {
+        $this->rows = $rows;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getColumns()
+    {
+        return $this->columns;
+    }
+
+    /**
+     * @param  int       $columns
+     * @return Container
+     */
+    public function setColumns($columns)
+    {
+        $this->columns = $columns;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getStores()
+    {
+        return $this->stores;
+    }
+
+    /**
+     * @param  string    $stores
+     * @return Container
+     */
+    public function setStores($stores)
+    {
+        $this->stores = $stores;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getComment()
+    {
+        return $this->comment;
     }
 
     /**
      * Specify a comment for the container.
      *
-     * @param string $comment
+     * @param  string $comment
      * @return $this
      */
     public function setComment($comment)
     {
         $this->comment = $comment;
+
         return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColour()
+    {
+        return $this->colour;
     }
 
     /**
      * Specify the colour of the container.
      *
-     * @param string $colour A hexadecimal colour, prefixed with #
+     * @param  string $colour A hexadecimal colour, prefixed with #
      * @return $this
      */
     public function setColour($colour)
     {
         $this->colour = $colour;
+
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    public static function getValidContainerTypes()
+    {
+        return [
+            self::STORES_CONTAINERS,
+            self::STORES_SAMPLES,
+        ];
     }
 }
