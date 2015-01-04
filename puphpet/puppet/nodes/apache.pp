@@ -17,7 +17,7 @@ if hash_key_equals($apache_values, 'install', 1) {
   }
 
   if ! $require_mod_php {
-    if $::operatingsystem == 'debian' and !$require_mod_php {
+    if $::operatingsystem == 'debian' {
       apache_debian_repo{ 'do': }
     } elsif $::operatingsystem == 'ubuntu' and $::lsbdistcodename == 'precise' {
       apt::ppa { 'ppa:ondrej/apache2': require => Apt::Key['4F4EA0AAE5267A6C'] }
@@ -40,7 +40,7 @@ if hash_key_equals($apache_values, 'install', 1) {
 
   if downcase($::provisioner_type) in $apache_provider_types {
     $webroot_location_group = 'www-data'
-    $vhost_docroot_group    = undef
+    $vhost_docroot_group    = 'www-data'
   } else {
     $webroot_location_group = undef
     $vhost_docroot_group    = 'www-user'
@@ -156,6 +156,7 @@ if hash_key_equals($apache_values, 'install', 1) {
 
       $vhost_merged = delete(merge($vhost, {
         'custom_fragment' => template('puphpet/apache/custom_fragment.erb'),
+        'directories'     => values_no_error($vhost['directories']),
         'ssl'             => 'ssl' in $vhost and str2bool($vhost['ssl']) ? { true => true, default => false },
         'ssl_cert'        => hash_key_true($vhost, 'ssl_cert')      ? { true => $vhost['ssl_cert'],      default => $puphpet::params::ssl_cert_location },
         'ssl_key'         => hash_key_true($vhost, 'ssl_key')       ? { true => $vhost['ssl_key'],       default => $puphpet::params::ssl_key_location },
@@ -225,7 +226,7 @@ define apache_centos {
   exec { 'download httpd-2.4.10':
     creates => $httpd_download_location,
     command => "wget --quiet --tries=5 --connect-timeout=10 -O '${httpd_download_location}' '${httpd_url}'",
-    timeout => 30,
+    timeout => 3600,
     path    => '/usr/bin',
   } ->
   exec { 'untar httpd-2.4.10':
@@ -254,4 +255,3 @@ define apache_mod {
     class { "apache::mod::${name}": }
   }
 }
-
