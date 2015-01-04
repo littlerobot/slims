@@ -70,7 +70,7 @@ class UsersController extends FOSRestController
         if ($form->isValid()) {
             // Make newly created users active
             if (!$manager->contains($user)) {
-                $user->setActive(true);
+                $user->setIsActive(true);
             }
 
             $manager->persist($user);
