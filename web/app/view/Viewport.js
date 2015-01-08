@@ -25,6 +25,10 @@ Ext.define('Slims.view.Viewport', {
             xtype: 'usersgrid',
             title: 'Users',
             icon: '/resources/images/users.png'
+        }, {
+            xtype: 'templatespage',
+            title: 'Templates',
+            icon: '/resources/images/users.png'
         }]
     }]
 });

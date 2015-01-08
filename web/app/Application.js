@@ -18,7 +18,8 @@ Ext.define('Slims.Application', {
         'Main',
         'Home',
         'ResearchGroups',
-        'Users'
+        'Users',
+        'Templates'
     ],
 
     stores: [
