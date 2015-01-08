@@ -3,8 +3,12 @@ Ext.define('Slims.view.templates.Panel', {
     xtype: 'templatespage',
 
     layout: 'fit',
+    border: true,
 
-    requires: ['Slims.view.templates.TemplatesGrid'],
+    requires: [
+        'Slims.view.templates.TemplatesGrid',
+        'Slims.view.templates.AttributesGrid'
+    ],
 
     initComponent: function() {
 
@@ -14,12 +18,11 @@ Ext.define('Slims.view.templates.Panel', {
             items: [{
                 xtype: 'templatesgrid',
                 width: '100%',
-                flex: '1'
+                flex: 1
             }, {
-                xtype: 'panel',
-                border: true,
+                xtype: 'attributesgrid',
                 width: '100%',
-                flex: '1'
+                flex: 1
             }]
         }];
 
