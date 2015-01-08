@@ -30,7 +30,7 @@ Ext.define('Slims.view.Viewport', {
         }, {
             xtype: 'templatespage',
             title: 'Templates',
-            icon: '/resources/images/users.png'
+            icon: '/resources/images/template.png'
         }]
     }]
 });

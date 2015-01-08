@@ -2419,15 +2419,20 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.Home": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
+  "Slims.model.Attribute": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
+  "Slims.model.Template": [],
   "Slims.model.User": [],
   "Slims.router.Api": [
     "Slims.Url"
   ],
+  "Slims.store.Attributes": [],
   "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Templates": [],
   "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
@@ -2435,6 +2440,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Grid": [],
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
+  "Slims.view.templates.AttributesGrid": [],
+  "Slims.view.templates.Panel": [],
+  "Slims.view.templates.TemplatesGrid": [],
   "Slims.view.users.Grid": [],
   "Slims.view.users.Window": []
 });
@@ -3444,13 +3452,18 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.Home": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
+  "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
+  "Slims.model.Attribute": [],
   "Slims.model.Container": [],
   "Slims.model.ResearchGroup": [],
+  "Slims.model.Template": [],
   "Slims.model.User": [],
   "Slims.router.Api": [],
+  "Slims.store.Attributes": [],
   "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],
+  "Slims.store.Templates": [],
   "Slims.store.Users": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [
@@ -3467,6 +3480,15 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.home.container.Window": [
     "widget.containerwindow"
+  ],
+  "Slims.view.templates.AttributesGrid": [
+    "widget.attributesgrid"
+  ],
+  "Slims.view.templates.Panel": [
+    "widget.templatespage"
+  ],
+  "Slims.view.templates.TemplatesGrid": [
+    "widget.templatesgrid"
   ],
   "Slims.view.users.Grid": [
     "widget.usersgrid"
