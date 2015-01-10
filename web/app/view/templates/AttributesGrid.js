@@ -2,7 +2,11 @@ Ext.define('Slims.view.templates.AttributesGrid', {
     extend: 'Ext.grid.Panel',
     xtype: 'attributesgrid',
 
-    requires: ['Ext.grid.column.Action'],
+    requires: [
+        'Ext.grid.column.Action',
+        'Ext.grid.plugin.DragDrop'
+    ],
+
     style: 'border-top: 1px solid #157fcc !important;',
 
     initComponent: function() {
@@ -42,8 +46,8 @@ Ext.define('Slims.view.templates.AttributesGrid', {
                 tooltip: 'Delete',
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('deleterecord', rec);
+                    grid.getStore().removeAt(rowIndex);
+                    this.updateAttributesOrder(this.getStore().data);
                 }
             }]
         }];
@@ -55,6 +59,22 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             name: 'addAttribute'
         }];
 
+
+        this.viewConfig = this.viewConfig || {};
+
+        this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
+            dragText: 'Drop on a new place to change order'
+        });
+
+        this.viewConfig.plugins = this.ddPlugin;
+        this.viewConfig.listeners = {
+            scope: this,
+            drop: function() {
+                this.updateAttributesOrder(this.getStore().data);
+            }
+        };
+
+
         this.callParent();
 
         this.on('afterrender', this.loadData, this);
@@ -62,5 +82,17 @@ Ext.define('Slims.view.templates.AttributesGrid', {
 
     loadData: function() {
         this.getStore().load();
+    },
+
+    updateAttributesOrder: function(data) {
+        var attributes = [];
+
+        Ext.each(data.items, function(r, index) {
+            var attribute = r.data;
+            attribute.order = index + 1;
+            attributes.push(attribute);
+        });
+
+        this.fireEvent('attributeschanged', attributes);
     }
 });

@@ -34,12 +34,16 @@ Ext.define('Slims.controller.Templates', {
             },
             'attributesgrid': {
                 editrecord: this.editAttribute,
-                deleterecord: this.deleteAttribute
+                attributeschanged: this.commitAttributes
             }
         });
     },
 
     onTemplateSelect: function(selModel, template) {
+        this.loadTemplateAttributes(template);
+    },
+
+    loadTemplateAttributes: function(template) {
         this.getAddAttributeButton().setDisabled(false);
         this.getAttributesGrid().getStore().loadData(template.get('attributes'));
     },
@@ -64,7 +68,34 @@ Ext.define('Slims.controller.Templates', {
         window.show();
     },
 
-    deleteAttribute: function() {
+    commitAttributes: function(attributes) {
+        this.getAttributesGrid().setLoading(true);
+        this.getTemplatesGrid().setLoading(true);
 
+        var template = this.getTemplatesGrid().selModel.selected.get(0);
+        template.set('attributes', attributes);
+
+        var loadCallback = Ext.bind(function() {
+            this.loadTemplateAttributes(template);
+        }, this)
+
+        Ext.Ajax.request({
+            url: Slims.Url.getRoute('settemplate'),
+            method: 'POST',
+            jsonData: template.getData(),
+            scope: this,
+            success: function() {
+                this.getAttributesGrid().setLoading(false);
+                this.getTemplatesGrid().setLoading(false);
+
+                this.getTemplatesGrid().getStore().load(loadCallback);
+            },
+            failure: function() {
+                this.getAttributesGrid().setLoading(false);
+                this.getTemplatesGrid().setLoading(false);
+
+                this.getTemplatesGrid().getStore().load(loadCallback);
+            }
+        })
     }
 });
