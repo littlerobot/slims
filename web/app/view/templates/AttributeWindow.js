@@ -5,7 +5,8 @@ Ext.define('Slims.view.templates.AttributeWindow', {
     requires: [
         'Ext.form.field.Text',
         'Ext.toolbar.Toolbar',
-        'Ext.form.field.Checkbox'
+        'Ext.form.field.Checkbox',
+        'Ext.grid.plugin.RowEditing'
     ],
 
     width: 400,
@@ -15,6 +16,11 @@ Ext.define('Slims.view.templates.AttributeWindow', {
 
     initComponent: function() {
         this.setWindowTitle();
+
+        var rowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
+            clicksToMoveEditor: 1,
+            autoCancel: false
+        });
 
         this.items = [{
             xtype: 'form',
@@ -62,6 +68,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
             hidden: true,
             items: [{
                 xtype: 'grid',
+                plugins: [rowEditor],
                 height: 300,
                 store: {
                     data: [],
@@ -70,7 +77,10 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                 columns: [{
                     text: 'Name',
                     flex: 1,
-                    dataIndex: 'name'
+                    dataIndex: 'name',
+                    editor: {
+                        xtype: 'textfield'
+                    }
                 }, {
                     xtype: 'actioncolumn',
                     width: 50,
@@ -78,26 +88,34 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                     items: [{
                         icon: '/resources/images/edit.png',
                         iconCls: 'slims-actions-icon-marginright',
-                        tooltip: 'Delete',
+                        tooltip: 'Edit',
                         scope: this,
                         handler: function(grid, rowIndex, colIndex) {
                             var rec = grid.getStore().getAt(rowIndex);
-                            this.fireEvent('editrecord', rec);
+                            rowEditor.startEdit(rowIndex, colIndex);
                         }
                     }, {
                         icon: '/resources/images/delete.png',
                         tooltip: 'Delete',
                         scope: this,
                         handler: function(grid, rowIndex, colIndex) {
-                            var rec = grid.getStore().getAt(rowIndex);
-                            this.fireEvent('deleterecord', rec);
+                            rowEditor.cancelEdit();
+                            grid.getStore().removeAt(rowIndex);
                         }
                     }]
                 }],
                 tbar: [{
                     text: 'Add option',
                     icon: '/resources/images/add.png',
-                    name: 'addOption'
+                    name: 'addOption',
+                    scope: this,
+                    handler: function() {
+                        rowEditor.cancelEdit();
+
+                        // add item to store
+                        this.down('grid').getStore().insert(0, {name: 'New option'});
+                        rowEditor.startEdit(0, 0);
+                    }
                 }]
             }]
         }];

@@ -31,7 +31,7 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             items: [{
                 icon: '/resources/images/edit.png',
                 iconCls: 'slims-actions-icon-marginright',
-                tooltip: 'Delete',
+                tooltip: 'Edit',
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
