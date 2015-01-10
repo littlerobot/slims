@@ -5,7 +5,7 @@ Ext.define('Slims.model.Attribute', {
     fields: [{
         name: 'order'
     }, {
-        name: 'name'
+        name: 'label'
     }, {
         name: 'type'
     }, {

@@ -31,6 +31,10 @@ Ext.define('Slims.controller.Templates', {
             },
             'attributesgrid button[name=addAttribute]': {
                 click: this.addAttribute
+            },
+            'attributesgrid': {
+                editrecord: this.editAttribute,
+                deleterecord: this.deleteAttribute
             }
         });
     },
@@ -50,5 +54,17 @@ Ext.define('Slims.controller.Templates', {
         var window = Ext.create('Slims.view.templates.AttributeWindow');
 
         window.show();
+    },
+
+    editAttribute: function(attribute) {
+        var window = Ext.create('Slims.view.templates.AttributeWindow', {
+            attribute: attribute.getData()
+        });
+
+        window.show();
+    },
+
+    deleteAttribute: function() {
+
     }
 });

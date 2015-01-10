@@ -14,7 +14,7 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             width: 100
         }, {
             text: 'Name',
-            dataIndex: 'name',
+            dataIndex: 'label',
             width: 320
         }, {
             text: 'Type',

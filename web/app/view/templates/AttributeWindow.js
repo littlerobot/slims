@@ -26,12 +26,13 @@ Ext.define('Slims.view.templates.AttributeWindow', {
             },
             items: [{
                 xtype: 'textfield',
-                name: 'name',
+                name: 'label',
                 allowBlank: false,
                 fieldLabel: 'Label'
             }, {
                 xtype: 'combobox',
                 fieldLabel: 'Type',
+                name: 'type',
                 allowBlank: false,
                 editable: false,
                 store: {
@@ -131,9 +132,14 @@ Ext.define('Slims.view.templates.AttributeWindow', {
         if (!this.attribute)
             return;
 
-        var isOptions = (this.attribute.type == 'option')
-        if (isOptions) {
-            this.showOptionsTools(this.attribute.options);
+        this.down('form').getForm().setValues(this.attribute);
+
+        var options = this.attribute.options || [];
+        if (options.length) {
+            var data = [];
+            for (var i in options) data.push({name: options[i]});
+
+            this.down('grid').getStore().loadData(data);
         }
     },
 
@@ -141,7 +147,6 @@ Ext.define('Slims.view.templates.AttributeWindow', {
         var optionsPanel = this.down('panel[name=options]');
 
         optionsPanel.setVisible(true);
-        optionsPanel.down('grid').getStore().loadData(options || []);
     },
 
     hideOptionsTools: function() {
