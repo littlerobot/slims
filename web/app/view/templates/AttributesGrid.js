@@ -26,10 +26,12 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             flex: 1
         }, {
             xtype: 'actioncolumn',
-            width: 60,
+            width: 50,
+            menuDisabled: true,
             items: [{
                 icon: '/resources/images/delete.png',
                 tooltip: 'Delete',
+                iconCls: 'slims-actions-icon-marginright',
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
@@ -48,6 +50,7 @@ Ext.define('Slims.view.templates.AttributesGrid', {
 
         this.tbar = [{
             text: 'Add attribute',
+            disabled: true,
             icon: '/resources/images/add.png',
             name: 'addAttribute'
         }];

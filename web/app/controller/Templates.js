@@ -12,17 +12,28 @@ Ext.define('Slims.controller.Templates', {
     refs: [{
         ref: 'templatesGrid',
         selector: 'templatesgrid'
+    }, {
+        ref: 'attributesGrid',
+        selector: 'attributesgrid'
+    }, {
+        ref: 'addAttributeButton',
+        selector: 'attributesgrid button[name=addAttribute]'
     }],
 
     init: function() {
         this.control({
             'templatesgrid': {
-
+                select: this.onTemplateSelect
             },
             'templatesgrid button[name=addTemplate]': {
                 click: this.addTemplate
             }
         });
+    },
+
+    onTemplateSelect: function(selModel, template) {
+        this.getAddAttributeButton().setDisabled(false);
+        this.getAttributesGrid().getStore().loadData(template.get('attributes'));
     },
 
     addTemplate: function() {

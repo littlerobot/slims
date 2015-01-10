@@ -1,0 +1,71 @@
+{
+    "success": true,
+    "templates": [{
+        "id": 1,
+        "name": "Employee",
+        "attributes": [
+            {
+                "order": 1,
+                "label": "Sex",
+                "type": "option",
+                "options": [
+                    "Male",
+                    "Female"
+                ]
+            },
+            {
+                "order": 2,
+                "label": "Age",
+                "type": "brief-text"
+            },
+            {
+                "order": 3,
+                "label": "Comment",
+                "type": "long-text"
+            }
+        ]
+    }, {
+        "id": 2,
+        "name": "Transport",
+        "attributes": [
+            {
+                "order": 1,
+                "label": "Model",
+                "type": "option",
+                "options": [
+                    "Honda",
+                    "Bentley",
+                    "Toyota"
+                ]
+            },
+            {
+                "order": 2,
+                "label": "Color",
+                "type": "color"
+            },
+            {
+                "order": 3,
+                "label": "Details",
+                "type": "long-text"
+            }
+        ]
+    }, {
+        "id": 3,
+        "name": "Template name 3",
+        "attributes": [
+            {
+                "order": 1,
+                "label": "Item 1",
+                "type": "option",
+                "options": [
+                    "Option 1",
+                    "Option 2",
+                    "Option 3",
+                    "Option 4",
+                    "Option 5",
+                    "Option 6"
+                ]
+            }
+        ]
+    }]
+}

@@ -14,6 +14,7 @@ Ext.define('Slims.view.templates.TemplatesGrid', {
         }, {
             xtype: 'actioncolumn',
             width: 30,
+            menuDisabled: true,
             items: [{
                 icon: '/resources/images/delete.png',
                 tooltip: 'Delete',

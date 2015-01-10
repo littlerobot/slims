@@ -5,7 +5,8 @@ Ext.define('Slims.store.Templates', {
 
     proxy: {
         type: 'ajax',
-        url: Slims.Url.getRoute('gettemplates'),
+        url: '/mock-responses/templates.json',
+        // url: Slims.Url.getRoute('gettemplates'),
         reader: {
             type: 'json',
             root: 'templates'
