@@ -29,21 +29,21 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             width: 50,
             menuDisabled: true,
             items: [{
-                icon: '/resources/images/delete.png',
-                tooltip: 'Delete',
-                iconCls: 'slims-actions-icon-marginright',
-                scope: this,
-                handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('deleterecord', rec);
-                }
-            }, {
                 icon: '/resources/images/edit.png',
+                iconCls: 'slims-actions-icon-marginright',
                 tooltip: 'Delete',
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
+                }
+            }, {
+                icon: '/resources/images/delete.png',
+                tooltip: 'Delete',
+                scope: this,
+                handler: function(grid, rowIndex, colIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('deleterecord', rec);
                 }
             }]
         }];

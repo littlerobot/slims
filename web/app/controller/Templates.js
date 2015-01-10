@@ -3,7 +3,8 @@ Ext.define('Slims.controller.Templates', {
 
     views: [
         'templates.Panel',
-        'templates.TemplateWindow'
+        'templates.TemplateWindow',
+        'templates.AttributeWindow'
     ],
 
     stores: ['Templates', 'Attributes'],
@@ -27,6 +28,9 @@ Ext.define('Slims.controller.Templates', {
             },
             'templatesgrid button[name=addTemplate]': {
                 click: this.addTemplate
+            },
+            'attributesgrid button[name=addAttribute]': {
+                click: this.addAttribute
             }
         });
     },
@@ -38,6 +42,12 @@ Ext.define('Slims.controller.Templates', {
 
     addTemplate: function() {
         var window = Ext.create('Slims.view.templates.TemplateWindow');
+
+        window.show();
+    },
+
+    addAttribute: function() {
+        var window = Ext.create('Slims.view.templates.AttributeWindow');
 
         window.show();
     }

@@ -2440,6 +2440,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Grid": [],
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
+  "Slims.view.templates.AttributeWindow": [],
   "Slims.view.templates.AttributesGrid": [],
   "Slims.view.templates.Panel": [],
   "Slims.view.templates.TemplateWindow": [],
@@ -3481,6 +3482,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.home.container.Window": [
     "widget.containerwindow"
+  ],
+  "Slims.view.templates.AttributeWindow": [
+    "widget.attributewindow"
   ],
   "Slims.view.templates.AttributesGrid": [
     "widget.attributesgrid"
