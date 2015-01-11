@@ -1,0 +1,4 @@
+suites:
+  slims_api_suite:
+    namespace: Cscr\SlimsApiBundle\
+    spec_prefix: slims_api_spec
