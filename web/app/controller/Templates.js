@@ -27,14 +27,20 @@ Ext.define('Slims.controller.Templates', {
                 select: this.onTemplateSelect
             },
             'templatesgrid button[name=addTemplate]': {
-                click: this.addTemplate
+                click: this.openAddTemplateWindow
             },
             'attributesgrid button[name=addAttribute]': {
-                click: this.addAttribute
+                click: this.openAddAttributeWindow
             },
             'attributesgrid': {
                 editrecord: this.editAttribute,
                 attributeschanged: this.commitAttributes
+            },
+            'templatewindow': {
+                save: this.onSaveTemplateClick
+            },
+            'attributewindow': {
+                save: this.saveAttribute
             }
         });
     },
@@ -48,13 +54,13 @@ Ext.define('Slims.controller.Templates', {
         this.getAttributesGrid().getStore().loadData(template.get('attributes'));
     },
 
-    addTemplate: function() {
+    openAddTemplateWindow: function() {
         var window = Ext.create('Slims.view.templates.TemplateWindow');
 
         window.show();
     },
 
-    addAttribute: function() {
+    openAddAttributeWindow: function() {
         var window = Ext.create('Slims.view.templates.AttributeWindow');
 
         window.show();
@@ -75,6 +81,10 @@ Ext.define('Slims.controller.Templates', {
         var template = this.getTemplatesGrid().selModel.selected.get(0);
         template.set('attributes', attributes);
 
+        this.saveTemplate(template);
+    },
+
+    saveTemplate: function(template) {
         var loadCallback = Ext.bind(function() {
             this.loadTemplateAttributes(template);
         }, this)
@@ -96,6 +106,18 @@ Ext.define('Slims.controller.Templates', {
 
                 this.getTemplatesGrid().getStore().load(loadCallback);
             }
-        })
+        });
+    },
+
+    createTemplate: function(template) {
+
+    },
+
+    onSaveTemplateClick: function() {
+
+    },
+
+    saveAttribute: function() {
+
     }
 });
