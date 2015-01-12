@@ -23,6 +23,12 @@ Ext.define('Slims.controller.Main', {
                 message = 'Server returned an error.';
         }
 
-        Ext.Msg.alert(title, message);
+        Ext.Msg.show({
+            title: title,
+            msg: message,
+            width: 300,
+            buttons: Ext.Msg.OK,
+            icon: Ext.Msg.ERROR
+        });
     }
 });

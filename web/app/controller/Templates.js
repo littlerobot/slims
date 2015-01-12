@@ -32,12 +32,15 @@ Ext.define('Slims.controller.Templates', {
             'attributesgrid button[name=addAttribute]': {
                 click: this.openAddAttributeWindow
             },
+            'attributesgrid button[name=reloadGrid]': {
+                click: this.reloadGrids
+            },
             'attributesgrid': {
                 editrecord: this.editAttribute,
                 attributeschanged: this.commitAttributes
             },
             'templatewindow': {
-                save: this.onSaveTemplateClick
+                save: this.saveTemplate
             },
             'attributewindow': {
                 save: this.saveAttribute
@@ -84,37 +87,53 @@ Ext.define('Slims.controller.Templates', {
         this.saveTemplate(template);
     },
 
-    saveTemplate: function(template) {
+    saveTemplate: function(template, dialog) {
         var loadCallback = Ext.bind(function() {
-            this.loadTemplateAttributes(template);
-        }, this)
+                this.loadTemplateAttributes(template);
+            }, this),
+            url;
+
+        if (template.getId()) {
+            url = Ext.String.format(Slims.Url.getRoute('settemplate'), template.getId());
+        } else {
+            url = Slims.Url.getRoute('createtemplate');
+        }
+
+        dialog.setLoading(true);
 
         Ext.Ajax.request({
-            url: Slims.Url.getRoute('settemplate'),
+            url: url,
             method: 'POST',
-            jsonData: template.getData(),
+            params: {
+                name: template.get('name')
+            },
             scope: this,
             success: function() {
+                dialog.setLoading(false);
+                dialog.close();
                 this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
-                this.getTemplatesGrid().getStore().load(loadCallback);
+                this.reloadGrids();
             },
             failure: function() {
+                dialog.setLoading(false);
                 this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
-                this.getTemplatesGrid().getStore().load(loadCallback);
+                this.reloadGrids();
             }
         });
     },
 
-    createTemplate: function(template) {
+    reloadGrids: function() {
+        var template = this.getTemplatesGrid().selModel.selected.get(0),
+            loadCallback = Ext.bind(function() {
+                if (template)
+                    this.loadTemplateAttributes(template);
+            }, this);
 
-    },
-
-    onSaveTemplateClick: function() {
-
+        this.getTemplatesGrid().getStore().load(loadCallback);
     },
 
     saveAttribute: function() {

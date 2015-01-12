@@ -5,11 +5,10 @@ Ext.define('Slims.store.Templates', {
 
     proxy: {
         type: 'ajax',
-        url: '/mock-responses/templates.json',
-        // url: Slims.Url.getRoute('gettemplates'),
+        url: Slims.Url.getRoute('gettemplates'),
         reader: {
             type: 'json',
-            root: 'templates'
+            root: 'sample_type_templates'
         }
     }
 });

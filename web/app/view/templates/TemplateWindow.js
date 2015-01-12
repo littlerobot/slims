@@ -29,7 +29,6 @@ Ext.define('Slims.view.templates.TemplateWindow', {
                 xtype: 'textfield',
                 fieldLabel: 'Name',
                 name: 'name',
-                maxLength: 10,
                 allowBlank: false
             }]
         }];
@@ -47,7 +46,9 @@ Ext.define('Slims.view.templates.TemplateWindow', {
                     return;
 
                 var name = this.down('textfield[name=name]').getValue();
-                this.fireEvent('save', name, this);
+
+                var template = Ext.create('Slims.model.Template', {name: name});
+                this.fireEvent('save', template, this);
             }
         }, {
             text: 'Cancel',
