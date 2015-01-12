@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Table(name="sample_type_template")
@@ -78,5 +79,19 @@ class SampleTypeTemplate
     public function getAttributes()
     {
         return $this->attributes;
+    }
+
+    /**
+     * The template can be edited as long as no samples have information saved using it.
+     *
+     * @return bool true if the template can be edited, false otherwise.
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\SerializedName("editable")
+     */
+    public function isEditable()
+    {
+        // TODO: Check for samples that have been recorded against this template and return false if there are any.
+        return true;
     }
 }

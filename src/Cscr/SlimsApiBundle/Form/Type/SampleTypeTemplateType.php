@@ -6,7 +6,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class CreateSampleTypeTemplateType extends AbstractType
+class SampleTypeTemplateType extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -15,8 +15,9 @@ class CreateSampleTypeTemplateType extends AbstractType
     {
         $builder->add('name')
             ->add('attributes', 'collection', [
-                'type' => new CreateSampleTypeAttributeType(),
+                'type' => new SampleTypeAttributeType(),
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
             ])
         ;
