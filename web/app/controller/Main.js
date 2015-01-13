@@ -9,7 +9,7 @@ Ext.define('Slims.controller.Main', {
         var response = Ext.decode(xhr.responseText);
 
         if (response && response.errors) {
-            var title = response.errors.message || 'Internal error',
+            var title = response.errors.message || 'Error appeared!',
                 message = 'Server returned an error.';
 
             if (response.errors.errors.length) {

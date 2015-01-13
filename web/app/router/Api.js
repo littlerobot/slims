@@ -13,7 +13,7 @@ Ext.define('Slims.router.Api', {
             case 'createtemplate':
                 return routePrefix + '/sample-type-templates';
             case 'settemplate':
-                return routePrefix + '/sample-type-template/{0}';
+                return routePrefix + '/sample-type-templates/{0}';
             case 'gettemplates':
                 return routePrefix + '/sample-type-templates';
             case 'getcontainers':
@@ -49,7 +49,7 @@ Ext.define('Slims.router.Api', {
             case 'createtemplate':
                 return devController + routePrefix + '/sample-type-templates';
             case 'settemplate':
-                return devController + routePrefix + '/sample-type-template/{0}';
+                return devController + routePrefix + '/sample-type-templates/{0}';
             case 'gettemplates':
                 return devController + routePrefix + '/sample-type-templates';
             case 'getcontainers':

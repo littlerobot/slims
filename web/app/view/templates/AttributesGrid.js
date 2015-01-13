@@ -59,7 +59,6 @@ Ext.define('Slims.view.templates.AttributesGrid', {
             name: 'addAttribute'
         }];
 
-
         this.viewConfig = this.viewConfig || {};
 
         this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
@@ -90,6 +89,11 @@ Ext.define('Slims.view.templates.AttributesGrid', {
         Ext.each(data.items, function(r, index) {
             var attribute = r.data;
             attribute.order = index + 1;
+            if (attribute.type != 'option')
+                delete attribute.options;
+
+            delete attribute.id;
+
             attributes.push(attribute);
         });
 

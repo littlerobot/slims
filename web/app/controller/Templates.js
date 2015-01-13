@@ -71,7 +71,7 @@ Ext.define('Slims.controller.Templates', {
 
     editAttribute: function(attribute) {
         var window = Ext.create('Slims.view.templates.AttributeWindow', {
-            attribute: attribute.getData()
+            attribute: attribute
         });
 
         window.show();
@@ -99,25 +99,28 @@ Ext.define('Slims.controller.Templates', {
             url = Slims.Url.getRoute('createtemplate');
         }
 
-        dialog.setLoading(true);
+        if (dialog) dialog.setLoading(true);
 
         Ext.Ajax.request({
             url: url,
             method: 'POST',
-            params: {
-                name: template.get('name')
+            jsonData: {
+                name: template.get('name'),
+                attributes: template.get('attributes') || []
             },
             scope: this,
             success: function() {
-                dialog.setLoading(false);
-                dialog.close();
+                if (dialog) {
+                    dialog.setLoading(false);
+                    dialog.close();
+                }
                 this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
                 this.reloadGrids();
             },
             failure: function() {
-                dialog.setLoading(false);
+                if (dialog) dialog.setLoading(false);
                 this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
@@ -136,7 +139,16 @@ Ext.define('Slims.controller.Templates', {
         this.getTemplatesGrid().getStore().load(loadCallback);
     },
 
-    saveAttribute: function() {
+    saveAttribute: function(attribute, dialog) {
+        dialog.close();
 
+        if (attribute.getId()) {
+            attribute.commit();
+        } else {
+            this.getAttributesGrid().getStore().add(attribute);
+        }
+        var attributes = this.getAttributesGrid().getStore().data;
+
+        this.getAttributesGrid().updateAttributesOrder(attributes);
     }
 });

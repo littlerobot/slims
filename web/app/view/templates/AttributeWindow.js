@@ -127,12 +127,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
             width: 80,
             name: 'save',
             scope: this,
-            handler: function() {
-                if (!this.down('form').getForm().isValid())
-                    return;
-
-                this.fireEvent('save', null, this);
-            }
+            handler: this.saveAttribute
         }, {
             text: 'Cancel',
             icon: '/resources/images/cancel.png',
@@ -150,15 +145,36 @@ Ext.define('Slims.view.templates.AttributeWindow', {
         if (!this.attribute)
             return;
 
-        this.down('form').getForm().setValues(this.attribute);
+        this.down('form').getForm().setValues(this.attribute.getData());
 
-        var options = this.attribute.options || [];
+        var options = this.attribute.get('options') || [];
         if (options.length) {
             var data = [];
             for (var i in options) data.push({name: options[i]});
 
             this.down('grid').getStore().loadData(data);
         }
+    },
+
+    saveAttribute: function() {
+        var form = this.down('form').getForm();
+        if (!form.isValid())
+            return;
+
+        var attribute = form.getValues();
+        if (attribute.type == 'option') {
+            var storeItems = this.down('grid').getStore().data.items,
+                options = [];
+            for (var i  in storeItems) options.push(storeItems[i].get('name'))
+
+            attribute.options = options;
+        }
+        if (!this.attribute) {
+            this.attribute = Ext.create('Slims.model.Attribute', attribute);
+        }
+        this.attribute.set(attribute);
+
+        this.fireEvent('save', this.attribute, this);
     },
 
     showOptionsTools: function(options) {
