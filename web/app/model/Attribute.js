@@ -3,9 +3,6 @@ Ext.define('Slims.model.Attribute', {
     idProprerty: 'id',
 
     fields: [{
-        name: 'id',
-        useNull: true
-    }, {
         name: 'order',
         type: 'int'
     }, {

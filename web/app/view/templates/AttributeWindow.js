@@ -13,6 +13,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
     layout: 'vbox',
     modal: true,
     attribute: null,
+    usedLabels: [],
 
     initComponent: function() {
         this.setWindowTitle();
@@ -34,7 +35,14 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                 xtype: 'textfield',
                 name: 'label',
                 allowBlank: false,
-                fieldLabel: 'Label'
+                fieldLabel: 'Label',
+                validator: function(val) {
+                    if (this.up('attributewindow').usedLabels.indexOf(val.trim()) == -1) {
+                        return true;
+                    } else {
+                        return 'This label already in use in this template.';
+                    }
+                }
             }, {
                 xtype: 'combobox',
                 fieldLabel: 'Type',
@@ -147,6 +155,10 @@ Ext.define('Slims.view.templates.AttributeWindow', {
 
         this.down('form').getForm().setValues(this.attribute.getData());
 
+        var currentLabelIndex = this.usedLabels.indexOf(this.attribute.get('label'));
+        this.usedLabels.splice(currentLabelIndex, 1);
+
+        console.log(this.usedLabels)
         var options = this.attribute.get('options') || [];
         if (options.length) {
             var data = [];
