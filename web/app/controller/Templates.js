@@ -60,6 +60,8 @@ Ext.define('Slims.controller.Templates', {
                 sm.select(sm.lastSelected);
             }
         }, this, {single: true});
+
+        this.getAttributesGrid().down('actioncolumn').setVisible(template.get('editable'));
         this.getAttributesGrid().getStore().loadData(template.get('attributes'));
     },
 

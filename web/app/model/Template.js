@@ -8,5 +8,9 @@ Ext.define('Slims.model.Template', {
         name: 'name'
     }, {
         name: 'attributes'
+    }, {
+    	name: 'editable',
+        type: 'bool',
+        defaultValue: true
     }]
 });
