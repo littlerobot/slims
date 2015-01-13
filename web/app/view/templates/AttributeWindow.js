@@ -18,6 +18,11 @@ Ext.define('Slims.view.templates.AttributeWindow', {
     initComponent: function() {
         this.setWindowTitle();
 
+        if (this.attribute) {
+            var currentLabelIndex = this.usedLabels.indexOf(this.attribute.get('label'));
+            this.usedLabels.splice(currentLabelIndex, 1);
+        }
+
         var rowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
             clicksToMoveEditor: 1,
             autoCancel: false
@@ -155,10 +160,6 @@ Ext.define('Slims.view.templates.AttributeWindow', {
 
         this.down('form').getForm().setValues(this.attribute.getData());
 
-        var currentLabelIndex = this.usedLabels.indexOf(this.attribute.get('label'));
-        this.usedLabels.splice(currentLabelIndex, 1);
-
-        console.log(this.usedLabels)
         var options = this.attribute.get('options') || [];
         if (options.length) {
             var data = [];
