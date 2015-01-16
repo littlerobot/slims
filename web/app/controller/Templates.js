@@ -24,7 +24,8 @@ Ext.define('Slims.controller.Templates', {
     init: function() {
         this.control({
             'templatesgrid': {
-                select: this.onTemplateSelect
+                select: this.onTemplateSelect,
+                editrecord: this.openEditTemplateWindow
             },
             'templatesgrid button[name=addTemplate]': {
                 click: this.openAddTemplateWindow
@@ -67,6 +68,14 @@ Ext.define('Slims.controller.Templates', {
 
     openAddTemplateWindow: function() {
         var window = Ext.create('Slims.view.templates.TemplateWindow');
+
+        window.show();
+    },
+
+    openEditTemplateWindow: function(template) {
+        var window = Ext.create('Slims.view.templates.TemplateWindow', {
+            record: template
+        });
 
         window.show();
     },

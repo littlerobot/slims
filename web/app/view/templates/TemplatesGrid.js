@@ -12,32 +12,33 @@ Ext.define('Slims.view.templates.TemplatesGrid', {
             dataIndex: 'name',
             flex: 1
         }, {
+            text: '',
+            dataIndex: 'editable',
+            width: 70,
+            renderer: function(isEditable, meta) {
+                if (isEditable) {
+                    meta.style = 'color: green;';
+                    return 'editable';
+                } else {
+                    meta.style = 'color: red;';
+                    return 'in use';
+                }
+            }
+        }, {
             xtype: 'actioncolumn',
             width: 30,
             menuDisabled: true,
             items: [{
-                icon: '/resources/images/delete.png',
-                tooltip: 'Delete',
+                icon: '/resources/images/edit.png',
+                tooltip: 'Edit name',
                 isDisabled: function(view, col, row, item, record) {
                     var isDisabled = !record.get('editable');
                     return isDisabled;
                 },
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('editrecord', rec);
-                }
-            }, {
-                icon: '/resources/images/delete.png',
-                tooltip: 'Delete',
-                isDisabled: function(view, col, row, item, record) {
-                    var isDisabled = !record.get('editable');
-                    return isDisabled;
-                },
-                scope: this,
-                handler: function(grid, rowIndex, colIndex) {
-                    var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('editrecord', rec);
+                    var template = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('editrecord', template);
                 }
             }]
         }];

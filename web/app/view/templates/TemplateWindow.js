@@ -12,10 +12,10 @@ Ext.define('Slims.view.templates.TemplateWindow', {
     layout: 'fit',
     modal: true,
 
-    name: null,
-    title: 'Add new template',
+    record: null,
 
     initComponent: function() {
+        this.setWindowTitle();
 
         this.items = [{
             xtype: 'form',
@@ -40,15 +40,18 @@ Ext.define('Slims.view.templates.TemplateWindow', {
             name: 'save',
             scope: this,
             handler: function() {
-                var user = this.record;
-
                 if (!this.down('form').getForm().isValid())
                     return;
 
                 var name = this.down('textfield[name=name]').getValue();
 
-                var template = Ext.create('Slims.model.Template', {name: name});
-                this.fireEvent('save', template, this);
+                if (this.record) {
+                    this.record.set('name', name);
+                } else {
+
+                    this.record = Ext.create('Slims.model.Template', {name: name});
+                }
+                this.fireEvent('save', this.record, this);
             }
         }, {
             text: 'Cancel',
@@ -63,7 +66,17 @@ Ext.define('Slims.view.templates.TemplateWindow', {
         this.callParent();
     },
 
+    setWindowTitle: function() {
+        if (this.record) {
+            this.title = 'Edit template';
+        } else {
+            this.title = 'Add new template';
+        }
+    },
+
     setupData: function() {
-        this.down('form').getForm().setValues(this.name || '');
+        if (this.record) {
+            this.down('form').getForm().setValues(this.record.data || '');
+        }
     }
 });
