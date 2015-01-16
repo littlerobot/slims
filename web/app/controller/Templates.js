@@ -32,7 +32,7 @@ Ext.define('Slims.controller.Templates', {
             'attributesgrid button[name=addAttribute]': {
                 click: this.openAddAttributeWindow
             },
-            'attributesgrid button[name=reloadGrid]': {
+            'templatesgrid button[name=reloadGrid]': {
                 click: this.reloadGrids
             },
             'attributesgrid': {

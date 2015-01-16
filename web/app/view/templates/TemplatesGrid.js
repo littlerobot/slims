@@ -27,6 +27,18 @@ Ext.define('Slims.view.templates.TemplatesGrid', {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
                 }
+            }, {
+                icon: '/resources/images/delete.png',
+                tooltip: 'Delete',
+                isDisabled: function(view, col, row, item, record) {
+                    var isDisabled = !record.get('editable');
+                    return isDisabled;
+                },
+                scope: this,
+                handler: function(grid, rowIndex, colIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('editrecord', rec);
+                }
             }]
         }];
 
