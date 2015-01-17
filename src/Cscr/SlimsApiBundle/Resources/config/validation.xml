@@ -119,8 +119,12 @@
                 <option name="message">The type you have selected is not a valid option</option>
             </constraint>
             <constraint name="Expression">
-                <option name="expression">this.allowsOptionsToBeSpecified()</option>
-                <option name="message">This attribute type does not allow options to be specified</option>
+                <option name="expression">this.getOptions() !== null</option>
+                <option name="message">You must specify options for the option attribute type</option>
+            </constraint>
+            <constraint name="Expression">
+                <option name="expression">!this.getOptions() === null</option>
+                <option name="message">You cannot specify options for this attribute type</option>
             </constraint>
         </property>
         <property name="options">
