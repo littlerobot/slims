@@ -43,14 +43,6 @@ class SampleTypeAttributeType extends AbstractType
 
     private function getChoices()
     {
-        return [
-            SampleTypeAttribute::TYPE_BRIEF_TEXT => 'Brief text',
-            SampleTypeAttribute::TYPE_LONG_TEXT => 'Long text',
-            SampleTypeAttribute::TYPE_OPTION => 'Option',
-            SampleTypeAttribute::TYPE_DOCUMENT => 'Document',
-            SampleTypeAttribute::TYPE_DATE => 'Date',
-            SampleTypeAttribute::TYPE_COLOUR => 'Colour',
-            SampleTypeAttribute::TYPE_USER => 'User',
-        ];
+        return array_combine(SampleTypeAttribute::getValidChoices(), SampleTypeAttribute::getValidChoices());
     }
 }

@@ -154,4 +154,30 @@ class SampleTypeAttribute
     {
         return $this->parent;
     }
+
+    /**
+     * Does this attribute type allow options to be specified?
+     *
+     * @return bool true if it does, false if it does not.
+     */
+    public function allowsOptionsToBeSpecified()
+    {
+        return self::TYPE_OPTION === $this->getType();
+    }
+
+    /**
+     * @return array All valid type options.
+     */
+    public static function getValidChoices()
+    {
+        return [
+            self::TYPE_BRIEF_TEXT,
+            self::TYPE_COLOUR,
+            self::TYPE_DATE,
+            self::TYPE_DOCUMENT,
+            self::TYPE_LONG_TEXT,
+            self::TYPE_OPTION,
+            self::TYPE_USER,
+        ];
+    }
 }
