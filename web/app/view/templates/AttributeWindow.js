@@ -55,11 +55,11 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                 allowBlank: false,
                 editable: false,
                 store: {
-                    fields: ['name'],
+                    fields: ['id', 'name'],
                     data: this.getOptionsList()
                 },
                 value: 'brief-text',
-                valueField: 'name',
+                valueField: 'id',
                 displayField: 'name',
                 listeners: {
                     scope: this,
@@ -212,19 +212,26 @@ Ext.define('Slims.view.templates.AttributeWindow', {
 
     getOptionsList: function() {
         return [{
-            name: 'brief-text'
+            name: 'Brief text',
+            id: 'brief-text'
         }, {
-            name: 'long-text'
+            name: 'Long text',
+            id: 'long-text'
         }, {
-            name: 'document'
+            name: 'Document',
+            id: 'document'
         }, {
-            name: 'option'
+            name: 'Option',
+            id: 'option'
         }, {
-            name: 'date'
+            name: 'Date',
+            id: 'date'
         }, {
-            name: 'colour'
+            name: 'Colour',
+            id: 'colour'
         }, {
-            name: 'user'
+            name: 'User',
+            id: 'user'
         }];
     }
 });

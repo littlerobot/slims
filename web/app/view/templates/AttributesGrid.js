@@ -89,13 +89,11 @@ Ext.define('Slims.view.templates.AttributesGrid', {
         Ext.each(data.items, function(r, index) {
             var attribute = r.data;
             attribute.order = index + 1;
-            if (attribute.type != 'option')
-                delete attribute.options;
-
-            delete attribute.id;
 
             attributes.push(attribute);
         });
+
+        this.getStore().loadData(attributes);
 
         this.fireEvent('attributeschanged', attributes);
     }

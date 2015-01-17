@@ -117,10 +117,22 @@ Ext.define('Slims.controller.Templates', {
     },
 
     saveTemplate: function(template, dialog) {
-        var url;
+        var url,
+            attributes = [];
 
         if (template.getId()) {
             url = Ext.String.format(Slims.Url.getRoute('settemplate'), template.getId());
+
+            // remove extra fields before request
+            Ext.each(template.get('attributes'), function(attribute, index) {
+                attribute.order = index + 1;
+                if (attribute.type != 'option')
+                    delete attribute.options;
+
+                delete attribute.id;
+
+                attributes.push(attribute);
+            });
         } else {
             url = Slims.Url.getRoute('createtemplate');
         }
@@ -132,7 +144,7 @@ Ext.define('Slims.controller.Templates', {
             method: 'POST',
             jsonData: {
                 name: template.get('name'),
-                attributes: template.get('attributes') || []
+                attributes: attributes || []
             },
             scope: this,
             success: function() {
