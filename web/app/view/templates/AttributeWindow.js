@@ -175,6 +175,11 @@ Ext.define('Slims.view.templates.AttributeWindow', {
         if (attribute.type == 'option') {
             var storeItems = this.down('grid').getStore().data.items,
                 options = [];
+
+            if (storeItems.length == 0) {
+                Slims.app.getMainController().error('Validation error.', 'Add at least one option in the table, or select a different type.');
+                return;
+            }
             for (var i  in storeItems) options.push(storeItems[i].get('name'))
 
             attribute.options = options;
