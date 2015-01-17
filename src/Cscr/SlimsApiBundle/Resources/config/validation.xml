@@ -118,27 +118,6 @@
                 <option name="callback">getValidChoices</option>
                 <option name="message">The type you have selected is not a valid option</option>
             </constraint>
-            <constraint name="Expression">
-                <option name="expression">this.getOptions() !== null</option>
-                <option name="message">You must specify options for the option attribute type</option>
-            </constraint>
-            <constraint name="Expression">
-                <option name="expression">!this.getOptions() === null</option>
-                <option name="message">You cannot specify options for this attribute type</option>
-            </constraint>
-        </property>
-        <property name="options">
-            <constraint name="All">
-                <constraint name="NotBlank">
-                    <option name="message">The option must have some text</option>
-                </constraint>
-                <constraint name="Length">
-                    <option name="min">1</option>
-                    <option name="max">255</option>
-                    <option name="minMessage">The option must be at least {{ limit }} characters long</option>
-                    <option name="maxMessage">The option cannot be longer than {{ limit }} characters</option>
-                </constraint>
-            </constraint>
         </property>
     </class>
 
