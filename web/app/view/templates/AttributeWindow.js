@@ -54,10 +54,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                 name: 'type',
                 allowBlank: false,
                 editable: false,
-                store: {
-                    fields: ['id', 'name'],
-                    data: this.getOptionsList()
-                },
+                store: 'attributeTypes',
                 value: 'brief-text',
                 valueField: 'id',
                 displayField: 'name',
@@ -208,30 +205,5 @@ Ext.define('Slims.view.templates.AttributeWindow', {
         } else {
             this.title = 'Edit attribute';
         }
-    },
-
-    getOptionsList: function() {
-        return [{
-            name: 'Brief text',
-            id: 'brief-text'
-        }, {
-            name: 'Long text',
-            id: 'long-text'
-        }, {
-            name: 'Document',
-            id: 'document'
-        }, {
-            name: 'Option',
-            id: 'option'
-        }, {
-            name: 'Date',
-            id: 'date'
-        }, {
-            name: 'Colour',
-            id: 'colour'
-        }, {
-            name: 'User',
-            id: 'user'
-        }];
     }
 });

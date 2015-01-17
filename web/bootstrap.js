@@ -870,6 +870,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.router.Api": [
     "Slims.Url"
   ],
+  "Slims.store.AttributeTypes": [],
   "Slims.store.Attributes": [],
   "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],
@@ -1903,6 +1904,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.model.Template": [],
   "Slims.model.User": [],
   "Slims.router.Api": [],
+  "Slims.store.AttributeTypes": [],
   "Slims.store.Attributes": [],
   "Slims.store.Containers": [],
   "Slims.store.ResearchGroups": [],

@@ -23,7 +23,10 @@ Ext.define('Slims.view.templates.AttributesGrid', {
         }, {
             text: 'Type',
             dataIndex: 'type',
-            width: 120
+            width: 120,
+            renderer: function(type) {
+                return type ? Ext.StoreManager.get('attributeTypes').getById(type).get('name') : '';
+            }
         }, {
             text: 'Details',
             dataIndex: 'options',

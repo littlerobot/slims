@@ -7,7 +7,7 @@ Ext.define('Slims.controller.Templates', {
         'templates.AttributeWindow'
     ],
 
-    stores: ['Templates', 'Attributes'],
+    stores: ['Templates', 'Attributes', 'AttributeTypes'],
     models: ['Template', 'Attribute'],
 
     refs: [{
@@ -46,6 +46,14 @@ Ext.define('Slims.controller.Templates', {
             'attributewindow': {
                 save: this.saveAttribute
             }
+        });
+
+        this.createAttributeTypesStore();
+    },
+
+    createAttributeTypesStore: function() {
+        Ext.create('Slims.store.AttributeTypes', {
+            storeId: 'attributeTypes'
         });
     },
 
