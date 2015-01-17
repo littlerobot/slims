@@ -39,7 +39,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
             items: [{
                 xtype: 'textfield',
                 name: 'label',
-                allowBlank: false,
+                allowOnlyWhitespace: false,
                 fieldLabel: 'Label',
                 validator: function(val) {
                     if (this.up('attributewindow').usedLabels.indexOf(val.trim()) == -1) {
@@ -52,7 +52,7 @@ Ext.define('Slims.view.templates.AttributeWindow', {
                 xtype: 'combobox',
                 fieldLabel: 'Type',
                 name: 'type',
-                allowBlank: false,
+                allowOnlyWhitespace: false,
                 editable: false,
                 store: 'attributeTypes',
                 value: 'brief-text',

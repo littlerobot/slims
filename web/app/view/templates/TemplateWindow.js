@@ -29,7 +29,7 @@ Ext.define('Slims.view.templates.TemplateWindow', {
                 xtype: 'textfield',
                 fieldLabel: 'Name',
                 name: 'name',
-                allowBlank: false
+                allowOnlyWhitespace: false
             }]
         }];
 

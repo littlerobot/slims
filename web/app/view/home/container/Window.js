@@ -39,7 +39,7 @@ Ext.define('Slims.view.home.container.Window', {
                 items: [{
                     xtype: 'textfield',
                     name: 'name',
-                    allowBlank: false,
+                    allowOnlyWhitespace: false,
                     width: '100%',
                     labelWidth: 20,
                     fieldLabel: 'Name'
@@ -113,7 +113,7 @@ Ext.define('Slims.view.home.container.Window', {
                     fieldLabel: 'Number of containers to create',
                     labelWidth: 190,
                     width: 250,
-                    allowBlank: false,
+                    allowOnlyWhitespace: false,
                     maxValue: 1,
                     minValue: 1,
                     value: 1
