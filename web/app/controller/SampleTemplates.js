@@ -1,10 +1,10 @@
-Ext.define('Slims.controller.Templates', {
+Ext.define('Slims.controller.SampleTemplates', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'templates.sample.Panel',
-        'templates.sample.TemplateWindow',
-        'templates.sample.AttributeWindow'
+        'sample.templates.Panel',
+        'sample.templates.TemplateWindow',
+        'sample.templates.AttributeWindow'
     ],
 
     stores: ['sample.Templates', 'sample.Attributes', 'sample.AttributeTypes'],
