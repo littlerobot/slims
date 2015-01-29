@@ -16,13 +16,49 @@ Ext.define('Slims.view.sample.templates.Panel', {
             xtype: 'panel',
             layout: 'vbox',
             items: [{
-                xtype: 'templatesgrid',
+                xtype: 'sampletemplatesgrid',
                 width: '100%',
                 flex: 1
             }, {
-                xtype: 'attributesgrid',
+                xtype: 'container',
+                layout: 'hbox',
                 width: '100%',
-                flex: 1
+                flex: 1,
+                items: [{
+                    xtype: 'sampleattributesgrid',
+                    title: 'On store Attributes',
+                    flex: 1,
+                    height: '100%'
+                }, {
+                    xtype: 'panel',
+                    bodyStyle: 'padding: 5px',
+                    border: true,
+                    width: 55,
+                    height: '100%',
+                    layout: {
+                        type: 'vbox',
+                        pack: 'center'
+                    },
+                    items: [{
+                        xtype: 'button',
+                        text: '>>',
+                        width: 40
+                    }, {
+                        xtype: 'button',
+                        text: '<=>',
+                        style: 'margin-top: 10px; margin-bottom: 10px;',
+                        width: 40
+                    }, {
+                        xtype: 'button',
+                        text: '<<',
+                        width: 40
+                    }]
+                }, {
+                    xtype: 'sampleattributesgrid',
+                    title: 'On Remove Attributes',
+                    flex: 1,
+                    height: '100%'
+                }]
             }]
         }];
 

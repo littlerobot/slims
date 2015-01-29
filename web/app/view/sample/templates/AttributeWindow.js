@@ -42,7 +42,7 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
                 allowOnlyWhitespace: false,
                 fieldLabel: 'Label',
                 validator: function(val) {
-                    if (this.up('attributewindow').usedLabels.indexOf(val.trim()) == -1) {
+                    if (this.up('sampleattributewindow').usedLabels.indexOf(val.trim()) == -1) {
                         return true;
                     } else {
                         return 'This label already in use in this template.';

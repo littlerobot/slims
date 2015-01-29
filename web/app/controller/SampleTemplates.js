@@ -75,13 +75,13 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     openAddTemplateWindow: function() {
-        var window = Ext.create('Slims.view.templates.sample.TemplateWindow');
+        var window = Ext.create('Slims.view.sample.templates.TemplateWindow');
 
         window.show();
     },
 
     openEditTemplateWindow: function(template) {
-        var window = Ext.create('Slims.view.templates.sample.TemplateWindow', {
+        var window = Ext.create('Slims.view.sample.templates.TemplateWindow', {
             record: template
         });
 
@@ -89,7 +89,7 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     openAddAttributeWindow: function() {
-        var window = Ext.create('Slims.view.templates.sample.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
             usedLabels: this.getUsedAttrLabels()
         });
 
@@ -97,7 +97,7 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     editAttribute: function(attribute) {
-        var window = Ext.create('Slims.view.templates.sample.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
             attribute: attribute,
             usedLabels: this.getUsedAttrLabels()
         });
