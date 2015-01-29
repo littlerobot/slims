@@ -87,6 +87,7 @@
     </class>
 
     <class name="Cscr\SlimsApiBundle\Entity\SampleTypeAttribute">
+        <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed" />
         <property name="order">
             <constraint name="NotBlank">
                 <option name="message">The order position specified</option>
@@ -117,6 +118,16 @@
             <constraint name="Choice">
                 <option name="callback">getValidChoices</option>
                 <option name="message">The type you have selected is not a valid option</option>
+            </constraint>
+        </property>
+        <property name="options">
+            <constraint name="All">
+                <constraint name="Length">
+                    <option name="min">1</option>
+                    <option name="max">255</option>
+                    <option name="minMessage">The option must be at least {{ limit }} characters long</option>
+                    <option name="maxMessage">The option cannot be longer than {{ limit }} characters</option>
+                </constraint>
             </constraint>
         </property>
     </class>

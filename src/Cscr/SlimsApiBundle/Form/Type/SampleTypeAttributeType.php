@@ -29,7 +29,6 @@ class SampleTypeAttributeType extends AbstractType
         $resolver->setDefaults([
             'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute',
             'csrf_protection' => false,
-
         ]);
     }
 

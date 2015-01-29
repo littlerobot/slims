@@ -96,6 +96,12 @@ class SampleTypeAttribute
     public function setType($type)
     {
         $this->type = $type;
+
+        // Remove any existing options if we're changing from an option type.
+        if (self::TYPE_OPTION !== $this->getType()) {
+            $this->setOptions(null);
+        }
+
         return $this;
     }
 
@@ -105,6 +111,11 @@ class SampleTypeAttribute
      */
     public function setOptions(array $options = null)
     {
+        // Remove any "blank" elements
+        if (is_array($options)) {
+            $options = array_filter($options);
+        }
+
         // Stop an empty array being set as this will make the output a bit funky.
         if (empty($options)) {
             $this->options = null;
