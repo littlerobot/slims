@@ -30,7 +30,8 @@
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
         "liip/functional-test-bundle": "~1.0",
-        "phpspec/phpspec": "~2.0"
+        "phpspec/phpspec": "~2.0",
+        "phpunit/phpunit": "~4.4"
     },
     "scripts": {
         "post-root-package-install": [
