@@ -18,6 +18,6 @@ research_groups:
 
 sample_type_templates:
     type:           rest
-    resource:       @CscrSlimsApiBundle/Controller/SampletypeTemplatesController.php
+    resource:       @CscrSlimsApiBundle/Controller/SampleTypeTemplatesController.php
     prefix:         sample-type-templates
     name_prefix:    api_sample_type_templates
