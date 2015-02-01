@@ -32,13 +32,13 @@ Ext.define('Slims.view.users.Window', {
                 fieldLabel: 'Username',
                 name: 'username',
                 maxLength: 10,
-                allowBlank: false
+                allowOnlyWhitespace: false
             }, {
                 xtype: 'textfield',
                 name: 'name',
                 fieldLabel: 'Name',
                 maxLength: 255,
-                allowBlank: false
+                allowOnlyWhitespace: false
             }, {
                 xtype: 'combobox',
                 name: 'research_group',

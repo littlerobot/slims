@@ -10,26 +10,42 @@ Ext.define('Slims.router.Api', {
         var routePrefix = 'api';
 
         switch (routeName) {
+            // templates
+            case 'createtemplate':
+                return routePrefix + '/sample-type-templates';
+            case 'settemplate':
+                return routePrefix + '/sample-type-templates/{0}';
+            case 'gettemplates':
+                return routePrefix + '/sample-type-templates';
+            // containers
             case 'getcontainers':
                 return routePrefix + '/containers';
             case 'setcontainer':
                 return routePrefix + '/containers/{0}';
             case 'createcontainer':
                 return routePrefix + '/containers';
-            case 'session':
-                return routePrefix + '/session';
+            // groups
             case 'getgroups':
                 return routePrefix + '/research-groups';
             case 'setgroup':
                 return routePrefix + '/research-groups/{0}';
             case 'creategroup':
                 return routePrefix + '/research-groups';
+            // users
             case 'getusers':
                 return routePrefix + '/users';
             case 'setuser':
                 return routePrefix + '/users/{0}';
             case 'createuser':
                 return routePrefix + '/users';
+            // sample templates
+            case 'createsampletemplate':
+                return routePrefix + '/sample-type-templates';
+            case 'setsampletemplate':
+                return routePrefix + '/sample-type-templates/{0}';
+            case 'getsampletemplates':
+                return routePrefix + '/sample-type-templates';
+
             default:
                 return routePrefix + '/' + routeName;
         }
@@ -40,26 +56,42 @@ Ext.define('Slims.router.Api', {
             devController = '/app_dev.php';
 
         switch (routeName) {
+            // templates
+            case 'createtemplate':
+                return devController + routePrefix + '/sample-type-templates';
+            case 'settemplate':
+                return devController + routePrefix + '/sample-type-templates/{0}';
+            case 'gettemplates':
+                return devController + routePrefix + '/sample-type-templates';
+            // containers
             case 'getcontainers':
                 return devController + routePrefix + '/containers';
             case 'setcontainer':
                 return devController + routePrefix + '/containers/{0}';
             case 'createcontainer':
                 return devController + routePrefix + '/containers';
-            case 'session':
-                return devController + routePrefix + '/session';
+            // groups
             case 'getgroups':
                 return devController + routePrefix + '/research-groups';
             case 'setgroup':
                 return devController + routePrefix + '/research-groups/{0}';
             case 'creategroup':
                 return devController + routePrefix + '/research-groups';
+            // users
             case 'getusers':
                 return devController + routePrefix + '/users';
             case 'setuser':
                 return devController + routePrefix + '/users/{0}';
             case 'createuser':
                 return devController + routePrefix + '/users';
+            // sample templates
+            case 'createsampletemplate':
+                return devController + routePrefix + '/sample-type-templates';
+            case 'setsampletemplate':
+                return devController + routePrefix + '/sample-type-templates/{0}';
+            case 'getsampletemplates':
+                return devController + routePrefix + '/sample-type-templates';
+
             default:
                 return devController + routePrefix + '/' + routeName;
         }

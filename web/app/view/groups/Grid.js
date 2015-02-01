@@ -15,6 +15,7 @@ Ext.define('Slims.view.groups.Grid', {
         }, {
             xtype: 'actioncolumn',
             width: 30,
+            menuDisabled: true,
             items: [{
                 icon: '/resources/images/edit.png',
                 tooltip: 'Edit',

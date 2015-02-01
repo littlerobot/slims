@@ -25,7 +25,7 @@ Ext.define('Slims.view.groups.Window', {
             labelAlign: 'top',
             maxLength: 255,
             margin: 10,
-            allowBlank: false,
+            allowOnlyWhitespace: false,
             value: this.record == null ? '' : this.record.get('name')
         }];
 

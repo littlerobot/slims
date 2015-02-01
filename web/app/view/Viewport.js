@@ -19,12 +19,22 @@ Ext.define('Slims.view.Viewport', {
             icon: '/resources/images/home.png'
         }, {
             xtype: 'groupsgrid',
+            border: true,
             title: 'Research Groups',
             icon: '/resources/images/groups.png'
         }, {
             xtype: 'usersgrid',
+            border: true,
             title: 'Users',
             icon: '/resources/images/users.png'
+        }, {
+            xtype: 'templatespage',
+            title: 'Templates',
+            icon: '/resources/images/template.png'
+        }, {
+            xtype: 'sampletemplatespage',
+            title: 'Sample Templates',
+            icon: '/resources/images/template.png'
         }]
     }]
 });

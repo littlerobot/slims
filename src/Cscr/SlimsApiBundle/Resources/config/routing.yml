@@ -15,3 +15,9 @@ research_groups:
     resource:       @CscrSlimsApiBundle/Controller/ResearchGroupsController.php
     prefix:         research-groups
     name_prefix:    api_research_groups_
+
+sample_type_templates:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/SampletypeTemplatesController.php
+    prefix:         sample-type-templates
+    name_prefix:    api_sample_type_templates
