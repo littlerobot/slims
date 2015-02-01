@@ -50,4 +50,13 @@ abstract class WebTestCase extends BaseWebTestCase
 
         return $client;
     }
+
+    /**
+     * Clears the Doctrine cache so that entities will be reloaded from the database,
+     * rather than the cache.
+     */
+    protected function clearDoctrineCache()
+    {
+        $this->getContainer()->get('doctrine')->getManager()->clear();
+    }
 }

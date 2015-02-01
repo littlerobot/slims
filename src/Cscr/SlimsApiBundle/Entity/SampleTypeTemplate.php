@@ -44,11 +44,18 @@ class SampleTypeTemplate
         $this->attributes = new ArrayCollection();
     }
 
+    /**
+     * @return string
+     */
     public function getName()
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName($name)
     {
         $this->name = $name;
@@ -69,6 +76,10 @@ class SampleTypeTemplate
         return $this;
     }
 
+    /**
+     * @param SampleTypeAttribute $attribute
+     * @return $this
+     */
     public function removeAttribute(SampleTypeAttribute $attribute)
     {
         $this->getAttributes()->removeElement($attribute);
@@ -76,6 +87,9 @@ class SampleTypeTemplate
         return $this;
     }
 
+    /**
+     * @return SampleTypeAttribute[]|ArrayCollection
+     */
     public function getAttributes()
     {
         return $this->attributes;
@@ -93,5 +107,13 @@ class SampleTypeTemplate
     {
         // TODO: Check for samples that have been recorded against this template and return false if there are any.
         return true;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }
