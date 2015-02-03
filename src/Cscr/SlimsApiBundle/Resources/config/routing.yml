@@ -21,3 +21,9 @@ sample_type_templates:
     resource:       @CscrSlimsApiBundle/Controller/SampleTypeTemplatesController.php
     prefix:         sample-type-templates
     name_prefix:    api_sample_type_templates
+
+sample_instance_templates:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/SampleInstanceTemplatesController.php
+    prefix:         sample-instance-templates
+    name_prefix:    api_sample_instance_templates
