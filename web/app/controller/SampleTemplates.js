@@ -128,8 +128,12 @@ Ext.define('Slims.controller.SampleTemplates', {
         var url,
             attributes = [];
 
+        var jsonData = {
+            name: template.get('name')
+        }
+
         if (template.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('settemplate'), template.getId());
+            url = Ext.String.format(Slims.Url.getRoute('setsampletemplate'), template.getId());
 
             // remove extra fields before request
             Ext.each(template.get('attributes'), function(attribute, index) {
@@ -141,8 +145,11 @@ Ext.define('Slims.controller.SampleTemplates', {
 
                 attributes.push(attribute);
             });
+            if (attributes.length) {
+                jsonData.attributes = attributes;
+            }
         } else {
-            url = Slims.Url.getRoute('createtemplate');
+            url = Slims.Url.getRoute('createsampletemplate');
         }
 
         if (dialog) dialog.setLoading(true);
@@ -150,10 +157,7 @@ Ext.define('Slims.controller.SampleTemplates', {
         Ext.Ajax.request({
             url: url,
             method: 'POST',
-            jsonData: {
-                name: template.get('name'),
-                attributes: attributes || []
-            },
+            jsonData: jsonData,
             scope: this,
             success: function() {
                 if (dialog) {
