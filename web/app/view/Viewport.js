@@ -29,11 +29,11 @@ Ext.define('Slims.view.Viewport', {
             icon: '/resources/images/users.png'
         }, {
             xtype: 'templatespage',
-            title: 'Templates',
+            title: 'Type Templates',
             icon: '/resources/images/template.png'
         }, {
             xtype: 'sampletemplatespage',
-            title: 'Sample Templates',
+            title: 'Instance Templates',
             icon: '/resources/images/template.png'
         }]
     }]

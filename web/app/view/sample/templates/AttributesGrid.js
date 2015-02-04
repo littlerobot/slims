@@ -19,13 +19,13 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         this.store = Ext.create('Slims.store.sample.Attributes');
 
         this.columns = [{
-            text: 'Order',
+            text: '#',
             dataIndex: 'order',
-            width: 100
+            width: 40
         }, {
             text: 'Name',
             dataIndex: 'label',
-            width: 320
+            width: 220
         }, {
             text: 'Type',
             dataIndex: 'type',
