@@ -56,7 +56,7 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('editrecord', rec);
+                    this.fireEvent('editrecord', rec, this);
                 }
             }, {
                 icon: '/resources/images/delete.png',
@@ -112,6 +112,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
         this.getStore().loadData(attributes);
 
-        this.fireEvent('attributeschanged', attributes);
+        this.fireEvent('attributeschanged', attributes, this);
     }
 });

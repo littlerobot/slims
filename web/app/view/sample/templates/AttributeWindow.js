@@ -14,6 +14,7 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
     modal: true,
     attribute: null,
     usedLabels: [],
+    grid: null,
 
     initComponent: function() {
         this.setWindowTitle();
@@ -189,7 +190,7 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
         }
         this.attribute.set(attribute);
 
-        this.fireEvent('save', this.attribute, this);
+        this.fireEvent('save', this.attribute, this, this.grid);
     },
 
     showOptionsTools: function(options) {
@@ -205,10 +206,20 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
     },
 
     setWindowTitle: function() {
-        if (this.attribute == null) {
-            this.title = 'Add new attribute';
+        var type;
+        if (this.grid.name == 'storeAttributes') {
+            type = 'Store';
         } else {
-            this.title = 'Edit attribute';
+            type = 'Remove';
         }
+
+        var title;
+        if (this.attribute == null) {
+            title = 'Add new attribute to {0} list';
+        } else {
+            title = 'Edit attribute in {0} list';
+        }
+
+        this.title = Ext.String.format(title, type);
     }
 });
