@@ -10,7 +10,23 @@ class SampleInstanceTemplateType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name');
+        $builder
+            ->add('name')
+            ->add('store', 'collection', [
+                'type' => new SampleInstanceStoredAttributeType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'property_path' => 'storedAttributes',
+            ])
+            ->add('remove', 'collection', [
+                'type' => new SampleInstanceRemovedAttributeType(),
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
+                'property_path' => 'removedAttributes',
+            ])
+        ;
     }
 
     public function setDefaultOptions(OptionsResolverInterface $resolver)

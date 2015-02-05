@@ -50,7 +50,7 @@ class SampleTypeAttribute
     private $type;
 
     /**
-     * @var ArrayCollection|string[]
+     * @var array|string[]
      *
      * @ORM\Column(type="array", nullable=true)
      */
