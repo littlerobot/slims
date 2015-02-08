@@ -19,6 +19,15 @@ use JMS\Serializer\Annotation as JMS;
  */
 abstract class AbstractSampleInstanceAttribute
 {
+
+    const TYPE_BRIEF_TEXT = 'brief-text';
+    const TYPE_LONG_TEXT = 'long-text';
+    const TYPE_OPTION = 'option';
+    const TYPE_DOCUMENT = 'document';
+    const TYPE_DATE = 'date';
+    const TYPE_COLOUR = 'colour';
+    const TYPE_USER = 'user';
+
     /**
      * @var integer
      *
@@ -171,5 +180,31 @@ abstract class AbstractSampleInstanceAttribute
     {
         $this->parent = $parent;
         return $this;
+    }
+
+    /**
+     * Does this attribute type allow options to be specified?
+     *
+     * @return bool true if it does, false if it does not.
+     */
+    public function allowsOptionsToBeSpecified()
+    {
+        return self::TYPE_OPTION === $this->getType();
+    }
+
+    /**
+     * @return array All valid type options.
+     */
+    public static function getValidChoices()
+    {
+        return [
+            self::TYPE_BRIEF_TEXT,
+            self::TYPE_COLOUR,
+            self::TYPE_DATE,
+            self::TYPE_DOCUMENT,
+            self::TYPE_LONG_TEXT,
+            self::TYPE_OPTION,
+            self::TYPE_USER,
+        ];
     }
 }
