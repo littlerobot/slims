@@ -28,6 +28,17 @@ class SampleTypeTemplatesController extends FOSRestController
     }
 
     /**
+     * @Rest\Route("/{id}")
+     * @Rest\View
+     * @param SampleTypeTemplate $template
+     * @return SampleTypeTemplateResponse
+     */
+    public function getSampleTypeTemplateAction(SampleTypeTemplate $template)
+    {
+        return new SampleTypeTemplateResponse($template);
+    }
+
+    /**
      * @Rest\Post("")
      *
      * @param Request $request
