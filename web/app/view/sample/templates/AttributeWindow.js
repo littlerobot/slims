@@ -181,13 +181,15 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
                 Slims.app.getMainController().error('Validation error.', 'Add at least one option in the table, or select a different type.');
                 return;
             }
-            for (var i  in storeItems) options.push(storeItems[i].get('name'))
+            for (var i in storeItems) options.push(storeItems[i].get('name'))
 
             attribute.options = options;
         }
+
         if (!this.attribute) {
             this.attribute = Ext.create('Slims.model.sample.Attribute', attribute);
         }
+
         this.attribute.set(attribute);
 
         this.fireEvent('save', this.attribute, this, this.grid);

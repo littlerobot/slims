@@ -13,8 +13,5 @@ Ext.define('Slims.model.sample.Attribute', {
     	name: 'options',
     	type: 'auto',
         useNull: true
-    }, {
-        name: 'display',
-        type: 'int'
     }]
 });

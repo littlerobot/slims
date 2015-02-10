@@ -52,7 +52,7 @@ Ext.define('Slims.controller.SampleTemplates', {
             }
         });
 
-        this.createAttributeTypesStore();
+        // this.createAttributeTypesStore();
     },
 
     setRestoreSelectionListener: function() {
@@ -61,11 +61,11 @@ Ext.define('Slims.controller.SampleTemplates', {
         }, this)
     },
 
-    createAttributeTypesStore: function() {
-        Ext.create('Slims.store.sample.AttributeTypes', {
-            storeId: 'attributeTypes'
-        });
-    },
+    // createAttributeTypesStore: function() {
+    //     Ext.create('Slims.store.sample.AttributeTypes', {
+    //         storeId: 'attributeTypes'
+    //     });
+    // },
 
     onTemplateSelect: function(selModel, template) {
         this.loadTemplateAttributes(template);
@@ -79,24 +79,13 @@ Ext.define('Slims.controller.SampleTemplates', {
         this.getRemoveAttributesGrid().down('actioncolumn').setVisible(template.get('editable'));
         this.getStoreAttributesGrid().down('actioncolumn').setVisible(template.get('editable'));
 
-        this.loadAttributes(template.get('attributes'));
+        this.loadAttributes(template);
     },
 
-    loadAttributes: function(attributes) {
-        var removeAttributes = [],
-            storeAttributes = [];
+    loadAttributes: function(template) {
+        var removeAttributes = template.get('removed') || [],
+            storeAttributes = template.get('stored') || [];
 
-        Ext.each(attributes, function(attr) {
-            var display = attr.display;
-            if (display == 0) {
-                removeAttributes.push(attr);
-            } else if (display == 1) {
-                storeAttributes.push(attr);
-            } else if (display == 2) {
-                removeAttributes.push(attr);
-                storeAttributes.push(attr);
-            }
-        }, this);
         this.getRemoveAttributesGrid().getStore().loadData(removeAttributes);
         this.getStoreAttributesGrid().getStore().loadData(storeAttributes);
     },
@@ -118,7 +107,6 @@ Ext.define('Slims.controller.SampleTemplates', {
     openAddAttributeWindow: function(button) {
         var grid = button.up('grid');
 
-        // проверять какая таблица и передавать диалогу
         var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
             grid: grid,
             usedLabels: this.getUsedAttrLabels(grid)
@@ -131,27 +119,41 @@ Ext.define('Slims.controller.SampleTemplates', {
         var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
             attribute: attribute,
             grid: grid,
-            usedLabels: this.getUsedAttrLabels(grid)
+            usedLabels: this.getUsedAttrLabels()
         });
 
         window.show();
     },
 
-    getUsedAttrLabels: function(grid) {
+    getUsedAttrLabels: function() {
         var labels = [],
-        attributes = grid.getStore().data.items;
+        storeAttributes = this.getStoreAttributesGrid().getStore().data.items,
+        removeAttributes = this.getRemoveAttributesGrid().getStore().data.items;
 
-        for (var i in attributes) labels.push(attributes[i].get('label'));
+        for (var i in storeAttributes ) labels.push(storeAttributes [i].get('label'));
+        for (var i in removeAttributes) labels.push(removeAttributes[i].get('label'));
 
         return labels;
     },
 
-    commitAttributes: function(attributes, grid) {
-        grid.setLoading(true);
+    commitAttributes: function() {
+        // сделать маску на всю страницу
+        // grid.getTab.setLoadig(true);
         this.getTemplatesGrid().setLoading(true);
 
+        var storeAttributes = this.getStoreAttributesGrid().getStore().data.items,
+            removeAttributes = this.getRemoveAttributesGrid().getStore().data.items,
+            attributes = {
+                store: [],
+                remove: []
+            };
+
+        for (var i in storeAttributes ) attributes.store .push(storeAttributes [i].data);
+        for (var i in removeAttributes) attributes.remove.push(removeAttributes[i].data);
+
         var template = this.getTemplatesGrid().selModel.selected.get(0);
-        template.set('attributes', attributes);
+        template.set('store', attributes.store);
+        template.set('remove', attributes.remove);
 
         this.saveTemplate(template);
     },
@@ -167,19 +169,19 @@ Ext.define('Slims.controller.SampleTemplates', {
         if (template.getId()) {
             url = Ext.String.format(Slims.Url.getRoute('setsampletemplate'), template.getId());
 
-            // remove extra fields before request
-            Ext.each(template.get('attributes'), function(attribute, index) {
-                attribute.order = index + 1;
-                if (attribute.type != 'option')
-                    delete attribute.options;
+            var prepareAttributeParams = function(attributes) {
+                Ext.each(attributes, function(attribute, index) {
+                    attribute.order = index + 1;
+                    if (attribute.type != 'option')
+                        delete attribute.options;
 
-                delete attribute.id;
+                    delete attribute.id;
+                });
+                return attributes;
+            };
 
-                attributes.push(attribute);
-            });
-            if (attributes.length) {
-                jsonData.attributes = attributes;
-            }
+            jsonData.store  = prepareAttributeParams(template.get('store') );
+            jsonData.remove = prepareAttributeParams(template.get('remove'));
         } else {
             url = Slims.Url.getRoute('createsampletemplate');
         }
@@ -196,14 +198,14 @@ Ext.define('Slims.controller.SampleTemplates', {
                     dialog.setLoading(false);
                     dialog.close();
                 }
-                this.getAttributesGrid().setLoading(false);
+                // this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
                 this.reloadGrids();
             },
             failure: function() {
                 if (dialog) dialog.setLoading(false);
-                this.getAttributesGrid().setLoading(false);
+                // this.getAttributesGrid().setLoading(false);
                 this.getTemplatesGrid().setLoading(false);
 
                 this.reloadGrids();

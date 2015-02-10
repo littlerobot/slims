@@ -2,6 +2,8 @@ Ext.define('Slims.view.users.Grid', {
     extend: 'Ext.grid.Panel',
     xtype: 'usersgrid',
 
+    border: true,
+
     requires: ['Ext.grid.column.Action'],
 
     initComponent: function() {

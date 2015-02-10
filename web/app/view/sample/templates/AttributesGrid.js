@@ -9,12 +9,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
     style: 'border-top: 1px solid #157fcc !important;',
 
-    DISPLAY_STATUSES: [
-        'On Store',
-        'On Remove',
-        'On Store & Remove'
-    ],
-
     initComponent: function() {
         this.store = Ext.create('Slims.store.sample.Attributes');
 
@@ -37,14 +31,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
             text: 'Details',
             dataIndex: 'options',
             flex: 1
-        }, {
-            text: 'Display',
-            dataIndex: 'display',
-            hidden: true,
-            width: 100,
-            renderer: function(displayStatusCode) {
-                return this.DISPLAY_STATUSES[displayStatusCode];
-            }
         }, {
             xtype: 'actioncolumn',
             width: 50,
