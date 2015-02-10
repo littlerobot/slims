@@ -37,7 +37,7 @@ class SampleInstanceTemplate
      *  cascade={"PERSIST"}
      * )
      *
-     * @JMS\SerializedName("stored")
+     * @JMS\SerializedName("store")
      */
     private $storedAttributes;
 
@@ -50,7 +50,7 @@ class SampleInstanceTemplate
      *  cascade={"PERSIST"}
      * )
      *
-     * @JMS\SerializedName("removed")
+     * @JMS\SerializedName("remove")
      */
     private $removedAttributes;
 
