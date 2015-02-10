@@ -83,8 +83,8 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     loadAttributes: function(template) {
-        var removeAttributes = template.get('removed') || [],
-            storeAttributes = template.get('stored') || [];
+        var removeAttributes = template.get('remove') || [],
+            storeAttributes = template.get('store') || [];
 
         this.getRemoveAttributesGrid().getStore().loadData(removeAttributes);
         this.getStoreAttributesGrid().getStore().loadData(storeAttributes);

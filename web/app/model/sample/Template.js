@@ -7,11 +7,11 @@ Ext.define('Slims.model.sample.Template', {
     }, {
         name: 'name'
     }, {
-        name: 'stored',
+        name: 'store',
         type: 'auto',
         useNull: true
     }, {
-        name: 'removed',
+        name: 'remove',
         type: 'auto',
         useNull: true
     }, {
