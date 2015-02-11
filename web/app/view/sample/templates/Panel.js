@@ -34,34 +34,17 @@ Ext.define('Slims.view.sample.templates.Panel', {
                     xtype: 'panel',
                     bodyStyle: 'padding: 5px',
                     border: true,
-                    width: 52,
+                    // width: 52,
+                    width: 25,
                     height: '100%',
-                    layout: 'vbox',
+                    layout: {
+                        align: 'center',
+                        pack: 'middle'
+                    },
                     items: [{
-                        xtype: 'button',
-                        icon: '/resources/images/copy_attr.png',
-                        iconAlign: 'center',
-                        scale: 'large',
-                        tooltip: 'Copy attribute in both lists',
-                        iconCls: 'button-icon-aligncenter',
-                        width: 40
-                    }, {
-                        xtype: 'button',
-                        icon: '/resources/images/put_right.png',
-                        iconAlign: 'center',
-                        scale: 'large',
-                        tooltip: 'Move attribute to Remove list',
-                        style: 'margin-top: 10px; margin-bottom: 10px;',
-                        iconCls: 'button-icon-aligncenter',
-                        width: 40
-                    }, {
-                        xtype: 'button',
-                        icon: '/resources/images/put_left.png',
-                        iconAlign: 'center',
-                        scale: 'large',
-                        tooltip: 'Move attribute to Store list',
-                        iconCls: 'button-icon-aligncenter',
-                        width: 40
+                        xtype: 'text',
+                        text: "Use drag'n'drop for ordering or moving attributes via grids.",
+                        degrees: 90
                     }]
                 }, {
                     xtype: 'sampleattributesgrid',
