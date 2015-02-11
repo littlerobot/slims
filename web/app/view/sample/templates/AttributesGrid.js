@@ -65,17 +65,19 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         this.viewConfig = this.viewConfig || {};
 
         this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
-            dragText: 'Drop on a new place to change order'
+            dragText: 'Just drop in a new place'
         });
 
-        this.viewConfig.plugins = this.ddPlugin;
-        this.viewConfig.listeners = {
-            scope: this,
-            drop: function() {
-                this.updateAttributesOrder(this.getStore().data);
+        this.viewConfig = {
+            plugins: this.ddPlugin,
+            allowCopy: true,
+            listeners: {
+                scope: this,
+                drop: function() {
+                    this.updateAttributesOrder(this.getStore().data);
+                }
             }
         };
-
 
         this.callParent();
 

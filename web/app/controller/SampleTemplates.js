@@ -140,7 +140,7 @@ Ext.define('Slims.controller.SampleTemplates', {
 
         var template = this.getTemplatesGrid().selModel.selected.get(0);
 
-        template.set('store', storeAttributes);
+        template.set('store',  storeAttributes);
         template.set('remove', removeAttributes);
 
         this.saveTemplate(template);
@@ -205,15 +205,6 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     reloadGrids: function() {
-        // var selectedTemplate = this.getTemplatesGrid().selModel.selected.get(0),
-        //     selectedAttribute = this.getAttributesGrid().selModel.selected.get(0);
-        //     loadCallback = Ext.bind(function() {
-        //         if (selectedTemplate)
-        //             this.loadTemplateAttributes(selectedTemplate, selectedAttribute);
-        //     }, this);
-
-        // this.getTemplatesGrid().getStore().load(loadCallback);
-
         this.getTemplatesGrid().getStore().load();
     },
 
