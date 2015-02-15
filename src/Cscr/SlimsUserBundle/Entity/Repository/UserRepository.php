@@ -65,15 +65,15 @@ class UserRepository extends EntityRepository implements UserProviderInterface
     {
         $q = $this
             ->createQueryBuilder('u')
-            ->orderBy('u.username')
+            ->orderBy('u.name')
             ->getQuery();
 
         try {
-            $groups = $q->getResult();
+            $users = $q->getResult();
         } catch (NoResultException $e) {
-            return;
+            return null;
         }
 
-        return $groups;
+        return $users;
     }
 }

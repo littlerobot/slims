@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Table(name="sample_type_attribute")
  * @ORM\Entity()
+ * @ORM\EntityListeners({"Cscr\SlimsApiBundle\EventListener\SampleTypeAttributeListener"})
  */
 class SampleTypeAttribute
 {
