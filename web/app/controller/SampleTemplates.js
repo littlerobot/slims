@@ -67,7 +67,7 @@ Ext.define('Slims.controller.SampleTemplates', {
         this.loadTemplateAttributes(template);
     },
 
-    loadTemplateAttributes: function(template, attribute) {
+    loadTemplateAttributes: function(template) {
         this.getRemoveAttributesGrid().down('button[name=addAttribute]').setDisabled(false);
         this.getStoreAttributesGrid().down('button[name=addAttribute]').setDisabled(false);
 
@@ -194,6 +194,7 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     prepareAttributeParams: function(attributes) {
+        var attributes = Ext.clone(attributes);
         Ext.each(attributes, function(attribute, index) {
             attribute.order = index + 1;
             if (attribute.type != 'option')

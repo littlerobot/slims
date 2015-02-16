@@ -73,7 +73,24 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
             allowCopy: true,
             listeners: {
                 scope: this,
-                drop: function() {
+                 beforedrop: function(node, data, overModel, dropPosition, dropHandlers) {
+                    var attribute = data.records[0],
+                        label = attribute.get('label'),
+                        id = attribute.get('id');
+
+                    Ext.each(this.getStore().data.items, function(item, i) {
+                        if ((item.get('label') == label) && (item.get('id') != id)) {
+                            dropHandlers.cancelDrop();
+                            Ext.Msg.alert('Operation canceled', 'Record already have attribute with this label');
+                        }
+                    }, this);
+                },
+                drop: function(node, data) {
+                    var attribute = data.records[0];
+                    if (data.copy) {
+                        console.log(1);
+                        attribute.set('id', null);
+                    }
                     this.updateAttributesOrder(this.getStore().data);
                 }
             }
