@@ -2,14 +2,14 @@
 
 namespace Cscr\SlimsApiBundle\Validator\Constraints;
 
-use Cscr\SlimsApiBundle\Entity\SampleTypeAttribute;
+use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class OptionAllowedValidator extends ConstraintValidator
 {
     /**
-     * @param SampleTypeAttribute $object
+     * @param SampleTypeTemplateAttribute $object
      * @param Constraint $constraint
      */
     public function validate($object, Constraint $constraint)

@@ -3,35 +3,29 @@
 namespace Cscr\SlimsApiBundle\EventListener;
 
 use Cscr\SlimsApiBundle\Entity\SampleTypeAttribute;
-use Cscr\SlimsUserBundle\Entity\User;
-use Doctrine\Common\Collections\ArrayCollection;
-use Doctrine\ORM\EntityManager;
+use Cscr\SlimsApiBundle\Service\SampleTypeDocumentAttributeUrlGenerator;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 
 class SampleTypeAttributeListener
 {
     /**
-     * @var EntityManager
+     * @var SampleTypeDocumentAttributeUrlGenerator
      */
-    private $em;
+    private $generator;
 
-    public function postLoad(SampleTypeAttribute $attribute, LifecycleEventArgs $event)
+    public function __construct(SampleTypeDocumentAttributeUrlGenerator $generator)
     {
-        $this->em = $event->getEntityManager();
-
-        if ($attribute->getType() === SampleTypeAttribute::TYPE_USER) {
-            $this->loadUserOptions($attribute);
-        }
+        $this->generator = $generator;
     }
 
-    private function loadUserOptions(SampleTypeAttribute $attribute)
+    public function postLoad(LifecycleEventArgs $event)
     {
-        $users = $this->em->getRepository('CscrSlimsUserBundle:User')->findAll();
-        $users = new ArrayCollection($users);
-        $names = $users->map(function (User $user) {
-            return $user->getName();
-        });
+        $entity = $event->getEntity();
 
-        $attribute->setOptions($names->toArray());
+        if ($entity instanceof SampleTypeAttribute) {
+            if ($entity->getFilename()) {
+                $entity->setUrl($this->generator->generateUrl($entity->getId(), $entity->getFilename()));
+            }
+        }
     }
 }

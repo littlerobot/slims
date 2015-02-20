@@ -29,19 +29,27 @@ class SampleTypeTemplate
     private $name;
 
     /**
-     * @var ArrayCollection|SampleTypeAttribute[]
+     * @var ArrayCollection|SampleTypeTemplateAttribute[]
      *
      * @ORM\OneToMany(
-     *  targetEntity="SampleTypeAttribute",
+     *  targetEntity="SampleTypeTemplateAttribute",
      *  mappedBy="parent",
      *  cascade={"PERSIST"}
      * )
      */
     private $attributes;
 
+    /**
+     * @var SampleType[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SampleType", mappedBy="template")
+     */
+    private $sampleTypes;
+
     public function __construct()
     {
         $this->attributes = new ArrayCollection();
+        $this->sampleTypes = new ArrayCollection();
     }
 
     /**
@@ -63,10 +71,10 @@ class SampleTypeTemplate
     }
 
     /**
-     * @param SampleTypeAttribute $attribute
+     * @param SampleTypeTemplateAttribute $attribute
      * @return $this
      */
-    public function addAttribute(SampleTypeAttribute $attribute)
+    public function addAttribute(SampleTypeTemplateAttribute $attribute)
     {
         if (!$this->getAttributes()->contains($attribute)) {
             $this->getAttributes()->add($attribute);
@@ -77,10 +85,10 @@ class SampleTypeTemplate
     }
 
     /**
-     * @param SampleTypeAttribute $attribute
+     * @param SampleTypeTemplateAttribute $attribute
      * @return $this
      */
-    public function removeAttribute(SampleTypeAttribute $attribute)
+    public function removeAttribute(SampleTypeTemplateAttribute $attribute)
     {
         $this->getAttributes()->removeElement($attribute);
 
@@ -88,7 +96,7 @@ class SampleTypeTemplate
     }
 
     /**
-     * @return SampleTypeAttribute[]|ArrayCollection
+     * @return SampleTypeTemplateAttribute[]|ArrayCollection
      */
     public function getAttributes()
     {

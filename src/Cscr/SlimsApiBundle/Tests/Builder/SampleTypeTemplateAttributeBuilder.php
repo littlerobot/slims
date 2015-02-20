@@ -2,21 +2,21 @@
 
 namespace Cscr\SlimsApiBundle\Tests\Builder;
 
-use Cscr\SlimsApiBundle\Entity\SampleTypeAttribute;
+use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 
-class SampleTypeAttributeBuilder
+class SampleTypeTemplateAttributeBuilder
 {
     public $label = 'Attribute';
     public $order;
-    public $type = SampleTypeAttribute::TYPE_BRIEF_TEXT;
+    public $type = SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT;
     public $options;
 
     /**
-     * @return SampleTypeAttribute
+     * @return SampleTypeTemplateAttribute
      */
     public function build()
     {
-        return (new SampleTypeAttribute())
+        return (new SampleTypeTemplateAttribute())
             ->setLabel($this->label)
             ->setOrder($this->order)
             ->setType($this->type)
@@ -33,7 +33,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Brief text')
-            ->withType(SampleTypeAttribute::TYPE_BRIEF_TEXT)
+            ->withType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)
         ;
     }
 
@@ -46,7 +46,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Long text')
-            ->withType(SampleTypeAttribute::TYPE_LONG_TEXT)
+            ->withType(SampleTypeTemplateAttribute::TYPE_LONG_TEXT)
         ;
     }
 
@@ -59,7 +59,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Option')
-            ->withType(SampleTypeAttribute::TYPE_OPTION)
+            ->withType(SampleTypeTemplateAttribute::TYPE_OPTION)
             ->withOptions([
                 'First',
                 'Second',
@@ -76,7 +76,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Document')
-            ->withType(SampleTypeAttribute::TYPE_DOCUMENT)
+            ->withType(SampleTypeTemplateAttribute::TYPE_DOCUMENT)
         ;
     }
 
@@ -89,7 +89,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Date')
-            ->withType(SampleTypeAttribute::TYPE_DATE)
+            ->withType(SampleTypeTemplateAttribute::TYPE_DATE)
         ;
     }
 
@@ -102,7 +102,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('Colour')
-            ->withType(SampleTypeAttribute::TYPE_COLOUR)
+            ->withType(SampleTypeTemplateAttribute::TYPE_COLOUR)
         ;
     }
 
@@ -115,7 +115,7 @@ class SampleTypeAttributeBuilder
     {
         return (new self())
             ->withLabel('User')
-            ->withType(SampleTypeAttribute::TYPE_USER)
+            ->withType(SampleTypeTemplateAttribute::TYPE_USER)
         ;
     }
 

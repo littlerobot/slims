@@ -13,7 +13,7 @@ class SampleTypeTemplateBuilder
     public $name = 'Template';
 
     /**
-     * @var ArrayCollection|SampleTypeAttributeBuilder[]
+     * @var ArrayCollection|SampleTypeTemplateAttributeBuilder[]
      */
     public $attributes;
 
@@ -38,10 +38,10 @@ class SampleTypeTemplateBuilder
     }
 
     /**
-     * @param SampleTypeAttributeBuilder $builder
+     * @param SampleTypeTemplateAttributeBuilder $builder
      * @return $this
      */
-    public function withAttribute(SampleTypeAttributeBuilder $builder)
+    public function withAttribute(SampleTypeTemplateAttributeBuilder $builder)
     {
         $this->attributes->add($builder);
         return $this;
