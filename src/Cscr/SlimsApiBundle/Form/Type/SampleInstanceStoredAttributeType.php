@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SampleInstanceStoredAttributeType extends SampleTypeAttributeType
+class SampleInstanceStoredTemplateAttributeType extends SampleTypeTemplateAttributeType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {

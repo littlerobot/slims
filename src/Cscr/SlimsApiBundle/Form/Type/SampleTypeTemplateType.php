@@ -15,7 +15,7 @@ class SampleTypeTemplateType extends AbstractType
     {
         $builder->add('name')
             ->add('attributes', 'collection', [
-                'type' => new SampleTypeAttributeType(),
+                'type' => new SampleTypeTemplateAttributeType(),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,

@@ -87,7 +87,7 @@
         </property>
     </class>
 
-    <class name="Cscr\SlimsApiBundle\Entity\SampleTypeAttribute">
+    <class name="Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute">
         <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed" />
         <property name="order">
             <constraint name="NotBlank">
@@ -153,7 +153,7 @@
             <constraint name="All">
                 <option name="constraints">
                     <constraint name="Type">
-                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleTypeAttribute</option>
+                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute</option>
                         <option name="message">The attributes must all be valid</option>
                     </constraint>
                 </option>
