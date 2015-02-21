@@ -11,6 +11,9 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
     initComponent: function() {
         this.store = Ext.create('Slims.store.sample.Attributes');
+        this.selModel = {
+            mode: 'SINGLE'
+        };
 
         this.columns = [{
             text: '#',
@@ -70,11 +73,11 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
         this.viewConfig = {
             plugins: this.ddPlugin,
-            allowCopy: true,
+            // allowCopy: true,
             listeners: {
                 scope: this,
                  beforedrop: function(node, data, overModel, dropPosition, dropHandlers) {
-                    var attribute = data.records[0],
+                        var attribute = data.records[data.records.length-1],
                         label = attribute.get('label'),
                         id = attribute.get('id');
 
@@ -82,16 +85,17 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
                         if ((item.get('label') == label) && (item.get('id') != id)) {
                             dropHandlers.cancelDrop();
                             Ext.Msg.alert('Operation canceled', 'Record already have attribute with this label');
+                            data.records = [attribute];
                         }
                     }, this);
                 },
                 drop: function(node, data) {
-                    var attribute = data.records[0];
+                    var attribute = data.records[data.records.length-1];
                     if (data.copy) {
-                        console.log(1);
                         attribute.set('id', null);
                     }
                     this.updateAttributesOrder(this.getStore().data);
+                    data.records = [attribute];
                 }
             }
         };
