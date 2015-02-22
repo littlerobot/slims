@@ -7,6 +7,7 @@ use Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate;
 use Cscr\SlimsApiBundle\Form\Type\SampleInstanceTemplateType;
 use Cscr\SlimsApiBundle\Response\SampleInstanceTemplateCollectionResponse;
 use Cscr\SlimsApiBundle\Response\SampleInstanceTemplateResponse;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -58,8 +59,8 @@ class SampleInstanceTemplatesController extends FOSRestController
         }
 
         // Record original attributes so we can remove any that have been deleted
-        $originalAttributes = $template->getStoredAttributes()->toArray() +
-                              $template->getRemovedAttributes()->toArray();
+        $originalStoredAttributes = $template->getStoredAttributes()->toArray();
+        $originalRemovedAttributes = $template->getRemovedAttributes()->toArray();
 
         $manager = $this->getDoctrine()->getManager();
 
@@ -67,7 +68,8 @@ class SampleInstanceTemplatesController extends FOSRestController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->removeDeletedAttributes($originalAttributes, $template, $manager);
+            $this->removeDeletedAttributes($originalStoredAttributes, $template->getStoredAttributes()->toArray(), $manager);
+            $this->removeDeletedAttributes($originalRemovedAttributes, $template->getRemovedAttributes()->toArray(), $manager);
 
             $manager->persist($template);
             $manager->flush();
@@ -110,19 +112,18 @@ class SampleInstanceTemplatesController extends FOSRestController
      * associated with the {@see SampleInstanceTemplate}.
      *
      * @param array|AbstractSampleInstanceAttribute[] $originalAttributes
-     * @param SampleInstanceTemplate $template
+     * @param array|AbstractSampleInstanceAttribute[] $newAttributes
      * @param ObjectManager $manager
      */
     private function removeDeletedAttributes(
         array $originalAttributes,
-        SampleInstanceTemplate $template,
+        array $newAttributes,
         ObjectManager $manager
     ) {
+        // Create an ArrayCollection so we can check the contents more easily.
+        $newAttributes = new ArrayCollection($newAttributes);
         foreach ($originalAttributes as $attribute) {
-            if (
-                false === $template->getStoredAttributes()->contains($attribute) &&
-                false === $template->getRemovedAttributes()->contains($attribute)
-            ) {
+            if (false === $newAttributes->contains($attribute)) {
                 $manager->remove($attribute);
             }
         }
