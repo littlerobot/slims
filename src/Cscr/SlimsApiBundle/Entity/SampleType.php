@@ -41,7 +41,11 @@ class SampleType
     /**
      * @var SampleTypeAttribute[]|ArrayCollection
      *
-     * @ORM\OneToMany(targetEntity="SampleTypeAttribute", mappedBy="parent")
+     * @ORM\OneToMany(
+     *  targetEntity="SampleTypeAttribute",
+     *  mappedBy="parent",
+     *  cascade={"PERSIST"}
+     * )
      */
     private $attributes;
 
@@ -96,5 +100,28 @@ class SampleType
     public function getSampleTypeTemplateId()
     {
         return $this->template->getId();
+    }
+
+    /**
+     * @return SampleTypeAttribute[]|ArrayCollection
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param SampleTypeAttribute[]|ArrayCollection $attributes
+     * @return SampleType
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+
+        foreach ($this->attributes as $attribute) {
+            $attribute->setParent($this);
+        }
+
+        return $this;
     }
 }
