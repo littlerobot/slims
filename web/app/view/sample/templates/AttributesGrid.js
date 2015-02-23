@@ -77,15 +77,25 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
             listeners: {
                 scope: this,
                  beforedrop: function(node, data, overModel, dropPosition, dropHandlers) {
-                        var attribute = data.records[data.records.length-1],
-                        label = attribute.get('label'),
-                        id = attribute.get('id');
+                    var attribute = data.records[data.records.length-1],
+                    label = attribute.get('label'),
+                    id = attribute.get('id');
 
+                    var abort = function() {
+                        dropHandlers.cancelDrop();
+                        Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
+                    }
                     Ext.each(this.getStore().data.items, function(item, i) {
-                        if ((item.get('label') == label) && ((item.get('id') != id) || (item.get('id') == undefined && id == undefined))) {
-                            dropHandlers.cancelDrop();
-                            Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
-                            return;
+                        if (item.get('label') == label) {
+                            if (data.view.id == this.view.id) {
+                                if (data.copy) {
+                                    abort();
+                                    return;
+                                }
+                            } else {
+                                abort();
+                                return;
+                            }
                         }
                     }, this);
                 },
@@ -110,7 +120,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         Ext.each(data.items, function(r, index) {
             var attribute = r.data;
             attribute.order = index + 1;
-            delete attribute.id;
             attributes.push(attribute);
         });
 
