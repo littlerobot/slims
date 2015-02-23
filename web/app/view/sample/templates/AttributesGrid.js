@@ -73,7 +73,7 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
         this.viewConfig = {
             plugins: this.ddPlugin,
-            // allowCopy: true,
+            allowCopy: true,
             listeners: {
                 scope: this,
                  beforedrop: function(node, data, overModel, dropPosition, dropHandlers) {
@@ -82,20 +82,15 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
                         id = attribute.get('id');
 
                     Ext.each(this.getStore().data.items, function(item, i) {
-                        if ((item.get('label') == label) && (item.get('id') != id)) {
+                        if ((item.get('label') == label) && ((item.get('id') != id) || (item.get('id') == undefined && id == undefined))) {
                             dropHandlers.cancelDrop();
-                            Ext.Msg.alert('Operation canceled', 'Record already have attribute with this label');
-                            data.records = [attribute];
+                            Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
+                            return;
                         }
                     }, this);
                 },
                 drop: function(node, data) {
-                    var attribute = data.records[data.records.length-1];
-                    if (data.copy) {
-                        attribute.set('id', null);
-                    }
                     this.updateAttributesOrder(this.getStore().data);
-                    data.records = [attribute];
                 }
             }
         };
@@ -115,7 +110,7 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         Ext.each(data.items, function(r, index) {
             var attribute = r.data;
             attribute.order = index + 1;
-
+            delete attribute.id;
             attributes.push(attribute);
         });
 
