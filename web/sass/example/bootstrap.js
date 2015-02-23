@@ -2420,6 +2420,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
+  "Slims.controller.SampleTypes": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -2452,6 +2453,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.templates.Panel": [],
   "Slims.view.sample.templates.TemplateWindow": [],
   "Slims.view.sample.templates.TemplatesGrid": [],
+  "Slims.view.sample.types.Panel": [],
   "Slims.view.templates.AttributeWindow": [],
   "Slims.view.templates.AttributesGrid": [],
   "Slims.view.templates.Panel": [],
@@ -3467,6 +3469,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
+  "Slims.controller.SampleTypes": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -3516,6 +3519,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.templates.TemplatesGrid": [
     "widget.sampletemplatesgrid"
+  ],
+  "Slims.view.sample.types.Panel": [
+    "widget.sampletypespage"
   ],
   "Slims.view.templates.AttributeWindow": [
     "widget.attributewindow"

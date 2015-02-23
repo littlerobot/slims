@@ -33,6 +33,10 @@ Ext.define('Slims.view.Viewport', {
             xtype: 'sampletemplatespage',
             title: 'Instance Templates',
             icon: '/resources/images/template.png'
+        }, {
+            xtype: 'sampletypespage',
+            title: 'Sample Types',
+            icon: '/resources/images/template.png'
         }]
     }]
 });
