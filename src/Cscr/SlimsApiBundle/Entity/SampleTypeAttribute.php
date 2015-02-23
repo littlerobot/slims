@@ -201,4 +201,16 @@ class SampleTypeAttribute
 
         return $this;
     }
+
+    /**
+     * Get the label text, determined by the label of the assocaited {@see SampleTypeTemplate}.
+     *
+     * @return string
+     *
+     * @JMS\VirtualProperty()
+     */
+    public function getLabel()
+    {
+        return $this->template->getLabel();
+    }
 }
