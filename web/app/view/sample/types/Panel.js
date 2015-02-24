@@ -5,16 +5,22 @@ Ext.define('Slims.view.sample.types.Panel', {
     layout: 'fit',
     border: true,
 
+    requires: ['Ext.draw.Text'],
+
     initComponent: function() {
         this.items = [{
             xtype: 'panel',
-            layout: 'vbox',
+            layout: 'hbox',
             items: [{
                 xtype: 'panel',
                 html: '<center style="padding: 30px;"><h2>Here will be Sample Types grid</h2></center>',
-                border: true,
-                width: '100%',
+                height: '100%',
                 flex: 1
+            }, {
+                xtype: 'panel',
+                html: '<center style="padding: 30px;"><h2>Here will be Sample Type form</h2></center>',
+                height: '100%',
+                flex: 2
             }]
         }];
 
