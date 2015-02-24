@@ -2,11 +2,12 @@ Ext.define('Slims.controller.SampleTypes', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'sample.types.Panel'
+        'sample.types.Panel',
+        'sample.types.Grid'
     ],
 
-    stores: [],
-    models: [],
+    stores: ['sample.Types'],
+    models: ['sample.Type'],
 
     refs: [],
 

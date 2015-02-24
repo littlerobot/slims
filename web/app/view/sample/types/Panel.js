@@ -5,14 +5,17 @@ Ext.define('Slims.view.sample.types.Panel', {
     layout: 'fit',
     border: true,
 
-    requires: ['Ext.draw.Text'],
+    requires: [
+        'Ext.draw.Text',
+        'Slims.view.sample.types.Grid'
+    ],
 
     initComponent: function() {
         this.items = [{
             xtype: 'panel',
             layout: 'hbox',
             items: [{
-                xtype: 'panel',
+                xtype: 'sampletypesgrid',
                 html: '<center style="padding: 30px;"><h2>Here will be Sample Types grid</h2></center>',
                 height: '100%',
                 flex: 1

@@ -45,6 +45,9 @@ Ext.define('Slims.router.Api', {
                 return routePrefix + '/sample-instance-templates/{0}';
             case 'getsampletemplates':
                 return routePrefix + '/sample-instance-templates';
+            // sample types
+            case 'getsampletypes':
+                return routePrefix + '/sample-types';
 
             default:
                 return routePrefix + '/' + routeName;
@@ -91,6 +94,9 @@ Ext.define('Slims.router.Api', {
                 return devController + routePrefix + '/sample-instance-templates/{0}';
             case 'getsampletemplates':
                 return devController + routePrefix + '/sample-instance-templates';
+            // sample types
+            case 'getsampletypes':
+                return devController + routePrefix + '/sample-types';
 
             default:
                 return devController + routePrefix + '/' + routeName;
