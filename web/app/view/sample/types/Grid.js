@@ -5,12 +5,27 @@ Ext.define('Slims.view.sample.types.Grid', {
     requires: ['Ext.grid.plugin.RowExpander'],
     border: true,
 
+    plugins: [{
+        ptype: 'rowexpander',
+        rowBodyTpl: [
+            '<p><b>Name:</b> {name}</p>'
+        ]
+    }],
+
     initComponent: function() {
         this.store = Ext.create('Slims.store.sample.Types');
 
         this.columns = [{
+            text: 'ID',
+            dataIndex: 'id',
+            width: 100
+        }, {
             text: 'Name',
             dataIndex: 'name',
+            flex: 1
+        }, {
+            text: 'Attributes',
+            dataIndex: 'attributes',
             flex: 1
         }];
 
@@ -22,14 +37,6 @@ Ext.define('Slims.view.sample.types.Grid', {
             width: 25,
             icon: '/resources/images/reload.png',
             name: 'reloadGrid'
-        }];
-
-        this.plugins = [{
-            ptype: 'rowexpander',
-            rowBodyTpl: [
-                '<p><b>Company:</b> {name}</p><br>',
-                '<p><b>Summary:</b> {name}</p>'
-            ]
         }];
 
         this.callParent();

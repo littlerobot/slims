@@ -4,8 +4,15 @@ Ext.define('Slims.store.sample.Types', {
     model: 'Slims.model.sample.Type',
 
     proxy: {
-        type: 'ajax',
-        url: Slims.Url.getRoute('getsampletypes'),
+        type: 'memory',
+        data: [{
+            id: 2, name: 'Hello', attributes: '1, 23,,4,4,34'
+        },{
+            id: 22, name: 'Hello dertre', attributes: '1, 23,,4,4,34'
+        },{
+            id: 221, name: 'Hello et4r3444', attributes: '1, 23,,4,4,34'
+        }],
+        // url: Slims.Url.getRoute('getsampletypes'),
         reader: {
             type: 'json',
             root: 'sample_types'
