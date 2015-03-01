@@ -2,8 +2,9 @@ Ext.define('Slims.view.groups.Grid', {
     extend: 'Ext.grid.Panel',
     xtype: 'groupsgrid',
 
-    requires: ['Ext.grid.column.Action'],
+    border: true,
 
+    requires: ['Ext.grid.column.Action'],
 
     initComponent: function() {
         this.store = Ext.StoreMgr.get('researchGroups');

@@ -2,15 +2,24 @@
 
 namespace Cscr\SlimsApiBundle\Entity;
 
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use JMS\Serializer\Annotation as JMS;
 
 /**
- * @ORM\Table(name="sample_type_attribute")
+ *
+ * @ORM\Table("sample_instance_attribute")
  * @ORM\Entity()
+ * @ORM\InheritanceType("SINGLE_TABLE")
+ * @ORM\DiscriminatorColumn(name="activity", type="string")
+ * @ORM\DiscriminatorMap({"remove"="SampleInstanceRemovedAttribute", "store"="SampleInstanceStoredAttribute"})
+ * @JMS\Discriminator(field="activity", map={
+ *  "remove": "Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute",
+ *  "store": "Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute"
+ * })
  */
-class SampleTypeAttribute
+abstract class AbstractSampleInstanceAttribute
 {
+
     const TYPE_BRIEF_TEXT = 'brief-text';
     const TYPE_LONG_TEXT = 'long-text';
     const TYPE_OPTION = 'option';
@@ -22,56 +31,67 @@ class SampleTypeAttribute
     /**
      * @var integer
      *
-     * @ORM\Id()
+     * @ORM\Column(name="id", type="integer")
+     * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(type="integer")
+     *
      */
-    private $id;
+    protected $id;
 
     /**
      * @var integer
      *
      * @ORM\Column(name="sequence", type="smallint")
      */
-    private $order;
+    protected $order;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $label;
+    protected $label;
 
     /**
      * @var string
      *
      * @ORM\Column(type="string", length=255)
      */
-    private $type;
+    protected $type;
 
     /**
      * @var array|string[]
      *
      * @ORM\Column(type="array", nullable=true)
      */
-    private $options;
+    protected $options;
 
     /**
-     * @var SampleTypeTemplate
-     *
-     * @ORM\ManyToOne(targetEntity="SampleTypeTemplate", inversedBy="attributes")
+     * @var SampleInstanceTemplate
      */
-    private $parent;
+    protected $parent;
 
-    public function setParent(SampleTypeTemplate $parent)
+    /**
+     * Get id
+     *
+     * @return integer
+     */
+    public function getId()
     {
-        $this->parent = $parent;
-        return $this;
+        return $this->id;
+    }
+
+    /**
+     * @return int
+     */
+    public function getOrder()
+    {
+        return $this->order;
     }
 
     /**
      * @param int $order
-     * @return SampleTypeAttribute
+     * @return SampleInstanceRemovedAttribute
      */
     public function setOrder($order)
     {
@@ -80,8 +100,16 @@ class SampleTypeAttribute
     }
 
     /**
+     * @return string
+     */
+    public function getLabel()
+    {
+        return $this->label;
+    }
+
+    /**
      * @param string $label
-     * @return SampleTypeAttribute
+     * @return SampleInstanceRemovedAttribute
      */
     public function setLabel($label)
     {
@@ -90,19 +118,29 @@ class SampleTypeAttribute
     }
 
     /**
+     * @return string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
      * @param string $type
-     * @return SampleTypeAttribute
+     * @return SampleInstanceRemovedAttribute
      */
     public function setType($type)
     {
         $this->type = $type;
-
-        // Remove any existing options if we're changing from an option type.
-        if (self::TYPE_OPTION !== $this->getType()) {
-            $this->setOptions(null);
-        }
-
         return $this;
+    }
+
+    /**
+     * @return array|\string[]
+     */
+    public function getOptions()
+    {
+        return $this->options;
     }
 
     /**
@@ -127,43 +165,21 @@ class SampleTypeAttribute
     }
 
     /**
-     * @return int
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * @return string
-     */
-    public function getLabel()
-    {
-        return $this->label;
-    }
-
-    /**
-     * @return string
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * @return ArrayCollection|\string[]
-     */
-    public function getOptions()
-    {
-        return $this->options;
-    }
-
-    /**
-     * @return SampleTypeTemplate
+     * @return SampleInstanceTemplate
      */
     public function getParent()
     {
         return $this->parent;
+    }
+
+    /**
+     * @param SampleInstanceTemplate $parent
+     * @return SampleInstanceRemovedAttribute
+     */
+    public function setParent(SampleInstanceTemplate $parent)
+    {
+        $this->parent = $parent;
+        return $this;
     }
 
     /**

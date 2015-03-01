@@ -9,23 +9,20 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
 
     style: 'border-top: 1px solid #157fcc !important;',
 
-    DISPLAY_STATUSES: [
-        'On Store',
-        'On Remove',
-        'On Store & Remove'
-    ],
-
     initComponent: function() {
         this.store = Ext.create('Slims.store.sample.Attributes');
+        this.selModel = {
+            mode: 'SINGLE'
+        };
 
         this.columns = [{
-            text: 'Order',
+            text: '#',
             dataIndex: 'order',
-            width: 100
+            width: 40
         }, {
             text: 'Name',
             dataIndex: 'label',
-            width: 320
+            width: 220
         }, {
             text: 'Type',
             dataIndex: 'type',
@@ -38,14 +35,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
             dataIndex: 'options',
             flex: 1
         }, {
-            text: 'Display',
-            dataIndex: 'display',
-            hidden: true,
-            width: 100,
-            renderer: function(displayStatusCode) {
-                return this.DISPLAY_STATUSES[displayStatusCode];
-            }
-        }, {
             xtype: 'actioncolumn',
             width: 50,
             menuDisabled: true,
@@ -56,7 +45,7 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {
                     var rec = grid.getStore().getAt(rowIndex);
-                    this.fireEvent('editrecord', rec);
+                    this.fireEvent('editrecord', rec, this);
                 }
             }, {
                 icon: '/resources/images/delete.png',
@@ -79,17 +68,42 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         this.viewConfig = this.viewConfig || {};
 
         this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
-            dragText: 'Drop on a new place to change order'
+            dragText: 'Just drop in a new place'
         });
 
-        this.viewConfig.plugins = this.ddPlugin;
-        this.viewConfig.listeners = {
-            scope: this,
-            drop: function() {
-                this.updateAttributesOrder(this.getStore().data);
+        this.viewConfig = {
+            plugins: this.ddPlugin,
+            allowCopy: true,
+            listeners: {
+                scope: this,
+                 beforedrop: function(node, data, overModel, dropPosition, dropHandlers) {
+                    var attribute = data.records[data.records.length-1],
+                    label = attribute.get('label'),
+                    id = attribute.get('id');
+
+                    var abort = function() {
+                        dropHandlers.cancelDrop();
+                        Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
+                    }
+                    Ext.each(this.getStore().data.items, function(item, i) {
+                        if (item.get('label') == label) {
+                            if (data.view.id == this.view.id) {
+                                if (data.copy) {
+                                    abort();
+                                    return;
+                                }
+                            } else {
+                                abort();
+                                return;
+                            }
+                        }
+                    }, this);
+                },
+                drop: function(node, data) {
+                    this.updateAttributesOrder(this.getStore().data);
+                }
             }
         };
-
 
         this.callParent();
 
@@ -106,12 +120,11 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         Ext.each(data.items, function(r, index) {
             var attribute = r.data;
             attribute.order = index + 1;
-
             attributes.push(attribute);
         });
 
         this.getStore().loadData(attributes);
 
-        this.fireEvent('attributeschanged', attributes);
+        this.fireEvent('attributeschanged', attributes, this);
     }
 });

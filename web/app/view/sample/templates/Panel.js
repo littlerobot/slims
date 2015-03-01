@@ -26,36 +26,30 @@ Ext.define('Slims.view.sample.templates.Panel', {
                 flex: 1,
                 items: [{
                     xtype: 'sampleattributesgrid',
-                    title: 'On store Attributes',
+                    name: 'storeAttributes',
+                    title: 'Store Attributes',
                     flex: 1,
                     height: '100%'
                 }, {
                     xtype: 'panel',
                     bodyStyle: 'padding: 5px',
                     border: true,
-                    width: 55,
+                    // width: 52,
+                    width: 25,
                     height: '100%',
                     layout: {
-                        type: 'vbox',
-                        pack: 'center'
+                        align: 'center',
+                        pack: 'middle'
                     },
                     items: [{
-                        xtype: 'button',
-                        text: '>>',
-                        width: 40
-                    }, {
-                        xtype: 'button',
-                        text: '<=>',
-                        style: 'margin-top: 10px; margin-bottom: 10px;',
-                        width: 40
-                    }, {
-                        xtype: 'button',
-                        text: '<<',
-                        width: 40
+                        xtype: 'text',
+                        text: "Use drag'n'drop for ordering or moving attributes via grids.",
+                        degrees: 90
                     }]
                 }, {
                     xtype: 'sampleattributesgrid',
-                    title: 'On Remove Attributes',
+                    name: 'removeAttributes',
+                    title: 'Remove Attributes',
                     flex: 1,
                     height: '100%'
                 }]

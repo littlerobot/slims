@@ -8,8 +8,7 @@ Ext.define('Slims.store.sample.Templates', {
         url: Slims.Url.getRoute('getsampletemplates'),
         reader: {
             type: 'json',
-            // TODO: fix when api ready
-            root: 'sample_type_templates'
+            root: 'sample_instance_templates'
         }
     }
 });

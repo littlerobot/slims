@@ -72,6 +72,7 @@
     <class name="Cscr\SlimsApiBundle\Entity\ResearchGroup">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">name</option>
+            <option name="message">The research group must have a unique name</option>
         </constraint>
         <property name="name">
             <constraint name="NotBlank">
@@ -90,7 +91,7 @@
         <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed" />
         <property name="order">
             <constraint name="NotBlank">
-                <option name="message">The order position specified</option>
+                <option name="message">The order position must be specified</option>
             </constraint>
             <constraint name="Range">
                 <option name="min">1</option>
@@ -135,6 +136,7 @@
     <class name="Cscr\SlimsApiBundle\Entity\SampleTypeTemplate">
         <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
             <option name="fields">name</option>
+            <option name="message">The template must have a unique name</option>
         </constraint>
         <property name="name">
             <constraint name="NotBlank">
@@ -157,6 +159,138 @@
                 </option>
             </constraint>
             <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate">
+        <constraint name="Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity">
+            <option name="fields">name</option>
+            <option name="message">The template must have a unique name</option>
+        </constraint>
+        <property name="name">
+            <constraint name="NotBlank">
+                <option name="message">The template must have a name</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+                <option name="minMessage">The name must be at least {{ limit }} characters long</option>
+                <option name="maxMessage">The name cannot be longer than {{ limit }} characters</option>
+            </constraint>
+        </property>
+        <property name="storedAttributes">
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="Type">
+                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute</option>
+                        <option name="message">The attributes must all be valid</option>
+                    </constraint>
+                </option>
+            </constraint>
+            <constraint name="Valid" />
+        </property>
+        <property name="removedAttributes">
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="Type">
+                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute</option>
+                        <option name="message">The attributes must all be valid</option>
+                    </constraint>
+                </option>
+            </constraint>
+            <constraint name="Valid" />
+        </property>
+    </class>
+
+    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute">
+        <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed"/>
+        <property name="order">
+            <constraint name="NotBlank">
+                <option name="message">The order position must be specified</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">100</option>
+                <option name="minMessage">The minimum order position is {{ limit }}</option>
+                <option name="maxMessage">The maximum order position is {{ limit }}</option>
+                <option name="invalidMessage">The order position must be a number</option>
+            </constraint>
+        </property>
+        <property name="label">
+            <constraint name="NotBlank">
+                <option name="message">The attribute must have a label</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+                <option name="minMessage">The label must be at least {{ limit }} characters</option>
+                <option name="maxMessage">The label cannot be more than {{ limit }} characters</option>
+            </constraint>
+        </property>
+        <property name="type">
+            <constraint name="NotBlank">
+                <option name="message">The attribute must have a type</option>
+            </constraint>
+            <constraint name="Choice">
+                <option name="callback">getValidChoices</option>
+                <option name="message">The type you have selected is not a valid option</option>
+            </constraint>
+        </property>
+        <property name="options">
+            <constraint name="All">
+                <constraint name="Length">
+                    <option name="min">1</option>
+                    <option name="max">255</option>
+                    <option name="minMessage">The option must be at least {{ limit }} characters long</option>
+                    <option name="maxMessage">The option cannot be longer than {{ limit }} characters</option>
+                </constraint>
+            </constraint>
+        </property>
+    </class>
+
+    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute">
+        <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed"/>
+        <property name="order">
+            <constraint name="NotBlank">
+                <option name="message">The order position must be specified</option>
+            </constraint>
+            <constraint name="Range">
+                <option name="min">1</option>
+                <option name="max">100</option>
+                <option name="minMessage">The minimum order position is {{ limit }}</option>
+                <option name="maxMessage">The maximum order position is {{ limit }}</option>
+                <option name="invalidMessage">The order position must be a number</option>
+            </constraint>
+        </property>
+        <property name="label">
+            <constraint name="NotBlank">
+                <option name="message">The attribute must have a label</option>
+            </constraint>
+            <constraint name="Length">
+                <option name="min">1</option>
+                <option name="max">255</option>
+                <option name="minMessage">The label must be at least {{ limit }} characters</option>
+                <option name="maxMessage">The label cannot be more than {{ limit }} characters</option>
+            </constraint>
+        </property>
+        <property name="type">
+            <constraint name="NotBlank">
+                <option name="message">The attribute must have a type</option>
+            </constraint>
+            <constraint name="Choice">
+                <option name="callback">getValidChoices</option>
+                <option name="message">The type you have selected is not a valid option</option>
+            </constraint>
+        </property>
+        <property name="options">
+            <constraint name="All">
+                <constraint name="Length">
+                    <option name="min">1</option>
+                    <option name="max">255</option>
+                    <option name="minMessage">The option must be at least {{ limit }} characters long</option>
+                    <option name="maxMessage">The option cannot be longer than {{ limit }} characters</option>
+                </constraint>
+            </constraint>
         </property>
     </class>
 
