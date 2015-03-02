@@ -11,19 +11,18 @@ Ext.define('Slims.view.sample.types.Panel', {
         'Slims.view.sample.types.Form'
     ],
 
+    layout: 'border',
+
     initComponent: function() {
         this.items = [{
-            xtype: 'panel',
-            layout: 'hbox',
-            items: [{
-                xtype: 'sampletypesgrid',
-                height: '100%',
-                flex: 1
-            }, {
-                xtype: 'sampletypeform',
-                height: '100%',
-                flex: 2
-            }]
+            xtype: 'sampletypesgrid',
+            region: 'west',
+            split: true,
+            flex: 1
+        }, {
+            xtype: 'sampletypeform',
+            region: 'center',
+            flex: 2
         }];
 
         this.callParent();

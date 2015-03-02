@@ -30,10 +30,6 @@ Ext.define('Slims.view.sample.types.Grid', {
             text: 'Name',
             dataIndex: 'name',
             flex: 1
-        }, {
-            text: 'Attributes',
-            dataIndex: 'attributes',
-            flex: 1
         }];
 
         this.tbar = [{
