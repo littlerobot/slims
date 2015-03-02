@@ -55,6 +55,15 @@ Ext.define('Slims.controller.SampleTemplates', {
             }
         });
 
+        this.createStores();
+    },
+
+    createStores: function() {
+        var templatesStore = Ext.create('Slims.store.Templates', {
+            storeId: 'templates'
+        });
+
+        templatesStore.load();
     },
 
     setRestoreSelectionListener: function() {

@@ -5,7 +5,7 @@ Ext.define('Slims.view.templates.TemplatesGrid', {
     requires: ['Ext.grid.column.Action'],
 
     initComponent: function() {
-        this.store = Ext.create('Slims.store.Templates');
+        this.store = Ext.StoreMgr.get('templates');
 
         this.columns = [{
             text: 'Name',
@@ -54,11 +54,5 @@ Ext.define('Slims.view.templates.TemplatesGrid', {
         }];
 
         this.callParent();
-
-        this.on('afterrender', this.loadData, this);
-    },
-
-    loadData: function() {
-        this.getStore().load();
     }
 });

@@ -7,9 +7,16 @@ Ext.define('Slims.view.sample.types.Grid', {
 
     plugins: [{
         ptype: 'rowexpander',
-        rowBodyTpl: [
-            '<p><b>Name:</b> {name}</p>'
-        ]
+        rowBodyTpl: ['{[this.getAttributesHtml(values.attributes)]}', {
+            getAttributesHtml: function(attributes) {
+                var html = '';
+                Ext.each(attributes, function(attr,i) {
+                    var string = Ext.String.format('<div style="width: 240px;"><b>{0}:</b> {1}</div>', attr.name, attr.value);
+                    html += string;
+                }, this);
+                return html;
+            }
+        }]
     }],
 
     initComponent: function() {

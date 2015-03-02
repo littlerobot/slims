@@ -6,11 +6,11 @@ Ext.define('Slims.store.sample.Types', {
     proxy: {
         type: 'memory',
         data: [{
-            id: 2, name: 'Hello', attributes: '1, 23,,4,4,34'
+            id: 2, name: 'Hello', attributes: [{name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}]
         },{
-            id: 22, name: 'Hello dertre', attributes: '1, 23,,4,4,34'
+            id: 22, name: 'Hello dertre', attributes: [{name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}]
         },{
-            id: 221, name: 'Hello et4r3444', attributes: '1, 23,,4,4,34'
+            id: 221, name: 'Hello et4r3444', attributes: [{name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}, {name: 'atrti', value: 'value'}]
         }],
         // url: Slims.Url.getRoute('getsampletypes'),
         reader: {
