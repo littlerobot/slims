@@ -18,10 +18,10 @@ class ApplicationController extends Controller
     }
 
     /**
-     * @Route("app", name="app_app")
+     * @Route("dashboard", name="app_dashboard")
      * @Template()
      */
-    public function appAction()
+    public function dashboardAction()
     {
         return [];
     }

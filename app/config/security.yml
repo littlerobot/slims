@@ -11,7 +11,7 @@ security:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
         raven:
-            pattern: ^/(app|api)
+            pattern: ^/(dashboard|api)
             raven: true
         home:
             pattern: ^/
