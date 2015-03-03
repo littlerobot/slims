@@ -6,7 +6,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Table(name="sample_type_attribute")
+ * @ORM\Table(name="sample_type_template_attribute")
  * @ORM\Entity()
  */
 class SampleTypeAttribute
