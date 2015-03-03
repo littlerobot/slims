@@ -28,7 +28,7 @@ set :copy_vendors, true
 
 # Composer
 set :use_composer, true
-set :composer_options,  "--prefer-dist --optimize-autoloader --no-progress"
+set :composer_options, "--no-dev -q --prefer-dist --optimize-autoloader --no-progress"
 
 # File permissions
 set :writable_dirs,       ["app/cache", "app/logs"]
@@ -54,4 +54,4 @@ task :upload_parameters do
 end
 
 # Be more verbose by uncommenting the following line
- logger.level = Logger::MAX_LEVEL
+# logger.level = Logger::MAX_LEVEL
