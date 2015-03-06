@@ -6,7 +6,8 @@ Ext.define('Slims.view.sample.types.Form', {
         'Ext.form.FieldSet',
         'Ext.form.field.Text',
         'Ext.form.field.TextArea',
-        'Ext.form.field.ComboBox'
+        'Ext.form.field.ComboBox',
+        'Ext.form.field.Date'
     ],
 
     initComponent: function() {
@@ -82,32 +83,39 @@ Ext.define('Slims.view.sample.types.Form', {
     },
 
     createField: function(attributes) {
-        var field;
+        var field,
+            defaults = {
+                width: 500,
+                labelWidth: 200,
+                padding: 3
+            }
         switch (attributes.type) {
-            case 'options':
-                field = Ext.create('Ext.form.field.ComboBox', {
-                    width: 400,
-                    store: {
-                        type: 'array',
-                        data: opts.options
-                    },
-                    fieldLabel: opts.label
-                });
+            case 'option':
+                field = Ext.create('Ext.form.field.ComboBox', Ext.apply(defaults, {
+                    store: attributes.options,
+                    fieldLabel: attributes.label,
+                    valueField: 'name',
+                    displayField: 'name'
+                }));
                 break;
             case 'long-text':
-                field = Ext.create('Ext.form.field.TextArea', {
+                field = Ext.create('Ext.form.field.TextArea', Ext.apply(defaults, {
                     name: attributes.id,
                     fieldLabel: attributes.label,
-                    width: 400,
                     height: 150
-                });
+                }));
+                break;
+            case 'date':
+                field = Ext.create('Ext.form.field.Date', Ext.apply(defaults, {
+                    name: attributes.id,
+                    fieldLabel: attributes.label
+                }))
                 break;
             default:
-                field = Ext.create('Ext.form.field.Text', {
+                field = Ext.create('Ext.form.field.Text', Ext.apply(defaults, {
                     name: attributes.id,
-                    fieldLabel: attributes.label,
-                    width: 400
-                });
+                    fieldLabel: attributes.label
+                }));
                 break;
         }
         return field;
