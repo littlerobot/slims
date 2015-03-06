@@ -12,7 +12,7 @@ Ext.define('Slims.view.sample.types.Form', {
 
     initComponent: function() {
         this.items = [
-            this.getTemplateCombo(),
+            this.getMainInfoPanel(),
             this.getAttributesPanel()
         ];
 
@@ -29,29 +29,42 @@ Ext.define('Slims.view.sample.types.Form', {
         this.callParent();
     },
 
-    getTemplateCombo: function() {
-        var templatesCombo = Ext.create('Ext.form.field.ComboBox', {
-            name: 'templatescombo',
-            style: 'margin-left: 5px;',
-            flex: 1,
-            emptyText: 'Sample type template',
+    getMainInfoPanel: function() {
+        return {
+            xtype: 'fieldset',
+            title: 'Main info',
             padding: 10,
-            width: 300,
-            editable: false,
-            hideLabel: true,
-            store: Ext.StoreMgr.get('templates'),
-            queryMode: 'local',
-            displayField: 'name',
-            valueField: 'id'
-        });
-
-        templatesCombo.on('change', function(combo, value) {
-            var template = combo.store.findRecord(combo.valueField, value),
-                attributes = template.get('attributes');
-                this.loadAttributes(attributes);
-        }, this);
-
-        return templatesCombo;
+            margin: 10,
+            items: [{
+                xtype: 'combo',
+                name: 'templatescombo',
+                fieldLabel: 'Sample type template',
+                emptyText: 'Select to continue',
+                width: 500,
+                labelWidth: 180,
+                allowBlank: false,
+                editable: false,
+                store: Ext.StoreMgr.get('templates'),
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'id',
+                listeners: {
+                    change: function(combo, value) {
+                        var template = combo.store.findRecord(combo.valueField, value),
+                            attributes = template.get('attributes');
+                            this.loadAttributes(attributes);
+                    },
+                    scope: this
+                }
+            }, {
+                xtype: 'textfield',
+                name: 'name',
+                allowBlank: false,
+                fieldLabel: 'Name',
+                width: 500,
+                labelWidth: 180
+            }]
+        };
     },
 
     getAttributesPanel: function() {
@@ -86,9 +99,9 @@ Ext.define('Slims.view.sample.types.Form', {
         var field,
             defaults = {
                 width: 500,
-                labelWidth: 200,
+                labelWidth: 180,
                 padding: 3
-            }
+            };
         switch (attributes.type) {
             case 'option':
                 field = Ext.create('Ext.form.field.ComboBox', Ext.apply(defaults, {
