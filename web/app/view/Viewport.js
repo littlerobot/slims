@@ -4,7 +4,8 @@ Ext.define('Slims.view.Viewport', {
         'Ext.tab.Panel',
         'Ext.layout.container.Fit',
         'Slims.view.groups.Grid',
-        'Slims.view.home.Panel'
+        'Slims.view.home.Panel',
+        'Ext.layout.container.Border'
     ],
 
     layout: 'fit',

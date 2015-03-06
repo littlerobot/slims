@@ -3,7 +3,10 @@ Ext.define('Slims.view.sample.types.Form', {
     xtype: 'sampletypeform',
 
     requires: [
-        'Ext.form.FieldSet'
+        'Ext.form.FieldSet',
+        'Ext.form.field.Text',
+        'Ext.form.field.TextArea',
+        'Ext.form.field.ComboBox'
     ],
 
     initComponent: function() {
@@ -11,6 +14,16 @@ Ext.define('Slims.view.sample.types.Form', {
             this.getTemplateCombo(),
             this.getAttributesPanel()
         ];
+
+        this.bbar = ['->', {
+            text: 'Save',
+            name: 'save',
+            width: 120
+        },{
+            text: 'Cancel',
+            name: 'cancel',
+            width: 120
+        }];
 
         this.callParent();
     },
@@ -44,7 +57,8 @@ Ext.define('Slims.view.sample.types.Form', {
         var attributesFieldset  = Ext.create('Ext.form.FieldSet', {
             name: 'attributesFieldset',
             title: 'Attributes',
-            padding: 10
+            padding: 10,
+            margin: 10
         });
 
         return attributesFieldset;
@@ -53,22 +67,49 @@ Ext.define('Slims.view.sample.types.Form', {
     loadAttributes: function(attributes) {
         var fields = [];
         Ext.each(attributes, function(attr) {
-            var xtype = this.FIELD_TYPES[attr.type];
-            var field = this.createField(xtype, attr);
+            var field = this.createField(attr);
             fields.push(field);
-        }, this)
+        }, this);
+
+        var attributesFieldset = this.down('[name=attributesFieldset]');
+        attributesFieldset.removeAll();
+        attributesFieldset.items.add(fields);
+        attributesFieldset.doLayout();
+
+        var disableButton = !fields.length;
+        this.down('[name=save]').setDisabled(disableButton);
+        this.down('[name=cancel]').setDisabled(disableButton);
     },
 
-    createField: function(xtype, opts) {
-        if (xtype == 'xtype.combo') {
-            Ext.create(xtype, {
-                name: opts.id,
-                store: {
-                    type: 'array',
-                    data: opts.options
-                },
-                fieldLabel: opts.label
-            })
+    createField: function(attributes) {
+        var field;
+        switch (attributes.type) {
+            case 'options':
+                field = Ext.create('Ext.form.field.ComboBox', {
+                    width: 400,
+                    store: {
+                        type: 'array',
+                        data: opts.options
+                    },
+                    fieldLabel: opts.label
+                });
+                break;
+            case 'long-text':
+                field = Ext.create('Ext.form.field.TextArea', {
+                    name: attributes.id,
+                    fieldLabel: attributes.label,
+                    width: 400,
+                    height: 150
+                });
+                break;
+            default:
+                field = Ext.create('Ext.form.field.Text', {
+                    name: attributes.id,
+                    fieldLabel: attributes.label,
+                    width: 400
+                });
+                break;
         }
+        return field;
     }
 });
