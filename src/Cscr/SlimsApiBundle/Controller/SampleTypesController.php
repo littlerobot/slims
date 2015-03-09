@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Controller;
 
 use Cscr\SlimsApiBundle\Entity\SampleType;
 use Cscr\SlimsApiBundle\Form\Type\SampleTypeType;
+use Cscr\SlimsApiBundle\Response\SampleTypeCollectionResponse;
 use Cscr\SlimsApiBundle\Response\SampleTypeResponse;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
@@ -21,7 +22,7 @@ class SampleTypesController extends FOSRestController
     public function getSampleTypesAction()
     {
         $templates = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:SampleType')->findAll();
-        return new SampleTypeResponse($templates);
+        return new SampleTypeCollectionResponse($templates);
     }
 
     /**
