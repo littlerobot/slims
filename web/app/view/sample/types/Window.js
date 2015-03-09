@@ -9,6 +9,7 @@ Ext.define('Slims.view.sample.types.Window', {
     title: 'Sample type',
     layout: 'fit',
     width: 500,
+    record: null,
 
     initComponent: function() {
         this.items = [{

@@ -11,7 +11,7 @@ Ext.define('Slims.view.sample.types.Grid', {
             getAttributesHtml: function(attributes) {
                 var html = '';
                 Ext.each(attributes, function(attr,i) {
-                    var string = Ext.String.format('<div style="width: 240px;"><b>{0}:</b> {1}</div>', attr.name, attr.value);
+                    var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, attr.value);
                     html += string;
                 }, this);
                 return html;
@@ -30,6 +30,23 @@ Ext.define('Slims.view.sample.types.Grid', {
             text: 'Name',
             dataIndex: 'name',
             flex: 1
+        }, {
+            xtype: 'actioncolumn',
+            width: 30,
+            menuDisabled: true,
+            items: [{
+                icon: '/resources/images/edit.png',
+                tooltip: 'Edit sample type',
+                isDisabled: function(view, col, row, item, record) {
+                    var isDisabled = !record.get('editable');
+                    return false; //isDisabled;
+                },
+                scope: this,
+                handler: function(grid, rowIndex, colIndex) {
+                    var sampleType = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('editrecord', sampleType);
+                }
+            }]
         }];
 
         this.tbar = [{

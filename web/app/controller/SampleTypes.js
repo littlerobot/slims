@@ -12,6 +12,9 @@ Ext.define('Slims.controller.SampleTypes', {
     refs: [{
         ref: 'tab',
         selector: 'sampletypespage'
+    }, {
+        ref: 'sampleTypesGrid',
+        selector: 'sampletypesgrid'
     }],
 
     init: function() {
@@ -19,14 +22,26 @@ Ext.define('Slims.controller.SampleTypes', {
             'sampletypesgrid button[name=addType]': {
                 click: this.openAddSampleTypeWindow
             },
+            'sampletypesgrid': {
+                editrecord: this.openEditSampleTypeWindow
+            },
             'sampletypewindow': {
                 save: this.saveSampleType
+            },
+            'sampletypesgrid button[name=reloadGrid]': {
+                click: this.reloadGrid
             }
         });
     },
 
     openAddSampleTypeWindow: function() {
         Ext.create('Slims.view.sample.types.Window').show();
+    },
+
+    openEditSampleTypeWindow: function(sampleType) {
+        Ext.create('Slims.view.sample.types.Window', {
+            record: sampleType
+        }).show();
     },
 
     saveSampleType: function(sampleType, wnd) {
@@ -42,7 +57,7 @@ Ext.define('Slims.controller.SampleTypes', {
         if (wnd) {
             wnd.setLoading(true);
         }
-        console.log(sampleType.data);
+
         Ext.Ajax.request({
             url: url,
             method: 'POST',
@@ -69,6 +84,6 @@ Ext.define('Slims.controller.SampleTypes', {
     },
 
     reloadGrid: function() {
-
+        this.getSampleTypesGrid().loadData();
     }
 });

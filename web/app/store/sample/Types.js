@@ -8,7 +8,7 @@ Ext.define('Slims.store.sample.Types', {
         url: Slims.Url.getRoute('getsampletypes'),
         reader: {
             type: 'json',
-            root: 'sample_types'
+            root: 'sample_type'
         }
     }
 });
