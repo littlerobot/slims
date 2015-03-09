@@ -35,7 +35,7 @@ Ext.define('Slims.view.sample.types.Grid', {
         this.tbar = [{
             text: 'Add type',
             icon: '/resources/images/add.png',
-            name: 'addTemplate'
+            name: 'addType'
         }, '->', {
             width: 25,
             icon: '/resources/images/reload.png',

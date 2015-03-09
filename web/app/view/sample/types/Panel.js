@@ -3,26 +3,18 @@ Ext.define('Slims.view.sample.types.Panel', {
     xtype: 'sampletypespage',
 
     layout: 'fit',
-    border: true,
+    border: false,
 
     requires: [
         'Ext.draw.Text',
         'Slims.view.sample.types.Grid',
-        'Slims.view.sample.types.Form'
+        'Slims.view.sample.types.Form',
+        'Slims.view.sample.types.Window'
     ],
-
-    layout: 'border',
 
     initComponent: function() {
         this.items = [{
-            xtype: 'sampletypesgrid',
-            region: 'west',
-            split: true,
-            flex: 1
-        }, {
-            xtype: 'sampletypeform',
-            region: 'center',
-            flex: 2
+            xtype: 'sampletypesgrid'
         }];
 
         this.callParent();

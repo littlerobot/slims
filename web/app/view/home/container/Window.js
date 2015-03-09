@@ -175,7 +175,6 @@ Ext.define('Slims.view.home.container.Window', {
             this.down('label[name=totalCapacity]').setText(rows*columns);
         };
 
-
         return {
             xtype: 'fieldcontainer',
             layout: {
@@ -312,7 +311,6 @@ Ext.define('Slims.view.home.container.Window', {
         if (!formPanel.getForm().isValid())
             return;
 
-
         // check research group selection
         if (this.down('radiogroup[name=belongs_to]').getValue().belongs_to == 'group') {
             var research_group = this.down('combobox[name=research_group]').getValue();
@@ -323,9 +321,7 @@ Ext.define('Slims.view.home.container.Window', {
         }
 
         var values = formPanel.getForm().getValues();
-
         var parentId = this.getParentContainerId();
-
         // return if error
         if (parentId === false)
             return;
@@ -337,8 +333,6 @@ Ext.define('Slims.view.home.container.Window', {
             });
 
         var container = this.record;
-
-        // TODO: Add data preparation here
 
         // edit or add mode
         if (container) {

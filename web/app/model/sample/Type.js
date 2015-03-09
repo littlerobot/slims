@@ -6,6 +6,8 @@ Ext.define('Slims.model.sample.Type', {
         name: 'id'
     }, {
         name: 'name'
+    },  {
+        name: 'sample_type_template'
     }, {
         name: 'attributes',
         type: 'auto'
