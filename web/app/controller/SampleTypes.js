@@ -39,9 +39,11 @@ Ext.define('Slims.controller.SampleTypes', {
     },
 
     openEditSampleTypeWindow: function(sampleType) {
-        Ext.create('Slims.view.sample.types.Window', {
-            record: sampleType
-        }).show();
+        var w = Ext.create('Slims.view.sample.types.Window', {
+            templateId: sampleType.get('sample_type_template_id')
+        });
+        w.show();
+        w.setData(sampleType.data);
     },
 
     saveSampleType: function(sampleType, wnd) {
@@ -49,7 +51,7 @@ Ext.define('Slims.controller.SampleTypes', {
 
         var url;
         if (sampleType.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('setsampletype'), sampleType.getId());
+            url = Slims.Url.getRoute('setsampletype', [sampleType.getId()]);
         } else {
             url = Slims.Url.getRoute('createsampletype');
         }

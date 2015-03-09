@@ -12,46 +12,46 @@ Ext.define('Slims.router.Api', {
         switch (routeName) {
             // templates
             case 'createtemplate':
-                return routePrefix + '/sample-type-templates';
+                return Ext.String.format('{0}/sample-type-templates', routePrefix);
             case 'settemplate':
-                return routePrefix + '/sample-type-templates/{0}';
+                return Ext.String.format('{0}/sample-type-templates/{1}', routePrefix, params[0]);
             case 'gettemplates':
-                return routePrefix + '/sample-type-templates';
+                return Ext.String.format('{0}/sample-type-templates', routePrefix);
             // containers
             case 'getcontainers':
-                return routePrefix + '/containers';
+                return Ext.String.format('{0}/containers', routePrefix);
             case 'setcontainer':
-                return routePrefix + '/containers/{0}';
+                return Ext.String.format('{0}/containers/{1}', routePrefix, params[0]);
             case 'createcontainer':
-                return routePrefix + '/containers';
+                return Ext.String.format('{0}/containers', routePrefix);
             // groups
             case 'getgroups':
-                return routePrefix + '/research-groups';
+                return Ext.String.format('{0}/research-groups', routePrefix);
             case 'setgroup':
-                return routePrefix + '/research-groups/{0}';
+                return Ext.String.format('{0}/research-groups/{1}', routePrefix, params[0]);
             case 'creategroup':
-                return routePrefix + '/research-groups';
+                return Ext.String.format('{0}/research-groups', routePrefix);
             // users
             case 'getusers':
-                return routePrefix + '/users';
+                return Ext.String.format('{0}/users', routePrefix);
             case 'setuser':
-                return routePrefix + '/users/{0}';
+                return Ext.String.format('{0}/users/{1}', routePrefix, params[0]);
             case 'createuser':
-                return routePrefix + '/users';
+                return Ext.String.format('{0}/users', routePrefix);
             // sample templates
             case 'createsampletemplate':
-                return routePrefix + '/sample-instance-templates';
+                return Ext.String.format('{0}/sample-instance-templates', routePrefix);
             case 'setsampletemplate':
-                return routePrefix + '/sample-instance-templates/{0}';
+                return Ext.String.format('{0}/sample-instance-templates/{1}', routePrefix, params[0]);
             case 'getsampletemplates':
-                return routePrefix + '/sample-instance-templates';
+                return Ext.String.format('{0}/sample-instance-templates', routePrefix);
             // sample types
             case 'getsampletypes':
-                return routePrefix + '/sample-types';
-            case 'createsampletype':
-                return routePrefix + '/sample-types';
+                return Ext.String.format('{0}/sample-types', routePrefix);
             case 'setsampletype':
-                return routePrefix + '/sample-types/{0}';
+                return Ext.String.format('{0}/sample-types/{1}', routePrefix, params[0]);
+            case 'createsampletype':
+                return Ext.String.format('{0}/sample-types', routePrefix);
 
             default:
                 return routePrefix + '/' + routeName;
@@ -59,52 +59,52 @@ Ext.define('Slims.router.Api', {
     },
 
     getTestRoute: function(routeName, params) {
-        var routePrefix = '/api',
+        var routePrefix = 'api',
             devController = '/app_dev.php';
 
         switch (routeName) {
             // templates
             case 'createtemplate':
-                return devController + routePrefix + '/sample-type-templates';
+                return Ext.String.format('{0}/{1}/sample-type-templates', devController, routePrefix);
             case 'settemplate':
-                return devController + routePrefix + '/sample-type-templates/{0}';
+                return Ext.String.format('{0}/{1}/sample-type-templates/{2}', devController, routePrefix, params[0]);
             case 'gettemplates':
-                return devController + routePrefix + '/sample-type-templates';
+                return Ext.String.format('{0}/{1}/sample-type-templates', devController, routePrefix);
             // containers
             case 'getcontainers':
-                return devController + routePrefix + '/containers';
+                return Ext.String.format('{0}/{1}/containers', devController, routePrefix);
             case 'setcontainer':
-                return devController + routePrefix + '/containers/{0}';
+                return Ext.String.format('{0}/{1}/containers/{2}', devController, routePrefix, params[0]);
             case 'createcontainer':
-                return devController + routePrefix + '/containers';
+                return Ext.String.format('{0}/{1}/containers', devController, routePrefix);
             // groups
             case 'getgroups':
-                return devController + routePrefix + '/research-groups';
+                return Ext.String.format('{0}/{1}/research-groups', devController, routePrefix);
             case 'setgroup':
-                return devController + routePrefix + '/research-groups/{0}';
+                return Ext.String.format('{0}/{1}/research-groups/{2}', devController, routePrefix, params[0]);
             case 'creategroup':
-                return devController + routePrefix + '/research-groups';
+                return Ext.String.format('{0}/{1}/research-groups', devController, routePrefix);
             // users
             case 'getusers':
-                return devController + routePrefix + '/users';
+                return Ext.String.format('{0}/{1}/users', devController, routePrefix);
             case 'setuser':
-                return devController + routePrefix + '/users/{0}';
+                return Ext.String.format('{0}/{1}/users/{2}', devController, routePrefix, params[0]);
             case 'createuser':
-                return devController + routePrefix + '/users';
+                return Ext.String.format('{0}/{1}/users', devController, routePrefix);
             // sample templates
             case 'createsampletemplate':
-                return devController + routePrefix + '/sample-instance-templates';
+                return Ext.String.format('{0}/{1}/sample-instance-templates', devController, routePrefix);
             case 'setsampletemplate':
-                return devController + routePrefix + '/sample-instance-templates/{0}';
+                return Ext.String.format('{0}/{1}/sample-instance-templates/{2}', devController, routePrefix, params[0]);
             case 'getsampletemplates':
-                return devController + routePrefix + '/sample-instance-templates';
+                return Ext.String.format('{0}/{1}/sample-instance-templates', devController, routePrefix);
             // sample types
             case 'getsampletypes':
-                return devController + routePrefix + '/sample-types';
-            case 'createsampletype':
-                return devController + routePrefix + '/sample-types';
+                return Ext.String.format('{0}/{1}/sample-types', devController, routePrefix);
             case 'setsampletype':
-                return devController + routePrefix + '/sample-types/{0}';
+                return Ext.String.format('{0}/{1}/sample-types/{2}', devController, routePrefix, params[0]);
+            case 'createsampletype':
+                return Ext.String.format('{0}/{1}/sample-types', devController, routePrefix);
 
             default:
                 return devController + routePrefix + '/' + routeName;

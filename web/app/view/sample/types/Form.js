@@ -10,11 +10,15 @@ Ext.define('Slims.view.sample.types.Form', {
         'Ext.form.field.Date'
     ],
 
+    templateId: null, // default sample type template value
+
     initComponent: function() {
         this.items = [
             this.getMainInfoPanel(),
             this.getAttributesPanel()
         ];
+
+        this.on('afterrender', this.setDefaultTemplate, this);
 
         this.callParent();
     },
@@ -86,7 +90,7 @@ Ext.define('Slims.view.sample.types.Form', {
                 padding: 3,
                 anchor: '100%',
                 labelWidth: 180,
-                name: attribute.id,
+                name: attribute.label,
                 fieldLabel: attribute.label
             };
         switch (attribute.type) {
@@ -111,5 +115,29 @@ Ext.define('Slims.view.sample.types.Form', {
                 break;
         }
         return field;
+    },
+
+    setDefaultTemplate: function() {
+        if (this.templateId) {
+            this.down('combo[name=templateId]').setValue(this.templateId);
+        }
+    },
+
+    setData: function(data) {
+        this.down('[name=name]').setValue(data.name);
+
+        attributesFieldset = this.down('[name=attributesFieldset]');
+        Ext.each(data.attributes, function(attribute) {
+            var fieldName = attribute.label,
+                field = attributesFieldset.down('[name='+fieldName+']');
+
+            if (field) {
+                if (field.xtype == 'datefield') {
+                    field.setValue(new Date(attribute.value));
+                } else {
+                    field.setValue(attribute.value);
+                }
+            }
+        }, this);
     }
 });

@@ -91,7 +91,7 @@ Ext.define('Slims.controller.ResearchGroups', {
 
         var url;
         if (group.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('setgroup'), group.getId());
+            url = Slims.Url.getRoute('setgroup', [group.getId()]);
         } else {
             url = Slims.Url.getRoute('creategroup');
         }

@@ -165,7 +165,7 @@ Ext.define('Slims.controller.SampleTemplates', {
         };
 
         if (template.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('setsampletemplate'), template.getId());
+            url = Slims.Url.getRoute('setsampletemplate', [template.getId()]);
 
             jsonData.store  = this.prepareAttributeParams(template.get('store' ));
             jsonData.remove = this.prepareAttributeParams(template.get('remove'));

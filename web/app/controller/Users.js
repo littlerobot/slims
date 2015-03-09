@@ -46,7 +46,7 @@ Ext.define('Slims.controller.Users', {
 
         var url;
         if (user.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('setuser'), user.getId());
+            url = Slims.Url.getRoute('setuser', [user.getId()]);
         } else {
             url = Slims.Url.getRoute('createuser');
         }

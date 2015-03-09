@@ -9,11 +9,11 @@ Ext.define('Slims.view.sample.types.Window', {
     title: 'Sample type',
     layout: 'fit',
     width: 500,
-    record: null,
 
     initComponent: function() {
         this.items = [{
-            xtype: 'sampletypeform'
+            xtype: 'sampletypeform',
+            templateId: this.templateId || null
         }];
 
         this.bbar = ['->', {
@@ -39,6 +39,7 @@ Ext.define('Slims.view.sample.types.Window', {
                 });
 
                 var sampleType = Ext.create('Slims.model.sample.Type', {
+                    id: this.id || null,
                     name: formValues.name,
                     sample_type_template: formValues.templateId,
                     attributes: attributes
@@ -56,5 +57,10 @@ Ext.define('Slims.view.sample.types.Window', {
         }];
 
         this.callParent();
+    },
+
+    setData: function(data) {
+        this.id = data.id;
+        this.down('sampletypeform').setData(data);
     }
 });

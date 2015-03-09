@@ -48,7 +48,7 @@ Ext.define('Slims.controller.Home', {
 
         var url;
         if (container.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('setcontainer'), container.getId());
+            url = Slims.Url.getRoute('setcontainer', [container.getId()]);
         } else {
             url = Slims.Url.getRoute('createcontainer');
         }
