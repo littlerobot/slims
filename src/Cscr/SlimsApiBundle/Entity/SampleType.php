@@ -96,6 +96,7 @@ class SampleType
      * @return int
      *
      * @JMS\VirtualProperty()
+     * @JMS\SerializedName("sample_type_template")
      */
     public function getSampleTypeTemplateId()
     {

@@ -14,7 +14,7 @@ class SampleTypeAttributeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $config)
     {
         $builder
-            ->add('sample_type_template_attribute', 'entity', [
+            ->add('id', 'entity', [
                 'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
                 'property' => 'id',
                 'property_path' => 'template',

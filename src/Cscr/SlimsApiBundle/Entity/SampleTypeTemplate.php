@@ -43,6 +43,8 @@ class SampleTypeTemplate
      * @var SampleType[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="SampleType", mappedBy="template")
+     *
+     * @JMS\Exclude()
      */
     private $sampleTypes;
 

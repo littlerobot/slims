@@ -65,7 +65,7 @@ class SampleTypeAttribute
      * @var SampleTypeTemplateAttribute
      *
      * @ORM\ManyToOne(targetEntity="SampleTypeTemplateAttribute")
-     * @ORM\JoinColumn(name="sample_type_attribute_id")
+     * @ORM\JoinColumn(name="sample_type_template_attribute_id")
      *
      * @JMS\Exclude()
      */
@@ -75,8 +75,9 @@ class SampleTypeAttribute
      * @return int
      *
      * @JMS\VirtualProperty()
+     * @JMS\SerializedName("sample_type_template")
      */
-    public function getSampleTypeTemplateAttributeId()
+    public function getSampleTypeTemplateAttribute()
     {
         return $this->template->getId();
     }
