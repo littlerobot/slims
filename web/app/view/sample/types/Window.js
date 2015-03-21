@@ -39,7 +39,7 @@ Ext.define('Slims.view.sample.types.Window', {
                 });
 
                 var sampleType = Ext.create('Slims.model.sample.Type', {
-                    id: this.id || null,
+                    id: this.templateId || null,
                     name: formValues.name,
                     sample_type_template: formValues.templateId,
                     attributes: attributes

@@ -39,11 +39,12 @@ Ext.define('Slims.controller.SampleTypes', {
     },
 
     openEditSampleTypeWindow: function(sampleType) {
-        var w = Ext.create('Slims.view.sample.types.Window', {
-            templateId: sampleType.get('sample_type_template_id')
+        var sampleTypesWindow = Ext.create('Slims.view.sample.types.Window', {
+            templateId: sampleType.get('sample_type_template')
         });
-        w.show();
-        w.setData(sampleType.data);
+
+        sampleTypesWindow.show();
+        sampleTypesWindow.setData(sampleType.data);
     },
 
     saveSampleType: function(sampleType, wnd) {
@@ -59,11 +60,15 @@ Ext.define('Slims.controller.SampleTypes', {
         if (wnd) {
             wnd.setLoading(true);
         }
-
+        var jsonData = {
+            name: sampleType.get('name'),
+            sample_type_template: sampleType.get('sample_type_template'),
+            attributes: sampleType.get('attributes')
+        };
         Ext.Ajax.request({
             url: url,
             method: 'POST',
-            jsonData: sampleType.data,
+            jsonData: jsonData,
             scope: this,
             success: function() {
                 this.getTab().setLoading(false);
