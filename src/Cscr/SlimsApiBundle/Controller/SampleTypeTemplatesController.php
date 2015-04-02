@@ -115,8 +115,8 @@ class SampleTypeTemplatesController extends FOSRestController
     }
 
     /**
-     * Remove deleted {@see SampleTypeTemplateAttribute}s from the {@see ObjectManager} if they are no longer associated with
-     * the {@see SampleTypeTemplate}.
+     * Remove deleted {@see SampleTypeTemplateAttribute}s from the {@see ObjectManager} if they are no longer associated
+     * with the {@see SampleTypeTemplate}.
      *
      * @param array $originalAttributes
      * @param SampleTypeTemplate $template
