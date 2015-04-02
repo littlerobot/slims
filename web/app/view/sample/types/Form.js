@@ -46,7 +46,7 @@ Ext.define('Slims.view.sample.types.Form', {
                     change: function(combo, value) {
                         var template = combo.store.findRecord(combo.valueField, value),
                             attributes = template.get('attributes');
-                            this.loadAttributes(attributes);
+                        this.loadAttributes(attributes);
                     },
                     scope: this
                 }
@@ -71,6 +71,24 @@ Ext.define('Slims.view.sample.types.Form', {
         return attributesFieldset;
     },
 
+    setData: function(data) {
+        this.down('[name=name]').setValue(data.name);
+
+        attributesFieldset = this.down('[name=attributesFieldset]');
+        Ext.each(data.attributes, function(attribute) {
+            var fieldName = attribute.sample_type_template,
+                field = attributesFieldset.down('[name='+fieldName+']');
+
+            if (field) {
+                if (field.xtype == 'datefield') {
+                    field.setValue(new Date(attribute.value));
+                } else {
+                    field.setValue(attribute.value);
+                }
+            }
+        }, this);
+    },
+
     loadAttributes: function(attributes) {
         var fields = [];
         Ext.each(attributes, function(attr) {
@@ -90,7 +108,7 @@ Ext.define('Slims.view.sample.types.Form', {
                 padding: 3,
                 anchor: '100%',
                 labelWidth: 180,
-                name: attribute.label,
+                name: attribute.id,
                 fieldLabel: attribute.label
             };
         switch (attribute.type) {
@@ -121,23 +139,5 @@ Ext.define('Slims.view.sample.types.Form', {
         if (this.templateId) {
             this.down('combo[name=templateId]').setValue(this.templateId);
         }
-    },
-
-    setData: function(data) {
-        this.down('[name=name]').setValue(data.name);
-
-        attributesFieldset = this.down('[name=attributesFieldset]');
-        Ext.each(data.attributes, function(attribute) {
-            var fieldName = attribute.label,
-                field = attributesFieldset.down('[name='+fieldName+']');
-
-            if (field) {
-                if (field.xtype == 'datefield') {
-                    field.setValue(new Date(attribute.value));
-                } else {
-                    field.setValue(attribute.value);
-                }
-            }
-        }, this);
     }
 });

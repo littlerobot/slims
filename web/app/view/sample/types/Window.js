@@ -33,7 +33,7 @@ Ext.define('Slims.view.sample.types.Window', {
 
                 Ext.each(attributesFieldset.items.items, function(field) {
                     attributes.push({
-                        sample_type_template_attribute: field.name,
+                        id: field.name,
                         value: field.getValue()
                     });
                 });
@@ -60,7 +60,7 @@ Ext.define('Slims.view.sample.types.Window', {
     },
 
     setData: function(data) {
-        this.id = data.id;
+        this.templateId = data.id;
         this.down('sampletypeform').setData(data);
     }
 });
