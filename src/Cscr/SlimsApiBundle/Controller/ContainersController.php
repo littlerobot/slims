@@ -64,15 +64,15 @@ class ContainersController extends FOSRestController
 
     /**
      * @param  Container         $container
-     * @param  FormTypeInterface $form
+     * @param  FormTypeInterface $formType
      * @param  Request           $request
      * @return View
      */
-    private function processForm(Container $container, FormTypeInterface $form, Request $request)
+    private function processForm(Container $container, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $form, $container);
+        $form = $this->get('form.factory')->createNamed('', $formType, $container);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

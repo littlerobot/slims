@@ -15,13 +15,15 @@ class OptionAllowedValidator extends ConstraintValidator
     public function validate($object, Constraint $constraint)
     {
         if ($object->allowsOptionsToBeSpecified() && null === $object->getOptions()) {
-            $this->context->buildViolation($constraint->optionMessage)
+            $this->context
+                ->buildViolation($constraint->optionMessage)
                 ->addViolation();
             return;
         }
 
         if (!$object->allowsOptionsToBeSpecified() && null !== $object->getOptions()) {
-            $this->context->buildViolation($constraint->nonOptionMessage)
+            $this->context
+                ->buildViolation($constraint->nonOptionMessage)
                 ->addViolation();
             return;
         }

@@ -91,15 +91,15 @@ class SampleTypesController extends FOSRestController
 
     /**
      * @param  SampleType $type
-     * @param  FormTypeInterface $form
+     * @param  FormTypeInterface $formType
      * @param  Request $request
      * @return View
      */
-    private function processForm(SampleType $type, FormTypeInterface $form, Request $request)
+    private function processForm(SampleType $type, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $form, $type);
+        $form = $this->get('form.factory')->createNamed('', $formType, $type);
 
         $form->handleRequest($request);
 

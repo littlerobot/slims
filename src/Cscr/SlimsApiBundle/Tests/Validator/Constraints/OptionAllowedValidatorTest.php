@@ -9,11 +9,17 @@ use Symfony\Component\Validator\Validation;
 
 class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
 {
+    /**
+     * {@inheritdoc}
+     */
     protected function getApiVersion()
     {
         return Validation::API_VERSION_2_5;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     protected function createValidator()
     {
         return new OptionAllowedValidator();
@@ -33,8 +39,15 @@ class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
     public function getValidValues()
     {
         return array(
-            [(new SampleTypeTemplateAttribute())->setType(SampleTypeTemplateAttribute::TYPE_OPTION)->setOptions([1, 2])],
-            [(new SampleTypeTemplateAttribute())->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)],
+            [
+                (new SampleTypeTemplateAttribute())
+                    ->setType(SampleTypeTemplateAttribute::TYPE_OPTION)
+                    ->setOptions([1, 2])
+            ],
+            [
+                (new SampleTypeTemplateAttribute())
+                    ->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)
+            ],
         );
     }
 
@@ -55,11 +68,14 @@ class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
     {
         return array(
             [
-                (new SampleTypeTemplateAttribute())->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)->setOptions([1, 2]),
+                (new SampleTypeTemplateAttribute())
+                    ->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)
+                    ->setOptions([1, 2]),
                 'Options cannot be specified for this attribute type',
             ],
             [
-                (new SampleTypeTemplateAttribute())->setType(SampleTypeTemplateAttribute::TYPE_OPTION),
+                (new SampleTypeTemplateAttribute())
+                    ->setType(SampleTypeTemplateAttribute::TYPE_OPTION),
                 'Options need to be specified for this attribute type',
             ],
         );

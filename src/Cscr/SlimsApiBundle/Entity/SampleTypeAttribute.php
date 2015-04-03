@@ -204,7 +204,7 @@ class SampleTypeAttribute
     }
 
     /**
-     * Get the label text, determined by the label of the assocaited {@see SampleTypeTemplate}.
+     * Get the label text, determined by the label of the associated {@see SampleTypeTemplate}.
      *
      * @return string
      *
