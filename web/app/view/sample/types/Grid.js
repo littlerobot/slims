@@ -7,11 +7,17 @@ Ext.define('Slims.view.sample.types.Grid', {
 
     plugins: [{
         ptype: 'rowexpander',
-        rowBodyTpl: ['{[this.getAttributesHtml(values.attributes)]}', {
-            getAttributesHtml: function(attributes) {
+        rowBodyTpl: ['{[this.getAttributesHtml(values.attributes, values.sample_type_template)]}', {
+            getAttributesHtml: function(attributes, sample_type_template) {
                 var html = '';
+                var template = Ext.StoreMgr.get('templates').findRecord('id', sample_type_template);
                 Ext.each(attributes, function(attr,i) {
-                    var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, attr.value);
+                    var type = template.get('attributes')[i].type,
+                        val = attr.value;
+                    if (type == 'date') {
+                        val = Ext.Date.format(new Date(val), 'Y-m-d');
+                    }
+                    var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, val);
                     html += string;
                 }, this);
                 return html;
