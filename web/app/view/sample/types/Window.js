@@ -32,11 +32,23 @@ Ext.define('Slims.view.sample.types.Window', {
                     attributes = [];
 
                 Ext.each(attributesFieldset.items.items, function(field) {
-                    attributes.push({
-                        id: field.name,
-                        value: field.getValue()
-                    });
+                    if (field.xtype == 'filefield') {
+                        if (field.file_name) {
+                            attributes.push({
+                                id: field.name,
+                                filename: field.file_name,
+                                mime_type: field.mime_type,
+                                value: field.theFile
+                            });
+                        }
+                    } else {
+                        attributes.push({
+                            id: field.name,
+                            value: field.getValue()
+                        });
+                    }
                 });
+
                 var sampleType = Ext.create('Slims.model.sample.Type', {
                     id: this.templateId || null,
                     name: formValues.name,

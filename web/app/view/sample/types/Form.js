@@ -137,7 +137,10 @@ Ext.define('Slims.view.sample.types.Form', {
             case 'document':
                 field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
                     buttonText: 'Select document',
-                    buttonOnly: true
+                    listeners: {
+                        change: this.readFile,
+                        scope: this
+                    }
                 }));
                 break;
             default:
@@ -145,6 +148,23 @@ Ext.define('Slims.view.sample.types.Form', {
                 break;
         }
         return field;
+    },
+
+    readFile: function(field, val) {
+        var filesList = field.el.down('input[type=file]').el.dom.files,
+            file = filesList[0];
+
+        var form = this;
+        form.setLoading('Read the file...');
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var file = e.target.result;
+            field.theFile = btoa(file);
+            form.setLoading(false);
+        };
+        field.mime_type = file.type;
+        field.file_name = file.name;
+        reader.readAsBinaryString(file);
     },
 
     setDefaultTemplate: function() {
