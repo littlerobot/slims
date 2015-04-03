@@ -7,7 +7,8 @@ Ext.define('Slims.view.sample.types.Form', {
         'Ext.form.field.Text',
         'Ext.form.field.TextArea',
         'Ext.form.field.ComboBox',
-        'Ext.form.field.Date'
+        'Ext.form.field.Date',
+        'Slims.ux.ColorButton'
     ],
 
     templateId: null, // default sample type template value
@@ -127,6 +128,9 @@ Ext.define('Slims.view.sample.types.Form', {
                 break;
             case 'date':
                 field = Ext.create('Ext.form.field.Date', generalParameters)
+                break;
+            case 'colour':
+                field = Ext.create('Slims.ux.ColorButton', generalParameters);
                 break;
             default:
                 field = Ext.create('Ext.form.field.Text', generalParameters);

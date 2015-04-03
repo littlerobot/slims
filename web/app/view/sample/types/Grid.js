@@ -17,6 +17,9 @@ Ext.define('Slims.view.sample.types.Grid', {
                     if (type == 'date') {
                         val = Ext.Date.format(new Date(val), 'Y-m-d');
                     }
+                    if (type == 'colour') {
+                        val = '<div style="background: '+val+'; height: 12px; width: 20px; display: inline-block;"></div>';
+                    }
                     var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, val);
                     html += string;
                 }, this);

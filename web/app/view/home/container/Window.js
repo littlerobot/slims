@@ -10,8 +10,8 @@ Ext.define('Slims.view.home.container.Window', {
         'Ext.form.Panel',
         'Ext.form.field.ComboBox',
         'Ext.form.Label',
-        'Ext.picker.Color',
-        'Ext.tree.Panel'
+        'Ext.tree.Panel',
+        'Slims.ux.ColorButton'
     ],
 
     layout: 'fit',
@@ -97,9 +97,9 @@ Ext.define('Slims.view.home.container.Window', {
                         name: 'stores',
                         inputValue: 'containers'
                     }]
-                },
-                    this.getColorPickerCmp(),
-                {
+                }, {
+                    xtype: 'colorbutton'
+                }, {
                     xtype: 'textarea',
                     name: 'comment',
                     width: '100%',
@@ -243,50 +243,6 @@ Ext.define('Slims.view.home.container.Window', {
         };
     },
 
-    getColorPickerCmp: function() {
-        return {
-            xtype: 'container',
-            layout: {
-                type: 'hbox',
-                align: 'middle'
-            },
-            items: [{
-                xtype: 'panel',
-                border: true,
-                layout: 'fit',
-                height: 24,
-                width: 24,
-                items: [{
-                    xtype: 'container',
-                    name: 'colorPalette',
-                    listeners: {
-                        afterrender: function(container) {
-                            container.el.dom.removeChild(container.el.dom.childNodes[0]);
-                        }
-                    }
-                }]
-            }, {
-                xtype: 'button',
-                style: 'margin-left: 8px;',
-                text: 'Select color',
-                width: 110,
-                name: 'colorButton',
-                menu: [{
-                    xtype: 'colorpicker',
-                    name: 'colour',
-                    value: 'FFFFFF',
-                    listeners: {
-                        scope: this,
-                        select: function(picker, selColor) {
-                            picker.up('button[name=colorButton]').menu.hide();
-                            this.down('container[name=colorPalette]').el.setStyle('background', '#'+selColor);
-                        }
-                    }
-                }]
-            }]
-        };
-    },
-
     getBbarCmpArray: function() {
         return [
             '->', {
@@ -326,11 +282,11 @@ Ext.define('Slims.view.home.container.Window', {
         if (parentId === false)
             return;
 
-            Ext.apply(values, {
-                colour: '#' + this.down('colorpicker').getValue(),
-                parent: parentId,
-                owner: research_group || null
-            });
+        Ext.apply(values, {
+            colour: this.down('colorbutton').getValue(),
+            parent: parentId,
+            owner: research_group || null
+        });
 
         var container = this.record;
 
@@ -359,7 +315,7 @@ Ext.define('Slims.view.home.container.Window', {
             container.research_group = container.research_group.id;
         }
 
-        this.setColor(container.colour);
+        this.down('colorbutton').setValue(container.colour);
         this.setParentContainer(container.parentId);
 
         this.down('form').getForm().setValues(container);
@@ -373,21 +329,6 @@ Ext.define('Slims.view.home.container.Window', {
             // get path from selected tree record
             container.set('parentPath', this.down('treepanel').selModel.selected.get(0).getPath());
         }
-    },
-
-    setColor: function(color) {
-        if (!color)
-            return;
-
-        this.down('container[name=colorPalette]').el.setStyle('background', color);
-        color = color.replace('#', '');
-        var picker = this.down('colorpicker');
-        // add color if it isn't in palette yet for resolving exception
-        if (picker.colors.indexOf(color) == -1) {
-            picker.colors.push(color);
-        }
-
-        picker.select(color);
     },
 
     setParentContainer: function(parentId) {
