@@ -8,6 +8,7 @@ Ext.define('Slims.view.sample.types.Form', {
         'Ext.form.field.TextArea',
         'Ext.form.field.ComboBox',
         'Ext.form.field.Date',
+        'Ext.form.field.File',
         'Slims.ux.ColorButton'
     ],
 
@@ -112,6 +113,7 @@ Ext.define('Slims.view.sample.types.Form', {
                 name: attribute.id,
                 fieldLabel: attribute.label
             };
+
         switch (attribute.type) {
             case 'option':
                 field = Ext.create('Ext.form.field.ComboBox', Ext.apply(generalParameters, {
@@ -131,6 +133,12 @@ Ext.define('Slims.view.sample.types.Form', {
                 break;
             case 'colour':
                 field = Ext.create('Slims.ux.ColorButton', generalParameters);
+                break;
+            case 'document':
+                field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
+                    buttonText: 'Select document',
+                    buttonOnly: true
+                }));
                 break;
             default:
                 field = Ext.create('Ext.form.field.Text', generalParameters);

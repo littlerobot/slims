@@ -14,7 +14,7 @@ Ext.define('Slims.ux.ColorButton', {
     initComponent: function() {
         this.items = [{
         	xtype: 'form',
-        	width: this.labelWidth,
+        	width: this.labelWidth ? this.labelWidth + 5 : 0,
         	items: [{
         		xtype: 'label',
         		width: this.labelWidth,
