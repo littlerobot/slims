@@ -233,7 +233,7 @@ class Container
     }
 
     /**
-     * @return string
+     * @return ResearchGroup
      */
     public function getResearchGroup()
     {

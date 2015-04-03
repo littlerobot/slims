@@ -84,15 +84,15 @@ class SampleInstanceTemplatesController extends FOSRestController
 
     /**
      * @param  SampleInstanceTemplate $template
-     * @param  FormTypeInterface $form
+     * @param  FormTypeInterface $formType
      * @param  Request $request
      * @return View
      */
-    private function processForm(SampleInstanceTemplate $template, FormTypeInterface $form, Request $request)
+    private function processForm(SampleInstanceTemplate $template, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $form, $template);
+        $form = $this->get('form.factory')->createNamed('', $formType, $template);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -111,8 +111,8 @@ class SampleInstanceTemplatesController extends FOSRestController
      * Remove deleted {@see AbstractSampleInstanceAttribute}s from the {@see ObjectManager} if they are no longer
      * associated with the {@see SampleInstanceTemplate}.
      *
-     * @param array|AbstractSampleInstanceAttribute[] $originalAttributes
-     * @param array|AbstractSampleInstanceAttribute[] $newAttributes
+     * @param AbstractSampleInstanceAttribute[] $originalAttributes
+     * @param AbstractSampleInstanceAttribute[] $newAttributes
      * @param ObjectManager $manager
      */
     private function removeDeletedAttributes(
