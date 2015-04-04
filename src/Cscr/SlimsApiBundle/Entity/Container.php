@@ -44,7 +44,7 @@ class Container
     /**
      * @var ResearchGroup
      *
-     * @ORM\ManyToOne(targetEntity="ResearchGroup")
+     * @ORM\ManyToOne(targetEntity="ResearchGroup", fetch="EAGER")
      * @ORM\JoinColumn(name="research_group_id")
      */
     private $researchGroup;
@@ -87,7 +87,7 @@ class Container
     /**
      * @var ArrayCollection<Container>
      *
-     * @ORM\OneToMany(targetEntity="Container", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="Container", mappedBy="parent", fetch="EAGER")
      *
      * @JMS\SerializedName("data")
      */

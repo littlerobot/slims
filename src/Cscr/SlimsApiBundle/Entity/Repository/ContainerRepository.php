@@ -17,7 +17,10 @@ class ContainerRepository extends EntityRepository
     {
         $q = $this
             ->createQueryBuilder('c')
+            ->select('c, children, researchGroup')
             ->where('c.parent IS NULL')
+            ->innerJoin('c.children', 'children')
+            ->innerJoin('c.researchGroup', 'researchGroup')
             ->getQuery();
 
         try {
