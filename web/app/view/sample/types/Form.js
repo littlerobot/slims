@@ -153,6 +153,10 @@ Ext.define('Slims.view.sample.types.Form', {
     },
 
     readFile: function(field, val) {
+        // replace fake path
+        var node = Ext.DomQuery.selectNode('input[id='+field.getInputId()+']');
+        node.value = val.replace("C:\\fakepath\\","");
+
         var filesList = field.el.down('input[type=file]').el.dom.files,
             file = filesList[0];
 
