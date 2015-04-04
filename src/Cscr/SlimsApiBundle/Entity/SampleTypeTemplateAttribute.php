@@ -183,7 +183,7 @@ class SampleTypeTemplateAttribute
     }
 
     /**
-     * @return array All valid type options.
+     * @return string[] All valid type options.
      */
     public static function getValidChoices()
     {
