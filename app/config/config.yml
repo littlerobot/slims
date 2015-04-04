@@ -73,6 +73,7 @@ swiftmailer:
 # Raven
 misd_raven:
     description: SLIMS
+    use_test_service: true
 
 # FOS REST
 fos_rest:
