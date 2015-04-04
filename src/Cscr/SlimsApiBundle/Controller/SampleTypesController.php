@@ -99,7 +99,7 @@ class SampleTypesController extends FOSRestController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            if ($originalAttributes) {
+            if (!empty($originalAttributes)) {
                 $this->removeDeletedAttributes($originalAttributes, $type, $manager);
             }
 
