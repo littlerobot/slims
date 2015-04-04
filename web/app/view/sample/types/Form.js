@@ -9,6 +9,7 @@ Ext.define('Slims.view.sample.types.Form', {
         'Ext.form.field.ComboBox',
         'Ext.form.field.Date',
         'Ext.form.field.File',
+        'Ext.form.FieldContainer',
         'Slims.ux.ColorButton'
     ],
 
@@ -135,12 +136,26 @@ Ext.define('Slims.view.sample.types.Form', {
                 field = Ext.create('Slims.ux.ColorButton', generalParameters);
                 break;
             case 'document':
-                field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
-                    buttonText: 'Select document',
-                    listeners: {
-                        change: this.readFile,
-                        scope: this
-                    }
+                field = Ext.create('Ext.form.FieldContainer', Ext.apply(generalParameters, {
+                    layout: 'vbox',
+                    setValue: function(val) {
+                        this.down('filefield').setValue(val);
+                    },
+                    getValue: function() {
+                        this.down('filefield').getValue();
+                    },
+                    items: [{
+                        xtype: 'filefield',
+                        width: '100%',
+                        buttonText: 'Select document',
+                        listeners: {
+                            change: this.readFile,
+                            scope: this
+                        }
+                    }, {
+                        xtype: 'checkbox',
+                        boxLabel: 'Remove existing document'
+                    }]
                 }));
                 break;
             default:

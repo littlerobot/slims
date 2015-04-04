@@ -32,14 +32,25 @@ Ext.define('Slims.view.sample.types.Window', {
                     attributes = [];
 
                 Ext.each(attributesFieldset.items.items, function(field) {
-                    if (field.xtype == 'filefield') {
-                        if (field.file_name) {
+                    if (field.xtype == 'fieldcontainer') {
+                        var removeDocument = field.down('checkbox').getValue();
+                        if (removeDocument) {
                             attributes.push({
                                 id: field.name,
-                                filename: field.file_name,
-                                mime_type: field.mime_type,
-                                value: field.theFile
+                                filename: '',
+                                mime_type: '',
+                                value: null
                             });
+                        } else {
+                            var fileField = field.down('filefield');
+                            if (fileField.file_name) {
+                                attributes.push({
+                                    id: field.name,
+                                    filename: fileField.file_name,
+                                    mime_type: fileField.mime_type,
+                                    value: fileField.theFile
+                                });
+                            }
                         }
                     } else {
                         attributes.push({
