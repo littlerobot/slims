@@ -106,7 +106,7 @@ class SampleTypeTemplate
     }
 
     /**
-     * The template can be edited as long as no samples have information saved using it.
+     * The template can be edited as long as no {@see SampleTypes}s have been saved using it.
      *
      * @return bool true if the template can be edited, false otherwise.
      *
@@ -115,8 +115,7 @@ class SampleTypeTemplate
      */
     public function isEditable()
     {
-        // TODO: Check for samples that have been recorded against this template and return false if there are any.
-        return true;
+        return $this->sampleTypes->isEmpty();
     }
 
     /**

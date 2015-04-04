@@ -214,4 +214,9 @@ class SampleTypeAttribute
     {
         return $this->template->getLabel();
     }
+
+    public function isDocument()
+    {
+        return SampleTypeTemplateAttribute::TYPE_DOCUMENT === $this->template->getType();
+    }
 }
