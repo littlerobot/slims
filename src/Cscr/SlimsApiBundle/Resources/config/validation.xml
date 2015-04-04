@@ -355,20 +355,6 @@
                 <option name="maxMessage">The filename cannot be longer than {{ limit }} characters.</option>
             </constraint>
         </property>
-        <property name="mimeType">
-            <constraint name="Expression">
-                <option name="expression">
-                    (this.getTemplate() and this.getTemplate().getType() != 'document') or value != false
-                </option>
-                <option name="message">A document must have a MIME type.</option>
-            </constraint>
-            <constraint name="Length">
-                <option name="min">1</option>
-                <option name="max">255</option>
-                <option name="minMessage">The MIME type must be at least {{ limit }} characters long.</option>
-                <option name="maxMessage">The MIME type cannot be longer than {{ limit }} characters.</option>
-            </constraint>
-        </property>
     </class>
 
 </constraint-mapping>
