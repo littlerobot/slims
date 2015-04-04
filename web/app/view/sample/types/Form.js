@@ -108,7 +108,9 @@ Ext.define('Slims.view.sample.types.Form', {
         var field,
             generalParameters = {
                 padding: 3,
+                allowBlank: false,
                 anchor: '100%',
+                msgTarget: 'under',
                 labelWidth: 180,
                 name: attribute.id,
                 fieldLabel: attribute.label
@@ -136,7 +138,7 @@ Ext.define('Slims.view.sample.types.Form', {
                 break;
             case 'document':
                 field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
-                    buttonText: 'Select document',
+                    buttonText: 'Select',
                     listeners: {
                         change: this.readFile,
                         scope: this
@@ -162,7 +164,6 @@ Ext.define('Slims.view.sample.types.Form', {
             field.theFile = btoa(file);
             form.setLoading(false);
         };
-        field.mime_type = file.type;
         field.file_name = file.name;
         reader.readAsBinaryString(file);
     },

@@ -37,7 +37,6 @@ Ext.define('Slims.view.sample.types.Window', {
                             attributes.push({
                                 id: field.name,
                                 filename: field.file_name,
-                                mime_type: field.mime_type,
                                 value: field.theFile
                             });
                         }

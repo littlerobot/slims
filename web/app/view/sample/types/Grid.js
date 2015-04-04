@@ -21,7 +21,7 @@ Ext.define('Slims.view.sample.types.Grid', {
                         val = '<div style="background: '+val+'; height: 12px; width: 20px; display: inline-block;"></div>';
                     }
                     if (type == 'document') {
-                        val = Ext.String.format('<a href="{0}">{1}({2})</a>', attr.url, attr.filename, attr.mime_type);
+                        val = Ext.String.format('<a href="{0}" target="_blank">{1}</a>', attr.url, attr.filename);
                     }
                     var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, val);
                     html += string;
