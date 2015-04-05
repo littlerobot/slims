@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * @ORM\Table(name="sample_type_template_attribute")
+ * @ORM\Table(name="sample_type_attribute")
  * @ORM\Entity()
  */
 class SampleTypeAttribute
