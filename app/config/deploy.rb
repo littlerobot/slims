@@ -46,7 +46,7 @@ after "deploy", "deploy:cleanup"
 before "symfony:cache:warmup", "symfony:doctrine:migrations:migrate"
 
 task :upload_parameters do
-  origin_file = "app/config/parameters.yml"
+  origin_file = "app/config/parameters.prod.yml"
   destination_file = latest_release + "/app/config/parameters.yml"
 
   try_sudo "mkdir -p #{File.dirname(destination_file)}"
