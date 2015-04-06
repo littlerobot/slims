@@ -29,19 +29,29 @@ class SampleTypeTemplate
     private $name;
 
     /**
-     * @var ArrayCollection|SampleTypeAttribute[]
+     * @var ArrayCollection|SampleTypeTemplateAttribute[]
      *
      * @ORM\OneToMany(
-     *  targetEntity="SampleTypeAttribute",
+     *  targetEntity="SampleTypeTemplateAttribute",
      *  mappedBy="parent",
      *  cascade={"PERSIST"}
      * )
      */
     private $attributes;
 
+    /**
+     * @var SampleType[]|ArrayCollection
+     *
+     * @ORM\OneToMany(targetEntity="SampleType", mappedBy="template")
+     *
+     * @JMS\Exclude()
+     */
+    private $sampleTypes;
+
     public function __construct()
     {
         $this->attributes = new ArrayCollection();
+        $this->sampleTypes = new ArrayCollection();
     }
 
     /**
@@ -63,10 +73,10 @@ class SampleTypeTemplate
     }
 
     /**
-     * @param SampleTypeAttribute $attribute
+     * @param SampleTypeTemplateAttribute $attribute
      * @return $this
      */
-    public function addAttribute(SampleTypeAttribute $attribute)
+    public function addAttribute(SampleTypeTemplateAttribute $attribute)
     {
         if (!$this->getAttributes()->contains($attribute)) {
             $this->getAttributes()->add($attribute);
@@ -77,10 +87,10 @@ class SampleTypeTemplate
     }
 
     /**
-     * @param SampleTypeAttribute $attribute
+     * @param SampleTypeTemplateAttribute $attribute
      * @return $this
      */
-    public function removeAttribute(SampleTypeAttribute $attribute)
+    public function removeAttribute(SampleTypeTemplateAttribute $attribute)
     {
         $this->getAttributes()->removeElement($attribute);
 
@@ -88,7 +98,7 @@ class SampleTypeTemplate
     }
 
     /**
-     * @return SampleTypeAttribute[]|ArrayCollection
+     * @return SampleTypeTemplateAttribute[]|ArrayCollection
      */
     public function getAttributes()
     {
@@ -96,7 +106,7 @@ class SampleTypeTemplate
     }
 
     /**
-     * The template can be edited as long as no samples have information saved using it.
+     * The template can be edited as long as no {@see SampleTypes}s have been saved using it.
      *
      * @return bool true if the template can be edited, false otherwise.
      *
@@ -105,8 +115,7 @@ class SampleTypeTemplate
      */
     public function isEditable()
     {
-        // TODO: Check for samples that have been recorded against this template and return false if there are any.
-        return true;
+        return $this->sampleTypes->isEmpty();
     }
 
     /**

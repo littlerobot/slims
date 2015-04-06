@@ -15,7 +15,7 @@ Ext.define('Slims.model.sample.Template', {
         type: 'auto',
         useNull: true
     }, {
-    	name: 'editable',
+        name: 'editable',
         type: 'bool',
         defaultValue: true
     }]

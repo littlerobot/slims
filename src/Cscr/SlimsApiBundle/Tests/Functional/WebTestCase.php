@@ -2,9 +2,9 @@
 
 namespace Cscr\SlimsApiBundle\Tests\Functional;
 
+use Liip\FunctionalTestBundle\Test\WebTestCase as BaseWebTestCase;
 use Symfony\Component\BrowserKit\Client;
 use Symfony\Component\HttpFoundation\Response;
-use Liip\FunctionalTestBundle\Test\WebTestCase as BaseWebTestCase;
 
 abstract class WebTestCase extends BaseWebTestCase
 {

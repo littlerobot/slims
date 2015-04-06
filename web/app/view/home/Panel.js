@@ -27,8 +27,6 @@ Ext.define('Slims.view.home.Panel', {
                 height: '100%',
                 border: true,
                 html: '<center style="margin-top: 60px;"><h2>Here will be some new content...</h2></center>',
-                // DEBUG: uncomment flex for production
-                // flex: 4
                 flex: 1
             }]
         }];

@@ -129,7 +129,7 @@ Ext.define('Slims.controller.Templates', {
             attributes = [];
 
         if (template.getId()) {
-            url = Ext.String.format(Slims.Url.getRoute('settemplate'), template.getId());
+            url = Slims.Url.getRoute('settemplate', [template.getId()]);
 
             // remove extra fields before request
             Ext.each(template.get('attributes'), function(attribute, index) {

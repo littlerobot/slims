@@ -7,8 +7,8 @@ use Cscr\SlimsApiBundle\Form\Type\CreateContainerType;
 use Cscr\SlimsApiBundle\Form\Type\UpdateContainerType;
 use Cscr\SlimsApiBundle\Response\ContainerResponse;
 use Cscr\SlimsApiBundle\Response\ExtJsResponse;
-use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
+use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
 use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -64,15 +64,15 @@ class ContainersController extends FOSRestController
 
     /**
      * @param  Container         $container
-     * @param  FormTypeInterface $form
+     * @param  FormTypeInterface $formType
      * @param  Request           $request
      * @return View
      */
-    private function processForm(Container $container, FormTypeInterface $form, Request $request)
+    private function processForm(Container $container, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $form, $container);
+        $form = $this->get('form.factory')->createNamed('', $formType, $container);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

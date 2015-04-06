@@ -4,17 +4,13 @@
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
-    <!--
-    <parameters>
-        <parameter key="cscr_slims_api.example.class">Cscr\SlimsApiBundle\Example</parameter>
-    </parameters>
-
     <services>
-        <service id="cscr_slims_api.example" class="%cscr_slims_api.example.class%">
-            <argument type="service" id="service_id" />
-            <argument>plain_value</argument>
-            <argument>%parameter_name%</argument>
+        <service id="sample_type_attribute.url.generator" class="Cscr\SlimsApiBundle\Service\SampleTypeDocumentAttributeUrlGenerator">
+            <argument type="service" id="router" />
+        </service>
+        <service id="sample_type_attribute.event_listener" class="Cscr\SlimsApiBundle\EventListener\SampleTypeAttributeListener">
+            <argument type="service" id="sample_type_attribute.url.generator" />
+            <tag name="doctrine.event_listener" event="postLoad" />
         </service>
     </services>
-    -->
 </container>
