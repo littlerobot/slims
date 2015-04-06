@@ -2,33 +2,39 @@
 
 namespace Cscr\SlimsApiBundle\Form\Type;
 
-use Cscr\SlimsApiBundle\Entity\SampleTypeAttribute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class SampleTypeAttributeType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * {@inheritdoc}
+     */
+    public function buildForm(FormBuilderInterface $builder, array $config)
     {
         $builder
-            ->add('order', 'integer')
-            ->add('label')
-            ->add('type', 'choice', [
-                'choices' => $this->getChoices(),
+            ->add('id', 'entity', [
+                'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
+                'property' => 'id',
+                'property_path' => 'template',
             ])
-            ->add('options', 'collection', [
-                'type' => 'text',
-                'allow_add' => true,
+            ->add('value')
+            ->add('mime_type', 'text', [
+                'property_path' => 'mimeType',
             ])
+            ->add('filename')
         ;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
             'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute',
-            'csrf_protection' => false,
+            'cscr_protection' => false,
         ]);
     }
 
@@ -37,11 +43,6 @@ class SampleTypeAttributeType extends AbstractType
      */
     public function getName()
     {
-        return 'create_sample_type_attribute';
-    }
-
-    private function getChoices()
-    {
-        return array_combine(SampleTypeAttribute::getValidChoices(), SampleTypeAttribute::getValidChoices());
+        return 'sample_type_attribute_create';
     }
 }

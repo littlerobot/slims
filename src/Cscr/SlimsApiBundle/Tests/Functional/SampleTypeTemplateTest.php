@@ -3,7 +3,7 @@
 namespace Cscr\SlimsApiBundle\Tests\Functional;
 
 use Cscr\SlimsApiBundle\Entity\SampleTypeTemplate;
-use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeAttributeBuilder;
+use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateAttributeBuilder;
 use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateBuilder;
 
 class SampleTypeTemplateTest extends WebTestCase
@@ -64,7 +64,7 @@ class SampleTypeTemplateTest extends WebTestCase
     public function testAddOptionAttributeWithoutAnyOptionsFails()
     {
         $builder = (new SampleTypeTemplateBuilder())
-            ->withAttribute(SampleTypeAttributeBuilder::anOptionAttribute()->withoutOptions());
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::anOptionAttribute()->withoutOptions());
 
         $this->client->request('POST', '/api/sample-type-templates', [], [], [], $builder->buildAsJson());
         $this->assertJsonResponse($this->client->getResponse(), 400);
@@ -73,7 +73,7 @@ class SampleTypeTemplateTest extends WebTestCase
     public function testAddBriefTextAttributeWithOptionsFails()
     {
         $builder = (new SampleTypeTemplateBuilder())
-            ->withAttribute(SampleTypeAttributeBuilder::aBriefTextAttribute()->withOptions(['foo', 'bar']));
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aBriefTextAttribute()->withOptions(['foo', 'bar']));
 
         $this->client->request('POST', '/api/sample-type-templates', [], [], [], $builder->buildAsJson());
         $this->assertJsonResponse($this->client->getResponse(), 400);
@@ -109,13 +109,13 @@ class SampleTypeTemplateTest extends WebTestCase
     {
         return (new SampleTypeTemplateBuilder())
             ->withName($name)
-            ->withAttribute(SampleTypeAttributeBuilder::aBriefTextAttribute()->withOrder(1))
-            ->withAttribute(SampleTypeAttributeBuilder::aLongTextAttribute()->withOrder(2))
-            ->withAttribute(SampleTypeAttributeBuilder::anOptionAttribute()->withOrder(3))
-            ->withAttribute(SampleTypeAttributeBuilder::aDocumentAttribute()->withOrder(4))
-            ->withAttribute(SampleTypeAttributeBuilder::aDateAttribute()->withOrder(5))
-            ->withAttribute(SampleTypeAttributeBuilder::aColourAttribute()->withOrder(6))
-            ->withAttribute(SampleTypeAttributeBuilder::aUserAttribute()->withOrder(7))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::anOptionAttribute()->withOrder(3))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aUserAttribute()->withOrder(7))
         ;
     }
 }

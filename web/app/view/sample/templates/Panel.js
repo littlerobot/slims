@@ -11,7 +11,6 @@ Ext.define('Slims.view.sample.templates.Panel', {
     ],
 
     initComponent: function() {
-
         this.items = [{
             xtype: 'panel',
             layout: 'vbox',

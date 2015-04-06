@@ -28,6 +28,17 @@ class SampleTypeTemplatesController extends FOSRestController
     }
 
     /**
+     * @Rest\Route("/{id}")
+     * @Rest\View
+     * @param SampleTypeTemplate $template
+     * @return SampleTypeTemplateResponse
+     */
+    public function getSampleTypeTemplateAction(SampleTypeTemplate $template)
+    {
+        return new SampleTypeTemplateResponse($template);
+    }
+
+    /**
      * @Rest\Post("")
      *
      * @param Request $request
@@ -80,15 +91,15 @@ class SampleTypeTemplatesController extends FOSRestController
 
     /**
      * @param  SampleTypeTemplate $template
-     * @param  FormTypeInterface $form
+     * @param  FormTypeInterface $formType
      * @param  Request $request
      * @return View
      */
-    private function processForm(SampleTypeTemplate $template, FormTypeInterface $form, Request $request)
+    private function processForm(SampleTypeTemplate $template, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $form, $template);
+        $form = $this->get('form.factory')->createNamed('', $formType, $template);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -104,8 +115,8 @@ class SampleTypeTemplatesController extends FOSRestController
     }
 
     /**
-     * Remove deleted {@see SampleTypeAttribute}s from the {@see ObjectManager} if they are no longer associated with
-     * the {@see SampleTypeTemplate}.
+     * Remove deleted {@see SampleTypeTemplateAttribute}s from the {@see ObjectManager} if they are no longer associated
+     * with the {@see SampleTypeTemplate}.
      *
      * @param array $originalAttributes
      * @param SampleTypeTemplate $template

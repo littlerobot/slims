@@ -60,7 +60,7 @@ abstract class AbstractSampleInstanceAttribute
     protected $type;
 
     /**
-     * @var array|string[]
+     * @var string[]|null
      *
      * @ORM\Column(type="array", nullable=true)
      */
@@ -144,8 +144,8 @@ abstract class AbstractSampleInstanceAttribute
     }
 
     /**
-     * @param array|\string[]|null $options
-     * @return SampleTypeAttribute
+     * @param string[]|null $options
+     * @return AbstractSampleInstanceAttribute
      */
     public function setOptions(array $options = null)
     {
@@ -161,6 +161,7 @@ abstract class AbstractSampleInstanceAttribute
         }
 
         $this->options = $options;
+
         return $this;
     }
 
@@ -193,7 +194,7 @@ abstract class AbstractSampleInstanceAttribute
     }
 
     /**
-     * @return array All valid type options.
+     * @return string[] All valid type options.
      */
     public static function getValidChoices()
     {

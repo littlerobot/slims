@@ -12,7 +12,7 @@ Ext.define('Slims.controller.Main', {
             var title = response.errors.message || 'Error appeared!',
                 message = 'Server returned an error.';
 
-            if (response.errors.errors.length) {
+            if (response.errors.errors && response.errors.errors.length) {
                 message = '';
                 Ext.each(response.errors.errors, function(m) {
                     message += m + "</br> ";

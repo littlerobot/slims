@@ -20,10 +20,17 @@ sample_type_templates:
     type:           rest
     resource:       @CscrSlimsApiBundle/Controller/SampleTypeTemplatesController.php
     prefix:         sample-type-templates
-    name_prefix:    api_sample_type_templates
+    name_prefix:    api_sample_type_templates_
 
 sample_instance_templates:
     type:           rest
     resource:       @CscrSlimsApiBundle/Controller/SampleInstanceTemplatesController.php
     prefix:         sample-instance-templates
-    name_prefix:    api_sample_instance_templates
+    name_prefix:    api_sample_instance_templates_
+
+
+sample_types:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/SampleTypesController.php
+    prefix:         sample-types
+    name_prefix:    api_sample_types_
