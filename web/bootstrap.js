@@ -870,7 +870,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.model.Template": [],
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
-  "Slims.model.sample.Template": [],
+  "Slims.model.sample.InstanceTemplate": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [
     "Slims.Url"
@@ -883,7 +883,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.Users": [],
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
-  "Slims.store.sample.Templates": [],
+  "Slims.store.sample.InstanceTemplates": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
   "Slims.view.Viewport": [],
@@ -893,6 +893,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
   "Slims.view.sample.Page": [],
+  "Slims.view.sample.Wizard": [],
   "Slims.view.sample.templates.AttributeWindow": [],
   "Slims.view.sample.templates.AttributesGrid": [],
   "Slims.view.sample.templates.Panel": [],
@@ -1926,7 +1927,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.model.Template": [],
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
-  "Slims.model.sample.Template": [],
+  "Slims.model.sample.InstanceTemplate": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [],
   "Slims.store.AttributeTypes": [],
@@ -1937,7 +1938,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.store.Users": [],
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
-  "Slims.store.sample.Templates": [],
+  "Slims.store.sample.InstanceTemplates": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
@@ -1960,6 +1961,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.Page": [
     "widget.samplespage"
+  ],
+  "Slims.view.sample.Wizard": [
+    "widget.samplewizard"
   ],
   "Slims.view.sample.templates.AttributeWindow": [
     "widget.sampleattributewindow"
