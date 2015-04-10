@@ -112,36 +112,39 @@ Ext.define('Slims.view.sample.Wizard', {
 
     getSelectSampleInstancePanel: function() {
         return Ext.create('Ext.form.Panel', {
+            layout: 'fit',
             items: [{
-                xtype: 'combo',
-                padding: 10,
-                width: 400,
-                name: 'sampleInstanceTemplateId',
-                fieldLabel: 'Step #2. Select <i>Sample Instance Template</i> and press <i>Next</i>',
-                labelAlign: 'top',
-                emptyText: 'Select to continue',
-                allowBlank: false,
-                editable: false,
-                store: Ext.StoreMgr.get('instanceTemplates'),
-                queryMode: 'local',
-                displayField: 'name',
-                valueField: 'id',
-                listeners: {
-                    change: function(combo, value) {
-                        var template = combo.store.findRecord(combo.valueField, value);
-                        this.down('grid[name=storeAttributesGrid]').getStore().loadData(template.get('store'));
-                        this.down('grid[name=removeAttributesGrid]').getStore().loadData(template.get('remove'));
-                    },
-                    scope: this
-                }
-            }, {
-                xtype: 'container',
-                height: '100%',
+                xtype: 'panel',
+                tbar: [{
+                    xtype: 'combo',
+                    padding: 10,
+                    width: 400,
+                    name: 'sampleInstanceTemplateId',
+                    fieldLabel: 'Step #2. Select <i>Sample Instance Template</i> and press <i>Next</i>',
+                    labelAlign: 'top',
+                    emptyText: 'Select to continue',
+                    allowBlank: false,
+                    editable: false,
+                    store: Ext.StoreMgr.get('instanceTemplates'),
+                    queryMode: 'local',
+                    displayField: 'name',
+                    valueField: 'id',
+                    listeners: {
+                        change: function(combo, value) {
+                            var template = combo.store.findRecord(combo.valueField, value);
+                            this.down('grid[name=storeAttributesGrid]').getStore().loadData(template.get('store'));
+                            this.down('grid[name=removeAttributesGrid]').getStore().loadData(template.get('remove'));
+                        },
+                        scope: this
+                    }
+                }],
                 layout: 'hbox',
                 items: [{
                     xtype: 'grid',
+                    style: 'border-right: 1px solid #99BBE8;',
                     title: 'Store Attributes',
                     name: 'storeAttributesGrid',
+                    height: '100%',
                     flex: 1,
                     store: {
                         fields: ['order', 'label', 'type'],
@@ -159,7 +162,7 @@ Ext.define('Slims.view.sample.Wizard', {
                             header: 'Label'
                         }, {
                             dataIndex: 'type',
-                            width: 200,
+                            width: 120,
                             header: 'Type'
                         }]
                     }
@@ -167,6 +170,7 @@ Ext.define('Slims.view.sample.Wizard', {
                     xtype: 'grid',
                     title: 'Remove Attributes',
                     name: 'removeAttributesGrid',
+                    height: '100%',
                     flex: 1,
                     store: {
                         fields: ['order', 'label', 'type'],
@@ -184,7 +188,7 @@ Ext.define('Slims.view.sample.Wizard', {
                             header: 'Label'
                         }, {
                             dataIndex: 'type',
-                            width: 200,
+                            width: 120,
                             header: 'Type'
                         }]
                     }
@@ -196,7 +200,12 @@ Ext.define('Slims.view.sample.Wizard', {
                 scope: this
             }, '->', {
                 text: 'Next',
-                handler: this.nextTab,
+                handler: function() {
+                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
+                    if (valid) {
+                        this.nextTab();
+                    }
+                },
                 scope: this
             }]
         });
