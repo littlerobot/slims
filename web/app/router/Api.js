@@ -39,11 +39,11 @@ Ext.define('Slims.router.Api', {
             case 'createuser':
                 return Ext.String.format('{0}/users', routePrefix);
             // sample templates
-            case 'createsampletemplate':
+            case 'createsampleinstancetemplate':
                 return Ext.String.format('{0}/sample-instance-templates', routePrefix);
-            case 'setsampletemplate':
+            case 'setsampleinstancetemplate':
                 return Ext.String.format('{0}/sample-instance-templates/{1}', routePrefix, params[0]);
-            case 'getsampletemplates':
+            case 'getsampleinstancetemplates':
                 return Ext.String.format('{0}/sample-instance-templates', routePrefix);
             // sample types
             case 'getsampletypes':
@@ -92,11 +92,11 @@ Ext.define('Slims.router.Api', {
             case 'createuser':
                 return Ext.String.format('{0}/{1}/users', devController, routePrefix);
             // sample templates
-            case 'createsampletemplate':
+            case 'createsampleinstancetemplate':
                 return Ext.String.format('{0}/{1}/sample-instance-templates', devController, routePrefix);
-            case 'setsampletemplate':
+            case 'setsampleinstancetemplate':
                 return Ext.String.format('{0}/{1}/sample-instance-templates/{2}', devController, routePrefix, params[0]);
-            case 'getsampletemplates':
+            case 'getsampleinstancetemplates':
                 return Ext.String.format('{0}/{1}/sample-instance-templates', devController, routePrefix);
             // sample types
             case 'getsampletypes':

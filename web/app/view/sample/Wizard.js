@@ -10,93 +10,21 @@ Ext.define('Slims.view.sample.Wizard', {
     title: 'Create Sample Wizard Tool',
     requires: [],
 
+    columnsDefaults: {
+        menuDisabled: true,
+        resizable: false,
+        sortable: false,
+        draggable: false
+    },
+
     initComponent: function() {
         this.items = [{
             xtype: 'panel',
             name: 'cardPanel',
             layout: 'card',
-            items: [{
-                xtype: 'form',
-                layout: 'fit',
-                items: [{
-                    xtype: 'label',
-                    padding: 10,
-                    width: '100%',
-                    html: '<center><h2>Welcome to Create New Sample Wizard.</h2></center>'
-                }, {
-                    xtype: 'grid',
-                    tbar: [{
-                        xtype: 'combo',
-                        padding: 10,
-                        name: 'templateId',
-                        fieldLabel: 'Please, select <i>Sample Type</i> for a new sample and press <i>Next</i>',
-                        labelAlign: 'top',
-                        emptyText: 'Select to continue',
-                        labelWidth: 180,
-                        allowBlank: false,
-                        editable: false,
-                        store: Ext.StoreMgr.get('templates'),
-                        queryMode: 'local',
-                        displayField: 'name',
-                        valueField: 'id',
-                        listeners: {
-                            change: function(combo, value) {
-                                var template = combo.store.findRecord(combo.valueField, value),
-                                    attributes = template.get('attributes');
-                                this.down('grid').getStore().loadData(attributes);
-                            },
-                            scope: this
-                        }
-                    }],
-                    store: {
-                        fields: ['order', 'label', 'type'],
-                        data: []
-                    },
-                    columns: {
-                        defaults: {
-                            menuDisabled: true,
-                            resizable: false,
-                            sortable: false,
-                            draggable: false
-                        },
-                        items: [{
-                            dataIndex: 'order',
-                            width: 40,
-                            header: '#'
-                        }, {
-                            dataIndex: 'label',
-                            flex: 1,
-                            header: 'Label'
-                        }, {
-                            dataIndex: 'type',
-                            width: 200,
-                            header: 'Type'
-                        }]
-                    }
-                }],
-                buttons: ['->', {
-                    text: 'Next',
-                    handler: function() {
-                        var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
-                        if (valid) {
-                            this.nextTab();
-                        }
-                    },
-                    scope: this
-                }]
-            }, {
-                xtype: 'panel',
-                bodyStyle: 'background: green;',
-                buttons: [{
-                    text: 'Prev',
-                    handler: this.prevTab,
-                    scope: this
-                }, '->', {
-                    text: 'Next',
-                    handler: this.nextTab,
-                    scope: this
-                }]
-            }, {
+            items: [
+                this.getSelectSampleTypePanel(),
+                this.getSelectSampleInstancePanel(), {
                 xtype: 'panel',
                 bodyStyle: 'background: red;',
                 buttons: [{
@@ -112,6 +40,166 @@ Ext.define('Slims.view.sample.Wizard', {
         }];
 
         this.callParent();
+    },
+
+    getSelectSampleTypePanel: function() {
+        return Ext.create('Ext.form.Panel', {
+            layout: 'fit',
+            items: [{
+                xtype: 'label',
+                padding: 10,
+                width: '100%',
+                html: '<center><h2>Welcome to Create New Sample Wizard.</h2></center>'
+            }, {
+                xtype: 'grid',
+                name: 'templatesGrid',
+                tbar: [{
+                    xtype: 'combo',
+                    padding: 10,
+                    width: 400,
+                    name: 'templateId',
+                    fieldLabel: 'Please, select <i>Sample Type</i> for a new sample and press <i>Next</i>',
+                    labelAlign: 'top',
+                    emptyText: 'Select to continue',
+                    allowBlank: false,
+                    editable: false,
+                    store: Ext.StoreMgr.get('templates'),
+                    queryMode: 'local',
+                    displayField: 'name',
+                    valueField: 'id',
+                    listeners: {
+                        change: function(combo, value) {
+                            var template = combo.store.findRecord(combo.valueField, value),
+                                attributes = template.get('attributes');
+                            this.down('grid[name=templatesGrid]').getStore().loadData(attributes);
+                        },
+                        scope: this
+                    }
+                }],
+                store: {
+                    fields: ['order', 'label', 'type'],
+                    data: []
+                },
+                columns: {
+                    defaults: this.columnsDefaults,
+                    items: [{
+                        dataIndex: 'order',
+                        width: 40,
+                        header: '#'
+                    }, {
+                        dataIndex: 'label',
+                        flex: 1,
+                        header: 'Label'
+                    }, {
+                        dataIndex: 'type',
+                        width: 200,
+                        header: 'Type'
+                    }]
+                }
+            }],
+            buttons: ['->', {
+                text: 'Next',
+                handler: function() {
+                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
+                    if (valid) {
+                        this.nextTab();
+                    }
+                },
+                scope: this
+            }]
+        });
+    },
+
+    getSelectSampleInstancePanel: function() {
+        return Ext.create('Ext.form.Panel', {
+            items: [{
+                xtype: 'combo',
+                padding: 10,
+                width: 400,
+                name: 'sampleInstanceTemplateId',
+                fieldLabel: 'Step #2. Select <i>Sample Instance Template</i> and press <i>Next</i>',
+                labelAlign: 'top',
+                emptyText: 'Select to continue',
+                allowBlank: false,
+                editable: false,
+                store: Ext.StoreMgr.get('instanceTemplates'),
+                queryMode: 'local',
+                displayField: 'name',
+                valueField: 'id',
+                listeners: {
+                    change: function(combo, value) {
+                        var template = combo.store.findRecord(combo.valueField, value);
+                        this.down('grid[name=storeAttributesGrid]').getStore().loadData(template.get('store'));
+                        this.down('grid[name=removeAttributesGrid]').getStore().loadData(template.get('remove'));
+                    },
+                    scope: this
+                }
+            }, {
+                xtype: 'container',
+                height: '100%',
+                layout: 'hbox',
+                items: [{
+                    xtype: 'grid',
+                    title: 'Store Attributes',
+                    name: 'storeAttributesGrid',
+                    flex: 1,
+                    store: {
+                        fields: ['order', 'label', 'type'],
+                        data: []
+                    },
+                    columns: {
+                        defaults: this.columnsDefaults,
+                        items: [{
+                            dataIndex: 'order',
+                            width: 40,
+                            header: '#'
+                        }, {
+                            dataIndex: 'label',
+                            flex: 1,
+                            header: 'Label'
+                        }, {
+                            dataIndex: 'type',
+                            width: 200,
+                            header: 'Type'
+                        }]
+                    }
+                }, {
+                    xtype: 'grid',
+                    title: 'Remove Attributes',
+                    name: 'removeAttributesGrid',
+                    flex: 1,
+                    store: {
+                        fields: ['order', 'label', 'type'],
+                        data: []
+                    },
+                    columns: {
+                        defaults: this.columnsDefaults,
+                        items: [{
+                            dataIndex: 'order',
+                            width: 40,
+                            header: '#'
+                        }, {
+                            dataIndex: 'label',
+                            flex: 1,
+                            header: 'Label'
+                        }, {
+                            dataIndex: 'type',
+                            width: 200,
+                            header: 'Type'
+                        }]
+                    }
+                }]
+            }],
+            buttons: [{
+                text: 'Prev',
+                handler: this.prevTab,
+                scope: this
+            }, '->', {
+                text: 'Next',
+                handler: this.nextTab,
+                scope: this
+            }]
+        });
     },
 
     nextTab: function() {

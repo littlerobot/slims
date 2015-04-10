@@ -7,8 +7,8 @@ Ext.define('Slims.controller.SampleTemplates', {
         'sample.templates.AttributeWindow'
     ],
 
-    stores: ['sample.Templates', 'sample.Attributes', 'sample.AttributeTypes'],
-    models: ['sample.Template', 'sample.Attribute'],
+    stores: ['sample.InstanceTemplates', 'sample.Attributes', 'sample.AttributeTypes'],
+    models: ['sample.InstanceTemplate', 'sample.Attribute'],
 
     refs: [{
         ref: 'tab',
@@ -64,6 +64,12 @@ Ext.define('Slims.controller.SampleTemplates', {
         });
 
         templatesStore.load();
+
+        var instanceTemplatesStore = Ext.create('Slims.store.sample.InstanceTemplates', {
+            storeId: 'instanceTemplates'
+        });
+
+        instanceTemplatesStore.load();
     },
 
     setRestoreSelectionListener: function() {
@@ -165,12 +171,12 @@ Ext.define('Slims.controller.SampleTemplates', {
         };
 
         if (template.getId()) {
-            url = Slims.Url.getRoute('setsampletemplate', [template.getId()]);
+            url = Slims.Url.getRoute('setsampleinstancetemplate', [template.getId()]);
 
             jsonData.store  = this.prepareAttributeParams(template.get('store' ));
             jsonData.remove = this.prepareAttributeParams(template.get('remove'));
         } else {
-            url = Slims.Url.getRoute('createsampletemplate');
+            url = Slims.Url.getRoute('createsampleinstancetemplate');
         }
 
         if (dialog) {
