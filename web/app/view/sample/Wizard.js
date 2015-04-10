@@ -154,7 +154,7 @@ Ext.define('Slims.view.sample.Wizard', {
                         defaults: this.columnsDefaults,
                         items: [{
                             dataIndex: 'order',
-                            width: 40,
+                            width: 30,
                             header: '#'
                         }, {
                             dataIndex: 'label',
@@ -180,7 +180,7 @@ Ext.define('Slims.view.sample.Wizard', {
                         defaults: this.columnsDefaults,
                         items: [{
                             dataIndex: 'order',
-                            width: 40,
+                            width: 30,
                             header: '#'
                         }, {
                             dataIndex: 'label',
