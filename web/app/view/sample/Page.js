@@ -2,47 +2,33 @@ Ext.define('Slims.view.sample.Page', {
     extend: 'Ext.panel.Panel',
     xtype: 'samplespage',
 
-    layout: 'card',
+    layout: 'hbox',
+    requires: ['Slims.view.sample.Wizard'],
     border: false,
-
-    requires: [],
 
     initComponent: function() {
         this.items = [{
             xtype: 'panel',
-            bodyStyle: 'background: yellow;',
-            buttons: ['->', {
-                text: 'Next',
-                handler: this.nextTab,
-                scope: this
-            }]
+            border: true,
+            title: 'Grid',
+            flex: 1
         }, {
             xtype: 'panel',
-            bodyStyle: 'background: green;',
-            buttons: [{
-                text: 'Prev',
-                handler: this.prevTab,
-                scope: this
-            }, '->', {
-                text: 'Next',
-                handler: this.nextTab,
-                scope: this
-            }]
-        }, {
-            xtype: 'panel',
-            bodyStyle: 'background: red;',
-            buttons: [{
-                text: 'Prev',
-                handler: this.prevTab,
-                scope: this
-            }, '->', {
-                text: 'Finish',
-                handler: this.commitChanges,
-                scope: this
-            }]
+            border: true,
+            title: 'Details',
+            flex: 2
+        }];
+
+        this.tbar = [{
+            text: 'Create New Sample',
+            handler: this.openWIzardTool
         }];
 
         this.callParent();
+    },
+
+    openWIzardTool: function() {
+        Ext.create('Slims.view.sample.Wizard').show();
     },
 
     nextTab: function() {
