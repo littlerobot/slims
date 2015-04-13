@@ -24,7 +24,8 @@ Ext.define('Slims.view.sample.Wizard', {
             layout: 'card',
             items: [
                 this.getSelectSampleTypePanel(),
-                this.getSelectSampleInstancePanel(), {
+                this.getSelectSampleInstancePanel(),
+                this.getSelectContainerPanel(), {
                 xtype: 'panel',
                 bodyStyle: 'background: red;',
                 buttons: [{
@@ -193,6 +194,40 @@ Ext.define('Slims.view.sample.Wizard', {
                         }]
                     }
                 }]
+            }],
+            buttons: [{
+                text: 'Prev',
+                handler: this.prevTab,
+                scope: this
+            }, '->', {
+                text: 'Next',
+                handler: function() {
+                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
+                    if (valid) {
+                        this.nextTab();
+                    }
+                },
+                scope: this
+            }]
+        });
+    },
+
+    getSelectContainerPanel: function() {
+        return Ext.create('Ext.form.Panel', {
+            layout: 'fit',
+            tbar: [{
+                xtype: 'label',
+                padding: '10px 10px 0 10px;',
+                html: 'Select Container for storing new Sample and press <i>Next</i>'
+            }],
+            items: [{
+                xtype: 'containersgrid',
+                readOnly: true,
+                listeners: {
+                    selectionchanged: function() {
+
+                    }
+                }
             }],
             buttons: [{
                 text: 'Prev',

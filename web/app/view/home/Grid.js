@@ -11,10 +11,12 @@ Ext.define('Slims.view.home.Grid', {
     useArrows: true,
     rootVisible: false,
     multiSelect: true,
+    readOnly: false,
 
     initComponent: function() {
         this.tbar = [{
             xtype: 'button',
+            hidden: this.readOnly,
             text: 'Add Container',
             icon: '/resources/images/add.png',
             name: 'addContainer'
@@ -59,6 +61,7 @@ Ext.define('Slims.view.home.Grid', {
             }
         }, {
             xtype: 'actioncolumn',
+            hidden: this.readOnly,
             icon: '/resources/images/edit.png',
             width: 30,
             menuDisabled: true,
