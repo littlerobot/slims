@@ -215,17 +215,18 @@ Ext.define('Slims.view.sample.Wizard', {
     getSelectContainerPanel: function() {
         return Ext.create('Ext.form.Panel', {
             layout: 'fit',
+            name: 'step3',
             tbar: [{
                 xtype: 'label',
-                padding: '10px 10px 0 10px;',
+                padding: 10,
                 html: 'Select Container for storing new Sample and press <i>Next</i>'
             }],
             items: [{
                 xtype: 'containersgrid',
                 readOnly: true,
                 listeners: {
-                    selectionchanged: function() {
-
+                    selectionchange: function(tree, selected) {
+                        tree.view.up('panel[name=step3]').down('button[name=next]').setDisabled(!selected.length);
                     }
                 }
             }],
@@ -235,12 +236,9 @@ Ext.define('Slims.view.sample.Wizard', {
                 scope: this
             }, '->', {
                 text: 'Next',
-                handler: function() {
-                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
-                    if (valid) {
-                        this.nextTab();
-                    }
-                },
+                name: 'next',
+                disabled: true,
+                handler: this.nextTab,
                 scope: this
             }]
         });
