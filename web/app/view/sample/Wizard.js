@@ -25,19 +25,9 @@ Ext.define('Slims.view.sample.Wizard', {
             items: [
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel(), {
-                xtype: 'panel',
-                bodyStyle: 'background: red;',
-                buttons: [{
-                    text: 'Prev',
-                    handler: this.prevTab,
-                    scope: this
-                }, '->', {
-                    text: 'Finish',
-                    handler: this.commitChanges,
-                    scope: this
-                }]
-            }]
+                this.getSelectContainerPanel(),
+                this.getSelectPositionPanel()
+            ]
         }];
 
         this.callParent();
@@ -244,6 +234,68 @@ Ext.define('Slims.view.sample.Wizard', {
         });
     },
 
+    getSelectPositionPanel: function() {
+        var imageTpl = new Ext.XTemplate(
+            '<tpl for=".">',
+                '<div style="margin: 10px;">',
+                '{[this.createRow(values.data)]}',
+                  // '<img src="{src}" />',
+                  // '<br/><span>{caption}</span>',
+                '</div>',
+            '</tpl>',
+            {
+                createRow: function(row) {
+                    var tpl = '';
+                    for (var i in row) {
+                        var item = row[i] || {};
+                        tpl += Ext.String.format('<div class="thumb-wrap" style="height: 10px; width: 10px; padding: 3px; color: {0}; position: inline;"></div>', item.color || 'white');
+                    }
+
+                    return tpl;
+                }
+            }
+        );
+
+        var data = this.getTempData();
+        var parsedData = [];
+        for (var i in data) {
+            var row = data[i];
+            parsedData.push({data: row});
+        }
+        var fields = ['data'];
+
+        var store = Ext.create('Ext.data.Store', {
+            fields: [{
+                name: 'data',
+                type: 'auto'
+            }],
+            data: parsedData
+        });
+
+        var view = Ext.create('Ext.view.View', {
+            autoScroll: true,
+            store: store,
+            tpl: imageTpl,
+            itemSelector: 'div.thumb-wrap',
+            emptyText: 'No images available'
+        });
+
+        return {
+            xtype: 'panel',
+            layout: 'fit',
+            items: [view],
+            buttons: [{
+                text: 'Prev',
+                handler: this.prevTab,
+                scope: this
+            }, '->', {
+                text: 'Finish',
+                handler: this.commitChanges,
+                scope: this
+            }]
+        };
+    },
+
     nextTab: function() {
         var cardPanel = this.down('panel[name=cardPanel]');
         cardPanel.layout.setActiveItem(cardPanel.layout.getNext());
@@ -254,7 +306,91 @@ Ext.define('Slims.view.sample.Wizard', {
         cardPanel.layout.setActiveItem(cardPanel.layout.getPrev());
     },
 
-    commitChanges: function() {
+    commitChanges: function() {},
 
+    getTempData: function() {
+        return [
+            [
+                {
+                    id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                }
+            ], [
+                {
+                    id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                }
+            ], [
+                null,{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },null,{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                }
+            ], [
+                {
+                    id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                }
+            ]
+        ];
     }
 });
