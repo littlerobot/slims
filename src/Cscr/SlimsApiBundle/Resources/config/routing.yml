@@ -28,9 +28,14 @@ sample_instance_templates:
     prefix:         sample-instance-templates
     name_prefix:    api_sample_instance_templates_
 
-
 sample_types:
     type:           rest
     resource:       @CscrSlimsApiBundle/Controller/SampleTypesController.php
     prefix:         sample-types
     name_prefix:    api_sample_types_
+
+samples:
+    type:           rest
+    resource:       @CscrSlimsApiBundle/Controller/SamplesController.php
+    prefix:         containers/{id}/samples
+    name_prefix:    api_samples_
