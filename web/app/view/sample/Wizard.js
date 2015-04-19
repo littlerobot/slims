@@ -237,10 +237,8 @@ Ext.define('Slims.view.sample.Wizard', {
     getSelectPositionPanel: function() {
         var imageTpl = new Ext.XTemplate(
             '<tpl for=".">',
-                '<div style="margin: 10px;">',
+                '<div style="margin: 10px;" class="thumb-wrap" >',
                 '{[this.createRow(values.data)]}',
-                  // '<img src="{src}" />',
-                  // '<br/><span>{caption}</span>',
                 '</div>',
             '</tpl>',
             {
@@ -248,7 +246,7 @@ Ext.define('Slims.view.sample.Wizard', {
                     var tpl = '';
                     for (var i in row) {
                         var item = row[i] || {};
-                        tpl += Ext.String.format('<div class="thumb-wrap" style="height: 10px; width: 10px; padding: 3px; color: {0}; position: inline;"></div>', item.color || 'white');
+                        tpl += Ext.String.format('<div style="height: 20px; width: 20px; margin: 3px; background: {0}; display: inline-flex; border: 1px solid #8AC007;"></div>', item.color || 'white');
                     }
 
                     return tpl;
