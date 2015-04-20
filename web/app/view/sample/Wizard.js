@@ -8,7 +8,9 @@ Ext.define('Slims.view.sample.Wizard', {
     height: 500,
 
     title: 'Create Sample Wizard Tool',
-    requires: [],
+    requires: [
+        'Ext.form.field.Checkbox'
+    ],
 
     columnsDefaults: {
         menuDisabled: true,
@@ -235,53 +237,40 @@ Ext.define('Slims.view.sample.Wizard', {
     },
 
     getSelectPositionPanel: function() {
-        var imageTpl = new Ext.XTemplate(
-            '<tpl for=".">',
-                '<div style="margin: 10px;" class="thumb-wrap" >',
-                '{[this.createRow(values.data)]}',
-                '</div>',
-            '</tpl>',
-            {
-                createRow: function(row) {
-                    var tpl = '';
-                    for (var i in row) {
-                        var item = row[i] || {};
-                        tpl += Ext.String.format('<div style="height: 20px; width: 20px; margin: 3px; background: {0}; display: inline-flex; border: 1px solid #8AC007;"></div>', item.color || 'white');
-                    }
-
-                    return tpl;
-                }
+        var createRowPanel = function(data) {
+            var items = [];
+            for (var i in data) {
+                var conf = data[i] || {};
+                var cb = Ext.create('Ext.form.field.Checkbox',  {
+                    hideLabel: true,
+                    margin: 3,
+                    checked: !!conf.color,
+                    cls: 'slims-wizard-position-cb',
+                    name: conf.id || 'empty',
+                    style: {
+                        'background': conf.color || 'white',
+                        margin: '3px'
+                    },
+                    sample_data: conf.sample_data || {}
+                });
+                items.push(cb);
             }
-        );
-
-        var data = this.getTempData();
-        var parsedData = [];
-        for (var i in data) {
-            var row = data[i];
-            parsedData.push({data: row});
+            var rowPanel = Ext.create('Ext.panel.Panel', {
+                layout: 'hbox',
+                items: items
+            });
+            return rowPanel;
         }
-        var fields = ['data'];
 
-        var store = Ext.create('Ext.data.Store', {
-            fields: [{
-                name: 'data',
-                type: 'auto'
-            }],
-            data: parsedData
-        });
-
-        var view = Ext.create('Ext.view.View', {
-            autoScroll: true,
-            store: store,
-            tpl: imageTpl,
-            itemSelector: 'div.thumb-wrap',
-            emptyText: 'No images available'
-        });
-
-        return {
-            xtype: 'panel',
-            layout: 'fit',
-            items: [view],
+        var colsItems = [],
+            data = this.getTempData();
+        for (var i in data) {
+            var colData = data[i];
+            colsItems.push(createRowPanel(colData));
+        }
+        var positionsPanel = Ext.create('Ext.panel.Panel', {
+            layout: 'vbox',
+            items: colsItems,
             buttons: [{
                 text: 'Prev',
                 handler: this.prevTab,
@@ -291,7 +280,9 @@ Ext.define('Slims.view.sample.Wizard', {
                 handler: this.commitChanges,
                 scope: this
             }]
-        };
+        });
+
+        return positionsPanel;
     },
 
     nextTab: function() {
@@ -329,10 +320,42 @@ Ext.define('Slims.view.sample.Wizard', {
                     id: 6,
                     sample_data: {},
                     color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
                 }
             ], [
                 {
                     id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
                     sample_data: {},
                     color: 'red'
                 },{
@@ -365,10 +388,76 @@ Ext.define('Slims.view.sample.Wizard', {
                     id: 6,
                     sample_data: {},
                     color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },null,{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
                 }
             ], [
                 {
                     id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
+                    sample_data: {},
+                    color: 'red'
+                }
+            ], [
+                {
+                    id: 1,
+                    sample_data: {},
+                    color: 'red'
+                },{
+                    id: 2,
+                    sample_data: {},
+                    color: 'green'
+                },{
+                    id: 3,
+                    sample_data: {},
+                    color: 'blue'
+                },{
+                    id: 4,
+                    sample_data: {},
+                    color: 'black'
+                },null,{
+                    id: 6,
                     sample_data: {},
                     color: 'red'
                 },{
