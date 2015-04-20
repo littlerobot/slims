@@ -27,6 +27,13 @@ class Sample
     private $id;
 
     /**
+     * @var string
+     *
+     * @ORM\Column(type="string", length=7, nullable=true)
+     */
+    private $colour;
+
+    /**
      * @var Container
      *
      * @ORM\ManyToOne(targetEntity="Container", inversedBy="samples")
@@ -48,7 +55,7 @@ class Sample
     /**
      * @var int
      *
-     * @ORM\Column(type="integer")
+     * @ORM\Column(name="`column`", type="integer")
      *
      * @JMS\Exclude()
      */
@@ -82,7 +89,7 @@ class Sample
     /**
      * @var ArrayCollection<SampleInstanceAttribute>
      *
-     * @ORM\OneToMany(targetEntity="SampleInstanceAttribute", mappedBy="parent")
+     * @ORM\OneToMany(targetEntity="SampleInstanceAttribute", mappedBy="parent", cascade={"PERSIST"})
      */
     private $attributes;
 
@@ -95,10 +102,185 @@ class Sample
      */
     private $state;
 
+    public function __construct()
+    {
+        $this->attributes = new ArrayCollection();
+    }
+
     public function setPosition($row, $column)
     {
+        // FIXME: Yucky way to set values until it's decoupled from form component.
+        if (is_null($row) || is_null($column)) {
+            return $this;
+        }
+
         $this->row = $row;
         $this->column = $column;
         $this->position = sprintf('%d:%d', $row, $column);
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getColour()
+    {
+        return $this->colour;
+    }
+
+    /**
+     * @return int
+     */
+    public function getRow()
+    {
+        return $this->row;
+    }
+
+    /**
+     * @return int
+     */
+    public function getColumn()
+    {
+        return $this->column;
+    }
+
+    /**
+     * @return SampleType
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * @return SampleInstanceTemplate
+     */
+    public function getTemplate()
+    {
+        return $this->template;
+    }
+
+    /**
+     * @return ArrayCollection
+     */
+    public function getAttributes()
+    {
+        return $this->attributes;
+    }
+
+    /**
+     * @param string $colour
+     * @return Sample
+     */
+    public function setColour($colour)
+    {
+        $this->colour = $colour;
+
+        return $this;
+    }
+
+    /**
+     * @param Container $container
+     * @return Sample
+     */
+    public function setContainer(Container $container)
+    {
+        $this->container = $container;
+
+        return $this;
+    }
+
+    /**
+     * @param int $row
+     * @return Sample
+     */
+    public function setRow($row)
+    {
+        $this->row = $row;
+
+        // FIXME: Yucky way to set values until it's decoupled from form component.
+        $this->setPosition($this->row, $this->column);
+
+        return $this;
+    }
+
+    /**
+     * @param int $column
+     * @return Sample
+     */
+    public function setColumn($column)
+    {
+        $this->column = $column;
+
+        // FIXME: Yucky way to set values until it's decoupled from form component.
+        $this->setPosition($this->row, $this->column);
+
+        return $this;
+    }
+
+    /**
+     * @param SampleType $type
+     * @return Sample
+     */
+    public function setType(SampleType $type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * @param SampleInstanceTemplate $template
+     * @return Sample
+     */
+    public function setTemplate(SampleInstanceTemplate $template)
+    {
+        $this->template = $template;
+
+        return $this;
+    }
+
+    /**
+     * @param ArrayCollection<SampleInstanceAttribute> $attributes
+     * @return Sample
+     */
+    public function setAttributes($attributes)
+    {
+        $this->attributes = $attributes;
+
+        /** @var SampleInstanceAttribute $attribute */
+        foreach ($attributes as $attribute) {
+            $attribute->setParent($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     * @return Sample
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+
+        return $this;
+    }
+
+    /**
+     * @return Container
+     */
+    public function getContainer()
+    {
+        return $this->container;
     }
 }

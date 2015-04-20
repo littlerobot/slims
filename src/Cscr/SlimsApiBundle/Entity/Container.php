@@ -382,4 +382,13 @@ class Container
     {
         return $this->samples;
     }
+
+    public function addSample(Sample $sample)
+    {
+        if (!$this->getSamples()->contains($sample)) {
+            $this->getSamples()->add($sample);
+        }
+
+        return $this;
+    }
 }

@@ -6,16 +6,13 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SampleTypeAttributeType extends AbstractType
+class StoreSampleInstanceAttributeType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
-    public function buildForm(FormBuilderInterface $builder, array $config)
+    public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('template', 'entity', [
-                'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
+            ->add('id', 'entity', [
+                'class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute',
                 'property' => 'id',
                 'property_path' => 'template',
             ])
@@ -27,22 +24,16 @@ class SampleTypeAttributeType extends AbstractType
         ;
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute',
-            'cscr_protection' => false,
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceAttribute',
+            'csrf_protection' => false,
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'sample_type_attribute_create';
+        return 'slims_sample_instance_attribute';
     }
 }
