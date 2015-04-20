@@ -17,7 +17,7 @@ class Version20150303175213 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        if ($schema->hasTable('sample_type_attribute')) {
+        if (!$schema->hasTable('sample_type_template_attribute')) {
             $this->addSql('RENAME TABLE sample_type_attribute TO sample_type_template_attribute');
         }
     }
@@ -29,7 +29,7 @@ class Version20150303175213 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        if ($schema->hasTable('sample_type_template_attribute')) {
+        if (!$schema->hasTable('sample_type_attribute')) {
             $this->addSql('RENAME TABLE sample_type_template_attribute TO sample_type_attribute');
         }
     }
