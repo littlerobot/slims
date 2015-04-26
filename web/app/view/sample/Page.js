@@ -21,13 +21,13 @@ Ext.define('Slims.view.sample.Page', {
 
         this.tbar = [{
             text: 'Create New Sample',
-            handler: this.openWIzardTool
+            handler: this.openWizardTool
         }];
 
         this.callParent();
     },
 
-    openWIzardTool: function() {
+    openWizardTool: function() {
         Ext.create('Slims.view.sample.Wizard').show();
     },
 

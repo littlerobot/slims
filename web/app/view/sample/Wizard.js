@@ -25,10 +25,10 @@ Ext.define('Slims.view.sample.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
+                this.getSelectPositionPanel(),
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel(),
-                this.getSelectPositionPanel()
+                this.getSelectContainerPanel()
             ]
         }];
 
@@ -243,17 +243,39 @@ Ext.define('Slims.view.sample.Wizard', {
                 var conf = data[i] || {};
                 var cb = Ext.create('Ext.form.field.Checkbox',  {
                     hideLabel: true,
-                    margin: 3,
-                    checked: !!conf.color,
-                    cls: 'slims-wizard-position-cb',
+                    checked: !!conf.id,
+                    readOnly: !!conf.id,
+                    componentCls: 'slims-wizard-position-cb',
                     name: conf.id || 'empty',
                     style: {
-                        'background': conf.color || 'white',
-                        margin: '3px'
+                        'background-color': conf.color || 'white',
+                    },
+                    fieldStyle: {
+                        'margin-top': '6px',
+                        'margin-left': '0px',
+                        'background-color': conf.color || 'white'
                     },
                     sample_data: conf.sample_data || {}
                 });
-                items.push(cb);
+                items.push({
+                    xtype: 'container',
+                    border: true,
+                    items: cb,
+                    layout: {
+                        type: 'vbox',
+                        align: 'center',
+                        pack: 'middle'
+                    },
+                    height: 30,
+                    width: 30,
+                    margin: 3,
+                    style: {
+                        'background-color': conf.color || 'white',
+                        'border': '1px solid #99BBE8'
+                        // border-right: 1px solid #99BBE8;
+                        // border-top: 1px solid #99BBE8;
+                    }
+                });
             }
             var rowPanel = Ext.create('Ext.panel.Panel', {
                 layout: 'hbox',
