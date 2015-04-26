@@ -25,10 +25,10 @@ Ext.define('Slims.view.sample.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectPositionPanel(),
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel()
+                this.getSelectContainerPanel(),
+                this.getSelectPositionPanel()
             ]
         }];
 
@@ -271,9 +271,7 @@ Ext.define('Slims.view.sample.Wizard', {
                     margin: 3,
                     style: {
                         'background-color': conf.color || 'white',
-                        'border': '1px solid #99BBE8'
-                        // border-right: 1px solid #99BBE8;
-                        // border-top: 1px solid #99BBE8;
+                        'border': conf.id ? '1px solid darkred;' : '1px solid lightgray;'
                     }
                 });
             }
@@ -283,7 +281,6 @@ Ext.define('Slims.view.sample.Wizard', {
             });
             return rowPanel;
         }
-
         var colsItems = [],
             data = this.getTempData();
         for (var i in data) {
@@ -473,7 +470,7 @@ Ext.define('Slims.view.sample.Wizard', {
                 },{
                     id: 3,
                     sample_data: {},
-                    color: 'blue'
+                    color: 'white'
                 },{
                     id: 4,
                     sample_data: {},
@@ -481,7 +478,7 @@ Ext.define('Slims.view.sample.Wizard', {
                 },null,{
                     id: 6,
                     sample_data: {},
-                    color: 'red'
+                    color: 'white'
                 },{
                     id: 2,
                     sample_data: {},
