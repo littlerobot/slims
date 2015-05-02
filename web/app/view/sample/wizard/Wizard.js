@@ -21,7 +21,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectPositionView(),
+                this.getSelectPositionPanel(),
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
                 this.getSelectContainerPanel()
@@ -97,9 +97,9 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    getSelectPositionView: function() {
+    getSelectPositionPanel: function() {
         return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
-            data: this.getTempData(),
+            data: this.getTempData().samples,
             buttons: [{
                 text: 'Prev',
                 handler: this.prevTab,
@@ -125,186 +125,370 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     commitChanges: function() {},
 
     getTempData: function() {
-        return [
-            [
-                {
-                    id: 1,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
+        return {
+            "success": true,
+            "samples": {
+                "1:1": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "id": 1,
+                        "name": "Test sample type",
+                        "attributes": [
+                            {
+                                "sample_type_template": 1,
+                                "label": "Sex",
+                                "id": 1,
+                                "value": "Trypsin"
+                            },
+                            {
+                                "sample_type_template": 2,
+                                "label": "Age",
+                                "id": 2,
+                                "value": "Typice, tam asinos esset mortuis, sicut stupri frixam gallinaceo, sed tu accidere ad detrahendum hoc cacas Dum ego in a transeuntem, tempus sic non wanna te occidere, volo te adjuvet. Sed non hoc tibi, quod mihi non sunt. Praeterea, Ive 'iam fuerunt nimio cacas hoc mane super hoc casu eam tradere vestris mutum asinum."
+                            },
+                            {
+                                "sample_type_template": 3,
+                                "label": "Comment",
+                                "id": 3,
+                                "filename": "spreadsheet.xls",
+                                "mime_type": "application/vnd.ms-excel",
+                                "url": "/app_dev.php/download/3/spreadsheet.xls"
+                            },
+                            {
+                                "sample_type_template": 4,
+                                "label": "Date",
+                                "id": 4,
+                                "value": "2015-02-02"
+                            }
+                        ]
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3",
+                        "store": [
+                            {
+                                "id": 4,
+                                "order": 1,
+                                "label": "Store Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "store"
+                            },
+                            {
+                                "id": 5,
+                                "order": 2,
+                                "label": "Store Age",
+                                "type": "brief-text",
+                                "activity": "store"
+                            },
+                            {
+                                "id": 6,
+                                "order": 3,
+                                "label": "Store Comment",
+                                "type": "long-text",
+                                "activity": "store"
+                            }
+                        ],
+                        "remove": [
+                            {
+                                "id": 7,
+                                "order": 1,
+                                "label": "Remove Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 8,
+                                "order": 2,
+                                "label": "Remove Age",
+                                "type": "brief-text",
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 9,
+                                "order": 3,
+                                "label": "Remove Comment",
+                                "type": "long-text",
+                                "activity": "remove"
+                            }
+                        ]
+                    },
+                    "attributes": [
+                        {
+                            "id": 1,
+                            "value": "Male"
+                        }
+                    ]
+                },
+                "1:2": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "id": 4,
+                        "name": "Mouse embryos",
+                        "attributes": [
+                            {
+                                "sample_type_template": 1,
+                                "label": "Sex",
+                                "id": 9,
+                                "value": "Trypsin"
+                            },
+                            {
+                                "sample_type_template": 2,
+                                "label": "Age",
+                                "id": 10,
+                                "value": "Typice, tam asinos esset mortuis, sicut stupri frixam gallinaceo, sed tu accidere ad detrahendum hoc cacas Dum ego in a transeuntem, tempus sic non wanna te occidere, volo te adjuvet. Sed non hoc tibi, quod mihi non sunt. Praeterea, Ive 'iam fuerunt nimio cacas hoc mane super hoc casu eam tradere vestris mutum asinum."
+                            },
+                            {
+                                "sample_type_template": 3,
+                                "label": "Comment",
+                                "id": 11,
+                                "filename": "spreadsheet.xls",
+                                "mime_type": "application/vnd.ms-excel",
+                                "url": "/app_dev.php/download/11/spreadsheet.xls"
+                            },
+                            {
+                                "sample_type_template": 4,
+                                "label": "Date",
+                                "id": 12,
+                                "value": "2015-02-01"
+                            }
+                        ]
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3",
+                        "store": [
+                            {
+                                "id": 4,
+                                "order": 1,
+                                "label": "Store Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "store"
+                            },
+                            {
+                                "id": 5,
+                                "order": 2,
+                                "label": "Store Age",
+                                "type": "brief-text",
+                                "activity": "store"
+                            },
+                            {
+                                "id": 6,
+                                "order": 3,
+                                "label": "Store Comment",
+                                "type": "long-text",
+                                "activity": "store"
+                            }
+                        ],
+                        "remove": [
+                            {
+                                "id": 7,
+                                "order": 1,
+                                "label": "Remove Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 8,
+                                "order": 2,
+                                "label": "Remove Age",
+                                "type": "brief-text",
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 9,
+                                "order": 3,
+                                "label": "Remove Comment",
+                                "type": "long-text",
+                                "activity": "remove"
+                            }
+                        ]
+                    },
+                    "attributes": []
+                },
+                "1:3": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "id": 4,
+                        "name": "Mouse embryos",
+                        "attributes": [
+                            {
+                                "sample_type_template": 1,
+                                "label": "Sex",
+                                "id": 9,
+                                "value": "Trypsin"
+                            },
+                            {
+                                "sample_type_template": 2,
+                                "label": "Age",
+                                "id": 10,
+                                "value": "Typice, tam asinos esset mortuis, sicut stupri frixam gallinaceo, sed tu accidere ad detrahendum hoc cacas Dum ego in a transeuntem, tempus sic non wanna te occidere, volo te adjuvet. Sed non hoc tibi, quod mihi non sunt. Praeterea, Ive 'iam fuerunt nimio cacas hoc mane super hoc casu eam tradere vestris mutum asinum."
+                            },
+                            {
+                                "sample_type_template": 3,
+                                "label": "Comment",
+                                "id": 11,
+                                "filename": "spreadsheet.xls",
+                                "mime_type": "application/vnd.ms-excel",
+                                "url": "/app_dev.php/download/11/spreadsheet.xls"
+                            },
+                            {
+                                "sample_type_template": 4,
+                                "label": "Date",
+                                "id": 12,
+                                "value": "2015-02-01"
+                            }
+                        ]
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3",
+                        "store": [
+                            {
+                                "id": 4,
+                                "order": 1,
+                                "label": "Store Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "store"
+                            },
+                            {
+                                "id": 5,
+                                "order": 2,
+                                "label": "Store Age",
+                                "type": "brief-text",
+                                "activity": "store"
+                            },
+                            {
+                                "id": 6,
+                                "order": 3,
+                                "label": "Store Comment",
+                                "type": "long-text",
+                                "activity": "store"
+                            }
+                        ],
+                        "remove": [
+                            {
+                                "id": 7,
+                                "order": 1,
+                                "label": "Remove Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 8,
+                                "order": 2,
+                                "label": "Remove Age",
+                                "type": "brief-text",
+                                "activity": "remove"
+                            },
+                            {
+                                "id": 9,
+                                "order": 3,
+                                "label": "Remove Comment",
+                                "type": "long-text",
+                                "activity": "remove"
+                            }
+                        ]
+                    },
+                    "attributes": []
+                },
+                "1:4": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "id": 5,
+                        "name": "Mouse embryos2",
+                        "attributes": [
+                            {
+                                "sample_type_template": 1,
+                                "label": "Sex",
+                                "id": 13,
+                                "value": "Trypsin"
+                            },
+                            {
+                                "sample_type_template": 2,
+                                "label": "Age",
+                                "id": 14,
+                                "value": "Typice, tam asinos esset mortuis, sicut stupri frixam gallinaceo, sed tu accidere ad detrahendum hoc cacas Dum ego in a transeuntem, tempus sic non wanna te occidere, volo te adjuvet. Sed non hoc tibi, quod mihi non sunt. Praeterea, Ive 'iam fuerunt nimio cacas hoc mane super hoc casu eam tradere vestris mutum asinum."
+                            },
+                            {
+                                "sample_type_template": 3,
+                                "label": "Comment",
+                                "id": 15,
+                                "filename": "spreadsheet.xls",
+                                "mime_type": "application/vnd.ms-excel",
+                                "url": "/app_dev.php/download/15/spreadsheet.xls"
+                            },
+                            {
+                                "sample_type_template": 4,
+                                "label": "Date",
+                                "id": 16,
+                                "value": "2015-02-01"
+                            }
+                        ]
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name",
+                        "store": [
+                            {
+                                "id": 1,
+                                "order": 1,
+                                "label": "Store Sex",
+                                "type": "option",
+                                "options": [
+                                    "Male",
+                                    "Female"
+                                ],
+                                "activity": "store"
+                            },
+                            {
+                                "id": 2,
+                                "order": 2,
+                                "label": "Store Age",
+                                "type": "brief-text",
+                                "activity": "store"
+                            },
+                            {
+                                "id": 3,
+                                "order": 3,
+                                "label": "Store Comment",
+                                "type": "long-text",
+                                "activity": "store"
+                            }
+                        ],
+                        "remove": []
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ]
                 }
-            ], [
-                {
-                    id: 1,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                }
-            ], [
-                null,{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },null,{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },null,{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                }
-            ], [
-                {
-                    id: 1,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                }
-            ], [
-                {
-                    id: 1,
-                    sample_data: {},
-                    color: 'red'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'white'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'white'
-                },{
-                    id: 2,
-                    sample_data: {},
-                    color: 'green'
-                },{
-                    id: 3,
-                    sample_data: {},
-                    color: 'blue'
-                },{
-                    id: 4,
-                    sample_data: {},
-                    color: 'black'
-                },null,{
-                    id: 6,
-                    sample_data: {},
-                    color: 'red'
-                }
-            ]
-        ];
+            }
+        };
     }
 });
