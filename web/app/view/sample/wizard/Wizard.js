@@ -11,15 +11,9 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     requires: [
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
-        'Slims.view.sample.wizard.PositionsView'
+        'Slims.view.sample.wizard.PositionsView',
+        'Slims.view.sample.wizard.SampleInstancePanel'
     ],
-
-    columnsDefaults: {
-        menuDisabled: true,
-        resizable: false,
-        sortable: false,
-        draggable: false
-    },
 
     initComponent: function() {
         this.items = [{
@@ -53,89 +47,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     },
 
     getSelectSampleInstancePanel: function() {
-        return Ext.create('Ext.form.Panel', {
-            layout: 'fit',
-            items: [{
-                xtype: 'panel',
-                tbar: [{
-                    xtype: 'combo',
-                    padding: 10,
-                    width: 400,
-                    name: 'sampleInstanceTemplateId',
-                    fieldLabel: 'Step #2. Select <i>Sample Instance Template</i> and press <i>Next</i>',
-                    labelAlign: 'top',
-                    emptyText: 'Select to continue',
-                    allowBlank: false,
-                    editable: false,
-                    store: Ext.StoreMgr.get('instanceTemplates'),
-                    queryMode: 'local',
-                    displayField: 'name',
-                    valueField: 'id',
-                    listeners: {
-                        change: function(combo, value) {
-                            var template = combo.store.findRecord(combo.valueField, value);
-                            this.down('grid[name=storeAttributesGrid]').getStore().loadData(template.get('store'));
-                            this.down('grid[name=removeAttributesGrid]').getStore().loadData(template.get('remove'));
-                        },
-                        scope: this
-                    }
-                }],
-                layout: 'hbox',
-                items: [{
-                    xtype: 'grid',
-                    style: 'border-right: 1px solid #99BBE8;',
-                    title: 'Store Attributes',
-                    name: 'storeAttributesGrid',
-                    height: '100%',
-                    flex: 1,
-                    store: {
-                        fields: ['order', 'label', 'type'],
-                        data: []
-                    },
-                    columns: {
-                        defaults: this.columnsDefaults,
-                        items: [{
-                            dataIndex: 'order',
-                            width: 30,
-                            header: '#'
-                        }, {
-                            dataIndex: 'label',
-                            flex: 1,
-                            header: 'Label'
-                        }, {
-                            dataIndex: 'type',
-                            width: 120,
-                            header: 'Type'
-                        }]
-                    }
-                }, {
-                    xtype: 'grid',
-                    title: 'Remove Attributes',
-                    name: 'removeAttributesGrid',
-                    height: '100%',
-                    flex: 1,
-                    store: {
-                        fields: ['order', 'label', 'type'],
-                        data: []
-                    },
-                    columns: {
-                        defaults: this.columnsDefaults,
-                        items: [{
-                            dataIndex: 'order',
-                            width: 30,
-                            header: '#'
-                        }, {
-                            dataIndex: 'label',
-                            flex: 1,
-                            header: 'Label'
-                        }, {
-                            dataIndex: 'type',
-                            width: 120,
-                            header: 'Type'
-                        }]
-                    }
-                }]
-            }],
+        return Ext.create('Slims.view.sample.wizard.SampleInstancePanel', {
             buttons: [{
                 text: 'Prev',
                 handler: this.prevTab,
@@ -186,7 +98,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     },
 
     getSelectPositionView: function() {
-        var positionsView = Ext.create('Slims.view.sample.wizard.PositionsView', {
+        return Ext.create('Slims.view.sample.wizard.PositionsView', {
             data: this.getTempData(),
             buttons: [{
                 text: 'Prev',
@@ -198,8 +110,6 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 scope: this
             }]
         });
-
-        return positionsView;
     },
 
     nextTab: function() {
