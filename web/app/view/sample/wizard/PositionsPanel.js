@@ -6,33 +6,52 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         type: 'vbox',
         align: 'center'
     },
-    data: [],
+    containerId: null,
 
     initComponent: function() {
-        this.buildItems();
+        this.on('show', this.buildItems, this);
         this.callParent(arguments);
     },
 
     buildItems: function() {
-
-        this.items = [{
-            xtype: 'label',
-            padding: 10,
-            width: '100%',
-            html: 'Select Posititons for storing new Samples'
-        }, {
-            xtype: 'panel',
-            layout: 'vbox',
-            flex: 1,
-            name: 'containerPositions',
-            style: 'padding-top: 10px;',
-            items: this.getPositionsItems()
-        }]
+        this.setLoading('Loading...');
+        this.removeAll();
+        Ext.Ajax.request({
+            url: Slims.Url.getRoute('getcontainerpositions', [this.containerId]),
+            method: 'GET',
+            scope: this,
+            success: function(xhr) {
+                this.setLoading(false);
+                var response = Ext.decode(xhr.responseText);
+                var samples = response.samples;
+                this.items.add(Ext.create('Ext.form.Label', {
+                    padding: 10,
+                    width: '100%',
+                    html: 'Select Posititons for storing new Samples'
+                }));
+                this.items.add(Ext.create('Ext.panel.Panel', {
+                    name: 'containerPositions',
+                    layout: 'vbox',
+                    flex: 1,
+                    style: 'padding-top: 10px;',
+                    items: this.getPositionsItems(samples)
+                }));
+                this.doLayout();
+            },
+            failure: function() {
+                this.setLoading(false);
+                this.items.add(Ext.create('Ext.form.Label', {
+                    padding: 10,
+                    width: '100%',
+                    html: '<center style="color: red;">Error occured</center>'
+                }));
+                this.doLayout();
+            }
+        });
     },
 
-    getPositionsItems: function() {
+    getPositionsItems: function(data) {
         var colsItems = [],
-            data = this.data,
             columnsCount = data.columnsCount||6,
             rowsCount = rowsCount||12;
         for (var i=0;i<=columnsCount;i++) {
@@ -50,9 +69,6 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                             'margin-left': '0px'
                         }
                     });
-                } else {
-                    console.log(conf);
-                    console.log(cb);
                 }
                 items.push({
                     xtype: 'container',

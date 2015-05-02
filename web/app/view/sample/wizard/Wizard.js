@@ -21,10 +21,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectPositionPanel(),
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel()
+                this.getSelectContainerPanel(),
+                this.getSelectPositionPanel()
             ]
         }];
 
@@ -91,7 +91,11 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 text: 'Next',
                 name: 'next',
                 disabled: true,
-                handler: this.nextTab,
+                handler: function(btn) {
+                    var selected = this.down('[name=step3]').down('containersgrid').selModel.selected.get(0);
+                    this.down('[name=step4]').containerId = selected.get('id');
+                    this.nextTab();
+                },
                 scope: this
             }]
         });
@@ -99,7 +103,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
 
     getSelectPositionPanel: function() {
         return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
-            data: this.getTempData().samples,
+            name: 'step4',
             buttons: [{
                 text: 'Prev',
                 handler: this.prevTab,
