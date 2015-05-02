@@ -3,7 +3,7 @@ Ext.define('Slims.view.sample.Page', {
     xtype: 'samplespage',
 
     layout: 'hbox',
-    requires: ['Slims.view.sample.Wizard'],
+    requires: ['Slims.view.sample.wizard.Wizard'],
     border: false,
 
     initComponent: function() {
@@ -28,7 +28,7 @@ Ext.define('Slims.view.sample.Page', {
     },
 
     openWizardTool: function() {
-        Ext.create('Slims.view.sample.Wizard').show();
+        Ext.create('Slims.view.sample.wizard.Wizard').show();
     },
 
     nextTab: function() {
