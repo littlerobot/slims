@@ -1,8 +1,11 @@
-Ext.define('Slims.view.sample.wizard.PositionsView', {
+Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     extend: 'Ext.panel.Panel',
     xtype: 'positionsview',
 
-    layout: 'vbox',
+    layout: {
+        type: 'vbox',
+        align: 'center'
+    },
     data: [],
 
     initComponent: function() {
@@ -17,7 +20,16 @@ Ext.define('Slims.view.sample.wizard.PositionsView', {
             var colData = data[i];
             colsItems.push(this.createRowPanel(colData));
         }
-        this.items = colsItems;
+        this.items = [{
+            xtype: 'label',
+            padding: 10,
+            width: '100%',
+            html: 'Select Posititons for storing new Samples'
+        }, {
+            xtype: 'panel',
+            style: 'padding-top: 10px;',
+            items: colsItems
+        }]
     },
 
     createRowPanel: function(data) {
@@ -28,6 +40,7 @@ Ext.define('Slims.view.sample.wizard.PositionsView', {
                 hideLabel: true,
                 checked: !!conf.id,
                 readOnly: !!conf.id,
+                hidden: !!conf.id,
                 componentCls: 'slims-wizard-position-cb',
                 name: conf.id || 'empty',
                 style: {

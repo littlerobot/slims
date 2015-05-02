@@ -11,7 +11,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     requires: [
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
-        'Slims.view.sample.wizard.PositionsView',
+        'Slims.view.sample.wizard.PositionsPanel',
         'Slims.view.sample.wizard.SampleInstancePanel'
     ],
 
@@ -21,10 +21,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
+                this.getSelectPositionView(),
                 this.getSelectSampleTypePanel(),
                 this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel(),
-                this.getSelectPositionView()
+                this.getSelectContainerPanel()
             ]
         }];
 
@@ -98,7 +98,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     },
 
     getSelectPositionView: function() {
-        return Ext.create('Slims.view.sample.wizard.PositionsView', {
+        return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
             data: this.getTempData(),
             buttons: [{
                 text: 'Prev',

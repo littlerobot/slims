@@ -893,7 +893,6 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
   "Slims.view.sample.Page": [],
-  "Slims.view.sample.Wizard": [],
   "Slims.view.sample.templates.AttributeWindow": [],
   "Slims.view.sample.templates.AttributesGrid": [],
   "Slims.view.sample.templates.Panel": [],
@@ -903,6 +902,10 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.types.Grid": [],
   "Slims.view.sample.types.Panel": [],
   "Slims.view.sample.types.Window": [],
+  "Slims.view.sample.wizard.PositionsPanel": [],
+  "Slims.view.sample.wizard.SampleInstancePanel": [],
+  "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.Wizard": [],
   "Slims.view.templates.AttributeWindow": [],
   "Slims.view.templates.AttributesGrid": [],
   "Slims.view.templates.Panel": [],
@@ -1962,9 +1965,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.sample.Page": [
     "widget.samplespage"
   ],
-  "Slims.view.sample.Wizard": [
-    "widget.samplewizard"
-  ],
   "Slims.view.sample.templates.AttributeWindow": [
     "widget.sampleattributewindow"
   ],
@@ -1991,6 +1991,14 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.types.Window": [
     "widget.sampletypewindow"
+  ],
+  "Slims.view.sample.wizard.PositionsPanel": [
+    "widget.positionsview"
+  ],
+  "Slims.view.sample.wizard.SampleInstancePanel": [],
+  "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.Wizard": [
+    "widget.samplewizard"
   ],
   "Slims.view.templates.AttributeWindow": [
     "widget.attributewindow"
