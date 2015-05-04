@@ -7,7 +7,7 @@ use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 class SampleTypeTemplateAttributeBuilder
 {
     public $label = 'Attribute';
-    public $order;
+    public $order = 1;
     public $type = SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT;
     public $options;
 
