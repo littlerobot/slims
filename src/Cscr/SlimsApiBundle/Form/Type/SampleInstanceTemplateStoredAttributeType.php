@@ -9,7 +9,7 @@ class SampleInstanceTemplateStoredAttributeType extends SampleTypeTemplateAttrib
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute',
             'csrf_protection' => false,
         ]);
     }
