@@ -2,6 +2,9 @@
 
 namespace Cscr\SlimsApiBundle\Tests\Functional;
 
+/**
+ * @group functional
+ */
 class SampleInstanceTemplateTest extends WebTestCase
 {
     const TEMPLATE_NAME = 'Test';

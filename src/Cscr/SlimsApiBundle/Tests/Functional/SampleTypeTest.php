@@ -5,6 +5,9 @@ namespace Cscr\SlimsApiBundle\Tests\Functional;
 use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateAttributeBuilder;
 use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateBuilder;
 
+/**
+ * @group functional
+ */
 class SampleTypeTest extends WebTestCase
 {
     const NAME = 'Test';

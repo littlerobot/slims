@@ -59,36 +59,6 @@ class SampleTypeTemplateBuilder
     }
 
     /**
-     * @return array
-     */
-    public function buildAsArray()
-    {
-        $object = $this->build();
-
-        $array = [
-            'name' => $object->getName(),
-        ];
-
-        if ($this->attributes) {
-            $array['attributes'] = [];
-
-            foreach ($this->attributes as $attribute) {
-                $array['attributes'][] = $attribute->buildAsArray();
-            }
-        }
-
-        return $array;
-    }
-
-    /**
-     * @return string
-     */
-    public function buildAsJson()
-    {
-        return json_encode($this->buildAsArray());
-    }
-
-    /**
      * @return array|null
      */
     private function buildAttributes()
