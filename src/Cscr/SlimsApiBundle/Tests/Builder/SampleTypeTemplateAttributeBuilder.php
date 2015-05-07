@@ -169,32 +169,4 @@ class SampleTypeTemplateAttributeBuilder
         $this->order = $order;
         return $this;
     }
-
-    /**
-     * @return array
-     */
-    public function buildAsArray()
-    {
-        $template = $this->build();
-
-        $array = [
-            'label' => $template->getLabel(),
-            'order' => $template->getOrder(),
-            'type' => $template->getType(),
-        ];
-
-        if ($template->getOptions()) {
-            $array['options'] = $template->getOptions();
-        }
-
-        return $array;
-    }
-
-    /**
-     * @return string
-     */
-    public function buildAsJson()
-    {
-        return json_encode($this->buildAsArray());
-    }
 }

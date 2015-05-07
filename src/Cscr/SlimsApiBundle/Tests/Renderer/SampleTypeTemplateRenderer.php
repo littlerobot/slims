@@ -12,7 +12,7 @@ class SampleTypeTemplateRenderer
             'name' => $template->getName(),
         ];
 
-        if ($template->getAttributes()) {
+        if (!empty($template->getAttributes())) {
             $array['attributes'] = [];
 
             foreach ($template->getAttributes() as $attribute) {
