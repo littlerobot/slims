@@ -1,4 +1,4 @@
-Ext.define('Slims.model.sample.Template', {
+Ext.define('Slims.model.sample.InstanceTemplate', {
     extend: 'Ext.data.Model',
     idProprerty: 'id',
 

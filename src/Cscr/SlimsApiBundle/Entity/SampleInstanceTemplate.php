@@ -29,10 +29,10 @@ class SampleInstanceTemplate
     private $name;
 
     /**
-     * @var ArrayCollection|SampleInstanceStoredAttribute[]
+     * @var ArrayCollection|SampleInstanceTemplateStoredAttribute[]
      *
      * @ORM\OneToMany(
-     *  targetEntity="SampleInstanceStoredAttribute",
+     *  targetEntity="SampleInstanceTemplateStoredAttribute",
      *  mappedBy="parent",
      *  cascade={"PERSIST"}
      * )
@@ -42,10 +42,10 @@ class SampleInstanceTemplate
     private $storedAttributes;
 
     /**
-     * @var ArrayCollection|SampleInstanceRemovedAttribute[]
+     * @var ArrayCollection|SampleInstanceTemplateRemovedAttribute[]
      *
      * @ORM\OneToMany(
-     *  targetEntity="SampleInstanceRemovedAttribute",
+     *  targetEntity="SampleInstanceTemplateRemovedAttribute",
      *  mappedBy="parent",
      *  cascade={"PERSIST"}
      * )
@@ -83,7 +83,7 @@ class SampleInstanceTemplate
         return $this->storedAttributes;
     }
 
-    public function addStoredAttribute(SampleInstanceStoredAttribute $attribute)
+    public function addStoredAttribute(SampleInstanceTemplateStoredAttribute $attribute)
     {
         if (!$this->getStoredAttributes()->contains($attribute)) {
             $this->getStoredAttributes()->add($attribute);
@@ -93,7 +93,7 @@ class SampleInstanceTemplate
         return $this;
     }
 
-    public function removeStoredAttribute(SampleInstanceStoredAttribute $attribute)
+    public function removeStoredAttribute(SampleInstanceTemplateStoredAttribute $attribute)
     {
         $this->getStoredAttributes()->removeElement($attribute);
 
@@ -105,7 +105,7 @@ class SampleInstanceTemplate
         return $this->removedAttributes;
     }
 
-    public function addRemovedAttribute(SampleInstanceRemovedAttribute $attribute)
+    public function addRemovedAttribute(SampleInstanceTemplateRemovedAttribute $attribute)
     {
         if (!$this->getRemovedAttributes()->contains($attribute)) {
             $this->getRemovedAttributes()->add($attribute);
@@ -115,10 +115,18 @@ class SampleInstanceTemplate
         return $this;
     }
 
-    public function removeRemovedAttribute(SampleInstanceRemovedAttribute $attribute)
+    public function removeRemovedAttribute(SampleInstanceTemplateRemovedAttribute $attribute)
     {
         $this->getRemovedAttributes()->removeElement($attribute);
 
         return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 }

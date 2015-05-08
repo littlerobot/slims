@@ -2,6 +2,7 @@ Ext.define('Slims.controller.Main', {
     extend: 'Ext.app.Controller',
 
     init: function() {
+        Ext.tip.QuickTipManager.init();
         Ext.Ajax.on('requestexception', this.handleAjaxErrors, this);
     },
 

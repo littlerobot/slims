@@ -3,9 +3,10 @@ Ext.define('Slims.view.Viewport', {
     requires: [
         'Ext.tab.Panel',
         'Ext.layout.container.Fit',
+        'Ext.layout.container.Border',
         'Slims.view.groups.Grid',
         'Slims.view.home.Panel',
-        'Ext.layout.container.Border'
+        'Slims.view.sample.Page'
     ],
 
     layout: 'fit',
@@ -27,17 +28,26 @@ Ext.define('Slims.view.Viewport', {
             title: 'Users',
             icon: '/resources/images/users.png'
         }, {
-            xtype: 'templatespage',
-            title: 'Type Templates',
-            icon: '/resources/images/template.png'
-        }, {
-            xtype: 'sampletemplatespage',
-            title: 'Instance Templates',
-            icon: '/resources/images/template.png'
-        }, {
-            xtype: 'sampletypespage',
-            title: 'Sample Types',
-            icon: '/resources/images/template.png'
+            xtype: 'tabpanel',
+            title: 'Samples',
+            tabPosition: 'left',
+            icon: '/resources/images/template.png',
+            items: [{
+                xtype: 'samplespage',
+                title: 'Manage Samples'
+            }, {
+                xtype: 'sampletypespage',
+                title: 'Manage Sample Types',
+                icon: '/resources/images/template.png'
+            }, {
+                xtype: 'sampletemplatespage',
+                title: 'Manage Instance Templates',
+                icon: '/resources/images/template.png'
+            }, {
+                xtype: 'templatespage',
+                title: 'Manage Type Templates',
+                icon: '/resources/images/template.png'
+            }]
         }]
     }]
 });

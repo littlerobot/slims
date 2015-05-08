@@ -6,10 +6,13 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Rename SampleTypeAttribute to SampleTypeTemplateAttribute
+ * Add position column to {@see Sample}.
  */
-class Version20150303175213 extends AbstractMigration
+class Version20150417153159 extends AbstractMigration
 {
+    /**
+     * @param Schema $schema
+     */
     public function up(Schema $schema)
     {
         $this->abortIf(
@@ -17,11 +20,12 @@ class Version20150303175213 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        if (!$schema->hasTable('sample_type_template_attribute')) {
-            $this->addSql('RENAME TABLE sample_type_attribute TO sample_type_template_attribute');
-        }
+        $this->addSql('ALTER TABLE sample ADD position VARCHAR(10) NOT NULL');
     }
 
+    /**
+     * @param Schema $schema
+     */
     public function down(Schema $schema)
     {
         $this->abortIf(
@@ -29,8 +33,6 @@ class Version20150303175213 extends AbstractMigration
             'Migration can only be executed safely on \'mysql\'.'
         );
 
-        if (!$schema->hasTable('sample_type_attribute')) {
-            $this->addSql('RENAME TABLE sample_type_template_attribute TO sample_type_attribute');
-        }
+        $this->addSql('ALTER TABLE sample DROP position');
     }
 }

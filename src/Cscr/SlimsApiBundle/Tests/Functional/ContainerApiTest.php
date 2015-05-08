@@ -3,7 +3,8 @@
 namespace Cscr\SlimsApiBundle\Tests\Functional;
 
 use Cscr\SlimsApiBundle\Entity\Container;
-use Cscr\SlimsApiBundle\Tests\Builder\ContainerJsonBuilder;
+use Cscr\SlimsApiBundle\Tests\Builder\ContainerBuilder;
+use Cscr\SlimsApiBundle\Tests\Renderer\ContainerRenderer;
 
 /**
  * @group functional
@@ -19,10 +20,11 @@ class ContainerApiTest extends WebTestCase
     public function testCreateCompleteContainer()
     {
         $name = 'ABCDEFGH1234567';
-        $builder = new ContainerJsonBuilder();
+        $builder = new ContainerBuilder();
         $builder->withName($name);
+        $content = ContainerRenderer::renderCreateAsJson($builder->build());
 
-        $this->client->request('POST', '/api/containers', [], [], [], $builder->buildCreate());
+        $this->client->request('POST', '/api/containers', [], [], [], $content);
         $this->assertJsonResponse($this->client->getResponse());
 
         $container = $this->getContainerByName($name);
@@ -33,10 +35,11 @@ class ContainerApiTest extends WebTestCase
     {
         $id = 1;
         $name = 'UPDATED-ABCDEFGH1234567';
-        $builder = new ContainerJsonBuilder();
+        $builder = new ContainerBuilder();
         $builder->withName($name);
+        $content = ContainerRenderer::renderUpdateAsJson($builder->build());
 
-        $this->client->request('POST', sprintf('/api/containers/%d', $id), [], [], [], $builder->buildUpdate());
+        $this->client->request('POST', sprintf('/api/containers/%d', $id), [], [], [], $content);
         $this->assertJsonResponse($this->client->getResponse());
 
         $container = $this->getContainerByName($name);

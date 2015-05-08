@@ -9,7 +9,8 @@ Ext.define('Slims.Application', {
     extend: 'Ext.app.Application',
 
     requires: [
-        'Slims.router.Api'
+        'Slims.router.Api',
+        'Ext.tip.QuickTipManager'
     ],
 
     views: [],
