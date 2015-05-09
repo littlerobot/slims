@@ -19,6 +19,7 @@ Ext.define('Slims.view.sample.Page', {
                 margin: 10,
                 index: 0,
                 scale: 'medium',
+                allowDepress: false,
                 enableToggle: true,
                 toggleGroup: 'tabs',
                 handler: this.changeTab,
@@ -27,6 +28,7 @@ Ext.define('Slims.view.sample.Page', {
             items: [{
                 xtype: 'button',
                 index: 0,
+                pressed: true,
                 text: 'Samples'
             }, {
                 xtype: 'button',
