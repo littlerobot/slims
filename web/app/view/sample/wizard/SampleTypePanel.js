@@ -27,7 +27,7 @@ Ext.define('Slims.view.sample.wizard.SampleTypePanel', {
                 emptyText: 'Select to continue',
                 allowBlank: false,
                 editable: false,
-                store: Ext.StoreMgr.get('templates'),
+                store: Ext.StoreMgr.get('sampleTypes'),
                 queryMode: 'local',
                 displayField: 'name',
                 valueField: 'id',
@@ -35,6 +35,7 @@ Ext.define('Slims.view.sample.wizard.SampleTypePanel', {
                     change: function(combo, value) {
                         var template = combo.store.findRecord(combo.valueField, value),
                             attributes = template.get('attributes');
+                        debugger
                         this.down('grid[name=templatesGrid]').getStore().loadData(attributes);
                     },
                     scope: this

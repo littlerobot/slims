@@ -37,11 +37,12 @@ Ext.define('Slims.view.sample.Page', {
             }, {
                 xtype: 'button',
                 index: 2,
-                text: 'Instance Templates'
+                width: 200,
+                text: 'Sample Type Templates'
             }, {
                 xtype: 'button',
                 index: 3,
-                text: 'Type Templates'
+                text: 'Instance Templates'
             }]
         }];
 
@@ -56,10 +57,10 @@ Ext.define('Slims.view.sample.Page', {
             xtype: 'sampletypespage',
             border: true
         }, {
-            xtype: 'sampletemplatespage',
+            xtype: 'templatespage',
             border: true
         }, {
-            xtype: 'templatespage',
+            xtype: 'sampletemplatespage',
             border: true
         }]
 
