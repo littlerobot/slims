@@ -12,42 +12,28 @@ Ext.define('Slims.view.Viewport', {
     layout: 'fit',
     title: 'Slims',
 
-    items: [{
-        xtype: 'tabpanel',
-        title: '<span id="title">Slims</span>',
-        items: [{
-            xtype: 'homepage',
-            title: 'Home',
-            icon: '/resources/images/home.png'
-        }, {
-            xtype: 'groupsgrid',
-            title: 'Research Groups',
-            icon: '/resources/images/groups.png'
-        }, {
-            xtype: 'usersgrid',
-            title: 'Users',
-            icon: '/resources/images/users.png'
-        }, {
+    initComponent: function() {
+        this.items = [{
             xtype: 'tabpanel',
-            title: 'Samples',
-            tabPosition: 'left',
-            icon: '/resources/images/template.png',
+            title: '<span id="title">Slims</span>',
             items: [{
+                xtype: 'homepage',
+                title: 'Home',
+                icon: '/resources/images/home.png'
+            }, {
+                xtype: 'groupsgrid',
+                title: 'Research Groups',
+                icon: '/resources/images/groups.png'
+            }, {
+                xtype: 'usersgrid',
+                title: 'Users',
+                icon: '/resources/images/users.png'
+            }, {
                 xtype: 'samplespage',
-                title: 'Manage Samples'
-            }, {
-                xtype: 'sampletypespage',
-                title: 'Manage Sample Types',
-                icon: '/resources/images/template.png'
-            }, {
-                xtype: 'sampletemplatespage',
-                title: 'Manage Instance Templates',
-                icon: '/resources/images/template.png'
-            }, {
-                xtype: 'templatespage',
-                title: 'Manage Type Templates',
+                title: 'Samples',
                 icon: '/resources/images/template.png'
             }]
-        }]
-    }]
+        }];
+        this.callParent();
+    }
 });

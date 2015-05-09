@@ -3,7 +3,6 @@ Ext.define('Slims.view.sample.types.Grid', {
     xtype: 'sampletypesgrid',
 
     requires: ['Ext.grid.plugin.RowExpander'],
-    border: true,
 
     plugins: [{
         ptype: 'rowexpander',
