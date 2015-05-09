@@ -6,7 +6,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         type: 'vbox',
         align: 'center'
     },
-    containerId: null,
+    container: null,
 
     initComponent: function() {
         this.on('show', this.buildItems, this);
@@ -22,7 +22,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         return this.setSamplesData(this.getTempData().samples);
 
         Ext.Ajax.request({
-            url: Slims.Url.getRoute('getcontainerpositions', [this.containerId]),
+            url: Slims.Url.getRoute('getcontainerpositions', [this.container.get('id')]),
             method: 'GET',
             scope: this,
             success: function(xhr) {
@@ -61,8 +61,8 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
 
     getPositionsItems: function(data) {
         var colsItems = [],
-            columnsCount = data.columnsCount||6,
-            rowsCount = rowsCount||12;
+            columnsCount = this.container.get('columns'),
+            rowsCount = this.container.get('rows');
         for (var i=0;i<=columnsCount;i++) {
             var items = [];
             for (var j=0;j<=rowsCount;j++) {

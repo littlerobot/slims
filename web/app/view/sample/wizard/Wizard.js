@@ -94,7 +94,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 disabled: true,
                 handler: function(btn) {
                     var selected = this.down('[name=step3]').down('containersgrid').selModel.selected.get(0);
-                    this.down('[name=step4]').containerId = selected.get('id');
+                    this.down('[name=step4]').container = selected;
                     this.nextTab();
                 },
                 scope: this
