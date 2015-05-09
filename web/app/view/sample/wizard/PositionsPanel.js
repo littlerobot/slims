@@ -16,6 +16,11 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     buildItems: function() {
         this.setLoading('Loading...');
         this.removeAll();
+
+        // DEBUG: test code
+        this.setLoading(false);
+        return this.setSamplesData(this.getTempData().samples);
+
         Ext.Ajax.request({
             url: Slims.Url.getRoute('getcontainerpositions', [this.containerId]),
             method: 'GET',
@@ -24,19 +29,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                 this.setLoading(false);
                 var response = Ext.decode(xhr.responseText);
                 var samples = response.samples;
-                this.items.add(Ext.create('Ext.form.Label', {
-                    padding: 10,
-                    width: '100%',
-                    html: 'Select Posititons for storing new Samples'
-                }));
-                this.items.add(Ext.create('Ext.panel.Panel', {
-                    name: 'containerPositions',
-                    layout: 'vbox',
-                    flex: 1,
-                    style: 'padding-top: 10px;',
-                    items: this.getPositionsItems(samples)
-                }));
-                this.doLayout();
+                this.setSamplesData(response.samples);
             },
             failure: function() {
                 this.setLoading(false);
@@ -50,6 +43,22 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         });
     },
 
+    setSamplesData: function(samples) {
+        this.items.add(Ext.create('Ext.form.Label', {
+            padding: 10,
+            width: '100%',
+            html: 'Select Posititons for storing new Samples'
+        }));
+        this.items.add(Ext.create('Ext.panel.Panel', {
+            name: 'containerPositions',
+            layout: 'vbox',
+            flex: 1,
+            style: 'padding-top: 10px;',
+            items: this.getPositionsItems(samples)
+        }));
+        this.doLayout();
+    },
+
     getPositionsItems: function(data) {
         var colsItems = [],
             columnsCount = data.columnsCount||6,
@@ -58,7 +67,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             var items = [];
             for (var j=0;j<=rowsCount;j++) {
                 var name = i+':'+j,
-                    conf = data[name], cb;
+                    conf = data[name], cb, tipHtml = undefined;
                 if (!conf) {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
                         name: name,
@@ -69,6 +78,12 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                             'margin-left': '0px'
                         }
                     });
+                } else {
+                    tipHtml = [
+                        '<b>Name:</b> '+conf.type.name,
+                        '<b>Sample Template:</b> '+conf.type.sample_type_template_name,
+                        '<b>Template Name:</b> '+conf.template.name
+                    ].join('</br>');
                 }
                 items.push({
                     xtype: 'container',
@@ -82,7 +97,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                     height: 30,
                     width: 30,
                     margin: 3,
-                    tip: conf ? conf.type.name : '',
+                    tip: tipHtml,
                     listeners: {
                         render: function(c) {
                             Ext.create('Ext.tip.ToolTip', {
@@ -92,7 +107,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                         }
                     },
                     style: {
-                        'background-color': conf ? conf.type.color : 'white',
+                        'background-color': conf ? conf.color : 'white',
                         'border': conf ? '1px solid darkred;' : '1px solid lightgray;'
                     }
                 });
@@ -104,5 +119,247 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             colsItems.push(rowPanel);
         }
         return colsItems;
+    },
+
+    getTempData: function() {
+        return {
+            "success": true,
+            "samples": {
+                "1:1": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 1,
+                        "name": "Test sample type"
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3"
+                    },
+                    "attributes": [
+                        {
+                            "id": 1,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'blue'
+                },
+                "1:2": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 4,
+                        "name": "Mouse embryos"
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3"
+                    },
+                    "attributes": [],
+                    color: 'red'
+                },
+                "1:3": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 4,
+                        "name": "Mouse embryos"
+                    },
+                    "template": {
+                        "id": 8,
+                        "name": "Template name 3"
+                    },
+                    "attributes": [],
+                    color: 'yellow'
+                },
+                "6:8": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ]
+                },
+                "2:8": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ]
+                },
+                "2:12": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ]
+                },
+                "2:10": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'blue'
+                },
+                "1:8": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'blue'
+                },
+                "4:4": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'green'
+                },
+                "4:5": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'green'
+                },
+                "4:6": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'green'
+                },
+                "4:7": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'green'
+                },
+                "4:8": {
+                    "type": {
+                        "sample_type_template": 1,
+                        "sample_type_template_name": "Template 1",
+                        "id": 5,
+                        "name": "Mouse embryos2"
+                    },
+                    "template": {
+                        "id": 7,
+                        "name": "Template name"
+                    },
+                    "attributes": [
+                        {
+                            "id": 4,
+                            "value": "Male"
+                        }
+                    ],
+                    color: 'green'
+                }
+            }
+        };
     }
 });

@@ -48,7 +48,7 @@ Ext.define('Slims.view.sample.templates.TemplateWindow', {
                 if (this.record) {
                     this.record.set('name', name);
                 } else {
-                    this.record = Ext.create('Slims.model.sample.Template', {name: name});
+                    this.record = Ext.create('Slims.model.Template', {name: name});
                 }
                 this.fireEvent('save', this.record, this);
             }
