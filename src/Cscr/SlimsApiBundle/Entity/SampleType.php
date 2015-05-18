@@ -112,16 +112,26 @@ class SampleType
     }
 
     /**
-     * @param SampleTypeAttribute[]|ArrayCollection $attributes
-     * @return SampleType
+     * @param SampleTypeAttribute $attribute
+     * @return $this
      */
-    public function setAttributes($attributes)
+    public function addAttribute(SampleTypeAttribute $attribute)
     {
-        $this->attributes = $attributes;
-
-        foreach ($this->attributes as $attribute) {
+        if (!$this->getAttributes()->contains($attribute)) {
+            $this->getAttributes()->add($attribute);
             $attribute->setParent($this);
         }
+
+        return $this;
+    }
+
+    /**
+     * @param SampleTypeAttribute $attribute
+     * @return $this
+     */
+    public function removeAttribute(SampleTypeAttribute $attribute)
+    {
+        $this->getAttributes()->removeElement($attribute);
 
         return $this;
     }

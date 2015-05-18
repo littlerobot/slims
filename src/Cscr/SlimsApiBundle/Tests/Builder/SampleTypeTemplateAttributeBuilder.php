@@ -6,10 +6,10 @@ use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 
 class SampleTypeTemplateAttributeBuilder
 {
-    public $label = 'Attribute';
-    public $order = 1;
-    public $type = SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT;
-    public $options;
+    private $label = 'Attribute';
+    private $order = 1;
+    private $type = SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT;
+    private $options;
 
     /**
      * @return SampleTypeTemplateAttribute
