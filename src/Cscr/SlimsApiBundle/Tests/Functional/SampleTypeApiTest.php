@@ -4,11 +4,7 @@ namespace Cscr\SlimsApiBundle\Tests\Functional;
 
 use Cscr\SlimsApiBundle\Entity\SampleType;
 use Cscr\SlimsApiBundle\Entity\SampleTypeTemplate;
-use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
-use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeAttributeBuilder;
 use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeBuilder;
-use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateAttributeBuilder;
-use Cscr\SlimsApiBundle\Tests\Builder\SampleTypeTemplateBuilder;
 use Cscr\SlimsApiBundle\Tests\Renderer\SampleTypeRenderer;
 
 /**
@@ -20,35 +16,45 @@ class SampleTypeApiTest extends WebTestCase
 
     public function testCreateSampleType()
     {
-        $templateBuilder = $this->createBasicSampleTypeTemplateWithAttributes(self::NAME);
-        $builder = $this->buildSampleTypeBuilderWithAttributes($templateBuilder);
+        $this->loadFixtures([
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleTypeApi\LoadSampleInstanceTemplateData',
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleTypeApi\LoadSampleTypeTemplateData',
+        ]);
+
+        $template = $this->findSampleTypeTemplate(self::NAME);
+        $builder = SampleTypeBuilder::buildSampleTypeBuilderWithAttributes($template, self::NAME);
 
         $content = SampleTypeRenderer::renderAsJson($builder->build());
         $this->client->request('POST', '/api/sample-types', [], [], [], $content);
         $this->assertJsonResponse($this->client->getResponse());
 
-        $type = $this->getSampleTypeByName(self::NAME);
+        $type = $this->findSampleTypeByName(self::NAME);
         $this->assertNotNull($type, 'Sample type was not saved');
     }
 
     public function testUpdateSampleType()
     {
-        $templateBuilder = $this->createBasicSampleTypeTemplateWithAttributes(self::NAME);
-        $createBuilder = $this->buildSampleTypeBuilderWithAttributes($templateBuilder);
-        $updateBuilder = clone $createBuilder;
-        $updateBuilder->getAttributes()[0]->withValue('Updated');
+        $this->loadFixtures([
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleTypeApi\LoadSampleInstanceTemplateData',
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleTypeApi\LoadSampleTypeData',
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleTypeApi\LoadSampleTypeTemplateData',
+        ]);
 
-        $createContent = SampleTypeRenderer::renderAsJson($createBuilder->build());
-        $updateContent = SampleTypeRenderer::renderAsJson($updateBuilder->build());
+        $template = $this->findSampleTypeTemplate(self::NAME);
+        $typeBuilder = SampleTypeBuilder::buildSampleTypeBuilderWithAttributes($template, self::NAME);
+        $typeBuilder->getAttributes()[0]->withValue('Updated');
 
-        $this->client->request('POST', '/api/sample-types', [], [], [], $createContent);
+        $content = SampleTypeRenderer::renderAsJson($typeBuilder->build());
+        $type = $this->findSampleTypeByName(self::NAME);
+
+        $this->client->request('POST', sprintf('/api/sample-types/%d', $type->getId()), [], [], [], $content);
         $this->assertJsonResponse($this->client->getResponse());
 
-        $type = $this->getSampleTypeByName(self::NAME);
-        $this->assertNotNull($type, 'Sample type was not saved');
+        // Reset manager to load data from database next query.
+        $this->getContainer()->get('doctrine')->resetManager();
+        $type = $this->findSampleTypeByName(self::NAME);
 
-        $this->client->request('POST', sprintf('/api/sample-types/%d', $type->getId()), [], [], [], $updateContent);
-        $this->assertJsonResponse($this->client->getResponse());
+        $this->assertEquals('Updated', $type->getAttributes()[0]->getValue());
     }
 
     public function testListSampleTypes()
@@ -59,24 +65,9 @@ class SampleTypeApiTest extends WebTestCase
 
     /**
      * @param string $name
-     * @return SampleTypeTemplate
+     * @return SampleType
      */
-    protected function createBasicSampleTypeTemplateWithAttributes($name)
-    {
-        $template = (new SampleTypeTemplateBuilder())
-            ->withName($name)
-            ->withAttribute(SampleTypeTemplateAttributeBuilder::aBriefTextAttribute())
-            ->withAttribute(SampleTypeTemplateAttributeBuilder::aLongTextAttribute())
-            ->build();
-
-        $em = $this->getContainer()->get('doctrine')->getManager();
-        $em->persist($template);
-        $em->flush();
-
-        return $template;
-    }
-
-    private function getSampleTypeByName($name)
+    private function findSampleTypeByName($name)
     {
         return $this
             ->getContainer()
@@ -85,34 +76,20 @@ class SampleTypeApiTest extends WebTestCase
             ->findOneBy([
                 'name' => $name,
             ]);
-
     }
 
     /**
-     * @param SampleTypeTemplate $sampleTypeTemplate
-     * @return SampleTypeBuilder
+     * @param string $name
+     * @return SampleTypeTemplate
      */
-    private function buildSampleTypeBuilderWithAttributes(SampleTypeTemplate $sampleTypeTemplate)
+    private function findSampleTypeTemplate($name)
     {
-        $builder = (new SampleTypeBuilder())
-            ->withName(self::NAME)
-            ->withTemplate($sampleTypeTemplate)
-        ;
-
-        foreach ($sampleTypeTemplate->getAttributes() as $attributeTemplate) {
-            switch ($attributeTemplate->getType()) {
-                case SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT:
-                default:
-                    $attributeBuilder = SampleTypeAttributeBuilder::aBriefTextAttribute($attributeTemplate);
-                    break;
-                case SampleTypeTemplateAttribute::TYPE_LONG_TEXT:
-                    $attributeBuilder = SampleTypeAttributeBuilder::aLongTextAttribute($attributeTemplate);
-                    break;
-            }
-
-            $builder->withAttribute($attributeBuilder);
-        }
-
-        return $builder;
+        return $this
+            ->getContainer()
+            ->get('doctrine')
+            ->getRepository('CscrSlimsApiBundle:SampleTypeTemplate')
+            ->findOneBy([
+                'name' => $name,
+            ]);
     }
 }

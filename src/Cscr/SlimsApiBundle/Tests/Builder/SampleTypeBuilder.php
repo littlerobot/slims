@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Tests\Builder;
 
 use Cscr\SlimsApiBundle\Entity\SampleType;
 use Cscr\SlimsApiBundle\Entity\SampleTypeTemplate;
+use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 
 class SampleTypeBuilder
 {
@@ -20,6 +21,34 @@ class SampleTypeBuilder
     public function __construct()
     {
         $this->template = new SampleTypeTemplate();
+    }
+
+    /**
+     * @param SampleTypeTemplate $sampleTypeTemplate
+     * @param string $name
+     * @return SampleTypeBuilder
+     */
+    public static function buildSampleTypeBuilderWithAttributes(SampleTypeTemplate $sampleTypeTemplate, $name)
+    {
+        $builder = (new SampleTypeBuilder())
+            ->withName($name)
+            ->withTemplate($sampleTypeTemplate);
+
+        foreach ($sampleTypeTemplate->getAttributes() as $attributeTemplate) {
+            switch ($attributeTemplate->getType()) {
+                case SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT:
+                default:
+                    $attributeBuilder = SampleTypeAttributeBuilder::aBriefTextAttribute($attributeTemplate);
+                    break;
+                case SampleTypeTemplateAttribute::TYPE_LONG_TEXT:
+                    $attributeBuilder = SampleTypeAttributeBuilder::aLongTextAttribute($attributeTemplate);
+                    break;
+            }
+
+            $builder->withAttribute($attributeBuilder);
+        }
+
+        return $builder;
     }
 
     public function build()
