@@ -46,6 +46,8 @@ class SampleType
      *  mappedBy="parent",
      *  cascade={"PERSIST"}
      * )
+     *
+     * @JMS\Groups({"sample_types"})
      */
     private $attributes;
 
@@ -101,6 +103,18 @@ class SampleType
     public function getSampleTypeTemplateId()
     {
         return $this->template->getId();
+    }
+
+    /**
+     * @return string
+     *
+     * @JMS\VirtualProperty()
+     * @JMS\Groups({"samples"})
+     * @JMS\SerializedName("sample_type_template_name")
+     */
+    public function getSampleTypeTemplateName()
+    {
+        return $this->template->getName();
     }
 
     /**

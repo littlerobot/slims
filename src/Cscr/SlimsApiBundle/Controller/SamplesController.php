@@ -21,7 +21,7 @@ class SamplesController extends FOSRestController
      * @return SamplesResponse
      *
      * @Rest\Route("")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"Default"})
      */
     public function getSamplesAction($id)
     {
