@@ -25,7 +25,7 @@ class SampleTypeRenderer
 
         foreach ($type->getAttributes() as $attribute) {
             $array['attributes'][] = [
-                'template' => $attribute->getTemplate()->getId(),
+                'id' => $attribute->getTemplate()->getId(),
                 'value' => $attribute->getValue(),
             ];
         }
