@@ -22,10 +22,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectContainerPanel(),
-                this.getSelectPositionPanel(),
                 this.getSelectSampleTypePanel(),
-                this.getSelectSampleInstancePanel()
+                this.getSelectSampleInstancePanel(),
+                this.getSelectContainerPanel(),
+                this.getSelectPositionPanel()
             ]
         }];
 
@@ -37,8 +37,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             buttons: ['->', {
                 text: 'Next',
                 handler: function() {
-                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
+                    var sampleTemplatePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
+                    var valid = sampleTemplatePanel.form.isValid();
                     if (valid) {
+                        this.sampleTemplate = sampleTemplatePanel.down('combo').getValue();
                         this.nextTab();
                     }
                 },
@@ -56,8 +58,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             }, '->', {
                 text: 'Next',
                 handler: function() {
-                    var valid = this.down('panel[name=cardPanel]').layout.getActiveItem().form.isValid();
+                    var sampleInstancePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
+                    var valid = sampleInstancePanel.form.isValid();
                     if (valid) {
+                        this.sampleInstance = sampleInstancePanel.down('combo').getValue();
                         this.nextTab();
                     }
                 },
@@ -95,6 +99,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 handler: function(btn) {
                     var selected = this.down('[name=step3]').down('containersgrid').selModel.selected.get(0);
                     this.down('[name=step4]').container = selected;
+                    this.container = selected;
                     this.nextTab();
                 },
                 scope: this

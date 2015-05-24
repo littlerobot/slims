@@ -163,12 +163,10 @@ Ext.define('Slims.controller.SampleTemplates', {
 
     saveTemplate: function(template, dialog) {
         this.getTab().setLoading('Saving. Please, wait...');
-        var url,
-            attributes = [];
 
         var jsonData = {
-            name: template.get('name')
-        };
+                name: template.get('name')
+            }, url;
 
         if (template.getId()) {
             url = Slims.Url.getRoute('setsampleinstancetemplate', [template.getId()]);

@@ -42,7 +42,7 @@ Ext.define('Slims.view.sample.templates.Panel', {
                     },
                     items: [{
                         xtype: 'text',
-                        text: "Use drag'n'drop for ordering or moving attributes via grids.",
+                        text: 'Use drag\'n\'drop for ordering or moving attributes via grids.',
                         degrees: 90
                     }]
                 }, {

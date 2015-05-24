@@ -16,7 +16,7 @@ Ext.define('Slims.view.sample.wizard.SampleTypePanel', {
             html: '<center><h2>Welcome to Create New Sample Wizard.</h2></center>'
         }, {
             xtype: 'grid',
-            name: 'templatesGrid',
+            name: 'sampleTypesGrid',
             tbar: [{
                 xtype: 'combo',
                 padding: 10,
@@ -35,30 +35,25 @@ Ext.define('Slims.view.sample.wizard.SampleTypePanel', {
                     change: function(combo, value) {
                         var template = combo.store.findRecord(combo.valueField, value),
                             attributes = template.get('attributes');
-                        debugger
-                        this.down('grid[name=templatesGrid]').getStore().loadData(attributes);
+                        this.down('grid[name=sampleTypesGrid]').getStore().loadData(attributes);
                     },
                     scope: this
                 }
             }],
             store: {
-                fields: ['order', 'label', 'type'],
+                fields: ['label', 'value'],
                 data: []
             },
             columns: {
                 defaults: this.columnsDefaults,
                 items: [{
-                    dataIndex: 'order',
-                    width: 40,
-                    header: '#'
-                }, {
                     dataIndex: 'label',
                     flex: 1,
                     header: 'Label'
                 }, {
-                    dataIndex: 'type',
-                    width: 200,
-                    header: 'Type'
+                    dataIndex: 'value',
+                    flex: 1,
+                    header: 'Value'
                 }]
             }
         }];
