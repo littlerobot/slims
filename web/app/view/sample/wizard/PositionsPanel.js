@@ -45,13 +45,15 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             width: '100%',
             html: 'Select Posititons for storing new Samples'
         }));
-        this.items.add(Ext.create('Ext.panel.Panel', {
+
+        this.items.add(Ext.create('Ext.form.Panel', {
             name: 'containerPositions',
             layout: 'vbox',
             flex: 1,
             style: 'padding-top: 10px;',
             items: this.getPositionsItems(samples)
         }));
+
         this.doLayout();
     },
 
@@ -59,14 +61,18 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         var colsItems = [],
             columnsCount = this.container.get('columns'),
             rowsCount = this.container.get('rows');
+
         for (var i=0;i<=columnsCount;i++) {
             var items = [];
+
             for (var j=0;j<=rowsCount;j++) {
                 var name = i+':'+j,
-                    conf = data[name], cb, tipHtml = 'Check it to save your sample here!';
+                    conf = data[name], cb, tipHtml = null;
+
                 if (!conf) {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
                         name: name,
+                        inputValue: true,
                         hideLabel: true,
                         componentCls: 'slims-wizard-position-cb',
                         fieldStyle: {
@@ -82,6 +88,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                         '<b><i>Template Name:</i></b> ' + conf.template.name
                     ].join('</br>');
                 }
+
                 items.push({
                     xtype: 'container',
                     border: true,
@@ -95,30 +102,34 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                     width: 30,
                     margin: 3,
                     tip: tipHtml,
-                    listeners: {
-                        render: function(c) {
-                            Ext.create('Ext.tip.ToolTip', {
-                                target: c.getEl(),
-                                html: c.tip
-                            });
-                        }
-                    },
                     style: {
                         'background-color': conf ? conf.color : 'white',
                         'border': conf ? '1px solid darkred;' : '1px solid lightgray;'
+                    },
+                    listeners: {
+                        afterrender: function(c) {
+                            if (c.tip) {
+                                Ext.create('Ext.tip.ToolTip', {
+                                    target: c.getEl(),
+                                    html: c.tip
+                                });
+                            }
+                        }
                     }
                 });
             }
+
             var rowPanel = Ext.create('Ext.panel.Panel', {
                 layout: 'hbox',
                 items: items
             });
             colsItems.push(rowPanel);
         }
+
         return colsItems;
     },
 
     getValue: function() {
-        return {};
+        return this.down('form').getValues();
     }
 });

@@ -13,7 +13,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
         'Slims.view.sample.wizard.PositionsPanel',
-        'Slims.view.sample.wizard.SampleInstancePanel'
+        'Slims.view.sample.wizard.SampleInstancePanel',
+        'Slims.view.sample.wizard.StoreAttributesPanel'
     ],
 
     initComponent: function() {
@@ -22,17 +23,18 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectSampleTypePanel(),
-                this.getSelectSampleInstancePanel(),
-                this.getSelectContainerPanel(),
-                this.getSelectPositionPanel()
+                this.buildSelectSampleTypePanel(),
+                this.buildSelectSampleInstancePanel(),
+                this.buildSelectContainerPanel(),
+                this.buildSelectPositionPanel(),
+                this.buildSetupStoreAttributesPanel()
             ]
         }];
 
         this.callParent();
     },
 
-    getSelectSampleTypePanel: function() {
+    buildSelectSampleTypePanel: function() {
         return Ext.create('Slims.view.sample.wizard.SampleTypePanel', {
             buttons: ['->', {
                 text: 'Next',
@@ -49,7 +51,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    getSelectSampleInstancePanel: function() {
+    buildSelectSampleInstancePanel: function() {
         return Ext.create('Slims.view.sample.wizard.SampleInstancePanel', {
             buttons: [{
                 text: 'Prev',
@@ -61,7 +63,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                     var sampleInstancePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     var valid = sampleInstancePanel.form.isValid();
                     if (valid) {
-                        this.sampleInstance = sampleInstancePanel.down('combo').getValue();
+                        var sampleInstanceId = sampleInstancePanel.down('combo').getValue();
+                        this.sampleInstanceStoreAttributes = sampleInstancePanel.down('grid').getStore().data.items;
                         this.nextTab();
                     }
                 },
@@ -70,7 +73,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    getSelectContainerPanel: function() {
+    buildSelectContainerPanel: function() {
         return Ext.create('Ext.form.Panel', {
             layout: 'fit',
             name: 'step3',
@@ -107,7 +110,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    getSelectPositionPanel: function() {
+    buildSelectPositionPanel: function() {
         return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
             name: 'step4',
             buttons: [{
@@ -115,7 +118,32 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 handler: this.prevTab,
                 scope: this
             }, '->', {
-                text: 'Finish',
+                text: 'Store samples',
+                handler: function() {
+                    var positionsPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
+                    this.postionsMap = positionsPanel.getValue();
+                    this.nextTab();
+                },
+                scope: this
+            }]
+        });
+    },
+
+    buildSetupStoreAttributesPanel: function() {
+        return Ext.create('Slims.view.sample.wizard.StoreAttributesPanel', {
+            name: 'step5',
+            listeners: {
+                show: function() {
+                    this.down('[name=step5]').loadAttributes(this.sampleInstanceStoreAttributes);
+                },
+                scope: this
+            },
+            buttons: [{
+                text: 'Prev',
+                handler: this.prevTab,
+                scope: this
+            }, '->', {
+                text: 'Commit changes',
                 handler: this.commitChanges,
                 scope: this
             }]
@@ -132,5 +160,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         cardPanel.layout.setActiveItem(cardPanel.layout.getPrev());
     },
 
-    commitChanges: function() {}
+    storeSamples: function() {
+
+    },
+
+    commitChanges: function() {
+    }
 });

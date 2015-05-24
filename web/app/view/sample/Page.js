@@ -18,7 +18,7 @@ Ext.define('Slims.view.sample.Page', {
                 width: 170,
                 margin: 10,
                 index: 0,
-                scale: 'medium',
+                scale: 'medium', // for setting font bigger
                 allowDepress: false,
                 enableToggle: true,
                 toggleGroup: 'tabs',
@@ -71,9 +71,6 @@ Ext.define('Slims.view.sample.Page', {
         Ext.create('Slims.view.sample.wizard.Wizard').show();
     },
 
-    commitChanges: function() {
-
-    },
     changeTab: function(btn) {
         this.getLayout().setActiveItem(btn.index);
     }
