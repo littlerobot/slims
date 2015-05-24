@@ -67,7 +67,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             var items = [];
             for (var j=0;j<=rowsCount;j++) {
                 var name = i+':'+j,
-                    conf = data[name], cb, tipHtml = undefined;
+                    conf = data[name], cb, tipHtml = 'Check it to save your sample here!';
                 if (!conf) {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
                         name: name,
@@ -80,9 +80,10 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                     });
                 } else {
                     tipHtml = [
-                        '<b>Name:</b> '+conf.type.name,
-                        '<b>Sample Template:</b> '+conf.type.sample_type_template_name,
-                        '<b>Template Name:</b> '+conf.template.name
+                        '<div><b>Sample storing here:</b></div>',
+                        '<b><i>Name:</i></b> ' + conf.type.name,
+                        '<b><i>Sample Template:</i></b> ' + conf.type.sample_type_template_name,
+                        '<b><i>Template Name:</i></b> ' + conf.template.name
                     ].join('</br>');
                 }
                 items.push({

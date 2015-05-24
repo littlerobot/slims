@@ -22,10 +22,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             name: 'cardPanel',
             layout: 'card',
             items: [
-                this.getSelectSampleTypePanel(),
-                this.getSelectSampleInstancePanel(),
                 this.getSelectContainerPanel(),
-                this.getSelectPositionPanel()
+                this.getSelectPositionPanel(),
+                this.getSelectSampleTypePanel(),
+                this.getSelectSampleInstancePanel()
             ]
         }];
 
