@@ -122,6 +122,12 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 handler: function() {
                     var positionsPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     this.postionsMap = positionsPanel.getValue();
+
+                    if (!this.postionsMap) {
+                        Ext.Msg.alert('No container selected', 'Please select one ore more containers.');
+                        return;
+                    }
+
                     this.nextTab();
                 },
                 scope: this
@@ -160,10 +166,13 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         cardPanel.layout.setActiveItem(cardPanel.layout.getPrev());
     },
 
-    storeSamples: function() {
-
-    },
-
     commitChanges: function() {
+        var storeAttributesPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
+
+        if (!storeAttributesPanel.form.isValid()) {
+            return;
+        }
+
+        // commit changes
     }
 });

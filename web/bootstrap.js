@@ -905,6 +905,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.wizard.PositionsPanel": [],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.StoreAttributesPanel": [],
   "Slims.view.sample.wizard.Wizard": [],
   "Slims.view.templates.AttributeWindow": [],
   "Slims.view.templates.AttributesGrid": [],
@@ -1997,6 +1998,7 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.StoreAttributesPanel": [],
   "Slims.view.sample.wizard.Wizard": [
     "widget.samplewizard"
   ],

@@ -1574,7 +1574,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.EventObjectImpl": "../../ext/src/EventObject.js",
   "Ext.Msg": "../../ext/src/window/MessageBox.js",
   "Ext.Supports": "../../ext/src/Support.js",
-  "Ext.cmd": "../../../../../../../C:/Users/Alexey/bin/Sencha/Cmd/5.1.0.26/plugins/src",
+  "Ext.cmd": "../../../../../../../C:/Users/Alexey/bin/Sencha/Cmd/5.1.3.61/plugins/src",
   "Ext.core.DomHelper": "../../ext/src/dom/Helper.js",
   "Ext.core.DomQuery": "../../ext/src/dom/Query.js",
   "Ext.rtl.EventObjectImpl": "../../ext/src/rtl/EventObject.js",
@@ -2464,6 +2464,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.wizard.PositionsPanel": [],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.StoreAttributesPanel": [],
   "Slims.view.sample.wizard.Wizard": [],
   "Slims.view.templates.AttributeWindow": [],
   "Slims.view.templates.AttributesGrid": [],
@@ -3556,6 +3557,7 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
+  "Slims.view.sample.wizard.StoreAttributesPanel": [],
   "Slims.view.sample.wizard.Wizard": [
     "widget.samplewizard"
   ],

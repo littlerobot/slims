@@ -7,15 +7,15 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         align: 'center'
     },
     container: null,
+    items: [],
 
     initComponent: function() {
-        this.on('show', this.buildItems, this);
+        this.on('show', this.getContainerPositions, this);
         this.callParent(arguments);
     },
 
-    buildItems: function() {
+    getContainerPositions: function() {
         this.setLoading('Loading...');
-        this.removeAll();
 
         Ext.Ajax.request({
             url: Slims.Url.getRoute('getcontainerpositions', [this.container.get('id')]),
@@ -32,7 +32,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                 this.items.add(Ext.create('Ext.form.Label', {
                     padding: 10,
                     width: '100%',
-                    html: '<center style="color: red;">Error occured</center>'
+                    html: '<center style="color: red;">Error occured.</center>'
                 }));
                 this.doLayout();
             }
@@ -40,6 +40,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     },
 
     setSamplesData: function(samples) {
+        this.items.removeAll();
         this.items.add(Ext.create('Ext.form.Label', {
             padding: 10,
             width: '100%',
@@ -74,6 +75,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                         name: name,
                         inputValue: true,
                         hideLabel: true,
+                        tooltip: name,
                         componentCls: 'slims-wizard-position-cb',
                         fieldStyle: {
                             'margin-top': '6px',
@@ -104,10 +106,10 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                     tip: tipHtml,
                     style: {
                         'background-color': conf ? conf.color : 'white',
-                        'border': conf ? '1px solid darkred;' : '1px solid lightgray;'
+                        'border': conf ? '1px solid darkred' : '1px solid lightgray'
                     },
                     listeners: {
-                        afterrender: function(c) {
+                        render: function(c) {
                             if (c.tip) {
                                 Ext.create('Ext.tip.ToolTip', {
                                     target: c.getEl(),
@@ -130,6 +132,11 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     },
 
     getValue: function() {
-        return this.down('form').getValues();
+        var values = this.down('form').getValues();
+        if (Ext.Object.toQueryString(values).length > 0) {
+            return values;
+        } else {
+            return false;
+        }
     }
 });
