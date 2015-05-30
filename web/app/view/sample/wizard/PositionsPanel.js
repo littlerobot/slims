@@ -3,16 +3,15 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     xtype: 'positionsview',
 
     layout: {
-        align: 'center',
-        type: 'vbox'
+        type: 'vbox',
+        align: 'center'
     },
     container: null,
     items: [],
 
     initComponent: function() {
         this.on('show', this.getContainerPositions, this);
-
-        this.callParent();
+        this.callParent(arguments);
     },
 
     getContainerPositions: function() {
@@ -71,14 +70,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                 var name = i+':'+j,
                     conf = data[name], cb, tipHtml = null;
 
-                if (conf) {
-                    tipHtml = [
-                        '<div><b>Sample storing here:</b></div>',
-                        '<b><i>Name:</i></b> ' + conf.type.name,
-                        '<b><i>Sample Template:</i></b> ' + conf.type.sample_type_template_name,
-                        '<b><i>Template Name:</i></b> ' + conf.template.name
-                    ].join('</br>');
-                } else {
+                if (!conf) {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
                         name: name,
                         inputValue: true,
@@ -90,12 +82,19 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                             'margin-left': '0px'
                         }
                     });
+                } else {
+                    tipHtml = [
+                        '<div><b>Sample storing here:</b></div>',
+                        '<b><i>Name:</i></b> ' + conf.type.name,
+                        '<b><i>Sample Template:</i></b> ' + conf.type.sample_type_template_name,
+                        '<b><i>Template Name:</i></b> ' + conf.template.name
+                    ].join('</br>');
                 }
 
                 items.push({
                     xtype: 'container',
                     border: true,
-                    items: conf ? [] : [cb],
+                    items: conf ? [] : cb,
                     layout: {
                         type: 'vbox',
                         align: 'center',
