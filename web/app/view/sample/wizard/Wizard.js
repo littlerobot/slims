@@ -101,8 +101,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 disabled: true,
                 handler: function(btn) {
                     var selected = this.down('[name=step3]').down('containersgrid').selModel.selected.get(0);
-                    this.down('[name=step4]').container = selected;
-                    this.container = selected;
+                    this.down('[name=step4]').selectedContainer = selected;
+                    this.selectedContainer = selected;
                     this.nextTab();
                 },
                 scope: this
@@ -113,6 +113,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     buildSelectPositionPanel: function() {
         return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
             name: 'step4',
+            width: '100%',
+            height: '100%',
             buttons: [{
                 text: 'Prev',
                 handler: this.prevTab,
