@@ -862,6 +862,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
+  "Slims.controller.Samples": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -871,6 +872,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
   "Slims.model.sample.InstanceTemplate": [],
+  "Slims.model.sample.Sample": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [
     "Slims.Url"
@@ -884,6 +886,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
   "Slims.store.sample.InstanceTemplates": [],
+  "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
   "Slims.view.Viewport": [],
@@ -892,6 +895,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Grid": [],
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
+  "Slims.view.sample.Grid": [],
   "Slims.view.sample.Page": [],
   "Slims.view.sample.templates.AttributeWindow": [],
   "Slims.view.sample.templates.AttributesGrid": [],
@@ -1923,6 +1927,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
+  "Slims.controller.Samples": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -1932,6 +1937,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
   "Slims.model.sample.InstanceTemplate": [],
+  "Slims.model.sample.Sample": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [],
   "Slims.store.AttributeTypes": [],
@@ -1943,6 +1949,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
   "Slims.store.sample.InstanceTemplates": [],
+  "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
@@ -1962,6 +1969,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.home.container.Window": [
     "widget.containerwindow"
+  ],
+  "Slims.view.sample.Grid": [
+    "widget.samplesgrid"
   ],
   "Slims.view.sample.Page": [
     "widget.samplespage"

@@ -13,7 +13,7 @@ Ext.define('Slims.controller.Samples', {
     refs: [{
         ref: 'wizard',
         selector: 'samplewizard'
-    }{
+    }, {
         ref: 'grid',
         selector: 'samplesgrid'
     }],
