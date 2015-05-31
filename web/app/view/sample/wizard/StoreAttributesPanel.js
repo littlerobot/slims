@@ -1,7 +1,6 @@
 Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
     extend: 'Ext.form.Panel',
 
-    layout: 'fit',
 
     initComponent: function() {
         this.buildItems();
@@ -9,14 +8,21 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
     },
 
     buildItems: function() {
-        var attributesFieldset  = Ext.create('Ext.form.FieldSet', {
+        var attributesFieldset = Ext.create('Ext.form.FieldSet', {
             name: 'attributesFieldset',
-            title: 'Please, fill in all fields',
+            title: 'Store attributes fields',
             padding: 10,
             margin: 10
         });
 
-        this.items = [attributesFieldset];
+        var colorPicker = Ext.create('Slims.ux.ColorButton', {
+            labelWidth: 180,
+            name: 'samplesColor',
+            margin: 20,
+            fieldLabel: 'Color for new samples'
+        });
+
+        this.items = [attributesFieldset, colorPicker];
     },
 
     loadAttributes: function(attributes) {

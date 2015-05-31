@@ -47,11 +47,12 @@ Ext.define('Slims.view.sample.Page', {
         this.items = [{
             xtype: 'panel',
             border: true,
-            tbar: [{
-                text: 'Create New Sample',
-                name: 'createSample'
-            }],
+            layout: 'fit',
             items: [{
+                tbar: [{
+                    text: 'Create New Sample',
+                    name: 'createSample'
+                }],
                 xtype: 'samplesgrid'
             }]
         }, {

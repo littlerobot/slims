@@ -13,6 +13,9 @@ Ext.define('Slims.controller.Samples', {
     refs: [{
         ref: 'wizard',
         selector: 'samplewizard'
+    }{
+        ref: 'grid',
+        selector: 'samplesgrid'
     }],
 
     init: function() {
@@ -24,20 +27,10 @@ Ext.define('Slims.controller.Samples', {
                 click: this.createNewSample
             }
         });
-
-        this.createStores();
     },
 
     openWizard: function() {
         Ext.create('Slims.view.sample.wizard.Wizard').show();
-    },
-
-    createStores: function() {
-        // var sampleTypesStore = Ext.create('Slims.store.sample.Types', {
-        //     storeId: 'sampleTypes'
-        // });
-
-        // sampleTypesStore.load();
     },
 
     createNewSample: function() {
@@ -49,8 +42,12 @@ Ext.define('Slims.controller.Samples', {
             return;
         }
 
-        var  storeAttributes = storeAttributesPanel.form.getValues();
+        var  storeAttributes = storeAttributesPanel.form.getValues(),
+            colour = storeAttributes.samplesColor;
 
+        delete storeAttributes.samplesColor;
+
+        wizard.setLoading('Saving...');
         Ext.Ajax.request({
             url: Slims.Url.getRoute('setsamples'),
             method: 'POST',
@@ -60,15 +57,16 @@ Ext.define('Slims.controller.Samples', {
                 container_id: wizard.selectedContainer,
                 store_attributes: storeAttributes,
                 positions: wizard.positionsMap,
-                colour: null
+                colour: colour
             },
             scope: this,
             success: function(xhr) {
-                // refresh grid
-                // close window
+                wizard.setLoading(false);
+                this.getGrid().getStore().load();
+                wizard.close();
             },
             failure: function() {
-                // show error message
+                wizard.setLoading(false);
             }
         });
     }
