@@ -40,7 +40,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     },
 
     setSamplesData: function(samples) {
-        this.items.removeAll();
+        this.removeAll();
         this.items.add(Ext.create('Ext.form.Label', {
             padding: 10,
             width: '100%',
@@ -80,6 +80,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                         name: positionId,
                         inputValue: true,
                         hideLabel: true,
+                        tooltip: positionId,
                         componentCls: 'slims-wizard-position-cb',
                         fieldStyle: {
                             'margin-top': '6px',

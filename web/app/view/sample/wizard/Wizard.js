@@ -63,7 +63,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                     var sampleInstancePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     var valid = sampleInstancePanel.form.isValid();
                     if (valid) {
-                        var sampleInstanceId = sampleInstancePanel.down('combo').getValue();
+                        this.sampleInstanceId = sampleInstancePanel.down('combo').getValue();
                         this.sampleInstanceStoreAttributes = sampleInstancePanel.down('grid').getStore().data.items;
                         this.nextTab();
                     }
@@ -123,9 +123,9 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 text: 'Store samples',
                 handler: function() {
                     var positionsPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
-                    this.postionsMap = positionsPanel.getValue();
+                    this.positionsMap = positionsPanel.getValue();
 
-                    if (!this.postionsMap) {
+                    if (!this.positionsMap) {
                         Ext.Msg.alert('No container selected', 'Please select one ore more containers.');
                         return;
                     }
@@ -152,8 +152,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 scope: this
             }, '->', {
                 text: 'Commit changes',
-                handler: this.commitChanges,
-                scope: this
+                name: 'commit'
             }]
         });
     },
@@ -166,15 +165,5 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     prevTab: function() {
         var cardPanel = this.down('panel[name=cardPanel]');
         cardPanel.layout.setActiveItem(cardPanel.layout.getPrev());
-    },
-
-    commitChanges: function() {
-        var storeAttributesPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
-
-        if (!storeAttributesPanel.form.isValid()) {
-            return;
-        }
-
-        // commit changes
     }
 });

@@ -2,8 +2,6 @@ Ext.define('Slims.view.sample.Page', {
     extend: 'Ext.panel.Panel',
     xtype: 'samplespage',
 
-    requires: ['Slims.view.sample.wizard.Wizard'],
-
     layout: 'card',
     border: false,
 
@@ -51,7 +49,10 @@ Ext.define('Slims.view.sample.Page', {
             border: true,
             tbar: [{
                 text: 'Create New Sample',
-                handler: this.openWizardTool
+                name: 'createSample'
+            }],
+            items: [{
+                xtype: 'samplesgrid'
             }]
         }, {
             xtype: 'sampletypespage',
@@ -65,10 +66,6 @@ Ext.define('Slims.view.sample.Page', {
         }]
 
         this.callParent();
-    },
-
-    openWizardTool: function() {
-        Ext.create('Slims.view.sample.wizard.Wizard').show();
     },
 
     changeTab: function(btn) {
