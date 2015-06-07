@@ -11,27 +11,46 @@ Ext.define('Slims.view.home.Panel', {
     ],
 
     initComponent: function() {
-
         this.items = [{
             xtype: 'panel',
             layout: 'hbox',
-            defauls: {
-            },
+            // tbar: [{
+            //     xtype: 'textfield',
+            //     fieldLabel: 'Search',
+            //     labelWidth: 50,
+            //     width: 400
+            // }],
             items: [{
                 xtype: 'containersgrid',
-                height: '100%',
                 border: true,
+                height: '100%',
                 flex: 1
             }, {
                 xtype: 'panel',
+                name: 'details',
+                layout: 'vbox',
                 height: '100%',
-                border: true,
-                html: '<center style="margin-top: 60px;"><h2>Here will be some new content...</h2></center>',
-                flex: 1
+                flex: 1,
+                items: [{
+                    xtype: 'positionsview',
+                    width: '100%',
+                    flex: 3
+                }, {
+                    xtype: 'positionsgrid',
+                    width: '100%',
+                    border: true,
+                    flex: 2,
+                    tbar: [{
+                        text: 'Configure all',
+                        name: 'addSample'
+                    }]
+                }],
+                buttons: ['->', {
+                    text: 'Store Samples'
+                }]
             }]
         }];
 
         this.callParent();
     }
-
 });

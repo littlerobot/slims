@@ -85,6 +85,12 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                         fieldStyle: {
                             'margin-top': '6px',
                             'margin-left': '0px'
+                        },
+                        listeners: {
+                            change: function(cb, val) {
+                                this.fireEvent('positionselected', cb.name, val);
+                            },
+                            scope: this
                         }
                     });
                 }

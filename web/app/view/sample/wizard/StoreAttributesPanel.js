@@ -1,6 +1,7 @@
 Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
     extend: 'Ext.form.Panel',
 
+    xtype: 'storeattributesform',
 
     initComponent: function() {
         this.buildItems();

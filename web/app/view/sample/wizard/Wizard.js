@@ -2,13 +2,13 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     extend: 'Ext.window.Window',
     xtype: 'samplewizard',
 
+    title: 'Sample Wizard Tool',
     layout: 'fit',
     border: false,
     width: 600,
     height: 500,
     modal: true,
 
-    title: 'Create Sample Wizard Tool',
     requires: [
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
@@ -25,8 +25,6 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             items: [
                 this.buildSelectSampleTypePanel(),
                 this.buildSelectSampleInstancePanel(),
-                this.buildSelectContainerPanel(),
-                this.buildSelectPositionPanel(),
                 this.buildSetupStoreAttributesPanel()
             ]
         }];
@@ -73,76 +71,12 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    buildSelectContainerPanel: function() {
-        return Ext.create('Ext.form.Panel', {
-            layout: 'fit',
-            name: 'step3',
-            tbar: [{
-                xtype: 'label',
-                padding: 10,
-                html: 'Select Container for storing new Sample and press <i>Next</i>'
-            }],
-            items: [{
-                xtype: 'containersgrid',
-                readOnly: true,
-                listeners: {
-                    selectionchange: function(tree, selected) {
-                        tree.view.up('panel[name=step3]').down('button[name=next]').setDisabled(!selected.length);
-                    }
-                }
-            }],
-            buttons: [{
-                text: 'Prev',
-                handler: this.prevTab,
-                scope: this
-            }, '->', {
-                text: 'Next',
-                name: 'next',
-                disabled: true,
-                handler: function(btn) {
-                    var selected = this.down('[name=step3]').down('containersgrid').selModel.selected.get(0);
-                    this.down('[name=step4]').selectedContainer = selected;
-                    this.selectedContainer = selected;
-                    this.nextTab();
-                },
-                scope: this
-            }]
-        });
-    },
-
-    buildSelectPositionPanel: function() {
-        return Ext.create('Slims.view.sample.wizard.PositionsPanel', {
-            name: 'step4',
-            width: '100%',
-            height: '100%',
-            buttons: [{
-                text: 'Prev',
-                handler: this.prevTab,
-                scope: this
-            }, '->', {
-                text: 'Store samples',
-                handler: function() {
-                    var positionsPanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
-                    this.positionsMap = positionsPanel.getValue();
-
-                    if (!this.positionsMap) {
-                        Ext.Msg.alert('No container selected', 'Please select one ore more containers.');
-                        return;
-                    }
-
-                    this.nextTab();
-                },
-                scope: this
-            }]
-        });
-    },
-
     buildSetupStoreAttributesPanel: function() {
         return Ext.create('Slims.view.sample.wizard.StoreAttributesPanel', {
-            name: 'step5',
+            name: 'step3',
             listeners: {
                 show: function() {
-                    this.down('[name=step5]').loadAttributes(this.sampleInstanceStoreAttributes);
+                    this.down('[name=step3]').loadAttributes(this.sampleInstanceStoreAttributes);
                 },
                 scope: this
             },

@@ -4,7 +4,8 @@ Ext.define('Slims.controller.Samples', {
     views: [
         'sample.wizard.Wizard',
         'sample.Page',
-        'sample.Grid'
+        'sample.Grid',
+        'sample.PositionsGrid'
     ],
 
     stores: ['sample.Samples'],
