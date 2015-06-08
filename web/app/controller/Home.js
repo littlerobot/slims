@@ -135,6 +135,8 @@ Ext.define('Slims.controller.Home', {
             positionsMap.fireEvent('show');
             this.getDetailsPanel().setDisabled(false);
         }
+
+        this.getPositionsGrid().buildStoreAttributes();
     },
 
     onPositionSelected: function(positionId, selected) {
@@ -158,11 +160,13 @@ Ext.define('Slims.controller.Home', {
             storeAttrColumns = fields.map(function(field) {
                 return {
                     text: field.fieldLabel,
-                    value: field.getValue(),
                     dataIndex: field.name
                 };
-            });
+            }),
+            attrValues = wizard.down('storeattributesform').getValues();
 
-        this.getPositionsGrid().reconfigure
+        this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, attrValues);
+
+        wizard.close();
     }
 });

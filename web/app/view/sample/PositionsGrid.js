@@ -18,19 +18,13 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             scope: this
         }];
 
-        this.columns = [{
+        this.forwardBlock = [{
             text: 'Position ID',
             width: 100,
             dataIndex: 'positionId'
-        }, {
-            text: 'Sample Type',
-            width: 150,
-            dataIndex: 'sampleType'
-        }, {
-            text: 'Sample Instance Template',
-            flex: 1,
-            dataIndex: 'sampleInstanceTemplate'
-        }, {
+        }]
+
+        this.backBlock = [{
             width: 30,
             dataIndex: 'colour',
             renderer: function(value) {
@@ -49,6 +43,32 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             }
         }];
 
+        this.columns = this.forwardBlock.concat(this.backBlock);
+
         this.callParent();
+    },
+
+    buildStoreAttributes: function(extraColumns, extraValues) {
+        extraColumns = extraColumns || [];
+        extraValues = extraValues || {};
+
+        var columns = this.forwardBlock.concat(extraColumns).concat(this.backBlock);
+        var storeFields = columns.map(function(f) {
+            return f.dataIndex ? f.dataIndex.toString() : null
+        });
+
+        storeFields.pop(); // remove actioncolumn
+
+        var store = Ext.create('Ext.data.Store', {fields: storeFields});
+        var storeItems = this.getStore().data.items;
+
+        var data = storeItems.map(function(record) {
+            var vals = record.data;
+            return Ext.merge(vals, extraValues);
+        });
+
+        this.reconfigure(store, columns);
+
+        this.getStore().loadData(data);
     }
 });
