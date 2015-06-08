@@ -17,8 +17,8 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
         });
 
         var colorPicker = Ext.create('Slims.ux.ColorButton', {
-            labelWidth: 180,
             name: 'samplesColor',
+            labelWidth: 180,
             margin: 20,
             fieldLabel: 'Color for new samples'
         });

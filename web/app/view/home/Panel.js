@@ -46,7 +46,8 @@ Ext.define('Slims.view.home.Panel', {
                     }]
                 }],
                 buttons: ['->', {
-                    text: 'Store Samples'
+                    text: 'Store Samples',
+                    name: 'storeSamples'
                 }]
             }]
         }];

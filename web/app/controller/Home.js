@@ -49,6 +49,9 @@ Ext.define('Slims.controller.Home', {
             },
             'samplewizard [name=commit]': {
                 click: this.setAttributes
+            },
+            'homepage [name=storeSamples]': {
+                click: this.storeSamples
             }
         });
     },
@@ -160,13 +163,51 @@ Ext.define('Slims.controller.Home', {
             storeAttrColumns = fields.map(function(field) {
                 return {
                     text: field.fieldLabel,
+                    width: 150,
                     dataIndex: field.name
                 };
             }),
             attrValues = wizard.down('storeattributesform').getValues();
 
+        attrValues.samplesColor = wizard.down('storeattributesform').down('[name=samplesColor]').getValue();
+
         this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, attrValues);
 
         wizard.close();
+    },
+
+    storeSamples: function() {
+        debugger
+        if (!storeAttributesPanel.form.isValid()) {
+            return;
+        }
+
+        var storeAttributes = storeAttributesPanel.form.getValues(),
+            colour = storeAttributes.samplesColor;
+
+        delete storeAttributes.samplesColor;
+
+        wizard.setLoading('Saving...');
+        Ext.Ajax.request({
+            url: Slims.Url.getRoute('setsamples'),
+            method: 'POST',
+            params: {
+                sample_template_id: wizard.sampleTemplate,
+                sample_instance_id: wizard.sampleInstanceId,
+                container_id: wizard.selectedContainer,
+                store_attributes: storeAttributes,
+                positions: wizard.positionsMap,
+                colour: colour
+            },
+            scope: this,
+            success: function(xhr) {
+                wizard.setLoading(false);
+                this.getGrid().getStore().load();
+                wizard.close();
+            },
+            failure: function() {
+                wizard.setLoading(false);
+            }
+        });
     }
 });

@@ -22,11 +22,21 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             text: 'Position ID',
             width: 100,
             dataIndex: 'positionId'
-        }]
+        }, {
+            text: 'Type',
+            width: 140,
+            hidden: true,
+            dataIndex: 'sampleType'
+        }, {
+            text: 'Instance Template',
+            width: 140,
+            hidden: true,
+            dataIndex: 'sampleInstanceTemplate'
+        }];
 
         this.backBlock = [{
             width: 30,
-            dataIndex: 'colour',
+            dataIndex: 'samplesColor',
             renderer: function(value) {
                 return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', value);
             }
