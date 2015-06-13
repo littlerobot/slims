@@ -11,7 +11,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         });
 
         this.tbar = [{
-            text: 'Configure All',
+            text: 'Configure Samples',
             handler: function() {
                 this.fireEvent('configure', this);
             },

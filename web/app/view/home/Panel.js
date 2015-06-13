@@ -14,12 +14,6 @@ Ext.define('Slims.view.home.Panel', {
         this.items = [{
             xtype: 'panel',
             layout: 'hbox',
-            // tbar: [{
-            //     xtype: 'textfield',
-            //     fieldLabel: 'Search',
-            //     labelWidth: 50,
-            //     width: 400
-            // }],
             items: [{
                 xtype: 'containersgrid',
                 border: true,
@@ -39,11 +33,7 @@ Ext.define('Slims.view.home.Panel', {
                     xtype: 'positionsgrid',
                     width: '100%',
                     border: true,
-                    flex: 2,
-                    tbar: [{
-                        text: 'Configure all',
-                        name: 'addSample'
-                    }]
+                    flex: 2
                 }],
                 buttons: ['->', {
                     text: 'Store Samples',

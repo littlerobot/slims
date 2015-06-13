@@ -44,11 +44,14 @@ Ext.define('Slims.controller.Home', {
             'positionsgrid': {
                 configure: this.openWizard
             },
+            'positionsgrid actioncolumn': {
+                editrecord: this.editPositionSample
+            },
             'positionsview': {
                 positionselected: this.onPositionSelected
             },
-            'samplewizard [name=commit]': {
-                click: this.setAttributes
+            'samplewizard': {
+                save: this.setPositionsGridAttributes
             },
             'homepage [name=storeSamples]': {
                 click: this.storeSamples
@@ -157,27 +160,18 @@ Ext.define('Slims.controller.Home', {
         }
     },
 
-    setAttributes: function() {
-        var wizard = this.getWizard(),
-            fields = wizard.down('storeattributesform').down('fieldset').items.items,
-            storeAttrColumns = fields.map(function(field) {
+    setPositionsGridAttributes: function(data) {
+        var storeAttrColumns = data.storeAttributes.map(function(attr) {
                 return {
-                    text: field.fieldLabel,
+                    text: attr.get('label'),
                     width: 150,
-                    dataIndex: field.name
+                    dataIndex: attr.get('id')
                 };
-            }),
-            attrValues = wizard.down('storeattributesform').getValues();
-
-        attrValues.samplesColor = wizard.down('storeattributesform').down('[name=samplesColor]').getValue();
-
-        this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, attrValues);
-
-        wizard.close();
+            });
+        this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, data.storeAtrributesValues);
     },
 
     storeSamples: function() {
-        debugger
         if (!storeAttributesPanel.form.isValid()) {
             return;
         }
@@ -209,5 +203,36 @@ Ext.define('Slims.controller.Home', {
                 wizard.setLoading(false);
             }
         });
+    },
+
+    editPositionSample: function(sample) {
+        var editSampleWindow = Ext.create('Ext.window.Window', {
+            title: Ext.String.format('Edit Sample on Position {0}', sample.get('positionId')),
+            modal: true,
+            width: 400,
+            layout: 'fit',
+            height: 500,
+            items: [{
+                xtype: 'storeattributesform'
+            }],
+            buttons: ['->', {
+                text: 'Save'
+            }, {
+                text: 'Cancel',
+                handler: function() {
+                    this.up('window').close();
+                }
+            }]
+        });
+
+        var form = editSampleWindow.down('storeattributesform'),
+            sampleData = sample.data;
+
+        var instanceTemplate = Ext.StoreMgr.get('instanceTemplates').findRecord('id', sample.get('sampleInstanceTemplate'));
+
+        form.loadAttributes(instanceTemplate.get('store'));
+        form.getForm().setValues(sampleData);
+
+        editSampleWindow.show();
     }
 });

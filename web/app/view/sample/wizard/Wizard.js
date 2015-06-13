@@ -12,10 +12,12 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     requires: [
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
-        'Slims.view.sample.wizard.PositionsPanel',
         'Slims.view.sample.wizard.SampleInstancePanel',
         'Slims.view.sample.wizard.StoreAttributesPanel'
     ],
+
+    // selected wizard values
+    data: {},
 
     initComponent: function() {
         this.items = [{
@@ -40,7 +42,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                     var sampleTemplatePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     var valid = sampleTemplatePanel.form.isValid();
                     if (valid) {
-                        this.sampleTemplate = sampleTemplatePanel.down('combo').getValue();
+                        var sampleTemplate = sampleTemplatePanel.down('combo').getValue();
+                        this.data.sampleTemplate = sampleTemplate;
                         this.nextTab();
                     }
                 },
@@ -61,8 +64,9 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                     var sampleInstancePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     var valid = sampleInstancePanel.form.isValid();
                     if (valid) {
-                        this.sampleInstanceId = sampleInstancePanel.down('combo').getValue();
+                        this.data.sampleInstanceId = sampleInstancePanel.down('combo').getValue();
                         this.sampleInstanceStoreAttributes = sampleInstancePanel.down('grid').getStore().data.items;
+                        this.data.storeAttributes = this.sampleInstanceStoreAttributes;
                         this.nextTab();
                     }
                 },
@@ -73,10 +77,9 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
 
     buildSetupStoreAttributesPanel: function() {
         return Ext.create('Slims.view.sample.wizard.StoreAttributesPanel', {
-            name: 'step3',
             listeners: {
                 show: function() {
-                    this.down('[name=step3]').loadAttributes(this.sampleInstanceStoreAttributes);
+                    this.down('storeattributesform').loadAttributes(this.sampleInstanceStoreAttributes);
                 },
                 scope: this
             },
@@ -85,8 +88,10 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 handler: this.prevTab,
                 scope: this
             }, '->', {
-                text: 'Commit changes',
-                name: 'commit'
+                text: 'Save',
+                name: 'save',
+                handler: this.saveChanges,
+                scope: this
             }]
         });
     },
@@ -99,5 +104,18 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     prevTab: function() {
         var cardPanel = this.down('panel[name=cardPanel]');
         cardPanel.layout.setActiveItem(cardPanel.layout.getPrev());
+    },
+
+    saveChanges: function() {
+        var storeAtrributesValues = this.down('storeattributesform').getValues();
+        storeAtrributesValues.samplesColor = this.down('storeattributesform').down('[name=samplesColor]').getValue();
+
+        this.data.storeAtrributesValues = storeAtrributesValues;
+        this.data.storeAtrributesValues.sampleType = this.data.sampleTemplate;
+        this.data.storeAtrributesValues.sampleInstanceTemplate = this.data.sampleInstanceId;
+
+        this.fireEvent('save', this.data);
+
+        this.close();
     }
 });

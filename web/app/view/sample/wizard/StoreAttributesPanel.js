@@ -1,7 +1,7 @@
 Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
     extend: 'Ext.form.Panel',
-
     xtype: 'storeattributesform',
+    layout: 'vbox',
 
     initComponent: function() {
         this.buildItems();
@@ -12,6 +12,7 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
         var attributesFieldset = Ext.create('Ext.form.FieldSet', {
             name: 'attributesFieldset',
             title: 'Store attributes fields',
+            width: '100%',
             padding: 10,
             margin: 10
         });
@@ -29,7 +30,7 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
     loadAttributes: function(attributes) {
         var fields = [];
         Ext.each(attributes, function(attr) {
-            var field = this.createField(attr.data);
+            var field = this.createField(attr.data || attr);
             fields.push(field);
         }, this);
 
