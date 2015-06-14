@@ -67,7 +67,15 @@ Ext.define('Slims.ux.ColorButton', {
         if (!color)
             return;
 
-        this.down('container[name=colorPalette]').el.setStyle('background', color);
+        var palette = this.down('container[name=colorPalette]'),
+            paletteEl = palette.el;
+
+        if (paletteEl) {
+            paletteEl.setStyle('background', color);
+        } else {
+            palette.style = 'background: ' + color;
+        }
+
         color = color.replace('#', '');
         var picker = this.down('colorpicker');
         // add color if it isn't in palette yet for resolving exception

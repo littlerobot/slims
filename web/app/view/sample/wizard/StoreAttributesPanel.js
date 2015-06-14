@@ -27,6 +27,17 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
         this.items = [attributesFieldset, colorPicker];
     },
 
+    setValues: function(values) {
+        this.getForm().setValues(values);
+        if (values.samplesColor) {
+            this.setColor(values.samplesColor);
+        }
+    },
+
+    setColor: function(color) {
+        this.down('[name=samplesColor]').setValue(color);
+    },
+
     loadAttributes: function(attributes) {
         var fields = [];
         Ext.each(attributes, function(attr) {

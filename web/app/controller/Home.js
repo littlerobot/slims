@@ -231,7 +231,7 @@ Ext.define('Slims.controller.Home', {
         var instanceTemplate = Ext.StoreMgr.get('instanceTemplates').findRecord('id', sample.get('sampleInstanceTemplate'));
 
         form.loadAttributes(instanceTemplate.get('store'));
-        form.getForm().setValues(sampleData);
+        form.setValues(sampleData);
 
         editSampleWindow.show();
     }
