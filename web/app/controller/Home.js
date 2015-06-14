@@ -4,7 +4,8 @@ Ext.define('Slims.controller.Home', {
     models: ['Container'],
     stores: ['Containers'],
     views: [
-        'home.container.Window'
+        'home.container.Window',
+        'sample.EditAttributesWindow'
     ],
 
     refs: [{
@@ -55,6 +56,9 @@ Ext.define('Slims.controller.Home', {
             },
             'homepage [name=storeSamples]': {
                 click: this.storeSamples
+            },
+            'editattributeswindow': {
+                save: this.saveSampleAttributes
             }
         });
     },
@@ -206,34 +210,15 @@ Ext.define('Slims.controller.Home', {
     },
 
     editPositionSample: function(sample) {
-        var editSampleWindow = Ext.create('Ext.window.Window', {
-            title: Ext.String.format('Edit Sample on Position {0}', sample.get('positionId')),
-            modal: true,
-            width: 400,
-            layout: 'fit',
-            height: 500,
-            items: [{
-                xtype: 'attributesform'
-            }],
-            buttons: ['->', {
-                text: 'Save',
-
-            }, {
-                text: 'Cancel',
-                handler: function() {
-                    this.up('window').close();
-                }
-            }]
+        var editSampleWindow = Ext.create('Slims.view.sample.EditAttributesWindow', {
+            mode: 'store',
+            sample: sample
         });
 
-        var form = editSampleWindow.down('attributesform'),
-            sampleData = sample.data;
-
-        var instanceTemplate = Ext.StoreMgr.get('instanceTemplates').findRecord('id', sample.get('sampleInstanceTemplate'));
-
-        form.loadAttributes(instanceTemplate.get('store'));
-        form.setValues(sampleData);
-
         editSampleWindow.show();
+    },
+
+    saveSampleAttributes: function(values) {
+
     }
 });

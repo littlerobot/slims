@@ -38,6 +38,13 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
         this.down('[name=samplesColor]').setValue(color);
     },
 
+    getValues: function() {
+        var values = this.getForm().getValues();
+        values.samplesColor = this.down('[name=samplesColor]').getValue();
+
+        return values;
+    },
+
     loadAttributes: function(attributes) {
         var fields = [];
         Ext.each(attributes, function(attr) {

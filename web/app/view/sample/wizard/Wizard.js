@@ -13,7 +13,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
         'Slims.view.sample.wizard.SampleInstancePanel',
-        'Slims.view.sample.wizard.AttributesForm'
+        'Slims.view.sample.wizard.AttributesForm',
+        'Slims.view.sample.wizard.PositionsPanel'
     ],
 
     // selected wizard values
