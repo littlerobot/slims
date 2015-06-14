@@ -47,7 +47,7 @@ Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
                 allowBlank: false,
                 anchor: '100%',
                 labelWidth: 180,
-                name: attribute.id,
+                name: attribute.id.toString(),
                 fieldLabel: attribute.label
             };
 
