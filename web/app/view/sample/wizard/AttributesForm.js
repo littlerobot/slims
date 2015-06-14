@@ -1,6 +1,6 @@
-Ext.define('Slims.view.sample.wizard.StoreAttributesPanel', {
+Ext.define('Slims.view.sample.wizard.AttributesForm', {
     extend: 'Ext.form.Panel',
-    xtype: 'storeattributesform',
+    xtype: 'attributesform',
     layout: 'vbox',
 
     initComponent: function() {

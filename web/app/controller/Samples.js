@@ -37,13 +37,13 @@ Ext.define('Slims.controller.Samples', {
     createNewSample: function() {
         var wizard = this.getWizard();
 
-        var storeAttributesPanel = wizard.down('panel[name=cardPanel]').layout.getActiveItem();
+        var attributesForm = wizard.down('panel[name=cardPanel]').layout.getActiveItem();
 
-        if (!storeAttributesPanel.form.isValid()) {
+        if (!attributesForm.form.isValid()) {
             return;
         }
 
-        var  storeAttributes = storeAttributesPanel.form.getValues(),
+        var  storeAttributes = attributesForm.form.getValues(),
             colour = storeAttributes.samplesColor;
 
         delete storeAttributes.samplesColor;

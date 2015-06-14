@@ -13,7 +13,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         'Ext.form.field.Checkbox',
         'Slims.view.sample.wizard.SampleTypePanel',
         'Slims.view.sample.wizard.SampleInstancePanel',
-        'Slims.view.sample.wizard.StoreAttributesPanel'
+        'Slims.view.sample.wizard.AttributesForm'
     ],
 
     // selected wizard values
@@ -27,7 +27,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             items: [
                 this.buildSelectSampleTypePanel(),
                 this.buildSelectSampleInstancePanel(),
-                this.buildSetupStoreAttributesPanel()
+                this.buildSetupAttributesForm()
             ]
         }];
 
@@ -75,11 +75,11 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         });
     },
 
-    buildSetupStoreAttributesPanel: function() {
-        return Ext.create('Slims.view.sample.wizard.StoreAttributesPanel', {
+    buildSetupAttributesForm: function() {
+        return Ext.create('Slims.view.sample.wizard.AttributesForm', {
             listeners: {
                 show: function() {
-                    this.down('storeattributesform').loadAttributes(this.sampleInstanceStoreAttributes);
+                    this.down('attributesform').loadAttributes(this.sampleInstanceStoreAttributes);
                 },
                 scope: this
             },
@@ -107,8 +107,8 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     },
 
     saveChanges: function() {
-        var storeAtrributesValues = this.down('storeattributesform').getValues();
-        storeAtrributesValues.samplesColor = this.down('storeattributesform').down('[name=samplesColor]').getValue();
+        var storeAtrributesValues = this.down('attributesform').getValues();
+        storeAtrributesValues.samplesColor = this.down('attributesform').down('[name=samplesColor]').getValue();
 
         this.data.storeAtrributesValues = storeAtrributesValues;
         this.data.storeAtrributesValues.sampleType = this.data.sampleTemplate;

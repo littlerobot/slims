@@ -172,11 +172,11 @@ Ext.define('Slims.controller.Home', {
     },
 
     storeSamples: function() {
-        if (!storeAttributesPanel.form.isValid()) {
+        if (!attributesForm.form.isValid()) {
             return;
         }
 
-        var storeAttributes = storeAttributesPanel.form.getValues(),
+        var storeAttributes = attributesForm.form.getValues(),
             colour = storeAttributes.samplesColor;
 
         delete storeAttributes.samplesColor;
@@ -213,10 +213,11 @@ Ext.define('Slims.controller.Home', {
             layout: 'fit',
             height: 500,
             items: [{
-                xtype: 'storeattributesform'
+                xtype: 'attributesform'
             }],
             buttons: ['->', {
-                text: 'Save'
+                text: 'Save',
+
             }, {
                 text: 'Cancel',
                 handler: function() {
@@ -225,7 +226,7 @@ Ext.define('Slims.controller.Home', {
             }]
         });
 
-        var form = editSampleWindow.down('storeattributesform'),
+        var form = editSampleWindow.down('attributesform'),
             sampleData = sample.data;
 
         var instanceTemplate = Ext.StoreMgr.get('instanceTemplates').findRecord('id', sample.get('sampleInstanceTemplate'));
