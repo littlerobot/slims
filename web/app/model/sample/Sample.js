@@ -14,5 +14,7 @@ Ext.define('Slims.model.sample.Sample', {
         name: 'sampleInstanceTemplate'
     }, {
         name: 'colour'
+    }, {
+        name: 'attributes'
     }]
 });

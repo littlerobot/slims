@@ -72,13 +72,15 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         var store = Ext.create('Ext.data.Store', {fields: storeFields});
         var storeItems = this.getStore().data.items;
 
+        // сделать чтобы только id были в attributes
         var data = storeItems.map(function(record) {
             var vals = record.data;
-            return Ext.merge(vals, extraValues);
+            Ext.apply(vals, extraValues);
+            return vals;
         });
 
         this.reconfigure(store, columns);
 
-        this.getStore().loadData(data);
+        this.getStore().loadRawData(data);
     }
 });

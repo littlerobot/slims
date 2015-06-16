@@ -169,23 +169,79 @@ Ext.define('Slims.controller.Home', {
                 return {
                     text: attr.get('label'),
                     width: 150,
-                    dataIndex: attr.get('id')
+                    dataIndex: 'id'+attr.get('id')
                 };
             });
         this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, data.storeAtrributesValues);
     },
 
     storeSamples: function() {
-        if (!attributesForm.form.isValid()) {
-            return;
-        }
+        // {
+        //     "container": 5,
+        //     "row": 7,
+        //     "column": 7,
+        //     "colour": null,
+        //     "attributes": [
+        //       {
+        //         "sample_instance_attribute": 12,
+        //         "value": "Los Angeles"
+        //       },
+        //       {
+        //         "sample_instance_attribute": 1,
+        //         "filename": "Manufacturer information.pdf",
+        //         "mime_type": "application/pdf",
+        //         "value": "<base 64 encoded file content>"
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     "container": 5,
+        //     "row": 7,
+        //     "column": 8,
+        //     "colour": "#36f23a",
+        //     "attributes": [
+        //       {
+        //         "sample_instance_attribute": 12,
+        //         "value": "New York"
+        //       },
+        //       {
+        //         "sample_instance_attribute": 1,
+        //         "filename": "Manufacturer information.pdf",
+        //         "mime_type": "application/pdf",
+        //         "value": "<base 64 encoded file content>"
+        //       }
+        //     ]
+        //   },
+        //   {
+        //     ...
+        //   }
 
-        var storeAttributes = attributesForm.form.getValues(),
-            colour = storeAttributes.samplesColor;
+        var samplesData = this.getPositionsGrid().getStore().data.items,
+            containerId = this.getContainersGrid().selModel.selected[0].getId();
 
-        delete storeAttributes.samplesColor;
+        var samples = samplesData.map(function(sample) {
+            var positionId = sample.get('positionId'),
+                position = positionId.split(':'),
+                row = position[0],
+                column = position[1],
+                colour = sample.get('sampleColor'),
+                attributes = sample.data;
+            // {
+            //     sample_instance_attribute:
+            //     value:
+            // }
+            return {
+                container: containerId,
+                colour: colour,
+                row: row,
+                column: column,
+                attributes: []
+            }
 
-        wizard.setLoading('Saving...');
+        })
+
+
+
         Ext.Ajax.request({
             url: Slims.Url.getRoute('setsamples'),
             method: 'POST',
@@ -219,6 +275,6 @@ Ext.define('Slims.controller.Home', {
     },
 
     saveSampleAttributes: function(values) {
-
+        this.getPositionsGrid().view.refresh();
     }
 });
