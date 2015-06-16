@@ -48,7 +48,7 @@ Ext.define('Slims.view.sample.EditAttributesWindow', {
 
     save: function() {
         var values = this.down('attributesform').getValues();
-        debugger
+
         this.sample.set(values);
         this.sample.set('attributes', values);
         this.fireEvent('save', values, this.sample);

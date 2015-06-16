@@ -18,6 +18,8 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             scope: this
         }];
 
+        this.staticFields = ['positionId', 'sampleType', 'sampleInstanceTemplate', 'samplesColor'];
+
         this.forwardBlock = [{
             text: 'Position ID',
             width: 100,
@@ -47,7 +49,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             menuDisabled: true,
             tooltip: 'Edit',
             scope: this,
-            handler: function(grid, rowIndex, colIndex) {
+            handler: function(grid, rowIndex) {
                 var rec = grid.getStore().getAt(rowIndex);
                 this.fireEvent('editrecord', rec);
             }
@@ -58,24 +60,43 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         this.callParent();
     },
 
-    buildStoreAttributes: function(extraColumns, extraValues) {
-        extraColumns = extraColumns || [];
-        extraValues = extraValues || {};
+    buildStoreAttributes: function(data) {
+        data = data || {
+            storeAttributes: [],
+            storeAtrributesValues: {}
+        };
+
+        var extraColumns = [];
+        Ext.each(data.storeAttributes, function(attr) {
+            extraColumns.push({
+                dataIndex: 'attributes.id'+attr.get('id'),
+                width: 150,
+                text: attr.get('label')
+            });
+        }, this);
 
         var columns = this.forwardBlock.concat(extraColumns).concat(this.backBlock);
-        var storeFields = columns.map(function(f) {
-            return f.dataIndex ? f.dataIndex.toString() : null
-        });
 
-        storeFields.pop(); // remove actioncolumn
+        // add dynamic attributes into store model
+        var storeFields = this.staticFields.concat(data.storeAttributes.map(function(attr) {
+            return 'attributes.id'+attr.get('id')
+        }));
 
         var store = Ext.create('Ext.data.Store', {fields: storeFields});
         var storeItems = this.getStore().data.items;
 
-        // сделать чтобы только id были в attributes
+        var attributesValues = data ? data.storeAtrributesValues : {},
+            attributes = {};
+        for (var id in attributesValues) {
+            attributes['id'+id] = attributesValues[id];
+        };
+        // copy attributes data into each sample
         var data = storeItems.map(function(record) {
             var vals = record.data;
-            Ext.apply(vals, extraValues);
+            vals.sampleInstanceId = data.sampleInstanceId || '';
+            vals.sampleInstanceTemplate = data.sampleInstanceTemplate || '';
+            vals.samplesColor = data.samplesColor || vals.samplesColor;
+            vals.attributes = attributes;
             return vals;
         });
 

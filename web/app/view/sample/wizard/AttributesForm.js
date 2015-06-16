@@ -65,7 +65,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
                 allowBlank: false,
                 anchor: '100%',
                 labelWidth: 180,
-                name: 'id'+attribute.id,
+                name: attribute.id,
                 fieldLabel: attribute.label
             };
 

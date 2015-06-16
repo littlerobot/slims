@@ -52,7 +52,7 @@ Ext.define('Slims.controller.Home', {
                 positionselected: this.onPositionSelected
             },
             'samplewizard': {
-                save: this.setPositionsGridAttributes
+                save: this.buildPositionsStoreAttributes
             },
             'homepage [name=storeSamples]': {
                 click: this.storeSamples
@@ -164,15 +164,8 @@ Ext.define('Slims.controller.Home', {
         }
     },
 
-    setPositionsGridAttributes: function(data) {
-        var storeAttrColumns = data.storeAttributes.map(function(attr) {
-                return {
-                    text: attr.get('label'),
-                    width: 150,
-                    dataIndex: 'id'+attr.get('id')
-                };
-            });
-        this.getPositionsGrid().buildStoreAttributes(storeAttrColumns, data.storeAtrributesValues);
+    buildPositionsStoreAttributes: function(data) {
+        this.getPositionsGrid().buildStoreAttributes(data);
     },
 
     storeSamples: function() {
