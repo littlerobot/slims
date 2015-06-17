@@ -184,16 +184,18 @@ Ext.define('Slims.controller.Home', {
                     if (name.indexOf('attributes.id') == 0) {
                         var id = name.replace('attributes.id', '');
                         attributes.push({
-                            sample_instance_attribute: id,
+                            sample_instance_attribute: parseInt(id),
                             value: sample.data[name]
                         });
                     }
                 }
             return {
                 container: containerId,
+                sample_type_template_id: sample.get('sampleType'),
+                sample_instance_template_id: sample.get('sampleInstanceTemplate'),
                 colour: colour,
-                row: row,
-                column: column,
+                row: parseInt(row),
+                column: parseInt(column),
                 attributes: attributes
             }
         });

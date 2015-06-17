@@ -40,11 +40,11 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
             buttons: ['->', {
                 text: 'Next',
                 handler: function() {
-                    var sampleTemplatePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
-                    var valid = sampleTemplatePanel.form.isValid();
+                    var sampleTypePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
+                    var valid = sampleTypePanel.form.isValid();
                     if (valid) {
-                        var sampleTemplate = sampleTemplatePanel.down('combo').getValue();
-                        this.data.sampleTemplate = sampleTemplate;
+                        var sampleType = sampleTypePanel.down('combo').getValue();
+                        this.data.sampleType = sampleType;
                         this.nextTab();
                     }
                 },

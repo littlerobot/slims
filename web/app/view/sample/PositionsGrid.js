@@ -95,6 +95,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         var data = storeItems.map(function(record) {
             var vals = record.data;
             vals.sampleInstanceTemplate = data.sampleInstanceId || '';
+            vals.sampleType = data.sampleType || '';
             vals.samplesColor = data.samplesColor || vals.samplesColor;
             vals.attributes = attributes;
             return vals;
