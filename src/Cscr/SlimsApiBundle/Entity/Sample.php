@@ -100,7 +100,7 @@ class Sample
      *
      * @JMS\Exclude()
      */
-    private $state;
+    private $state = self::STATE_STORED;
 
     public function __construct()
     {
@@ -241,18 +241,19 @@ class Sample
         return $this;
     }
 
-    /**
-     * @param ArrayCollection<SampleInstanceAttribute> $attributes
-     * @return Sample
-     */
-    public function setAttributes($attributes)
+    public function addAttribute(SampleInstanceAttribute $attribute)
     {
-        $this->attributes = $attributes;
-
-        /** @var SampleInstanceAttribute $attribute */
-        foreach ($attributes as $attribute) {
+        if (!$this->attributes->contains($attribute)) {
+            $this->attributes->add($attribute);
             $attribute->setParent($this);
         }
+
+        return $this;
+    }
+
+    public function removeAttribute(SampleInstanceAttribute $attribute)
+    {
+        $this->attributes->removeElement($attribute);
 
         return $this;
     }

@@ -6,39 +6,28 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SampleTypeTemplateType extends AbstractType
+class StoreSamplesType extends AbstractType
 {
-    /**
-     * {@inheritdoc}
-     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        $builder->add('name')
-            ->add('attributes', 'collection', [
-                'type' => new SampleTypeTemplateAttributeType(),
+        $builder
+            ->add('samples', 'collection', [
+                'type' => new StoreSampleType(),
                 'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => true,
-            ])
-        ;
+                'by_reference' => false,
+            ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplate',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\Container',
             'csrf_protection' => false,
         ]);
     }
 
-    /**
-     * {@inheritdoc}
-     */
     public function getName()
     {
-        return 'create_sample_type_template';
+        return 'slims_store_samples';
     }
 }

@@ -96,7 +96,7 @@ class Container
     /**
      * @var ArrayCollection<Sample>
      *
-     * @ORM\OneToMany(targetEntity="Sample", mappedBy="container", indexBy="position")
+     * @ORM\OneToMany(targetEntity="Sample", mappedBy="container", indexBy="position", cascade={"PERSIST"})
      *
      * @JMS\Exclude()
      */
@@ -387,7 +387,15 @@ class Container
     {
         if (!$this->getSamples()->contains($sample)) {
             $this->getSamples()->add($sample);
+            $sample->setContainer($this);
         }
+
+        return $this;
+    }
+
+    public function removeSample(Sample $sample)
+    {
+        $this->samples->removeElement($sample);
 
         return $this;
     }
