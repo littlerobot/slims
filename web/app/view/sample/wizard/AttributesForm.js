@@ -28,19 +28,41 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
     },
 
     setValues: function(values) {
-        this.getForm().setValues(values);
         if (values.samplesColor) {
             this.setColor(values.samplesColor);
         }
+
+        var formValues = {};
+        for (var id in values) {
+            formValues['id-'+id] = values[id];
+        }
+        this.getForm().setValues(formValues);
     },
 
     setColor: function(color) {
         this.down('[name=samplesColor]').setValue(color);
     },
 
+    getColor: function() {
+        var color = this.down('[name=samplesColor]').getValue();
+        return color;
+    },
+
     getValues: function() {
-        var values = this.getForm().getValues();
+        var formValues = this.getForm().getValues(),
+            values = {};
+
+        for (var id in formValues) {
+            values[id.replace('id-', '')] = formValues[id];
+        }
         values.samplesColor = this.down('[name=samplesColor]').getValue();
+
+        return values;
+    },
+
+    getAttributesValues: function() {
+        var values = this.getValues();
+        delete values.samplesColor;
 
         return values;
     },
@@ -65,7 +87,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
                 allowBlank: false,
                 anchor: '100%',
                 labelWidth: 180,
-                name: attribute.id,
+                name: 'id-'+attribute.id,
                 fieldLabel: attribute.label
             };
 

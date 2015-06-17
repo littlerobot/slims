@@ -169,91 +169,48 @@ Ext.define('Slims.controller.Home', {
     },
 
     storeSamples: function() {
-        // {
-        //     "container": 5,
-        //     "row": 7,
-        //     "column": 7,
-        //     "colour": null,
-        //     "attributes": [
-        //       {
-        //         "sample_instance_attribute": 12,
-        //         "value": "Los Angeles"
-        //       },
-        //       {
-        //         "sample_instance_attribute": 1,
-        //         "filename": "Manufacturer information.pdf",
-        //         "mime_type": "application/pdf",
-        //         "value": "<base 64 encoded file content>"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     "container": 5,
-        //     "row": 7,
-        //     "column": 8,
-        //     "colour": "#36f23a",
-        //     "attributes": [
-        //       {
-        //         "sample_instance_attribute": 12,
-        //         "value": "New York"
-        //       },
-        //       {
-        //         "sample_instance_attribute": 1,
-        //         "filename": "Manufacturer information.pdf",
-        //         "mime_type": "application/pdf",
-        //         "value": "<base 64 encoded file content>"
-        //       }
-        //     ]
-        //   },
-        //   {
-        //     ...
-        //   }
+        var samplesGridData = this.getPositionsGrid().getStore().data.items,
+            containerId = this.getContainersGrid().selModel.selected.get(0).getId();
 
-        var samplesData = this.getPositionsGrid().getStore().data.items,
-            containerId = this.getContainersGrid().selModel.selected[0].getId();
-
-        var samples = samplesData.map(function(sample) {
+        var samples = samplesGridData.map(function(sample) {
             var positionId = sample.get('positionId'),
                 position = positionId.split(':'),
                 row = position[0],
                 column = position[1],
                 colour = sample.get('sampleColor'),
-                attributes = sample.data;
-            // {
-            //     sample_instance_attribute:
-            //     value:
-            // }
+                attributes = [];
+
+                for (var name in sample.data) {
+                    if (name.indexOf('attributes.id') == 0) {
+                        var id = name.replace('attributes.id', '');
+                        attributes.push({
+                            sample_instance_attribute: id,
+                            value: sample.data[name]
+                        });
+                    }
+                }
             return {
                 container: containerId,
                 colour: colour,
                 row: row,
                 column: column,
-                attributes: []
+                attributes: attributes
             }
+        });
 
-        })
-
-
+        this.getPositionsGrid().setLoading('Saving...');
 
         Ext.Ajax.request({
-            url: Slims.Url.getRoute('setsamples'),
+            url: Slims.Url.getRoute('setsamples', [containerId]),
             method: 'POST',
-            params: {
-                sample_template_id: wizard.sampleTemplate,
-                sample_instance_id: wizard.sampleInstanceId,
-                container_id: wizard.selectedContainer,
-                store_attributes: storeAttributes,
-                positions: wizard.positionsMap,
-                colour: colour
-            },
+            jsonData: samples,
             scope: this,
             success: function(xhr) {
-                wizard.setLoading(false);
-                this.getGrid().getStore().load();
-                wizard.close();
+                this.getPositionsGrid().setLoading(false);
+                alert('success');
             },
             failure: function() {
-                wizard.setLoading(false);
+                this.getPositionsGrid().setLoading(false);
             }
         });
     },

@@ -87,14 +87,14 @@ Ext.define('Slims.view.sample.PositionsGrid', {
 
         var attributesValues = data ? data.storeAtrributesValues : {},
             attributes = {};
+
         for (var id in attributesValues) {
             attributes['id'+id] = attributesValues[id];
         };
         // copy attributes data into each sample
         var data = storeItems.map(function(record) {
             var vals = record.data;
-            vals.sampleInstanceId = data.sampleInstanceId || '';
-            vals.sampleInstanceTemplate = data.sampleInstanceTemplate || '';
+            vals.sampleInstanceTemplate = data.sampleInstanceId || '';
             vals.samplesColor = data.samplesColor || vals.samplesColor;
             vals.attributes = attributes;
             return vals;

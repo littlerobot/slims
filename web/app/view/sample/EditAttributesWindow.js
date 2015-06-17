@@ -41,17 +41,30 @@ Ext.define('Slims.view.sample.EditAttributesWindow', {
             sampleData = this.sample.data;
 
         var instanceTemplate = Ext.StoreMgr.get('instanceTemplates').findRecord('id', this.sample.get('sampleInstanceTemplate'));
+        var attributes = instanceTemplate.get(this.mode);
 
-        form.loadAttributes(instanceTemplate.get(this.mode));
+        form.loadAttributes(attributes);
+
+        var attributes = {};
+        for (var name in sampleData) {
+            if (name.indexOf('attributes.id') == 0) {
+                var id = name.replace('attributes.id', '');
+                attributes[id] = sampleData[name];
+            }
+        }
+        Ext.apply(sampleData, attributes);
         form.setValues(sampleData);
     },
 
     save: function() {
-        var values = this.down('attributesform').getValues();
+        var attributes = this.down('attributesform').getAttributesValues();
+        var color = this.down('attributesform').getColor();
 
-        this.sample.set(values);
-        this.sample.set('attributes', values);
-        this.fireEvent('save', values, this.sample);
+        for (var name in attributes) {
+            this.sample.set('attributes.id'+name, attributes[name]);
+        }
+        this.sample.set('samplesColor', color);
+        this.fireEvent('save', this.sample, attributes, color);
         this.close();
     },
 
