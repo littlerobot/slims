@@ -79,6 +79,9 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             });
         }, this);
 
+        if (extraColumns.length > 0) {
+            this.configured = true;
+        }
         var columns = this.forwardBlock.concat(extraColumns).concat(this.backBlock);
 
         // add dynamic attributes into store model
@@ -108,5 +111,11 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         this.reconfigure(store, columns);
 
         this.getStore().loadRawData(data);
+    },
+
+    reset: function() {
+        this.configured = false;
+        this.getStore().removeAll();
+        this.buildStoreAttributes();
     }
 });

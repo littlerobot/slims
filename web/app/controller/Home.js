@@ -138,7 +138,7 @@ Ext.define('Slims.controller.Home', {
         var positionsMap = this.getPositionsMap(),
             selectedContainer = record;
 
-        this.getPositionsGrid().getStore().removeAll();
+        this.getPositionsGrid().reset();
         this.getDetailsPanel().setDisabled(true);
         if (selectedContainer.get('stores') == 'samples') {
             positionsMap.selectedContainer = selectedContainer;
@@ -170,10 +170,16 @@ Ext.define('Slims.controller.Home', {
 
     storeSamples: function() {
         var currentContainer = this.getContainersGrid().selModel.selected.get(0),
+            configured = this.getPositionsGrid().configured,
             samplesGridData = this.getPositionsGrid().getStore().data.items;
 
         if (!currentContainer || !samplesGridData.length) {
             Ext.Msg.alert('No data to storing', 'Please, select postitions in container and configure them before storing.');
+            return;
+        }
+
+        if (!configured) {
+            Ext.Msg.alert('Samples not configured', 'Please, configure samples before saving');
             return;
         }
 
@@ -184,18 +190,19 @@ Ext.define('Slims.controller.Home', {
                 position = positionId.split(':'),
                 row = position[0],
                 column = position[1],
-                colour = sample.get('sampleColor'),
+                colour = sample.get('samplesColor'),
                 attributes = [];
 
-                for (var name in sample.data) {
-                    if (name.indexOf('attributes.id') == 0) {
-                        var id = name.replace('attributes.id', '');
-                        attributes.push({
-                            id: parseInt(id),
-                            value: sample.data[name]
-                        });
-                    }
+            for (var name in sample.data) {
+                if (name.indexOf('attributes.id') == 0) {
+                    var id = name.replace('attributes.id', '');
+                    attributes.push({
+                        id: parseInt(id),
+                        value: sample.data[name]
+                    });
                 }
+            }
+
             return {
                 type: sample.get('sampleType'),
                 template: sample.get('sampleInstanceTemplate'),
@@ -214,7 +221,7 @@ Ext.define('Slims.controller.Home', {
             jsonData: {samples: samples},
             scope: this,
             success: function(xhr) {
-                this.getPositionsGrid().getStore().removeAll();
+                this.getPositionsGrid().reset();
                 this.getPositionsGrid().setLoading(false);
                 this.getPositionsMap().fireEvent('show');
             },

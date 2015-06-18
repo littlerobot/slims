@@ -71,9 +71,8 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                 if (sample) {
                     tipHtml = [
                         '<div><b>Sample storing here:</b></div>',
-                        '<b><i>Name:</i></b> ' + sample.type.name,
-                        '<b><i>Sample Template:</i></b> ' + sample.type.sample_type_template_name,
-                        '<b><i>Template Name:</i></b> ' + sample.template.name
+                        '<b><i>Sample Type:</i></b> ' + sample.type.name,
+                        '<b><i>Sample Template:</i></b> ' + sample.template.name
                     ].join('</br>');
                 } else {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
@@ -109,7 +108,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                     margin: 3,
                     tip: tipHtml,
                     style: {
-                        'background-color': sample ? sample.color : 'white',
+                        'background-color': sample ? sample.colour : 'white',
                         'border': sample ? '1px solid darkred' : '1px solid lightgray'
                     },
                     listeners: {
