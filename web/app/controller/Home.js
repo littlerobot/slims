@@ -169,8 +169,15 @@ Ext.define('Slims.controller.Home', {
     },
 
     storeSamples: function() {
-        var samplesGridData = this.getPositionsGrid().getStore().data.items,
-            containerId = this.getContainersGrid().selModel.selected.get(0).getId();
+        var currentContainer = this.getContainersGrid().selModel.selected.get(0),
+            samplesGridData = this.getPositionsGrid().getStore().data.items;
+
+        if (!currentContainer || !samplesGridData.length) {
+            Ext.Msg.alert('No data to storing', 'Please, select postitions in container and configure them before storing.');
+            return;
+        }
+
+        var containerId = currentContainer.getId();
 
         var samples = samplesGridData.map(function(sample) {
             var positionId = sample.get('positionId'),
@@ -207,8 +214,9 @@ Ext.define('Slims.controller.Home', {
             jsonData: {samples: samples},
             scope: this,
             success: function(xhr) {
+                this.getPositionsGrid().getStore().removeAll();
                 this.getPositionsGrid().setLoading(false);
-                alert('success');
+                this.getPositionsMap().fireEvent('show');
             },
             failure: function() {
                 this.getPositionsGrid().setLoading(false);

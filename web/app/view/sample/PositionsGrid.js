@@ -13,7 +13,11 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         this.tbar = [{
             text: 'Configure Samples',
             handler: function() {
-                this.fireEvent('configure', this);
+                if (this.getStore().data.length > 0) {
+                    this.fireEvent('configure', this);
+                } else {
+                    Ext.Msg.alert('Grid is empty', 'No data to configure. Please, select postitons first.');
+                }
             },
             scope: this
         }];
