@@ -184,15 +184,14 @@ Ext.define('Slims.controller.Home', {
                     if (name.indexOf('attributes.id') == 0) {
                         var id = name.replace('attributes.id', '');
                         attributes.push({
-                            sample_instance_attribute: parseInt(id),
+                            id: parseInt(id),
                             value: sample.data[name]
                         });
                     }
                 }
             return {
-                container: containerId,
-                sample_type_template_id: sample.get('sampleType'),
-                sample_instance_template_id: sample.get('sampleInstanceTemplate'),
+                type: sample.get('sampleType'),
+                template: sample.get('sampleInstanceTemplate'),
                 colour: colour,
                 row: parseInt(row),
                 column: parseInt(column),
@@ -205,7 +204,7 @@ Ext.define('Slims.controller.Home', {
         Ext.Ajax.request({
             url: Slims.Url.getRoute('setsamples', [containerId]),
             method: 'POST',
-            jsonData: samples,
+            jsonData: {samples: samples},
             scope: this,
             success: function(xhr) {
                 this.getPositionsGrid().setLoading(false);
