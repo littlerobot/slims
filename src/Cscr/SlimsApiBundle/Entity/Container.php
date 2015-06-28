@@ -171,9 +171,8 @@ class Container
     public function getNumberOfStoredSamples()
     {
         // This container stores samples so won't have any children.
-        // FIXME: Add sample calculation when samples are actually being stored.
         if (static::STORES_SAMPLES === $this->stores) {
-            return 0;
+            return $this->samples->count();
         }
 
         $childStored = 0;
