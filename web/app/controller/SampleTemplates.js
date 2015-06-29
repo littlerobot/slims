@@ -2,9 +2,9 @@ Ext.define('Slims.controller.SampleTemplates', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'sample.templates.Panel',
-        'sample.templates.TemplateWindow',
-        'sample.templates.AttributeWindow'
+        'sample.instancetemplates.Panel',
+        'sample.instancetemplates.TemplateWindow',
+        'sample.instancetemplates.AttributeWindow'
     ],
 
     stores: ['sample.InstanceTemplates', 'sample.Attributes', 'sample.AttributeTypes'],
@@ -12,45 +12,45 @@ Ext.define('Slims.controller.SampleTemplates', {
 
     refs: [{
         ref: 'tab',
-        selector: 'sampletemplatespage'
+        selector: 'instancetemplatespage'
     }, {
         ref: 'templatesGrid',
-        selector: 'sampletemplatesgrid'
+        selector: 'instancetemplatesgrid'
     }, {
         ref: 'storeAttributesGrid',
-        selector: 'sampleattributesgrid[name=storeAttributes]'
+        selector: 'instancetemplatesattributes[name=storeAttributes]'
     }, {
         ref: 'removeAttributesGrid',
-        selector: 'sampleattributesgrid[name=removeAttributes]'
+        selector: 'instancetemplatesattributes[name=removeAttributes]'
     }, {
         ref: 'addAttributeButton',
-        selector: 'sampleattributesgrid button[name=addAttribute]'
+        selector: 'instancetemplatesattributes button[name=addAttribute]'
     }],
 
     init: function() {
         this.control({
-            'sampletemplatesgrid': {
+            'instancetemplatesgrid': {
                 select: this.onTemplateSelect,
                 editrecord: this.openEditTemplateWindow
             },
-            'sampletemplatesgrid button[name=addTemplate]': {
+            'instancetemplatesgrid button[name=addTemplate]': {
                 click: this.openAddTemplateWindow
             },
-            'sampleattributesgrid button[name=addAttribute]': {
+            'instancetemplatesattributes button[name=addAttribute]': {
                 click: this.openAddAttributeWindow
             },
-            'sampletemplatesgrid button[name=reloadGrid]': {
+            'instancetemplatesgrid button[name=reloadGrid]': {
                 click: this.reloadGrids
             },
-            'sampleattributesgrid': {
+            'instancetemplatesattributes': {
                 afterrender: this.setRestoreSelectionListener,
                 editrecord: this.editAttribute,
                 attributeschanged: this.commitAttributes
             },
-            'sampletemplatewindow': {
+            'instancetemplatewindow': {
                 save: this.saveTemplate
             },
-            'sampleattributewindow': {
+            'instancetemplatesattrwindow': {
                 save: this.saveAttribute
             }
         });
@@ -101,13 +101,13 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     openAddTemplateWindow: function() {
-        var window = Ext.create('Slims.view.sample.templates.TemplateWindow');
+        var window = Ext.create('Slims.view.sample.instancetemplates.TemplateWindow');
 
         window.show();
     },
 
     openEditTemplateWindow: function(template) {
-        var window = Ext.create('Slims.view.sample.templates.TemplateWindow', {
+        var window = Ext.create('Slims.view.sample.instancetemplates.TemplateWindow', {
             record: template
         });
 
@@ -117,7 +117,7 @@ Ext.define('Slims.controller.SampleTemplates', {
     openAddAttributeWindow: function(button) {
         var grid = button.up('grid');
 
-        var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.instancetemplates.AttributeWindow', {
             grid: grid,
             usedLabels: this.getUsedAttrLabels(grid)
         });
@@ -126,7 +126,7 @@ Ext.define('Slims.controller.SampleTemplates', {
     },
 
     editAttribute: function(attribute, grid) {
-        var window = Ext.create('Slims.view.sample.templates.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.instancetemplates.AttributeWindow', {
             attribute: attribute,
             grid: grid,
             usedLabels: this.getUsedAttrLabels(grid)

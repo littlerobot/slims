@@ -1,6 +1,6 @@
-Ext.define('Slims.view.sample.templates.AttributesGrid', {
+Ext.define('Slims.view.sample.instancetemplates.AttributesGrid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'sampleattributesgrid',
+    xtype: 'instancetemplatesattributes',
 
     requires: [
         'Ext.grid.column.Action',

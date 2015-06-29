@@ -1,13 +1,13 @@
-Ext.define('Slims.view.sample.templates.Panel', {
+Ext.define('Slims.view.sample.instancetemplates.Panel', {
     extend: 'Ext.panel.Panel',
-    xtype: 'sampletemplatespage',
+    xtype: 'instancetemplatespage',
 
     layout: 'fit',
     border: true,
 
     requires: [
-        'Slims.view.sample.templates.TemplatesGrid',
-        'Slims.view.sample.templates.AttributesGrid'
+        'Slims.view.sample.instancetemplates.TemplatesGrid',
+        'Slims.view.sample.instancetemplates.AttributesGrid'
     ],
 
     initComponent: function() {
@@ -15,7 +15,7 @@ Ext.define('Slims.view.sample.templates.Panel', {
             xtype: 'panel',
             layout: 'vbox',
             items: [{
-                xtype: 'sampletemplatesgrid',
+                xtype: 'instancetemplatesgrid',
                 width: '100%',
                 flex: 1
             }, {
@@ -24,7 +24,7 @@ Ext.define('Slims.view.sample.templates.Panel', {
                 width: '100%',
                 flex: 1,
                 items: [{
-                    xtype: 'sampleattributesgrid',
+                    xtype: 'instancetemplatesattributes',
                     name: 'storeAttributes',
                     title: 'Store Attributes',
                     flex: 1,
@@ -46,7 +46,7 @@ Ext.define('Slims.view.sample.templates.Panel', {
                         degrees: 90
                     }]
                 }, {
-                    xtype: 'sampleattributesgrid',
+                    xtype: 'instancetemplatesattributes',
                     name: 'removeAttributes',
                     title: 'Remove Attributes',
                     flex: 1,

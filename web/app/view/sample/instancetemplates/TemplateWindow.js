@@ -1,6 +1,6 @@
-Ext.define('Slims.view.sample.templates.TemplateWindow', {
+Ext.define('Slims.view.sample.instancetemplates.TemplateWindow', {
     extend: 'Ext.window.Window',
-    xtype: 'sampletemplatewindow',
+    xtype: 'instancetemplatewindow',
 
     requires: [
         'Ext.form.field.Text',

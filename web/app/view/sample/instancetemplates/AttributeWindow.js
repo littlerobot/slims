@@ -1,6 +1,6 @@
-Ext.define('Slims.view.sample.templates.AttributeWindow', {
+Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
     extend: 'Ext.window.Window',
-    xtype: 'sampleattributewindow',
+    xtype: 'instancetemplatesattrwindow',
 
     requires: [
         'Ext.form.field.Text',
@@ -43,7 +43,7 @@ Ext.define('Slims.view.sample.templates.AttributeWindow', {
                 allowOnlyWhitespace: false,
                 fieldLabel: 'Label',
                 validator: function(val) {
-                    if (this.up('sampleattributewindow').usedLabels.indexOf(val.trim()) == -1) {
+                    if (this.up('instancetemplatesattrwindow').usedLabels.indexOf(val.trim()) == -1) {
                         return true;
                     } else {
                         return 'This label already in use in this template.';

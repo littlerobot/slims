@@ -18,13 +18,13 @@ Ext.define('Slims.view.templates.Panel', {
                 xtype: 'templatesgrid',
                 width: '100%',
                 border: true,
-                padding: 5,
+                padding: '0 5 5 5',
                 flex: 1
             }, {
                 xtype: 'attributesgrid',
                 width: '100%',
                 border: true,
-                padding: 5,
+                padding: '0 5 5 5',
                 flex: 1
             }]
         }];

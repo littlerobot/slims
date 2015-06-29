@@ -1,6 +1,6 @@
-Ext.define('Slims.view.sample.templates.TemplatesGrid', {
+Ext.define('Slims.view.sample.instancetemplates.TemplatesGrid', {
     extend: 'Ext.grid.Panel',
-    xtype: 'sampletemplatesgrid',
+    xtype: 'instancetemplatesgrid',
 
     requires: ['Ext.grid.column.Action'],
 

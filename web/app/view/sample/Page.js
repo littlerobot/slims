@@ -7,12 +7,14 @@ Ext.define('Slims.view.sample.Page', {
     initComponent: function() {
         this.tbar = [{
             xtype: 'panel',
-            border: true,
             width: '100%',
-            layout: 'hbox',
+            layout: {
+                type: 'hbox',
+                pack: 'center'
+            },
             defaults: {
                 width: 170,
-                margin: 10,
+                margin: '5 5 5 0',
                 index: 0,
                 scale: 'medium', // for setting font bigger
                 allowDepress: false,
@@ -41,13 +43,13 @@ Ext.define('Slims.view.sample.Page', {
         this.items = [{
             xtype: 'templatespage'
         }, {
-            xtype: 'sampletemplatespage',
+            xtype: 'instancetemplatespage',
             border: true,
-            padding: 5
+            padding: '0 5 5 5'
         }, {
             xtype: 'sampletypespage',
             border: true,
-            padding: 5
+            padding: '0 5 5 5'
         }]
 
         this.callParent();
