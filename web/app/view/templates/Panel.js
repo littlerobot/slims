@@ -3,7 +3,6 @@ Ext.define('Slims.view.templates.Panel', {
     xtype: 'templatespage',
 
     layout: 'fit',
-    border: true,
 
     requires: [
         'Slims.view.templates.TemplatesGrid',
@@ -18,10 +17,14 @@ Ext.define('Slims.view.templates.Panel', {
             items: [{
                 xtype: 'templatesgrid',
                 width: '100%',
+                border: true,
+                padding: 5,
                 flex: 1
             }, {
                 xtype: 'attributesgrid',
                 width: '100%',
+                border: true,
+                padding: 5,
                 flex: 1
             }]
         }];

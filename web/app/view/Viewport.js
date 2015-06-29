@@ -22,11 +22,15 @@ Ext.define('Slims.view.Viewport', {
                 icon: '/resources/images/home.png'
             }, {
                 xtype: 'groupsgrid',
+                padding: 5,
+                border: true,
                 title: 'Research Groups',
                 icon: '/resources/images/groups.png'
             }, {
                 xtype: 'usersgrid',
                 title: 'Users',
+                padding: 5,
+                border: true,
                 icon: '/resources/images/users.png'
             }, {
                 xtype: 'samplespage',

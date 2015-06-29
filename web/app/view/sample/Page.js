@@ -3,14 +3,12 @@ Ext.define('Slims.view.sample.Page', {
     xtype: 'samplespage',
 
     layout: 'card',
-    border: false,
 
     initComponent: function() {
         this.tbar = [{
             xtype: 'panel',
             border: true,
             width: '100%',
-            padding: 10,
             layout: 'hbox',
             defaults: {
                 width: 170,
@@ -41,14 +39,15 @@ Ext.define('Slims.view.sample.Page', {
         }];
 
         this.items = [{
-            xtype: 'templatespage',
-            border: true
+            xtype: 'templatespage'
         }, {
             xtype: 'sampletemplatespage',
-            border: true
+            border: true,
+            padding: 5
         }, {
             xtype: 'sampletypespage',
-            border: true
+            border: true,
+            padding: 5
         }]
 
         this.callParent();

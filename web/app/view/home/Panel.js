@@ -17,6 +17,7 @@ Ext.define('Slims.view.home.Panel', {
             items: [{
                 xtype: 'containersgrid',
                 border: true,
+                padding: '5 0 5 5',
                 height: '100%',
                 flex: 1
             }, {
@@ -28,16 +29,19 @@ Ext.define('Slims.view.home.Panel', {
                 items: [{
                     xtype: 'positionsview',
                     width: '100%',
+                    border: true,
+                    padding: '5 5 5 5',
                     flex: 3
                 }, {
                     xtype: 'positionsgrid',
+                    padding: '0 5 5 5',
                     width: '100%',
                     border: true,
-                    flex: 2
-                }],
-                buttons: ['->', {
-                    text: 'Store Samples',
-                    name: 'storeSamples'
+                    flex: 2,
+                    buttons: ['->', {
+                        text: 'Store Samples',
+                        name: 'storeSamples'
+                    }]
                 }]
             }]
         }];

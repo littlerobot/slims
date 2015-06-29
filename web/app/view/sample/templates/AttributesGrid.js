@@ -7,8 +7,6 @@ Ext.define('Slims.view.sample.templates.AttributesGrid', {
         'Ext.grid.plugin.DragDrop'
     ],
 
-    style: 'border-top: 1px solid #157fcc !important;',
-
     initComponent: function() {
         this.store = Ext.create('Slims.store.sample.Attributes');
         this.selModel = {
