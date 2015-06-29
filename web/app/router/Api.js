@@ -3,7 +3,7 @@ Ext.define('Slims.router.Api', {
     singleton: true,
 
     getRoute: function(routeName, params) {
-        if (window.location.hostname == 'localhost') {
+        if (window.location.hostname == 'localhost' || window.location.hostname == 'slims.dev') {
             return this.getTestRoute(routeName, params);
         }
 
