@@ -27,27 +27,27 @@ Ext.define('Slims.view.sample.Page', {
                 xtype: 'button',
                 pressed: true,
                 index: 0,
-                text: 'Types'
+                text: 'Type Templates'
             }, {
                 xtype: 'button',
                 index: 1,
                 width: 200,
-                text: 'Type Templates'
+                text: 'Instance Templates'
             }, {
                 xtype: 'button',
                 index: 2,
-                text: 'Instance Templates'
+                text: 'Types'
             }]
         }];
 
         this.items = [{
-            xtype: 'sampletypespage',
-            border: true
-        }, {
             xtype: 'templatespage',
             border: true
         }, {
             xtype: 'sampletemplatespage',
+            border: true
+        }, {
+            xtype: 'sampletypespage',
             border: true
         }]
 
