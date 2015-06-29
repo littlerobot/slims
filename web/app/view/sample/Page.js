@@ -27,12 +27,12 @@ Ext.define('Slims.view.sample.Page', {
                 xtype: 'button',
                 pressed: true,
                 index: 0,
-                text: 'Sample Types'
+                text: 'Types'
             }, {
                 xtype: 'button',
                 index: 1,
                 width: 200,
-                text: 'Sample Type Templates'
+                text: 'Type Templates'
             }, {
                 xtype: 'button',
                 index: 2,
