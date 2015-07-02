@@ -11,6 +11,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
 
     initComponent: function() {
         this.buildItems();
+        this.on('afterrender', this.filterInstanceTemplatesWithoutAttributes, this);
         this.callParent(arguments);
     },
 
@@ -27,7 +28,26 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
                 emptyText: 'Select to continue',
                 allowBlank: false,
                 editable: false,
-                store: Ext.StoreMgr.get('instanceTemplates'),
+                store: {
+                    fields: [{
+                        name: 'id'
+                    }, {
+                        name: 'name'
+                    }, {
+                        name: 'store',
+                        type: 'auto',
+                        useNull: true
+                    }, {
+                        name: 'remove',
+                        type: 'auto',
+                        useNull: true
+                    }, {
+                        name: 'editable',
+                        type: 'bool',
+                        defaultValue: true
+                    }],
+                    data: []
+                },
                 queryMode: 'local',
                 displayField: 'name',
                 valueField: 'id',
@@ -98,5 +118,19 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
         var template = combo.store.findRecord(combo.valueField, value);
         this.down('grid[name=storeAttributesGrid]').getStore().loadData(template.get('store'));
         this.down('grid[name=removeAttributesGrid]').getStore().loadData(template.get('remove'));
+    },
+
+    filterInstanceTemplatesWithoutAttributes: function() {
+        var combo = this.down('combo'),
+            comboStore = combo.store,
+            instanceTemplatesStore = Ext.StoreMgr.get('instanceTemplates'), instanseTemplatesWithAttributes = [];
+
+        instanceTemplatesStore.data.each(function(template) {
+            if (template.get('store').length > 0 && template.get('remove').length > 0) {
+                instanseTemplatesWithAttributes.push(template);
+            }
+        });
+
+        comboStore.loadData(instanseTemplatesWithAttributes);
     }
 });
