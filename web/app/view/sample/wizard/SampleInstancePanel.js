@@ -11,7 +11,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
 
     initComponent: function() {
         this.buildItems();
-        this.on('afterrender', this.filterInstanceTemplatesWithoutAttributes, this);
+        this.on('show', this.filterInstanceTemplatesWithoutAttributes, this);
         this.callParent(arguments);
     },
 
@@ -130,6 +130,11 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
                 instanseTemplatesWithAttributes.push(template);
             }
         });
+
+        if (instanseTemplatesWithAttributes.length == 0) {
+            Ext.Msg.alert('Cannot configure samples', 'You haven\'t instance templates with store and remove attributes, please add one at least to continue.');
+            // this.up('samplewizard').close();
+        }
 
         comboStore.loadData(instanseTemplatesWithAttributes);
     }
