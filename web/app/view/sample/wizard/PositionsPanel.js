@@ -8,6 +8,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
     },
     selectedContainer: null,
     items: [],
+    autoScroll: true,
 
     initComponent: function() {
         this.on('show', this.getContainerPositions, this);
