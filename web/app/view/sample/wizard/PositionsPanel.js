@@ -45,7 +45,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         this.items.add(Ext.create('Ext.form.Label', {
             padding: 10,
             width: '100%',
-            html: 'Select Posititons for storing new Samples'
+            html: 'Select empty positions to store samples'
         }));
 
         this.items.add(Ext.create('Ext.form.Panel', {
@@ -71,7 +71,6 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
 
                 if (sample) {
                     tipHtml = [
-                        '<div><b>Sample storing here:</b></div>',
                         '<b><i>Sample Type:</i></b> ' + sample.type.name,
                         '<b><i>Sample Template:</i></b> ' + sample.template.name
                     ].join('</br>');

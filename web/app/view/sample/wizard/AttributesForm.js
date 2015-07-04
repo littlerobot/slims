@@ -11,7 +11,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
     buildItems: function() {
         var attributesFieldset = Ext.create('Ext.form.FieldSet', {
             name: 'attributesFieldset',
-            title: 'Store attributes fields',
+            title: 'Attributes',
             width: '100%',
             padding: 10,
             margin: 10

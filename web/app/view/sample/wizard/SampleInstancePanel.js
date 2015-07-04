@@ -23,7 +23,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
                 padding: 10,
                 width: 400,
                 name: 'sampleInstanceTemplateId',
-                fieldLabel: 'Step #2. Select <i>Sample Instance Template</i> and press <i>Next</i>',
+                fieldLabel: 'Select the template',
                 labelAlign: 'top',
                 emptyText: 'Select to continue',
                 allowBlank: false,

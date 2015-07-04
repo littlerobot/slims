@@ -17,7 +17,7 @@ Ext.define('Slims.view.sample.wizard.SampleTypePanel', {
                 name: 'templateId',
                 padding: 10,
                 width: 400,
-                fieldLabel: 'Please, select <i>Sample Type</i> for a new sample and press <i>Next</i>',
+                fieldLabel: 'Select the sample type',
                 labelAlign: 'top',
                 emptyText: 'Select to continue',
                 allowBlank: false,
