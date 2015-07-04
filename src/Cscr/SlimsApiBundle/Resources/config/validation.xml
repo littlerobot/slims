@@ -66,6 +66,17 @@
                 <option name="message">Colour must be in hexadecimal format. E.g. #00ff33.</option>
             </constraint>
         </property>
+        <property name="samples">
+            <constraint name="All">
+                <option name="constraints">
+                    <constraint name="Type">
+                        <option name="type">Cscr\SlimsApiBundle\Entity\Sample</option>
+                        <option name="message">The samples must all be valid.</option>
+                    </constraint>
+                </option>
+            </constraint>
+            <constraint name="Valid"/>
+        </property>
     </class>
 
 
@@ -375,10 +386,10 @@
                 <option name="message">The row must be specified.</option>
             </constraint>
             <constraint name="Range">
-                <option name="min">1</option>
+                <option name="min">0</option>
                 <option name="max">100</option>
-                <option name="minMessage">Row number must be greater than {{ limit }}.</option>
-                <option name="maxMessage">Row number must be less than {{ limit }}.</option>
+                <option name="minMessage">Row number must be be at least {{ limit }}.</option>
+                <option name="maxMessage">Row number cannot be more than {{ limit }}.</option>
                 <option name="invalidMessage">This must be a number.</option>
             </constraint>
         </property>
@@ -387,10 +398,10 @@
                 <option name="message">The column must be specified.</option>
             </constraint>
             <constraint name="Range">
-                <option name="min">1</option>
+                <option name="min">0</option>
                 <option name="max">100</option>
-                <option name="minMessage">Column number must be greater than {{ limit }}.</option>
-                <option name="maxMessage">Column number must be less than {{ limit }}.</option>
+                <option name="minMessage">Column number must be at least {{ limit }}.</option>
+                <option name="maxMessage">Column number cannot be more than {{ limit }}.</option>
                 <option name="invalidMessage">This must be a number.</option>
             </constraint>
         </property>
@@ -403,7 +414,7 @@
                 <option name="message">The associated sample type must be valid.</option>
             </constraint>
         </property>
-        <property name="type">
+        <property name="template">
             <constraint name="NotBlank">
                 <option name="message">The sample instance template must be specified.</option>
             </constraint>
