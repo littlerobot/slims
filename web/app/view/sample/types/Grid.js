@@ -3,7 +3,6 @@ Ext.define('Slims.view.sample.types.Grid', {
     xtype: 'sampletypesgrid',
 
     requires: ['Ext.grid.plugin.RowExpander'],
-    border: true,
 
     plugins: [{
         ptype: 'rowexpander',
@@ -32,7 +31,7 @@ Ext.define('Slims.view.sample.types.Grid', {
     }],
 
     initComponent: function() {
-        this.store = Ext.create('Slims.store.sample.Types');
+        this.store = Ext.StoreMgr.get('sampleTypes');
 
         this.columns = [{
             text: 'ID',

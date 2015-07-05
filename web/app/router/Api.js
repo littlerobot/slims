@@ -3,7 +3,7 @@ Ext.define('Slims.router.Api', {
     singleton: true,
 
     getRoute: function(routeName, params) {
-        if (window.location.hostname == 'localhost') {
+        if (window.location.hostname == 'localhost' || window.location.hostname == 'slims.dev') {
             return this.getTestRoute(routeName, params);
         }
 
@@ -53,7 +53,12 @@ Ext.define('Slims.router.Api', {
             case 'createsampletype':
                 return Ext.String.format('{0}/sample-types', routePrefix);
             case 'getcontainerpositions':
-                return Ext.String.format('{0}/container/{1}/samples', routePrefix, params[0]);
+                return Ext.String.format('{0}/containers/{1}/samples', routePrefix, params[0]);
+            // samples
+            case 'getsamples':
+                return Ext.String.format('{0}/samples', routePrefix);
+            case 'setsamples':
+                return Ext.String.format('{0}/containers/{1}/samples', routePrefix, params[0]);
 
             default:
                 return routePrefix + '/' + routeName;
@@ -108,7 +113,12 @@ Ext.define('Slims.router.Api', {
             case 'createsampletype':
                 return Ext.String.format('{0}/{1}/sample-types', devController, routePrefix);
             case 'getcontainerpositions':
-                return Ext.String.format('{0}/{1}/container/{2}/samples', devController, routePrefix, params[0]);
+                return Ext.String.format('{0}/{1}/containers/{2}/samples', devController, routePrefix, params[0]);
+            // samples
+            case 'getsamples':
+                return Ext.String.format('{0}/{1}/samples', devController, routePrefix);
+            case 'setsamples':
+                return Ext.String.format('{0}/{1}/containers/{2}/samples', devController, routePrefix, params[0]);
 
             default:
                 return devController + routePrefix + '/' + routeName;

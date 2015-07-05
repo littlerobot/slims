@@ -38,6 +38,7 @@ class SampleInstanceTemplate
      * )
      *
      * @JMS\SerializedName("store")
+     * @JMS\Groups({"sample_instance_templates"})
      */
     private $storedAttributes;
 
@@ -51,6 +52,7 @@ class SampleInstanceTemplate
      * )
      *
      * @JMS\SerializedName("remove")
+     * @JMS\Groups({"sample_instance_templates"})
      */
     private $removedAttributes;
 

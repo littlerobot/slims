@@ -22,7 +22,8 @@ Ext.define('Slims.Application', {
         'Users',
         'Templates',
         'SampleTemplates',
-        'SampleTypes'
+        'SampleTypes',
+        'Samples'
     ],
 
     stores: [

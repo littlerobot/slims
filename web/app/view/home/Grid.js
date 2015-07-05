@@ -58,7 +58,7 @@ Ext.define('Slims.view.home.Grid', {
             width: 30,
             dataIndex: 'colour',
             renderer: function(value) {
-                return '<div style="width: 15px; height: 15px; background-color: '+value+'; border: 1px solid black;">&nbsp;</div>';
+                return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', value);
             }
         }];
 
@@ -75,7 +75,7 @@ Ext.define('Slims.view.home.Grid', {
                     var rec = grid.getStore().getAt(rowIndex);
                     this.fireEvent('editrecord', rec);
                 }
-            })
+            });
         }
 
         this.callParent();

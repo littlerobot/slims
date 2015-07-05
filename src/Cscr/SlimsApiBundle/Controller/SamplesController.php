@@ -3,8 +3,7 @@
 namespace Cscr\SlimsApiBundle\Controller;
 
 use Cscr\SlimsApiBundle\Entity\Container;
-use Cscr\SlimsApiBundle\Entity\Sample;
-use Cscr\SlimsApiBundle\Form\Type\StoreSampleType;
+use Cscr\SlimsApiBundle\Form\Type\StoreSamplesType;
 use Cscr\SlimsApiBundle\Response\SamplesResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
@@ -21,7 +20,7 @@ class SamplesController extends FOSRestController
      * @return SamplesResponse
      *
      * @Rest\Route("")
-     * @Rest\View()
+     * @Rest\View(serializerGroups={"Default"})
      */
     public function getSamplesAction($id)
     {
@@ -38,13 +37,11 @@ class SamplesController extends FOSRestController
      * @Rest\View()
      * @return View
      */
-    public function storeSampleAction($id, Request $request)
+    public function storeSamplesAction($id, Request $request)
     {
         $container = $this->findContainer($id);
-        $sample = new Sample();
-        $sample->setContainer($container);
 
-        return $this->processForm($sample, new StoreSampleType(), $request);
+        return $this->processForm($container, new StoreSamplesType(), $request);
     }
 
     /**
@@ -62,27 +59,25 @@ class SamplesController extends FOSRestController
     }
 
     /**
-     * @param  Sample $sample
+     * @param Container $container
      * @param  FormTypeInterface $formType
      * @param  Request $request
      * @return View
      */
-    private function processForm(Sample $sample, FormTypeInterface $formType, Request $request)
+    private function processForm(Container $container, FormTypeInterface $formType, Request $request)
     {
         $manager = $this->getDoctrine()->getManager();
 
-        $form = $this->get('form.factory')->createNamed('', $formType, $sample);
+        $form = $this->get('form.factory')->createNamed('', $formType, $container);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            // FIXME: Should be set in a command
-            $sample->setState(Sample::STATE_STORED);
-            $manager->persist($sample);
+            $manager->persist($container);
             $manager->flush();
 
             // ExtJS doesn't work with RESTful APIs, as far as I can see.
             // Return the object and a 200.
-            return View::create(new SamplesResponse($sample->getContainer()->getSamples()), Response::HTTP_OK);
+            return View::create(new SamplesResponse($container->getSamples()), Response::HTTP_OK);
         }
 
         return View::create($form, 400);
