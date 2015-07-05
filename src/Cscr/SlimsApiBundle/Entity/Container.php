@@ -385,7 +385,7 @@ class Container
     public function addSample(Sample $sample)
     {
         if (!$this->getSamples()->contains($sample)) {
-            $this->getSamples()->add($sample);
+            $this->samples[$sample->getPosition()] = $sample;
             $sample->setContainer($this);
         }
 

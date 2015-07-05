@@ -107,16 +107,18 @@ class Sample
         $this->attributes = new ArrayCollection();
     }
 
-    public function setPosition($row, $column)
+    public function setPosition($position)
     {
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        if (is_null($row) || is_null($column)) {
-            return $this;
+        if (false === stripos($position, ':')) {
+            throw new \RuntimeException('A sample position must include a colon, to separate the row and column.');
         }
+
+        // FIXME: Yucky way to set values until it's decoupled from form component.
+        list($row, $column) = explode(':', $position);
 
         $this->row = $row;
         $this->column = $column;
-        $this->position = sprintf('%d:%d', $row, $column);
+        $this->position = $position;
 
         return $this;
     }
@@ -200,7 +202,7 @@ class Sample
         $this->row = $row;
 
         // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition($this->row, $this->column);
+        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
 
         return $this;
     }
@@ -214,7 +216,7 @@ class Sample
         $this->column = $column;
 
         // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition($this->row, $this->column);
+        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
 
         return $this;
     }
@@ -283,5 +285,13 @@ class Sample
     public function getContainer()
     {
         return $this->container;
+    }
+
+    /**
+     * @return string
+     */
+    public function getPosition()
+    {
+        return $this->position;
     }
 }

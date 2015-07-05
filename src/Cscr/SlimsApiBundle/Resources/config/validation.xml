@@ -376,6 +376,9 @@
             </constraint>
         </property>
         <property name="container">
+            <constraint name="NotBlank">
+                <option name="message">The container must be specified.</option>
+            </constraint>
             <constraint name="Type">
                 <option name="type">Cscr\SlimsApiBundle\Entity\Container</option>
                 <option name="message">Parent container must be valid.</option>

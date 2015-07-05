@@ -14,7 +14,9 @@ class StoreSamplesType extends AbstractType
             ->add('samples', 'collection', [
                 'type' => new StoreSampleType(),
                 'allow_add' => true,
+                'allow_delete' => true,
                 'by_reference' => false,
+                'cascade_validation' => true,
             ]);
     }
 
