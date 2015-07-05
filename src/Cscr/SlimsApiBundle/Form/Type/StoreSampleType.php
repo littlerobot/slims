@@ -33,7 +33,7 @@ class StoreSampleType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'class' => 'Cscr\Slims\ApiBundle\Entity\Sample',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\Sample',
             'csrf_protection' => false,
         ]);
     }

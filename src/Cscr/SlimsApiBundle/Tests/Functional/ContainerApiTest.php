@@ -33,6 +33,10 @@ class ContainerApiTest extends WebTestCase
 
     public function testUpdateExistingContainer()
     {
+        $this->loadFixtures([
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\ContainerApi\LoadContainerData',
+        ]);
+
         $id = 1;
         $name = 'UPDATED-ABCDEFGH1234567';
         $builder = new ContainerBuilder();

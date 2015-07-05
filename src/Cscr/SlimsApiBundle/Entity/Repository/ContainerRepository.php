@@ -31,4 +31,22 @@ class ContainerRepository extends EntityRepository
 
         return $containers;
     }
+
+    /**
+     * @param int $id
+     * @return Container|null
+     * @throws \Doctrine\ORM\NonUniqueResultException
+     */
+    public function find($id)
+    {
+        return $this
+            ->createQueryBuilder('c')
+            ->select('c, s')
+            ->join('c.samples', 's')
+            ->orderBy('s.position')
+            ->where('c.id = :id')
+            ->setParameter('id', $id)
+            ->getQuery()
+            ->getOneOrNullResult();
+    }
 }

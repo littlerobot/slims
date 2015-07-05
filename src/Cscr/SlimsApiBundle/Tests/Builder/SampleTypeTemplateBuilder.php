@@ -23,6 +23,20 @@ class SampleTypeTemplateBuilder
     }
 
     /**
+     * @param string $name
+     * @return SampleTypeTemplateBuilder
+     */
+    public static function buildBasicSampleTypeTemplateWithAttributes($name)
+    {
+        $template = (new SampleTypeTemplateBuilder())
+            ->withName($name)
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aBriefTextAttribute())
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aLongTextAttribute());
+
+        return $template;
+    }
+
+    /**
      * @return SampleTypeTemplate
      */
     public function build()
@@ -83,8 +97,8 @@ class SampleTypeTemplateBuilder
      */
     public function switchOrderOfFirstAndLastAttributes()
     {
-        $firstOrder = $this->attributes->first()->order;
-        $lastOrder = $this->attributes->last()->order;
+        $firstOrder = $this->attributes->first()->build()->getOrder();
+        $lastOrder = $this->attributes->last()->build()->getOrder();
 
         $this->attributes->first()->withOrder($lastOrder);
         $this->attributes->last()->withOrder($firstOrder);

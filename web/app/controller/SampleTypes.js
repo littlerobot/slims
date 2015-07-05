@@ -32,6 +32,16 @@ Ext.define('Slims.controller.SampleTypes', {
                 click: this.reloadGrid
             }
         });
+
+        this.createStores();
+    },
+
+    createStores: function() {
+        var sampleTypesStore = Ext.create('Slims.store.sample.Types', {
+            storeId: 'sampleTypes'
+        });
+
+        sampleTypesStore.load();
     },
 
     openAddSampleTypeWindow: function() {

@@ -862,6 +862,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
+  "Slims.controller.Samples": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -871,6 +872,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
   "Slims.model.sample.InstanceTemplate": [],
+  "Slims.model.sample.Sample": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [
     "Slims.Url"
@@ -884,6 +886,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
   "Slims.store.sample.InstanceTemplates": [],
+  "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
   "Slims.view.Viewport": [],
@@ -892,16 +895,20 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.home.Grid": [],
   "Slims.view.home.Panel": [],
   "Slims.view.home.container.Window": [],
+  "Slims.view.sample.EditAttributesWindow": [],
+  "Slims.view.sample.Grid": [],
   "Slims.view.sample.Page": [],
-  "Slims.view.sample.templates.AttributeWindow": [],
-  "Slims.view.sample.templates.AttributesGrid": [],
-  "Slims.view.sample.templates.Panel": [],
-  "Slims.view.sample.templates.TemplateWindow": [],
-  "Slims.view.sample.templates.TemplatesGrid": [],
+  "Slims.view.sample.PositionsGrid": [],
+  "Slims.view.sample.instancetemplates.AttributeWindow": [],
+  "Slims.view.sample.instancetemplates.AttributesGrid": [],
+  "Slims.view.sample.instancetemplates.Panel": [],
+  "Slims.view.sample.instancetemplates.TemplateWindow": [],
+  "Slims.view.sample.instancetemplates.TemplatesGrid": [],
   "Slims.view.sample.types.Form": [],
   "Slims.view.sample.types.Grid": [],
   "Slims.view.sample.types.Panel": [],
   "Slims.view.sample.types.Window": [],
+  "Slims.view.sample.wizard.AttributesForm": [],
   "Slims.view.sample.wizard.PositionsPanel": [],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
@@ -1922,6 +1929,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.ResearchGroups": [],
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
+  "Slims.controller.Samples": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -1931,6 +1939,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.model.User": [],
   "Slims.model.sample.Attribute": [],
   "Slims.model.sample.InstanceTemplate": [],
+  "Slims.model.sample.Sample": [],
   "Slims.model.sample.Type": [],
   "Slims.router.Api": [],
   "Slims.store.AttributeTypes": [],
@@ -1942,6 +1951,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.store.sample.AttributeTypes": [],
   "Slims.store.sample.Attributes": [],
   "Slims.store.sample.InstanceTemplates": [],
+  "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
@@ -1962,23 +1972,32 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.home.container.Window": [
     "widget.containerwindow"
   ],
+  "Slims.view.sample.EditAttributesWindow": [
+    "widget.editattributeswindow"
+  ],
+  "Slims.view.sample.Grid": [
+    "widget.samplesgrid"
+  ],
   "Slims.view.sample.Page": [
     "widget.samplespage"
   ],
-  "Slims.view.sample.templates.AttributeWindow": [
-    "widget.sampleattributewindow"
+  "Slims.view.sample.PositionsGrid": [
+    "widget.positionsgrid"
   ],
-  "Slims.view.sample.templates.AttributesGrid": [
-    "widget.sampleattributesgrid"
+  "Slims.view.sample.instancetemplates.AttributeWindow": [
+    "widget.instancetemplatesattrwindow"
   ],
-  "Slims.view.sample.templates.Panel": [
-    "widget.sampletemplatespage"
+  "Slims.view.sample.instancetemplates.AttributesGrid": [
+    "widget.instancetemplatesattributes"
   ],
-  "Slims.view.sample.templates.TemplateWindow": [
-    "widget.sampletemplatewindow"
+  "Slims.view.sample.instancetemplates.Panel": [
+    "widget.instancetemplatespage"
   ],
-  "Slims.view.sample.templates.TemplatesGrid": [
-    "widget.sampletemplatesgrid"
+  "Slims.view.sample.instancetemplates.TemplateWindow": [
+    "widget.instancetemplatewindow"
+  ],
+  "Slims.view.sample.instancetemplates.TemplatesGrid": [
+    "widget.instancetemplatesgrid"
   ],
   "Slims.view.sample.types.Form": [
     "widget.sampletypeform"
@@ -1991,6 +2010,9 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.types.Window": [
     "widget.sampletypewindow"
+  ],
+  "Slims.view.sample.wizard.AttributesForm": [
+    "widget.attributesform"
   ],
   "Slims.view.sample.wizard.PositionsPanel": [
     "widget.positionsview"

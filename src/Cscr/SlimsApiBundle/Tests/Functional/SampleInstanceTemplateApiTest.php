@@ -1,7 +1,7 @@
 <?php
 
 namespace Cscr\SlimsApiBundle\Tests\Functional;
-use Cscr\SlimsApiBundle\Tests\Builder\SampleInstanceTemplateAttributeBuilder;
+
 use Cscr\SlimsApiBundle\Tests\Builder\SampleInstanceTemplateBuilder;
 use Cscr\SlimsApiBundle\Tests\Renderer\SampleInstanceTemplateRenderer;
 
@@ -26,7 +26,7 @@ class SampleInstanceTemplateApiTest extends WebTestCase
     }
     public function testCreateSampleInstanceTemplateWithOneOfEachAttribute()
     {
-        $builder = $this->buildBuilderWithAllAttributeTypes(self::TEMPLATE_NAME);
+        $builder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes(self::TEMPLATE_NAME);
         $content = SampleInstanceTemplateRenderer::renderAsJson($builder->build());
 
         $this->client->request('POST', '/api/sample-instance-templates', [], [], [], $content);
@@ -38,15 +38,15 @@ class SampleInstanceTemplateApiTest extends WebTestCase
 
     public function testUpdateSampleInstanceTemplate()
     {
-        $createName = self::TEMPLATE_NAME . '-create';
-        $createBuilder = $this->buildBuilderWithAllAttributeTypes($createName);
-        $createContent = SampleInstanceTemplateRenderer::renderAsJson($createBuilder->build());
-        $updateName = self::TEMPLATE_NAME . '-update';
-        $updateBuilder = $this->buildBuilderWithAllAttributeTypes($updateName)->shuffleAttributes();
-        $updateContent = SampleInstanceTemplateRenderer::renderAsJson($updateBuilder->build());
+        $this->loadFixtures([
+            'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleInstanceTemplateApi\LoadSampleInstanceTemplateData',
+        ]);
 
-        $this->client->request('POST', '/api/sample-instance-templates', [], [], [], $createContent);
-        $this->assertJsonResponse($this->client->getResponse());
+        $createName = self::TEMPLATE_NAME . '-create';
+        $updateName = self::TEMPLATE_NAME . '-update';
+        $updateBuilder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes($updateName)
+            ->shuffleAttributes();
+        $updateContent = SampleInstanceTemplateRenderer::renderAsJson($updateBuilder->build());
 
         $template = $this->getTemplateByName($createName);
         $url = sprintf('/api/sample-instance-templates/%d', $template->getId());
@@ -75,31 +75,5 @@ class SampleInstanceTemplateApiTest extends WebTestCase
             ->findOneBy([
                 'name' => $name,
             ]);
-    }
-
-    /**
-     * @param $name
-     * @return SampleInstanceTemplateBuilder
-     */
-    private function buildBuilderWithAllAttributeTypes($name)
-    {
-        return (new SampleInstanceTemplateBuilder())
-            ->withName($name)
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::anOptionAttribute()->withOrder(3))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
-            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aUserAttribute()->withOrder(7))
-
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::anOptionAttribute()->withOrder(3))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
-            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aUserAttribute()->withOrder(7))
-        ;
     }
 }

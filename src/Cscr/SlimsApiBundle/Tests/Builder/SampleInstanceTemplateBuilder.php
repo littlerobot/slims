@@ -84,4 +84,28 @@ class SampleInstanceTemplateBuilder
 
         return $this;
     }
+
+    /**
+     * @param string $name Template name
+     * @return SampleInstanceTemplateBuilder
+     */
+    public static function buildBuilderWithAllAttributeTypes($name)
+    {
+        return (new SampleInstanceTemplateBuilder())
+            ->withName($name)
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::anOptionAttribute()->withOrder(3))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
+            ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aUserAttribute()->withOrder(7))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::anOptionAttribute()->withOrder(3))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
+            ->withRemovedAttribute(SampleInstanceTemplateAttributeBuilder::aUserAttribute()->withOrder(7));
+    }
 }

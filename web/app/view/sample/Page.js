@@ -2,44 +2,60 @@ Ext.define('Slims.view.sample.Page', {
     extend: 'Ext.panel.Panel',
     xtype: 'samplespage',
 
-    layout: 'hbox',
-    requires: ['Slims.view.sample.wizard.Wizard'],
-    border: false,
+    layout: 'card',
 
     initComponent: function() {
-        this.items = [{
+        this.tbar = [{
             xtype: 'panel',
-            border: true,
-            title: 'Grid',
-            flex: 1
-        }, {
-            xtype: 'panel',
-            border: true,
-            title: 'Details',
-            flex: 2
+            width: '100%',
+            layout: {
+                type: 'hbox',
+                pack: 'center'
+            },
+            defaults: {
+                width: 170,
+                margin: '5 5 5 0',
+                index: 0,
+                scale: 'medium', // for setting font bigger
+                allowDepress: false,
+                enableToggle: true,
+                toggleGroup: 'tabs',
+                handler: this.changeTab,
+                scope: this
+            },
+            items: [{
+                xtype: 'button',
+                pressed: true,
+                index: 0,
+                text: 'Type Templates'
+            }, {
+                xtype: 'button',
+                index: 1,
+                width: 200,
+                text: 'Instance Templates'
+            }, {
+                xtype: 'button',
+                index: 2,
+                text: 'Types'
+            }]
         }];
 
-        this.tbar = [{
-            text: 'Create New Sample',
-            handler: this.openWizardTool
-        }];
+        this.items = [{
+            xtype: 'templatespage'
+        }, {
+            xtype: 'instancetemplatespage',
+            border: true,
+            padding: '0 5 5 5'
+        }, {
+            xtype: 'sampletypespage',
+            border: true,
+            padding: '0 5 5 5'
+        }]
 
         this.callParent();
     },
 
-    openWizardTool: function() {
-        Ext.create('Slims.view.sample.wizard.Wizard').show();
-    },
-
-    nextTab: function() {
-        this.layout.setActiveItem(this.layout.getNext());
-    },
-
-    prevTab: function() {
-        this.layout.setActiveItem(this.layout.getPrev());
-    },
-
-    commitChanges: function() {
-
+    changeTab: function(btn) {
+        this.getLayout().setActiveItem(btn.index);
     }
 });
