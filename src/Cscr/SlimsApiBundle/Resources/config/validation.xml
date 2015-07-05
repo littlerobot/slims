@@ -182,7 +182,7 @@
             <constraint name="All">
                 <option name="constraints">
                     <constraint name="Type">
-                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute</option>
+                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute</option>
                         <option name="message">The attributes must all be valid.</option>
                     </constraint>
                 </option>
@@ -193,7 +193,7 @@
             <constraint name="All">
                 <option name="constraints">
                     <constraint name="Type">
-                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute</option>
+                        <option name="type">Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateRemovedAttribute</option>
                         <option name="message">The attributes must all be valid.</option>
                     </constraint>
                 </option>
@@ -202,7 +202,7 @@
         </property>
     </class>
 
-    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute">
+    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute">
         <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed"/>
         <property name="order">
             <constraint name="NotBlank">
@@ -248,7 +248,7 @@
         </property>
     </class>
 
-    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute">
+    <class name="Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateRemovedAttribute">
         <constraint name="Cscr\SlimsApiBundle\Validator\Constraints\OptionAllowed"/>
         <property name="order">
             <constraint name="NotBlank">

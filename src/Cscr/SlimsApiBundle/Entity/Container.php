@@ -93,9 +93,19 @@ class Container
      */
     private $children;
 
+    /**
+     * @var ArrayCollection<Sample>
+     *
+     * @ORM\OneToMany(targetEntity="Sample", mappedBy="container", indexBy="position")
+     *
+     * @JMS\Exclude()
+     */
+    private $samples;
+
     public function __construct()
     {
         $this->children = new ArrayCollection();
+        $this->samples = new ArrayCollection();
     }
 
     /**
@@ -366,5 +376,19 @@ class Container
             self::STORES_CONTAINERS,
             self::STORES_SAMPLES,
         ];
+    }
+
+    public function getSamples()
+    {
+        return $this->samples;
+    }
+
+    public function addSample(Sample $sample)
+    {
+        if (!$this->getSamples()->contains($sample)) {
+            $this->getSamples()->add($sample);
+        }
+
+        return $this;
     }
 }

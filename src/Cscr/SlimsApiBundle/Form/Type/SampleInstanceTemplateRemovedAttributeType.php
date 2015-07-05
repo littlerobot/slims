@@ -4,12 +4,12 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SampleInstanceRemovedTemplateAttributeType extends SampleTypeTemplateAttributeType
+class SampleInstanceTemplateRemovedAttributeType extends SampleTypeTemplateAttributeType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateRemovedAttribute',
             'csrf_protection' => false,
         ]);
     }

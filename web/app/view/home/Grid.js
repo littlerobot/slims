@@ -11,18 +11,21 @@ Ext.define('Slims.view.home.Grid', {
     useArrows: true,
     rootVisible: false,
     multiSelect: true,
+    readOnly: false,
 
     initComponent: function() {
-        this.tbar = [{
-            xtype: 'button',
-            text: 'Add Container',
-            icon: '/resources/images/add.png',
-            name: 'addContainer'
-        }, '->', {
-            width: 25,
-            icon: '/resources/images/reload.png',
-            name: 'reloadGrid'
-        }];
+        if (!this.readOnly) {
+            this.tbar = [{
+                xtype: 'button',
+                text: 'Add Container',
+                icon: '/resources/images/add.png',
+                name: 'addContainer'
+            }, '->', {
+                width: 25,
+                icon: '/resources/images/reload.png',
+                name: 'reloadGrid'
+            }];
+        }
 
         this.store = Ext.create('Slims.store.Containers');
 
@@ -57,18 +60,23 @@ Ext.define('Slims.view.home.Grid', {
             renderer: function(value) {
                 return '<div style="width: 15px; height: 15px; background-color: '+value+'; border: 1px solid black;">&nbsp;</div>';
             }
-        }, {
-            xtype: 'actioncolumn',
-            icon: '/resources/images/edit.png',
-            width: 30,
-            menuDisabled: true,
-            tooltip: 'Edit container',
-            scope: this,
-            handler: function(grid, rowIndex, colIndex) {
-                var rec = grid.getStore().getAt(rowIndex);
-                this.fireEvent('editrecord', rec);
-            }
         }];
+
+        if (!this.readOnly) {
+            this.columns.push({
+                xtype: 'actioncolumn',
+                hidden: this.readOnly,
+                icon: '/resources/images/edit.png',
+                width: 30,
+                menuDisabled: true,
+                tooltip: 'Edit container',
+                scope: this,
+                handler: function(grid, rowIndex, colIndex) {
+                    var rec = grid.getStore().getAt(rowIndex);
+                    this.fireEvent('editrecord', rec);
+                }
+            })
+        }
 
         this.callParent();
     },

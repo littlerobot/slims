@@ -2,7 +2,7 @@
 
 namespace Cscr\SlimsApiBundle\Controller;
 
-use Cscr\SlimsApiBundle\Entity\AbstractSampleInstanceAttribute;
+use Cscr\SlimsApiBundle\Entity\AbstractSampleInstanceTemplateAttribute;
 use Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate;
 use Cscr\SlimsApiBundle\Form\Type\SampleInstanceTemplateType;
 use Cscr\SlimsApiBundle\Response\SampleInstanceTemplateCollectionResponse;
@@ -108,11 +108,11 @@ class SampleInstanceTemplatesController extends FOSRestController
     }
 
     /**
-     * Remove deleted {@see AbstractSampleInstanceAttribute}s from the {@see ObjectManager} if they are no longer
-     * associated with the {@see SampleInstanceTemplate}.
+     * Remove deleted {@see AbstractSampleInstanceTemplateAttribute}s from the {@see ObjectManager} if they are no
+     * longer associated with the {@see SampleInstanceTemplate}.
      *
-     * @param AbstractSampleInstanceAttribute[] $originalAttributes
-     * @param AbstractSampleInstanceAttribute[] $newAttributes
+     * @param AbstractSampleInstanceTemplateAttribute[] $originalAttributes
+     * @param AbstractSampleInstanceTemplateAttribute[] $newAttributes
      * @param ObjectManager $manager
      */
     private function removeDeletedAttributes(

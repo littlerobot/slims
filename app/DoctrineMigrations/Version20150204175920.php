@@ -6,7 +6,8 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Create the {@see SampleInstanceStoredAttribute} and {@see SampleInstanceRemovedAttribute} classes and relations.
+ * Create the {@see SampleInstanceTemplateStoredAttribute} and {@see SampleInstanceTemplateRemovedAttribute} classes
+ * and relations.
  */
 class Version20150204175920 extends AbstractMigration
 {
@@ -32,7 +33,9 @@ class Version20150204175920 extends AbstractMigration
         ');
         $this->addSql('
             ALTER TABLE sample_instance_attribute
-              ADD CONSTRAINT FK_749C145B81B21623 FOREIGN KEY (sample_instance_template_id) REFERENCES sample_instance_template (id)
+              ADD CONSTRAINT FK_749C145B81B21623
+                FOREIGN KEY (sample_instance_template_id)
+                  REFERENCES sample_instance_template (id)
         ');
     }
 

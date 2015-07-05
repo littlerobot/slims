@@ -4,12 +4,12 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
-class SampleInstanceStoredTemplateAttributeType extends SampleTypeTemplateAttributeType
+class SampleInstanceTemplateStoredAttributeType extends SampleTypeTemplateAttributeType
 {
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute',
             'csrf_protection' => false,
         ]);
     }

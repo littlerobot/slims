@@ -7,19 +7,21 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  *
- * @ORM\Table("sample_instance_attribute")
+ * @ORM\Table("sample_instance_template_attribute")
  * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
  * @ORM\DiscriminatorColumn(name="activity", type="string")
- * @ORM\DiscriminatorMap({"remove"="SampleInstanceRemovedAttribute", "store"="SampleInstanceStoredAttribute"})
+ * @ORM\DiscriminatorMap({
+ *  "remove"="SampleInstanceTemplateRemovedAttribute",
+ *  "store"="SampleInstanceTemplateStoredAttribute"
+ * })
  * @JMS\Discriminator(field="activity", map={
- *  "remove": "Cscr\SlimsApiBundle\Entity\SampleInstanceRemovedAttribute",
- *  "store": "Cscr\SlimsApiBundle\Entity\SampleInstanceStoredAttribute"
+ *  "remove": "Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateRemovedAttribute",
+ *  "store": "Cscr\SlimsApiBundle\Entity\SampleInstanceTemplateStoredAttribute"
  * })
  */
-abstract class AbstractSampleInstanceAttribute
+abstract class AbstractSampleInstanceTemplateAttribute
 {
-
     const TYPE_BRIEF_TEXT = 'brief-text';
     const TYPE_LONG_TEXT = 'long-text';
     const TYPE_OPTION = 'option';
@@ -91,7 +93,7 @@ abstract class AbstractSampleInstanceAttribute
 
     /**
      * @param int $order
-     * @return SampleInstanceRemovedAttribute
+     * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setOrder($order)
     {
@@ -109,7 +111,7 @@ abstract class AbstractSampleInstanceAttribute
 
     /**
      * @param string $label
-     * @return SampleInstanceRemovedAttribute
+     * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setLabel($label)
     {
@@ -127,7 +129,7 @@ abstract class AbstractSampleInstanceAttribute
 
     /**
      * @param string $type
-     * @return SampleInstanceRemovedAttribute
+     * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setType($type)
     {
@@ -145,7 +147,7 @@ abstract class AbstractSampleInstanceAttribute
 
     /**
      * @param string[]|null $options
-     * @return AbstractSampleInstanceAttribute
+     * @return AbstractSampleInstanceTemplateAttribute
      */
     public function setOptions(array $options = null)
     {
@@ -175,7 +177,7 @@ abstract class AbstractSampleInstanceAttribute
 
     /**
      * @param SampleInstanceTemplate $parent
-     * @return SampleInstanceRemovedAttribute
+     * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setParent(SampleInstanceTemplate $parent)
     {

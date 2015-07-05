@@ -7,7 +7,7 @@ use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 class SampleTypeTemplateAttributeBuilder
 {
     public $label = 'Attribute';
-    public $order;
+    public $order = 1;
     public $type = SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT;
     public $options;
 
@@ -168,33 +168,5 @@ class SampleTypeTemplateAttributeBuilder
     {
         $this->order = $order;
         return $this;
-    }
-
-    /**
-     * @return array
-     */
-    public function buildAsArray()
-    {
-        $template = $this->build();
-
-        $array = [
-            'label' => $template->getLabel(),
-            'order' => $template->getOrder(),
-            'type' => $template->getType(),
-        ];
-
-        if ($template->getOptions()) {
-            $array['options'] = $template->getOptions();
-        }
-
-        return $array;
-    }
-
-    /**
-     * @return string
-     */
-    public function buildAsJson()
-    {
-        return json_encode($this->buildAsArray());
     }
 }

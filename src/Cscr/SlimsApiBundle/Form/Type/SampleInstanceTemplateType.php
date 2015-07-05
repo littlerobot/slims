@@ -13,14 +13,14 @@ class SampleInstanceTemplateType extends AbstractType
         $builder
             ->add('name')
             ->add('store', 'collection', [
-                'type' => new SampleInstanceStoredTemplateAttributeType(),
+                'type' => new SampleInstanceTemplateStoredAttributeType(),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
                 'property_path' => 'storedAttributes',
             ])
             ->add('remove', 'collection', [
-                'type' => new SampleInstanceRemovedTemplateAttributeType(),
+                'type' => new SampleInstanceTemplateRemovedAttributeType(),
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
