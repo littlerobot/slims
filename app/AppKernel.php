@@ -32,6 +32,7 @@ class AppKernel extends Kernel
             $bundles[] = new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle();
             $bundles[] = new Hautelook\AliceBundle\HautelookAliceBundle();
             $bundles[] = new Liip\FunctionalTestBundle\LiipFunctionalTestBundle();
+            $bundles[] = new Symfony\Bundle\DebugBundle\DebugBundle();
         }
 
         return $bundles;
