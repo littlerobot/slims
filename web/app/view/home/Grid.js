@@ -78,6 +78,10 @@ Ext.define('Slims.view.home.Grid', {
             });
         }
 
+        this.viewConfig = {
+            loadMask: true
+        };
+
         this.callParent();
     },
 
