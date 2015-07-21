@@ -1,4 +1,4 @@
-Ext.define('Slims.view.sample.SearchGrid', {
+Ext.define('Slims.view.sample.search.Grid', {
     extend: 'Ext.grid.Panel',
     xtype: 'samplesearch',
 
@@ -22,21 +22,6 @@ Ext.define('Slims.view.sample.SearchGrid', {
             ]
         });
 
-        this.tbar = [{
-            xtype: 'textfield',
-            name: 'searchQuery',
-            fieldLabel: 'Search',
-            labelWidth: 50,
-            width: 350
-        }, {
-            xtype: 'button',
-            text: 'Search',
-            name: 'searchBtn'
-        }, '->', {
-            xtype: 'button',
-            text: 'Advanced'
-        }];
-
         this.columns = [{
             dataIndex: 'containerName',
             header: 'Container',
@@ -55,7 +40,11 @@ Ext.define('Slims.view.sample.SearchGrid', {
             flex: 1
         }];
 
-
+        this.store.on('load', this.parseData, this);
         this.callParent();
+    },
+
+    parseData: function() {
+
     }
 });

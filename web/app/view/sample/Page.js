@@ -67,9 +67,18 @@ Ext.define('Slims.view.sample.Page', {
         }];
 
         this.items = [{
-            xtype: 'samplesearch',
+            xtype: 'panel',
+            layout: 'vbox',
             border: true,
-            padding: '0 5 5 5'
+            padding: '0 5 5 5',
+            items: [{
+                xtype: 'samplessearchfilter',
+                width: '100%'
+            }, {
+                xtype: 'samplesearch',
+                width: '100%',
+                flex: 1
+            }]
         }, {
             xtype: 'templatespage'
         }, {
