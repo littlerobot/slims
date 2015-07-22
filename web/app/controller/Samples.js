@@ -5,9 +5,7 @@ Ext.define('Slims.controller.Samples', {
         'sample.wizard.Wizard',
         'sample.Page',
         'sample.Grid',
-        'sample.PositionsGrid',
-        'sample.search.Grid',
-        'sample.search.FiltersPanel'
+        'sample.PositionsGrid'
     ],
 
     stores: ['sample.Samples'],

@@ -23,7 +23,8 @@ Ext.define('Slims.Application', {
         'Templates',
         'SampleTemplates',
         'SampleTypes',
-        'Samples'
+        'Samples',
+        'SamplesSearch'
     ],
 
     stores: [

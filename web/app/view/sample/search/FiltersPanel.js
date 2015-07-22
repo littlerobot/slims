@@ -8,36 +8,9 @@ Ext.define('Slims.view.sample.search.FiltersPanel', {
     layout: 'vbox',
     initComponent: function() {
         this.items = [{
-            xtype: 'panel',
-            width: '100%',
-            layout: 'hbox',
-            tbar: [{
-                xtype: 'textfield',
-                name: 'searchQuery',
-                fieldLabel: 'Search',
-                labelWidth: 50,
-                width: 350
-            }, {
-                xtype: 'button',
-                name: 'searchBtn',
-                // icon: '/resources/images/search.png',
-                text: 'Search'
-            }, {
-                xtype: 'container',
-                flex: 1
-            }, {
-                xtype: 'button',
-                text: 'Advanced',
-                handler: this.triggerAdvancedFilterPanel,
-                scope: this
-            }]
-        }, {
             xtype: 'form',
             width: '100%',
-            border: true,
-            hidden: true,
             layout: 'hbox',
-            padding: 5,
             bodyPadding: 5,
             name: 'advancedFilter',
             items: [{
@@ -86,19 +59,13 @@ Ext.define('Slims.view.sample.search.FiltersPanel', {
                     name: 'storedTill',
                     fieldLabel: 'Date stored till'
                 }]
+            }],
+            buttons: [{
+                text: 'Search',
+                name: 'search'
             }]
         }];
 
         this.callParent();
-    },
-
-    triggerAdvancedFilterPanel: function() {
-        advancedFilterPanel = this.down('[name=advancedFilter]');
-
-        if (!advancedFilterPanel.isVisible()) {
-            advancedFilterPanel.show();
-        } else {
-            advancedFilterPanel.hide();
-        }
     }
 });
