@@ -38,7 +38,3 @@ assetic:
 # Raven
 misd_raven:
     use_test_service: true
-
-# Alice fixtures
-hautelook_alice:
-    locale: en_GB
