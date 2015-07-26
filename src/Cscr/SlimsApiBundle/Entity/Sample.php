@@ -8,7 +8,7 @@ use JMS\Serializer\Annotation as JMS;
 
 /**
  * @ORM\Table(name="sample")
- * @ORM\Entity()
+ * @ORM\Entity(repositoryClass="Cscr\SlimsApiBundle\Entity\Repository\SampleRepository")
  */
 class Sample
 {
