@@ -16,8 +16,8 @@ class SamplesController extends FOSRestController
      * @Rest\QueryParam(name="type", nullable=true)
      * @Rest\QueryParam(name="user", nullable=true)
      * @Rest\QueryParam(name="container", nullable=true)
-     * @Rest\QueryParam(name="stored_start", requirements="[0-9]{4}-[0-9]{2}-[0-9]{2}", nullable=true)
-     * @Rest\QueryParam(name="stored_end", requirements="[0-9]{4}-[0-9]{2}-[0-9]{2}", nullable=true)
+     * @Rest\QueryParam(name="stored_start", requirements="[0-9]{2}/[0-9]{2}/[0-9]{4}", nullable=true)
+     * @Rest\QueryParam(name="stored_end", requirements="[0-9]{2}/[0-9]{2}/[0-9]{4}", nullable=true)
      *
      * @param ParamFetcher $paramFetcher
      * @return View
