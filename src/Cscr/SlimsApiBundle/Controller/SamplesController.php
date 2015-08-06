@@ -2,6 +2,7 @@
 
 namespace Cscr\SlimsApiBundle\Controller;
 
+use Cscr\SlimsApiBundle\Response\FilteredSamplesResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Request\ParamFetcher;
@@ -35,7 +36,7 @@ class SamplesController extends FOSRestController
                 $paramFetcher->get('stored_end')
             );
 
-        return View::create($results);
+        return new FilteredSamplesResponse($results);
     }
 
     /**

@@ -87,7 +87,7 @@ class Sample
     private $template;
 
     /**
-     * @var ArrayCollection<SampleInstanceAttribute>
+     * @var SampleInstanceAttribute[]|ArrayCollection
      *
      * @ORM\OneToMany(targetEntity="SampleInstanceAttribute", mappedBy="parent", cascade={"PERSIST"})
      */
@@ -164,7 +164,7 @@ class Sample
     }
 
     /**
-     * @return ArrayCollection
+     * @return SampleInstanceAttribute[]|ArrayCollection
      */
     public function getAttributes()
     {
