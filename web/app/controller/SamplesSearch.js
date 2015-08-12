@@ -3,23 +3,40 @@ Ext.define('Slims.controller.SamplesSearch', {
 
     views: [
         'sample.search.Grid',
-        'sample.search.FiltersPanel'
+        'sample.search.FiltersForm'
     ],
 
     refs: [{
-        ref: 'advancedFilterForm',
-        selector: 'form[name=advancedFilter]'
+        ref: 'form',
+        selector: 'samplessearchfilter'
+    }, {
+        ref: 'grid',
+        selector: 'samplesearch'
     }],
 
     init: function() {
         this.control({
-            'form[name=advancedFilter] button[name=search]': {
-                click: this.advancedSearch
+            'samplessearchfilter button[name=search]': {
+                click: this.doSearch
             }
         });
     },
 
-    advancedSearch: function() {
+    doSearch: function() {
+        this.getGrid().setLoading(true);
 
+        Ext.Ajax.request({
+            url: Slims.Url.getRoute('searchsamples'),
+            method: 'GET',
+            params: this.getForm().getValues(),
+            scope: this,
+            success: function(xhr) {
+                var response = Ext.decode(xhr.responseText);
+                debugger
+            },
+            failure: function() {
+                this.getGrid().setLoading(false);
+            }
+        });
     }
 });
