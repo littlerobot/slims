@@ -2464,7 +2464,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.instancetemplates.Panel": [],
   "Slims.view.sample.instancetemplates.TemplateWindow": [],
   "Slims.view.sample.instancetemplates.TemplatesGrid": [],
-  "Slims.view.sample.search.FiltersPanel": [],
+  "Slims.view.sample.search.FiltersForm": [],
   "Slims.view.sample.search.Grid": [],
   "Slims.view.sample.types.Form": [],
   "Slims.view.sample.types.Grid": [],
@@ -3562,7 +3562,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.sample.instancetemplates.TemplatesGrid": [
     "widget.instancetemplatesgrid"
   ],
-  "Slims.view.sample.search.FiltersPanel": [
+  "Slims.view.sample.search.FiltersForm": [
     "widget.samplessearchfilter"
   ],
   "Slims.view.sample.search.Grid": [
