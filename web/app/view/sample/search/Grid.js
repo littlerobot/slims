@@ -21,7 +21,8 @@ Ext.define('Slims.view.sample.search.Grid', {
 
         var data = results.map(function(sample) {
             Ext.each(sample.instance_attributes, function(attr) {
-                var id = attr.label+attr.type,
+                var lbl = attr.label.split(' ').join('');
+                var id = lbl+attr.type,
                     column = {
                         dataIndex: id,
                         text: attr.label,
@@ -32,7 +33,7 @@ Ext.define('Slims.view.sample.search.Grid', {
                 if (!attributes[id]) {
                     attributesColumns.push(column);
                     instanceColumns.push(column);
-                    attributes[id] = attr.value;
+                    attributes[id] = attr.value || true;
                 }
             }, this);
 
@@ -48,13 +49,15 @@ Ext.define('Slims.view.sample.search.Grid', {
                 if (!attributes[id]) {
                     attributesColumns.push(column);
                     typeColumns.push(column);
-                    attributes[id] = attr.value;
+                    attributes[id] = attr.value || true;
                 }
             }, this);
 
             return sample;
         });
 
+        console.log(instanceColumns);
+        console.log(typeColumns);
         var columns = this.getDefaultColumns(),
             fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; }),
             columnModel = columns.concat({
