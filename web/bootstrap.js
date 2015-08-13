@@ -890,6 +890,9 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
+  "Slims.ux.Utils": [
+    "Utils"
+  ],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
   "Slims.view.groups.Window": [],
@@ -1960,6 +1963,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
   ],
+  "Slims.ux.Utils": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [
     "widget.groupsgrid"
