@@ -1,6 +1,7 @@
 Ext.define('Slims.view.sample.search.Grid', {
     extend: 'Ext.grid.Panel',
     xtype: 'samplesearch',
+    stateful: true,
 
     initComponent: function() {
         this.store = Ext.create('Ext.data.Store', {
@@ -36,23 +37,27 @@ Ext.define('Slims.view.sample.search.Grid', {
                 width: column.width
             };
         });
+        var instanceColumns = [];
+        var typeColumns = [];
         var attributes = {};
+        var attributesColumns = [];
 
         var data = results.map(function(sample) {
-            // Ext.each(sample.instance_attributes, function(attr) {
-            //     var id = 'ia'+attr.id,
-            //         column = {
-            //             dataIndex: id,
-            //             text: attr.label,
-            //             width: 150
-            //         };
+            Ext.each(sample.instance_attributes, function(attr) {
+                var id = attr.label+attr.type,
+                    column = {
+                        dataIndex: id,
+                        text: attr.label,
+                        width: 150
+                    };
 
-            //     sample[id] = attr.value;
-            //     if (!attributes[id]) {
-            //         columns.push(column);
-            //         attributes[id] = attr.value;
-            //     }
-            // }, this);
+                sample[id] = attr.value;
+                if (!attributes[id]) {
+                    attributesColumns.push(column);
+                    instanceColumns.push(column);
+                    attributes[id] = attr.value;
+                }
+            }, this);
 
             Ext.each(sample.type_attributes, function(attr) {
                 var id = 'ta'+attr.id,
@@ -64,7 +69,8 @@ Ext.define('Slims.view.sample.search.Grid', {
 
                 sample[id] = attr.value;
                 if (!attributes[id]) {
-                    columns.push(column);
+                    attributesColumns.push(column);
+                    typeColumns.push(column);
                     attributes[id] = attr.value;
                 }
             }, this);
@@ -72,13 +78,17 @@ Ext.define('Slims.view.sample.search.Grid', {
             return sample;
         });
 
-        var fields = columns.map(function(column) { return column.dataIndex; });
+        // склеить все и взять список полей
+        var fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; });
+
+        var columnModel = columns.concat({text: 'Type attributes', columns: typeColumns}).concat({text: 'Instance attributes', columns: instanceColumns});
+        // создать колумн модель с подгруппами
 
         store = Ext.create('Ext.data.Store', {
             fields: fields,
             data: results
         });
 
-        this.reconfigure(store, columns);
+        this.reconfigure(store, columnModel);
     }
 });
