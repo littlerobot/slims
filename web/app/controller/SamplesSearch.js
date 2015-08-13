@@ -31,8 +31,9 @@ Ext.define('Slims.controller.SamplesSearch', {
             params: this.getForm().getValues(),
             scope: this,
             success: function(xhr) {
+                this.getGrid().setLoading(false);
                 var response = Ext.decode(xhr.responseText);
-                debugger
+                this.getGrid().showSearchResults(response.results || []);
             },
             failure: function() {
                 this.getGrid().setLoading(false);

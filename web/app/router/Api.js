@@ -60,7 +60,7 @@ Ext.define('Slims.router.Api', {
             case 'setsamples':
                 return Ext.String.format('{0}/containers/{1}/samples', routePrefix, params[0]);
             case 'searchsamples':
-                return Ext.String.format('{0}/samples/filter', routePrefix);
+                return Ext.String.format('{0}/samples', routePrefix);
 
             default:
                 return routePrefix + '/' + routeName;
@@ -122,7 +122,7 @@ Ext.define('Slims.router.Api', {
             case 'setsamples':
                 return Ext.String.format('{0}/{1}/containers/{2}/samples', devController, routePrefix, params[0]);
             case 'searchsamples':
-                return Ext.String.format('{0}/{1}/samples/filter', devController, routePrefix);
+                return Ext.String.format('{0}/{1}/samples', devController, routePrefix);
 
             default:
                 return devController + routePrefix + '/' + routeName;
