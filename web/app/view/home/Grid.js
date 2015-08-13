@@ -57,9 +57,7 @@ Ext.define('Slims.view.home.Grid', {
         }, {
             width: 30,
             dataIndex: 'colour',
-            renderer: function(value) {
-                return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', value);
-            }
+            renderer: Utils.rendererColorColumn
         }];
 
         if (!this.readOnly) {

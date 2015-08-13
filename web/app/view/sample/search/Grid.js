@@ -5,10 +5,10 @@ Ext.define('Slims.view.sample.search.Grid', {
 
     initComponent: function() {
         this.store = Ext.create('Ext.data.Store', {
-            fields: this.getDefaultsFields()
+            fields: this.getDefaultFields()
         });
 
-        this.columns = this.getDefaultsColumns();
+        this.columns = this.getDefaultColumns();
 
         this.callParent();
     },
@@ -55,7 +55,7 @@ Ext.define('Slims.view.sample.search.Grid', {
             return sample;
         });
 
-        var columns = this.getDefaultsColumns(),
+        var columns = this.getDefaultColumns(),
             fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; }),
             columnModel = columns.concat({
                 text: 'Type attributes',
@@ -67,13 +67,13 @@ Ext.define('Slims.view.sample.search.Grid', {
 
         var store = Ext.create('Ext.data.Store', {
             fields: fields,
-            data: results
+            data: data
         });
 
         this.reconfigure(store, columnModel);
     },
 
-     getDefaultsFields: function() {
+     getDefaultFields: function() {
         return [
             'container_name',
             'instance_template_name',
@@ -81,7 +81,7 @@ Ext.define('Slims.view.sample.search.Grid', {
         ];
     },
 
-    getDefaultsColumns: function() {
+    getDefaultColumns: function() {
         return [{
             dataIndex: 'container_name',
             text: 'Container',
