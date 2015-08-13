@@ -5,42 +5,19 @@ Ext.define('Slims.view.sample.search.Grid', {
 
     initComponent: function() {
         this.store = Ext.create('Ext.data.Store', {
-            fields: [
-                'container_name',
-                'instance_template_name',
-                'type_name'
-            ]
+            fields: this.getDefaultsFields()
         });
 
-        this.columns = [{
-            dataIndex: 'container_name',
-            text: 'Container',
-            width: 150
-        }, {
-            dataIndex: 'type_name',
-            text: 'Sample Type',
-            width: 150
-        }, {
-            dataIndex: 'instance_template_name',
-            text: 'Template',
-            width: 150
-        }];
+        this.columns = this.getDefaultsColumns();
 
         this.callParent();
     },
 
     showSearchResults: function(results) {
-        var columns = this.columns.map(function(column) {
-            return {
-                dataIndex: column.dataIndex,
-                text: column.text,
-                width: column.width
-            };
-        });
-        var instanceColumns = [];
-        var typeColumns = [];
-        var attributes = {};
-        var attributesColumns = [];
+        var instanceColumns = [],
+            typeColumns = [],
+            attributes = {},
+            attributesColumns = [];
 
         var data = results.map(function(sample) {
             Ext.each(sample.instance_attributes, function(attr) {
@@ -78,17 +55,45 @@ Ext.define('Slims.view.sample.search.Grid', {
             return sample;
         });
 
-        // склеить все и взять список полей
-        var fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; });
+        var columns = this.getDefaultsColumns(),
+            fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; }),
+            columnModel = columns.concat({
+                text: 'Type attributes',
+                columns: typeColumns
+            }).concat({
+                text: 'Instance attributes',
+                columns: instanceColumns
+            });
 
-        var columnModel = columns.concat({text: 'Type attributes', columns: typeColumns}).concat({text: 'Instance attributes', columns: instanceColumns});
-        // создать колумн модель с подгруппами
-
-        store = Ext.create('Ext.data.Store', {
+        var store = Ext.create('Ext.data.Store', {
             fields: fields,
             data: results
         });
 
         this.reconfigure(store, columnModel);
+    },
+
+     getDefaultsFields: function() {
+        return [
+            'container_name',
+            'instance_template_name',
+            'type_name'
+        ];
+    },
+
+    getDefaultsColumns: function() {
+        return [{
+            dataIndex: 'container_name',
+            text: 'Container',
+            width: 150
+        }, {
+            dataIndex: 'type_name',
+            text: 'Sample Type',
+            width: 150
+        }, {
+            dataIndex: 'instance_template_name',
+            text: 'Template',
+            width: 150
+        }];
     }
 });
