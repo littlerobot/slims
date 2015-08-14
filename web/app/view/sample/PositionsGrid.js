@@ -41,11 +41,10 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         }];
 
         this.backBlock = [{
-            width: 30,
+            xtype: 'typecolumn',
+            type: 'colour',
             dataIndex: 'samplesColor',
-            renderer: function(value) {
-                return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', value);
-            }
+            width: 30
         }, {
             xtype: 'actioncolumn',
             icon: '/resources/images/edit.png',
@@ -73,6 +72,8 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         var extraColumns = [];
         Ext.each(data.storeAttributes, function(attr) {
             extraColumns.push({
+                xtype: 'typecolumn',
+                type: attr.get('type'),
                 dataIndex: 'attributes.id'+attr.get('id'),
                 width: 150,
                 text: attr.get('label')

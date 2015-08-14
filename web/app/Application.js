@@ -11,7 +11,8 @@ Ext.define('Slims.Application', {
     requires: [
         'Slims.router.Api',
         'Ext.tip.QuickTipManager',
-        'Slims.ux.Utils'
+        'Slims.ux.Utils',
+        'Slims.ux.GridColumn'
     ],
 
     views: [],
