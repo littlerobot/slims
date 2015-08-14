@@ -5,7 +5,8 @@ Ext.define('Slims.controller.Home', {
     stores: ['Containers'],
     views: [
         'home.container.Window',
-        'sample.EditAttributesWindow'
+        'sample.EditAttributesWindow',
+        'Ext.state.LocalStorageProvider'
     ],
 
     refs: [{
@@ -61,6 +62,8 @@ Ext.define('Slims.controller.Home', {
                 save: this.saveSampleAttributes
             }
         });
+
+        this.initStateProvider();
     },
 
     openAddContainerWindow: function() {
@@ -242,5 +245,9 @@ Ext.define('Slims.controller.Home', {
 
     saveSampleAttributes: function(values) {
         this.getPositionsGrid().view.refresh();
+    },
+
+    initStateProvider: function() {
+        Ext.state.Manager.setProvider(new Ext.state.LocalStorageProvider());
     }
 });
