@@ -36,10 +36,10 @@ class SampleInstanceTemplateBuilder
 
     /**
      * @param string $type
-     * @param SampleInstanceTemplateAttributeBuilder[]|null $attributes
+     * @param SampleInstanceTemplateAttributeBuilder[] $attributes
      * @return array|null
      */
-    private function buildAttributes($type, array $attributes = null)
+    private function buildAttributes($type, array $attributes)
     {
         if (empty($this->$type)) {
             return [];
