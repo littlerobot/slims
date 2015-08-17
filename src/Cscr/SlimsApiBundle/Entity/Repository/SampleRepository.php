@@ -87,7 +87,7 @@ class SampleRepository extends EntityRepository
     }
 
     /**
-     * @param $string
+     * @param string $string
      * @return string
      */
     private function getLikePattern($string)
