@@ -20,8 +20,6 @@ class SampleRepository extends EntityRepository
             ->innerJoin('sample.template', 'sample_instance_template')
             ->innerJoin('sample.type', 'sample_type')
             ->innerJoin('sample_type.template', 'sample_type_template')
-            ->innerJoin('sample_type_template.attributes', 'sample_type_template_attributes')
-            ->innerJoin('sample_type.attributes', 'sample_type_attributes')
         ;
 
         if ($name) {
