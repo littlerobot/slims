@@ -2,10 +2,20 @@
 
 namespace Cscr\SlimsApiBundle\Entity\Repository;
 
+use Cscr\SlimsApiBundle\Entity\Sample;
 use Doctrine\ORM\EntityRepository;
 
 class SampleRepository extends EntityRepository
 {
+    /**
+     * @param null|string $name
+     * @param null|string $type
+     * @param null|string $user
+     * @param null|string $container
+     * @param null|string $storedFrom
+     * @param null|string $storedTo
+     * @return Sample[]
+     */
     public function filter(
         $name = null,
         $type = null,

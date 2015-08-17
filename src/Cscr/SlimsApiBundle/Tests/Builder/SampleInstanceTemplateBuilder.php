@@ -35,8 +35,8 @@ class SampleInstanceTemplateBuilder
     }
 
     /**
-     * @param $type
-     * @param array|SampleInstanceTemplateAttributeBuilder[] $attributes
+     * @param string $type
+     * @param SampleInstanceTemplateAttributeBuilder[]|null $attributes
      * @return array|null
      */
     private function buildAttributes($type, array $attributes = null)
