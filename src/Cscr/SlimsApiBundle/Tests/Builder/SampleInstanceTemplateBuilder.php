@@ -10,9 +10,12 @@ class SampleInstanceTemplateBuilder
     const TYPE_REMOVED = 'removedAttributes';
 
     private $name;
-    private $storedAttributes;
-    private $removedAttributes;
+    private $storedAttributes = [];
+    private $removedAttributes = [];
 
+    /**
+     * @return SampleInstanceTemplate
+     */
     public function build()
     {
         $template = new SampleInstanceTemplate();
@@ -51,6 +54,10 @@ class SampleInstanceTemplateBuilder
         return $builtAttributes;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function withName($name)
     {
         $this->name = $name;
@@ -58,6 +65,10 @@ class SampleInstanceTemplateBuilder
         return $this;
     }
 
+    /**
+     * @param SampleInstanceTemplateAttributeBuilder $attribute
+     * @return $this
+     */
     public function withStoredAttribute(SampleInstanceTemplateAttributeBuilder $attribute)
     {
         $this->storedAttributes[] = $attribute;
@@ -65,6 +76,10 @@ class SampleInstanceTemplateBuilder
         return $this;
     }
 
+    /**
+     * @param SampleInstanceTemplateAttributeBuilder $attribute
+     * @return $this
+     */
     public function withRemovedAttribute(SampleInstanceTemplateAttributeBuilder $attribute)
     {
         $this->removedAttributes[] = $attribute;
@@ -72,6 +87,11 @@ class SampleInstanceTemplateBuilder
         return $this;
     }
 
+    /**
+     * Shuffle the stored and removed attributes.
+     *
+     * @return $this
+     */
     public function shuffleAttributes()
     {
         if (!empty($this->removedAttributes)) {

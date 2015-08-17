@@ -51,7 +51,7 @@ class SampleTypeTemplateAttribute
     private $type;
 
     /**
-     * @var array|string[]
+     * @var string[]|null
      *
      * @ORM\Column(type="array", nullable=true)
      */

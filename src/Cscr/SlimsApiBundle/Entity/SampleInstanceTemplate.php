@@ -80,6 +80,9 @@ class SampleInstanceTemplate
         return $this;
     }
 
+    /**
+     * @return SampleInstanceTemplateStoredAttribute[]|ArrayCollection
+     */
     public function getStoredAttributes()
     {
         return $this->storedAttributes;
@@ -102,6 +105,9 @@ class SampleInstanceTemplate
         return $this;
     }
 
+    /**
+     * @return SampleInstanceTemplateRemovedAttribute[]|ArrayCollection
+     */
     public function getRemovedAttributes()
     {
         return $this->removedAttributes;
