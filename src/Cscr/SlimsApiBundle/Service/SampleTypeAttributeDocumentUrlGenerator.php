@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Routing\Router;
 /**
  * Generates a URL that can be used to download a document associated with a {@see SampleType}
  */
-class SampleTypeDocumentAttributeUrlGenerator
+class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGeneratorInterface
 {
     /**
      * @var Router
@@ -34,5 +34,13 @@ class SampleTypeDocumentAttributeUrlGenerator
             'id' => $id,
             'filename' => $filename,
         ]);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function canGenerateFor($namespace)
+    {
+        return 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute' === $namespace;
     }
 }

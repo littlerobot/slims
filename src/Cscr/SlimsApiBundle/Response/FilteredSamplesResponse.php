@@ -74,6 +74,5 @@ class FilteredSamplesResponse
 
             $this->data[] = $result;
         }
-
     }
 }
