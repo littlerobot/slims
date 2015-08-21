@@ -8,7 +8,7 @@
     cursor: pointer;
     position: absolute;
     overflow:  hidden; /* IE 6 :-( */
-    margin-top: 4px;
+    margin-top: 2px;
     background-color: white;
 }
 
