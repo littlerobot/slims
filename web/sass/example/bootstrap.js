@@ -367,7 +367,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 origin = window.location.origin ||
                     window.location.protocol +
                     "//" +
-                    window.location.hostnaBoot +
+                    window.location.hostname +
                     (window.location.port ? ':' + window.location.port: '');
                 Boot.origin = origin;
 
@@ -1578,6 +1578,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.core.DomHelper": "../../ext/src/dom/Helper.js",
   "Ext.core.DomQuery": "../../ext/src/dom/Query.js",
   "Ext.rtl.EventObjectImpl": "../../ext/src/rtl/EventObject.js",
+  "Ext.ux.ClearButton": "../../app/ux/ClearButton.js",
   "ExtThemeNeptune": "../../ext/packages/ext-theme-neptune/overrides",
   "Slims": "../../app"
 });
@@ -2322,6 +2323,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.util.TextMetrics": [],
   "Ext.ux.BoxReorderer": [],
   "Ext.ux.CellDragDrop": [],
+  "Ext.ux.ClearButton": [],
   "Ext.ux.DataTip": [],
   "Ext.ux.DataView.Animated": [],
   "Ext.ux.DataView.DragSelector": [],
@@ -3343,6 +3345,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.BoxReorderer": [],
   "Ext.ux.CellDragDrop": [
     "plugin.celldragdrop"
+  ],
+  "Ext.ux.ClearButton": [
+    "plugin.clearbutton"
   ],
   "Ext.ux.DataTip": [
     "plugin.datatip"
