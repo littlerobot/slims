@@ -19,6 +19,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.core.DomHelper": "ext/src/dom/Helper.js",
   "Ext.core.DomQuery": "ext/src/dom/Query.js",
   "Ext.rtl.EventObjectImpl": "ext/src/rtl/EventObject.js",
+  "Ext.ux.ClearButton": "app/ux/ClearButton.js",
   "ExtThemeNeptune": "ext/packages/ext-theme-neptune/overrides",
   "Slims": "app"
 });
@@ -425,6 +426,7 @@ Ext.ClassManager.addNameAlternateMappings({
   ],
   "Ext.grid.RowEditor": [],
   "Ext.grid.RowEditorButtons": [],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [],
   "Ext.grid.ViewDropZone": [],
   "Ext.grid.column.Action": [
@@ -763,6 +765,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.util.TextMetrics": [],
   "Ext.ux.BoxReorderer": [],
   "Ext.ux.CellDragDrop": [],
+  "Ext.ux.ClearButton": [],
   "Ext.ux.DataTip": [],
   "Ext.ux.DataView.Animated": [],
   "Ext.ux.DataView.DragSelector": [],
@@ -1365,6 +1368,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.grid.RowEditorButtons": [
     "widget.roweditorbuttons"
   ],
+  "Ext.grid.Scroller": [],
   "Ext.grid.View": [
     "widget.gridview"
   ],
@@ -1784,6 +1788,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.BoxReorderer": [],
   "Ext.ux.CellDragDrop": [
     "plugin.celldragdrop"
+  ],
+  "Ext.ux.ClearButton": [
+    "plugin.clearbutton"
   ],
   "Ext.ux.DataTip": [
     "plugin.datatip"

@@ -38,6 +38,7 @@ Ext.define('Slims.view.Viewport', {
                 icon: '/resources/images/template.png'
             }]
         }];
+
         this.callParent();
     }
 });

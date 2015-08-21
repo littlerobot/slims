@@ -20,15 +20,18 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             items: [{
                 xtype: 'textfield',
                 fieldLabel: 'Sample Name',
-                name: 'name'
+                name: 'name',
+                plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
                 fieldLabel: 'User Name',
-                name: 'user'
+                name: 'user',
+                plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
                 name: 'stored_start',
-                fieldLabel: 'Date stored from'
+                fieldLabel: 'Date stored from',
+                plugins: ['clearbutton']
             }]
         }, {
             xtype: 'container',
@@ -43,15 +46,18 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             items: [{
                 xtype: 'textfield',
                 fieldLabel: 'Sample Type',
-                name: 'type'
+                name: 'type',
+                plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
                 fieldLabel: 'Container Name',
-                name: 'container'
+                name: 'container',
+                plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
                 name: 'stored_end',
-                fieldLabel: 'Date stored till'
+                fieldLabel: 'Date stored till',
+                plugins: ['clearbutton']
             }]
         }];
 
