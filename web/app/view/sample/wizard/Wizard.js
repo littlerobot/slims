@@ -110,7 +110,6 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     saveChanges: function() {
         this.data.storeAtrributesValues = this.down('attributesform').getValues();
         this.data.samplesColor = this.down('attributesform').down('[name=samplesColor]').getValue();
-
         this.fireEvent('save', this.data);
 
         this.close();

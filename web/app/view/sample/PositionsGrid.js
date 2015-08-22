@@ -68,7 +68,6 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             storeAttributes: [],
             storeAtrributesValues: {}
         };
-
         var extraColumns = [];
         Ext.each(data.storeAttributes, function(attr) {
             extraColumns.push({

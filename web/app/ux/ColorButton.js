@@ -63,6 +63,17 @@ Ext.define('Slims.ux.ColorButton', {
     	return '#' + this.down('colorpicker').getValue();
     },
 
+    getSubmitData: function() {
+        var data = {};
+        data[this.name] = this.getValue();
+
+        return data;
+    },
+
+    isFormField: function() {
+        return true;
+    },
+
     setValue: function(color) {
         if (!color)
             return;
