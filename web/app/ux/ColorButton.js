@@ -14,13 +14,13 @@ Ext.define('Slims.ux.ColorButton', {
 
     initComponent: function() {
         this.items = [{
-        	xtype: 'form',
-        	width: this.labelWidth ? this.labelWidth + 5 : 0,
-        	items: [{
-        		xtype: 'label',
-        		width: this.labelWidth,
-        		text: this.fieldLabel ? this.fieldLabel + ":" : ''
-        	}]
+            xtype: 'form',
+            width: this.labelWidth ? this.labelWidth + 5 : 0,
+            items: [{
+                xtype: 'label',
+                width: this.labelWidth,
+                text: this.fieldLabel ? this.fieldLabel + ":" : ''
+            }]
         }, {
             xtype: 'panel',
             border: true,
@@ -56,22 +56,7 @@ Ext.define('Slims.ux.ColorButton', {
             }]
         }];
 
-    	this.callParent();
-    },
-
-    getValue: function() {
-    	return '#' + this.down('colorpicker').getValue();
-    },
-
-    getSubmitData: function() {
-        var data = {};
-        data[this.name] = this.getValue();
-
-        return data;
-    },
-
-    isFormField: function() {
-        return true;
+        this.callParent();
     },
 
     setValue: function(color) {
@@ -95,5 +80,28 @@ Ext.define('Slims.ux.ColorButton', {
         }
 
         picker.select(color);
+    },
+
+    getValue: function() {
+        return '#' + this.down('colorpicker').getValue();
+    },
+
+    getSubmitData: function() {
+        var data = {};
+        data[this.name] = this.getValue();
+
+        return data;
+    },
+
+    isFormField: function() {
+        return true;
+    },
+
+    getName: function() {
+        return this.name;
+    },
+
+    isValid: function() {
+        return true;
     }
 });
