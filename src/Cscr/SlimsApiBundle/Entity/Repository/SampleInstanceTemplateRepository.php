@@ -14,8 +14,8 @@ class SampleInstanceTemplateRepository extends EntityRepository
     {
         return $this->createQueryBuilder('templates')
             ->select('templates, stored, removed')
-            ->innerJoin('templates.storedAttributes', 'stored')
-            ->innerJoin('templates.removedAttributes', 'removed')
+            ->leftJoin('templates.storedAttributes', 'stored')
+            ->leftJoin('templates.removedAttributes', 'removed')
             ->orderBy('templates.name')
             ->getQuery()
             ->getResult();
