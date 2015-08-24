@@ -17,7 +17,7 @@ Ext.define('Slims.Application', {
         'Ext.ux.ClearButton',
         'Slims.ux.FileField',
         'Slims.ux.Utils',
-        'Slims.ux.GridColumn'
+        'Slims.ux.TypeColumn'
     ],
 
     views: [],

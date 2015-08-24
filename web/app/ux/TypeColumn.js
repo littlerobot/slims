@@ -1,11 +1,11 @@
 /**
  *
- * Slims.ux.GridColumn class
+ * Slims.ux.TypeColumn class
  * extend simple grid column
  * determine column renderer according to type
  *
 **/
-Ext.define('Slims.ux.GridColumn', {
+Ext.define('Slims.ux.TypeColumn', {
     extend: 'Ext.grid.column.Column',
     xtype: 'typecolumn',
 
@@ -54,7 +54,7 @@ Ext.define('Slims.ux.GridColumn', {
     },
 
     documentRenderer: function(value) {
-        return value ? value.name : '';
+        return value ? '[' + value.name + ']' : '';
     },
 
     optionRenderer: function(value) {
