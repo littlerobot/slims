@@ -114,7 +114,7 @@ Ext.define('Slims.view.sample.types.Form', {
                 labelWidth: 180,
                 name: attribute.id,
                 fieldLabel: attribute.label
-            };
+            }
 
         switch (attribute.type) {
             case 'option':
@@ -137,39 +137,13 @@ Ext.define('Slims.view.sample.types.Form', {
                 field = Ext.create('Slims.ux.ColorButton', generalParameters);
                 break;
             case 'document':
-                field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
-                    buttonText: 'Select',
-                    listeners: {
-                        change: this.readFile,
-                        scope: this
-                    }
-                }));
+                field = Ext.create('Slims.ux.FileField', generalParameters);
                 break;
             default:
                 field = Ext.create('Ext.form.field.Text', generalParameters);
                 break;
         }
         return field;
-    },
-
-    readFile: function(field, val) {
-        // replace fake path
-        var node = Ext.DomQuery.selectNode('input[id='+field.getInputId()+']');
-        node.value = val.replace("C:\\fakepath\\","");
-
-        var filesList = field.el.down('input[type=file]').el.dom.files,
-            file = filesList[0];
-
-        var form = this;
-        form.setLoading('Read the file...');
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var file = e.target.result;
-            field.theFile = btoa(file);
-            form.setLoading(false);
-        };
-        field.file_name = file.name;
-        reader.readAsBinaryString(file);
     },
 
     setDefaultTemplate: function() {
