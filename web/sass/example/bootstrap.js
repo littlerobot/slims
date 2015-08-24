@@ -2451,6 +2451,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
+  "Slims.ux.FileField": [],
   "Slims.ux.GridColumn": [],
   "Slims.ux.Utils": [
     "Utils"
@@ -3527,6 +3528,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
+  ],
+  "Slims.ux.FileField": [
+    "widget.samplefile"
   ],
   "Slims.ux.GridColumn": [
     "widget.typecolumn"
