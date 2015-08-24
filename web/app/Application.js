@@ -15,6 +15,7 @@ Ext.define('Slims.Application', {
         'Slims.router.Api',
         'Ext.tip.QuickTipManager',
         'Ext.ux.ClearButton',
+        'Slims.ux.FileField',
         'Slims.ux.Utils',
         'Slims.ux.GridColumn'
     ],

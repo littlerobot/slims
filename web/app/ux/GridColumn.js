@@ -54,7 +54,7 @@ Ext.define('Slims.ux.GridColumn', {
     },
 
     documentRenderer: function(value) {
-        return value;
+        return value ? value.name : '';
     },
 
     optionRenderer: function(value) {

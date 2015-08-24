@@ -83,11 +83,11 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
     createField: function(attribute) {
         var field,
             generalParameters = {
+                name: 'id-'+attribute.id,
                 padding: 3,
                 allowBlank: false,
                 anchor: '100%',
                 labelWidth: 180,
-                name: 'id-'+attribute.id,
                 fieldLabel: attribute.label
             };
 
@@ -112,38 +112,12 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
                 field = Ext.create('Slims.ux.ColorButton', generalParameters);
                 break;
             case 'document':
-                field = Ext.create('Ext.form.field.File', Ext.apply(generalParameters, {
-                    buttonText: 'Select',
-                    listeners: {
-                        change: this.readFile,
-                        scope: this
-                    }
-                }));
+                field = Ext.create('Slims.ux.FileField', generalParameters);
                 break;
             default:
                 field = Ext.create('Ext.form.field.Text', generalParameters);
                 break;
         }
         return field;
-    },
-
-    readFile: function(field, val) {
-        // replace fake path
-        var node = Ext.DomQuery.selectNode('input[id='+field.getInputId()+']');
-        node.value = val.replace("C:\\fakepath\\","");
-
-        var filesList = field.el.down('input[type=file]').el.dom.files,
-            file = filesList[0];
-
-        var form = this;
-        form.setLoading('Read the file...');
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            var file = e.target.result;
-            field.theFile = btoa(file);
-            form.setLoading(false);
-        };
-        field.file_name = file.name;
-        reader.readAsBinaryString(file);
     }
 });
