@@ -36,7 +36,7 @@ abstract class ExtJsResponse
     public static function supports($object)
     {
         // Check the class specified in the constructor and see whether it matches the passed class.
-        $r = new \ReflectionClass(static::class);
+        $r = new \ReflectionClass(get_called_class());
         $constructor = $r->getConstructor();
         $class = $constructor->getParameters()[0]->getClass()->getName();
 
