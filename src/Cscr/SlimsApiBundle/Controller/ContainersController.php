@@ -5,8 +5,8 @@ namespace Cscr\SlimsApiBundle\Controller;
 use Cscr\SlimsApiBundle\Entity\Container;
 use Cscr\SlimsApiBundle\Form\Type\CreateContainerType;
 use Cscr\SlimsApiBundle\Form\Type\UpdateContainerType;
+use Cscr\SlimsApiBundle\Response\ContainerCollectionResponse;
 use Cscr\SlimsApiBundle\Response\ContainerResponse;
-use Cscr\SlimsApiBundle\Response\ExtJsResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
@@ -25,7 +25,7 @@ class ContainersController extends FOSRestController
     {
         $containers = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:Container')->findRootContainers();
 
-        return new ExtJsResponse($containers);
+        return new ContainerCollectionResponse($containers);
     }
 
     /**
@@ -40,13 +40,14 @@ class ContainersController extends FOSRestController
         $container = new Container();
         $form = new CreateContainerType();
 
-        return $this->processForm($container, $form, $request);
+        $processor = $this->get('cscr_slims_api.service.form_processor');
+        return $processor->processForm($form, $container, $request);
     }
 
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int     $id
+     * @param int $id
      * @param Request $request
      *
      * @return View
@@ -59,31 +60,8 @@ class ContainersController extends FOSRestController
 
         $form = new UpdateContainerType();
 
-        return $this->processForm($group, $form, $request);
-    }
+        $processor = $this->get('cscr_slims_api.service.form_processor');
 
-    /**
-     * @param  Container         $container
-     * @param  FormTypeInterface $formType
-     * @param  Request           $request
-     * @return View
-     */
-    private function processForm(Container $container, FormTypeInterface $formType, Request $request)
-    {
-        $manager = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamed('', $formType, $container);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $manager->persist($container);
-            $manager->flush();
-
-            // ExtJS doesn't work with RESTful APIs, as far as I can see.
-            // Return the object and a 200.
-            return View::create(new ContainerResponse($container), Response::HTTP_OK);
-        }
-
-        return View::create($form, 400);
+        return $processor->processForm($form, $group, $request);
     }
 }

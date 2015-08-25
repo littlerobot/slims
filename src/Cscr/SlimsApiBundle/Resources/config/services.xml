@@ -5,6 +5,7 @@
            xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
+        <!-- URL generation for attributes with documents -->
         <service id="slims.downloadable_entity_url_generator_registry"
                  class="Cscr\SlimsApiBundle\Service\DownloadableEntityUrlGeneratorRegistry">
         </service>
@@ -17,6 +18,24 @@
                  class="Cscr\SlimsApiBundle\EventListener\DownloadableEntityUrlPopulater">
             <argument type="service" id="slims.downloadable_entity_url_generator_registry"/>
             <tag name="doctrine.event_listener" event="postLoad"/>
+        </service>
+
+        <!-- Responses -->
+        <service class="Cscr\SlimsApiBundle\Service\ResponseRepository"
+                 id="slims.service.response_repository"/>
+
+        <!-- Constructor is not needed for the actual response objects as we don't ever instantiate them - we just need
+             their class name for the repository. -->
+        <service class="Cscr\SlimsApiBundle\Response\ContainerResponse"
+                 id="slims.response.container_response">
+            <tag name="slims.response_type"/>
+        </service>
+
+        <!-- Form processing -->
+        <service class="Cscr\SlimsApiBundle\Service\FormProcessor" id="cscr_slims_api.service.form_processor">
+            <argument id="doctrine.orm.entity_manager" type="service"/>
+            <argument id="slims.service.response_repository" type="service"/>
+            <argument id="form.factory" type="service"/>
         </service>
     </services>
 </container>
