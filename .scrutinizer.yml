@@ -1,20 +1,20 @@
 filter:
     excluded_paths:
         - vendor/*
-		- test/*
-		- tests/*
-		- Tests/*
-		- spec/*
-		- features/*
-		- Fixtures/*
-		- DataFixtures/*
-		- var/*
-		- puphpet/*
-		- app/check.php
-		- app/SymfonyRequirements.php
-		- app/DoctrineMigrations
-		- web/config.php
-		- web/app_*.php
+        - test/*
+        - tests/*
+        - Tests/*
+        - spec/*
+        - features/*
+        - Fixtures/*
+        - DataFixtures/*
+        - var/*
+        - puphpet/*
+        - app/check.php
+        - app/SymfonyRequirements.php
+        - app/DoctrineMigrations
+        - web/config.php
+        - web/app_*.php
 
 build:
     dependencies:
