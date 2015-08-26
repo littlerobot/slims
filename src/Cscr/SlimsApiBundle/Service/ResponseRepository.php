@@ -14,8 +14,9 @@ class ResponseRepository
     }
 
     /**
-     * @param $object
-     * @return ExtJsResponse|null
+     * @param mixed $object
+     * @return ExtJsResponse
+     * @throws \InvalidArgumentException If there is no matching response type for the passed object.
      */
     public function getFor($object)
     {
@@ -25,6 +26,8 @@ class ResponseRepository
             }
         }
 
-        return null;
+        throw new \InvalidArgumentException(
+            sprintf("There is no matching response type for '%s'", get_class($object))
+        );
     }
 }

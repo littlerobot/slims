@@ -19,11 +19,13 @@ class ResponseRepositoryTest extends \PHPUnit_Framework_TestCase
         $this->assertInstanceOf($responseClass, $repository->getFor($entity));
     }
 
-    public function testReturnsNullIfThereIsNoMatchingResponse()
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testThrowsExceptionIfThereIsNoMatchingResponse()
     {
         $entity = new Container();
         $repository = new ResponseRepository();
-
-        $this->assertNull($repository->getFor($entity));
+        $repository->getFor($entity);
     }
 }
