@@ -6,13 +6,10 @@ use Cscr\SlimsApiBundle\Entity\Container;
 use Cscr\SlimsApiBundle\Form\Type\CreateContainerType;
 use Cscr\SlimsApiBundle\Form\Type\UpdateContainerType;
 use Cscr\SlimsApiBundle\Response\ContainerCollectionResponse;
-use Cscr\SlimsApiBundle\Response\ContainerResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ContainersController extends FOSRestController
@@ -54,14 +51,14 @@ class ContainersController extends FOSRestController
      */
     public function updateAction($id, Request $request)
     {
-        if (!$group = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:Container')->find($id)) {
+        if (!$container = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:Container')->find($id)) {
             throw new NotFoundHttpException(sprintf("No container with ID '%d' available.", $id));
         }
 
-        $form = new UpdateContainerType();
-
-        $processor = $this->get('cscr_slims_api.service.form_processor');
-
-        return $processor->processForm($form, $group, $request);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(
+            new UpdateContainerType(),
+            $container,
+            $request
+        );
     }
 }
