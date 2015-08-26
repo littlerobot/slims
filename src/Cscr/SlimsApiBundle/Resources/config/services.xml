@@ -24,13 +24,6 @@
         <service class="Cscr\SlimsApiBundle\Service\ResponseRepository"
                  id="slims.service.response_repository"/>
 
-        <!-- Constructor is not needed for the actual response objects as we don't ever instantiate them - we just need
-             their class name for the repository. -->
-        <service class="Cscr\SlimsApiBundle\Response\ContainerResponse"
-                 id="slims.response.container_response">
-            <tag name="slims.response_type"/>
-        </service>
-
         <!-- Form processing -->
         <service class="Cscr\SlimsApiBundle\Service\FormProcessor" id="cscr_slims_api.service.form_processor">
             <argument id="doctrine.orm.entity_manager" type="service"/>

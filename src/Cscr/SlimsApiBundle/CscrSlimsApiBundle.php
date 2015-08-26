@@ -14,7 +14,6 @@ class CscrSlimsApiBundle extends Bundle
         parent::build($builder);
 
         $builder
-            ->addCompilerPass(new DownloadableEntityUrlPopulatorPass())
-            ->addCompilerPass(new ResponseRegistryPass());
+            ->addCompilerPass(new DownloadableEntityUrlPopulatorPass());
     }
 }

@@ -86,3 +86,11 @@ fos_rest:
 
 sensio_framework_extra:
     view: { annotations: false }
+
+cscr_slims_api:
+    response_classes:
+        - Cscr\SlimsApiBundle\Response\ContainerResponse
+        - Cscr\SlimsApiBundle\Response\ResearchGroupResponse
+        - Cscr\SlimsApiBundle\Response\SampleInstanceTemplateResponse
+        - Cscr\SlimsApiBundle\Response\SampleTypeTemplateResponse
+        - Cscr\SlimsApiBundle\Response\UserResponse
