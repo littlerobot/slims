@@ -8,7 +8,6 @@ use Symfony\Component\DependencyInjection\Reference;
 
 class DownloadableEntityUrlPopulatorPass implements CompilerPassInterface
 {
-
     /**
      * {@inheritdoc}
      */
@@ -20,7 +19,7 @@ class DownloadableEntityUrlPopulatorPass implements CompilerPassInterface
 
         $definition = $container->findDefinition('slims.downloadable_entity_url_generator_registry');
 
-        $taggedServices = $container->findTaggedServiceIds('slims.downloadalbe_entity_url_generator');
+        $taggedServices = $container->findTaggedServiceIds('slims.downloadable_entity_url_generator');
 
         foreach ($taggedServices as $id => $tags) {
             $definition->addMethodCall(
