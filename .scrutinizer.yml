@@ -3,6 +3,7 @@ filter:
         - src/*
     excluded_paths:
         - src/*Bundle/Tests/*
+        - src/*Bundle/DataFixtures/*
 
 build:
     dependencies:
