@@ -1,17 +1,8 @@
 filter:
+    paths:
+        - src/*
     excluded_paths:
-        - app/*
-        - DataFixtures/*
-        - features/*
-        - Fixtures/*
-        - puphpet/*
-        - spec/*
-        - test/*
-        - tests/*
-        - Tests/*
-        - var/*
-        - vendor/*
-        - web/*
+        - src/*Bundle/Tests/*
 
 build:
     dependencies:
