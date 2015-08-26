@@ -35,15 +35,17 @@ class ResearchGroupsController extends Controller
      */
     public function createAction(Request $request)
     {
-        $group = new ResearchGroup();
-
-        return $this->processForm($group, $request);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(
+            new ResearchGroupType(),
+            new ResearchGroup(),
+            $request
+        );
     }
 
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int     $id
+     * @param int $id
      * @param Request $request
      *
      * @return View
@@ -54,30 +56,10 @@ class ResearchGroupsController extends Controller
             throw new NotFoundHttpException(sprintf("No research group with ID '%d' available.", $id));
         }
 
-        return $this->processForm($group, $request);
-    }
-
-    /**
-     * @param  ResearchGroup $group
-     * @param  Request       $request
-     * @return View
-     */
-    private function processForm(ResearchGroup $group, Request $request)
-    {
-        $manager = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamed('', new ResearchGroupType(), $group);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $manager->persist($group);
-            $manager->flush();
-
-            // ExtJS doesn't work with RESTful APIs, as far as I can see.
-            // Return the object and a 200.
-            return View::create(new ResearchGroupResponse($group), Response::HTTP_OK);
-        }
-
-        return View::create($form, 400);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(
+            new ResearchGroupType(),
+            $group,
+            $request
+        );
     }
 }
