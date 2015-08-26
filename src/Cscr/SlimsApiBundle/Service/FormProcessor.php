@@ -54,9 +54,10 @@ class FormProcessor
             // ExtJS doesn't work with RESTful APIs, as far as I can see.
             // Return the object and a 200.
             $response = $this->repository->getFor($entity);
+
             return View::create($response, Response::HTTP_OK);
         }
 
-        return View::create($formType, Response::HTTP_BAD_REQUEST);
+        return View::create($form, Response::HTTP_BAD_REQUEST);
     }
 }
