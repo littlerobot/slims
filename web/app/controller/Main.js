@@ -15,11 +15,15 @@ Ext.define('Slims.controller.Main', {
             var title = response.errors.message || 'Error appeared!',
                 message = 'Server returned an error.';
 
-            if (response.errors.errors && response.errors.errors.length) {
+            if (response.errors.children) {
                 message = '';
-                Ext.each(response.errors.errors, function(m) {
-                    message += m + "</br> ";
-                });
+                var errorsList = response.errors.children;
+                for (var fname in errorsList) {
+                    var errors = errorsList[fname].errors;
+                    Ext.each(errors, function(m) {
+                        message += m + "</br> ";
+                    });
+                }
             }
         } else {
             var title = 'Internal error',
