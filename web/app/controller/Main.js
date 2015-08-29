@@ -12,7 +12,7 @@ Ext.define('Slims.controller.Main', {
         var response = Ext.decode(xhr.responseText);
 
         if (response && response.errors) {
-            var title = response.errors.message || 'Error appeared',
+            var title = response.errors.message || '',
                 message = 'Server returned an error.';
 
             if (response.errors.children) {
