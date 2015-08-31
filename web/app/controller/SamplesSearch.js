@@ -16,8 +16,8 @@ Ext.define('Slims.controller.SamplesSearch', {
 
     init: function() {
         this.control({
-            'samplessearchfilter button[name=search]': {
-                click: this.doSearch
+            'samplessearchfilter': {
+                search: this.doSearch
             }
         });
     },

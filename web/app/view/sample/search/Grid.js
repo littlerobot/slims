@@ -10,6 +10,11 @@ Ext.define('Slims.view.sample.search.Grid', {
 
         this.columns = this.getDefaultColumns();
 
+
+        this.viewConfig = {
+            emptyText: '<center>No results</center>'
+        };
+
         this.callParent();
     },
 

@@ -19,13 +19,15 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             layout: 'vbox',
             items: [{
                 xtype: 'textfield',
-                fieldLabel: 'Sample Name',
                 name: 'name',
+                fieldLabel: 'Sample Name',
+                minLength: 3,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
-                fieldLabel: 'User Name',
                 name: 'user',
+                fieldLabel: 'User Name',
+                minLength: 3,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
@@ -45,13 +47,15 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             layout: 'vbox',
             items: [{
                 xtype: 'textfield',
-                fieldLabel: 'Sample Type',
                 name: 'type',
+                fieldLabel: 'Sample Type',
+                minLength: 3,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
-                fieldLabel: 'Container Name',
                 name: 'container',
+                fieldLabel: 'Container Name',
+                minLength: 3,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
@@ -63,9 +67,37 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
 
         this.buttons = [{
             text: 'Search',
-            name: 'search'
+            name: 'search',
+            handler: this.validateAndSearch,
+            scope: this
         }]
 
         this.callParent();
+    },
+
+    validateAndSearch: function() {
+        if (!this.getForm().isValid())
+            return;
+
+        var fValues = this.getForm().getValues(),
+            hasValue = false;
+
+        for (var opt in fValues) {
+            if (fValues[opt]) {
+                hasValue = true;
+                break;
+            }
+        }
+        if (!hasValue) {
+            Ext.Msg.alert('Filter is empty', 'Please, type filter parameter(s) before searching');
+            return;
+        }
+
+        if (fValues.stored_end && !fValues.stored_start || fValues.stored_start && !fValues.stored_end) {
+            Ext.Msg.alert('Use both dates', 'Please, fill in or clear both "Date stored from" and "Date stored till" fields');
+            return;
+        }
+
+        this.fireEvent('search', fValues);
     }
 });
