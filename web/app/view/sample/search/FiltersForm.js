@@ -62,6 +62,11 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
                 name: 'stored_end',
                 fieldLabel: 'Date stored till',
                 plugins: ['clearbutton']
+            }, {
+                align: 'left',
+                xtype: 'label',
+                name: 'errorLabel',
+                style: 'color: red; padding-right: 10px;'
             }]
         }];
 
@@ -73,6 +78,16 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
         }]
 
         this.callParent();
+    },
+
+    showError: function(text) {
+        var errorLabel = this.down('[name=errorLabel]');
+        errorLabel.setText(text);
+        errorLabel.el.show();
+        errorLabel.el.setStyle('opacity', '1');
+        setTimeout(function() {
+            errorLabel.el.fadeOut({opacity: 0, duration: 1000});
+        }, 3000);
     },
 
     validateAndSearch: function() {
@@ -89,11 +104,13 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             }
         }
         if (!hasValue) {
+            // this.showError('Please, type filter parameter(s) before searching');
             Ext.Msg.alert('Filter is empty', 'Please, type filter parameter(s) before searching');
             return;
         }
 
         if (fValues.stored_end && !fValues.stored_start || fValues.stored_start && !fValues.stored_end) {
+            // this.showError('Please, fill in or clear both "Date stored from" and "Date stored till" fields');
             Ext.Msg.alert('Use both dates', 'Please, fill in or clear both "Date stored from" and "Date stored till" fields');
             return;
         }
