@@ -22,13 +22,13 @@ Ext.define('Slims.controller.SamplesSearch', {
         });
     },
 
-    doSearch: function() {
+    doSearch: function(values) {
         this.getGrid().setLoading(true);
 
         Ext.Ajax.request({
             url: Slims.Url.getRoute('searchsamples'),
             method: 'GET',
-            params: this.getForm().getValues(),
+            params: values,
             scope: this,
             success: function(xhr) {
                 this.getGrid().setLoading(false);
