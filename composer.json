@@ -23,7 +23,8 @@
         "doctrine/migrations": "^1.0@RC",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "beberlei/assert": "^2.3",
-        "symfony/icu": "1.0.*"
+        "symfony/icu": "1.0.*",
+        "jms/serializer-bundle": "~0.13.0"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",
