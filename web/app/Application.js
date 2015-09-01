@@ -1,6 +1,9 @@
 Ext.Loader.setConfig({
     enabled: true,
-    disableCaching: false
+    disableCaching: false,
+    paths: {
+        'Ext.ux': 'app/ux'
+    }
 });
 
 Ext.define('Slims.Application', {
@@ -10,7 +13,11 @@ Ext.define('Slims.Application', {
 
     requires: [
         'Slims.router.Api',
-        'Ext.tip.QuickTipManager'
+        'Ext.tip.QuickTipManager',
+        'Ext.ux.ClearButton',
+        'Slims.ux.FileField',
+        'Slims.ux.Utils',
+        'Slims.ux.TypeColumn'
     ],
 
     views: [],
@@ -23,7 +30,8 @@ Ext.define('Slims.Application', {
         'Templates',
         'SampleTemplates',
         'SampleTypes',
-        'Samples'
+        'Samples',
+        'SamplesSearch'
     ],
 
     stores: [

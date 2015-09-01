@@ -195,6 +195,10 @@ class Container
      */
     public function storeContainerInside(Container $container)
     {
+        if ($this->isLeaf()) {
+            throw new \LogicException('A container cannot store other containers if it is configured to store samples.');
+        }
+
         if (!$this->children->contains($container)) {
             $this->children->add($container);
             $container->parent = $this;
@@ -228,17 +232,6 @@ class Container
     public function getParent()
     {
         return $this->parent;
-    }
-
-    /**
-     * @param  Container $parent
-     * @return Container
-     */
-    public function setParent($parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
     }
 
     /**

@@ -1,6 +1,9 @@
 filter:
     paths:
-        - 'src/*'
+        - src/*
+    excluded_paths:
+        - src/*Bundle/Tests/*
+        - src/*Bundle/DataFixtures/*
 
 build:
     dependencies:
@@ -63,3 +66,8 @@ tools:
     php_pdepend: true
     php_sim: true
     php_changetracking: true
+
+checks:
+    php:
+        code_rating: true
+        duplication: true

@@ -32,11 +32,11 @@ Ext.define('Slims.view.sample.types.Window', {
                     attributes = [];
 
                 Ext.each(attributesFieldset.items.items, function(field) {
-                    if (field.xtype == 'filefield') {
-                        if (field.file_name) {
+                    if (field.xtype == 'samplefile') {
+                        if (field.getValue()) {
                             attributes.push({
                                 id: field.name,
-                                filename: field.file_name,
+                                filename: field.getValue(),
                                 value: field.theFile
                             });
                         }

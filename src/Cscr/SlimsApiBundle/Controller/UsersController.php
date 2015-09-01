@@ -49,34 +49,7 @@ class UsersController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $user = new User();
-
-        return $this->processForm($user, $request);
-    }
-
-    /**
-     * @param User $user
-     * @param Request $request
-     *
-     * @return View
-     */
-    private function processForm(User $user, Request $request)
-    {
-        $manager = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamed('', new UserType(), $user);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
-            $manager->persist($user);
-            $manager->flush();
-
-            // ExtJS doesn't work with RESTful APIs, as far as I can see.
-            // Return the object and a 200.
-            return View::create(new UserResponse($user), Response::HTTP_OK);
-        }
-
-        return View::create($form, 400);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(new UserType(), new User(), $request);
     }
 
     /**
@@ -93,6 +66,6 @@ class UsersController extends FOSRestController
             throw new NotFoundHttpException(sprintf("No user with ID '%d' available.", $id));
         }
 
-        return $this->processForm($user, $request);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(new UserType(), $user, $request);
     }
 }

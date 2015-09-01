@@ -30,14 +30,19 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             },
             failure: function() {
                 this.setLoading(false);
-                this.items.add(Ext.create('Ext.form.Label', {
-                    padding: 10,
-                    width: '100%',
-                    html: '<center style="color: red;">Error occured.</center>'
-                }));
-                this.doLayout();
+                this.setSamplesError();
             }
         });
+    },
+
+    setSamplesError: function() {
+        this.removeAll();
+        this.items.add(Ext.create('Ext.form.Label', {
+            padding: 10,
+            width: '100%',
+            html: '<center style="color: red;">Error occured.</center>'
+        }));
+        this.doLayout();
     },
 
     setSamplesData: function(samples) {

@@ -73,12 +73,12 @@ class SampleTypeTemplateBuilder
     }
 
     /**
-     * @return array|null
+     * @return array
      */
     private function buildAttributes()
     {
         if (!$this->attributes) {
-            return null;
+            return [];
         }
 
         $attributes = [];

@@ -138,7 +138,7 @@ abstract class AbstractSampleInstanceTemplateAttribute
     }
 
     /**
-     * @return array|\string[]
+     * @return string[]|null
      */
     public function getOptions()
     {

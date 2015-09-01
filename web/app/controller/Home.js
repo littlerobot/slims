@@ -195,11 +195,22 @@ Ext.define('Slims.controller.Home', {
 
             for (var name in sample.data) {
                 if (name.indexOf('attributes.id') == 0) {
-                    var id = name.replace('attributes.id', '');
-                    attributes.push({
-                        id: parseInt(id),
-                        value: sample.data[name]
-                    });
+                    var id = name.replace('attributes.id', ''),
+                        value = sample.data[name],
+                        attr;
+                    if (value.file) {
+                        attr = {
+                            id: parseInt(id),
+                            filename: value.name,
+                            value: value.file
+                        };
+                    } else {
+                        attr = {
+                            id: parseInt(id),
+                            value: sample.data[name]
+                        };
+                    }
+                    attributes.push(attr);
                 }
             }
 
@@ -210,7 +221,7 @@ Ext.define('Slims.controller.Home', {
                 row: parseInt(row),
                 column: parseInt(column),
                 attributes: attributes
-            }
+            };
         });
 
         this.getPositionsGrid().setLoading('Saving...');
