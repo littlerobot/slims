@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="Cscr\SlimsApiBundle\Entity\Repository\SampleInstanceTemplateRepository")
  * @ORM\Table(name="sample_instance_template")
  */
 class SampleInstanceTemplate
@@ -80,6 +80,9 @@ class SampleInstanceTemplate
         return $this;
     }
 
+    /**
+     * @return SampleInstanceTemplateStoredAttribute[]|ArrayCollection
+     */
     public function getStoredAttributes()
     {
         return $this->storedAttributes;
@@ -102,6 +105,9 @@ class SampleInstanceTemplate
         return $this;
     }
 
+    /**
+     * @return SampleInstanceTemplateRemovedAttribute[]|ArrayCollection
+     */
     public function getRemovedAttributes()
     {
         return $this->removedAttributes;

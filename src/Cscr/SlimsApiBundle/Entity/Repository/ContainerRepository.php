@@ -42,7 +42,7 @@ class ContainerRepository extends EntityRepository
         return $this
             ->createQueryBuilder('c')
             ->select('c, s')
-            ->join('c.samples', 's')
+            ->leftJoin('c.samples', 's')
             ->orderBy('s.position')
             ->where('c.id = :id')
             ->setParameter('id', $id)

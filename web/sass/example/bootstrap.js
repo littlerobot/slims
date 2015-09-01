@@ -367,7 +367,7 @@ Ext.Boot = Ext.Boot || (function (emptyFn) {
                 origin = window.location.origin ||
                     window.location.protocol +
                     "//" +
-                    window.location.hostnaBoot +
+                    window.location.hostname +
                     (window.location.port ? ':' + window.location.port: '');
                 Boot.origin = origin;
 
@@ -1578,6 +1578,7 @@ Ext.Loader.addClassPathMappings({
   "Ext.core.DomHelper": "../../ext/src/dom/Helper.js",
   "Ext.core.DomQuery": "../../ext/src/dom/Query.js",
   "Ext.rtl.EventObjectImpl": "../../ext/src/rtl/EventObject.js",
+  "Ext.ux.ClearButton": "../../app/ux/ClearButton.js",
   "ExtThemeNeptune": "../../ext/packages/ext-theme-neptune/overrides",
   "Slims": "../../app"
 });
@@ -2322,6 +2323,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Ext.util.TextMetrics": [],
   "Ext.ux.BoxReorderer": [],
   "Ext.ux.CellDragDrop": [],
+  "Ext.ux.ClearButton": [],
   "Ext.ux.DataTip": [],
   "Ext.ux.DataView.Animated": [],
   "Ext.ux.DataView.DragSelector": [],
@@ -2422,6 +2424,7 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
   "Slims.controller.Samples": [],
+  "Slims.controller.SamplesSearch": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -2448,6 +2451,11 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.store.sample.Samples": [],
   "Slims.store.sample.Types": [],
   "Slims.ux.ColorButton": [],
+  "Slims.ux.FileField": [],
+  "Slims.ux.TypeColumn": [],
+  "Slims.ux.Utils": [
+    "Utils"
+  ],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [],
   "Slims.view.groups.Window": [],
@@ -2463,6 +2471,8 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.instancetemplates.Panel": [],
   "Slims.view.sample.instancetemplates.TemplateWindow": [],
   "Slims.view.sample.instancetemplates.TemplatesGrid": [],
+  "Slims.view.sample.search.FiltersForm": [],
+  "Slims.view.sample.search.Grid": [],
   "Slims.view.sample.types.Form": [],
   "Slims.view.sample.types.Grid": [],
   "Slims.view.sample.types.Panel": [],
@@ -3337,6 +3347,9 @@ Ext.ClassManager.addNameAliasMappings({
   "Ext.ux.CellDragDrop": [
     "plugin.celldragdrop"
   ],
+  "Ext.ux.ClearButton": [
+    "plugin.clearbutton"
+  ],
   "Ext.ux.DataTip": [
     "plugin.datatip"
   ],
@@ -3489,6 +3502,7 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
   "Slims.controller.Samples": [],
+  "Slims.controller.SamplesSearch": [],
   "Slims.controller.Templates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
@@ -3515,6 +3529,13 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.ux.ColorButton": [
     "widget.colorbutton"
   ],
+  "Slims.ux.FileField": [
+    "widget.samplefile"
+  ],
+  "Slims.ux.TypeColumn": [
+    "widget.typecolumn"
+  ],
+  "Slims.ux.Utils": [],
   "Slims.view.Viewport": [],
   "Slims.view.groups.Grid": [
     "widget.groupsgrid"
@@ -3557,6 +3578,12 @@ Ext.ClassManager.addNameAliasMappings({
   ],
   "Slims.view.sample.instancetemplates.TemplatesGrid": [
     "widget.instancetemplatesgrid"
+  ],
+  "Slims.view.sample.search.FiltersForm": [
+    "widget.samplessearchfilter"
+  ],
+  "Slims.view.sample.search.Grid": [
+    "widget.samplesearch"
   ],
   "Slims.view.sample.types.Form": [
     "widget.sampletypeform"

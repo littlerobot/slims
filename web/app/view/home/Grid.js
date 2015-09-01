@@ -55,11 +55,10 @@ Ext.define('Slims.view.home.Grid', {
                 dataIndex: 'sample_total_capacity'
             }]
         }, {
+            xtype: 'typecolumn',
+            type: 'colour',
             width: 30,
-            dataIndex: 'colour',
-            renderer: function(value) {
-                return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', value);
-            }
+            dataIndex: 'colour'
         }];
 
         if (!this.readOnly) {
@@ -77,6 +76,10 @@ Ext.define('Slims.view.home.Grid', {
                 }
             });
         }
+
+        this.viewConfig = {
+            loadMask: true
+        };
 
         this.callParent();
     },

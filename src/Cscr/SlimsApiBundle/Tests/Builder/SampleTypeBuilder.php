@@ -36,12 +36,12 @@ class SampleTypeBuilder
 
         foreach ($sampleTypeTemplate->getAttributes() as $attributeTemplate) {
             switch ($attributeTemplate->getType()) {
+                case SampleTypeTemplateAttribute::TYPE_LONG_TEXT:
+                    $attributeBuilder = SampleTypeAttributeBuilder::aLongTextAttribute($attributeTemplate);
+                    break;
                 case SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT:
                 default:
                     $attributeBuilder = SampleTypeAttributeBuilder::aBriefTextAttribute($attributeTemplate);
-                    break;
-                case SampleTypeTemplateAttribute::TYPE_LONG_TEXT:
-                    $attributeBuilder = SampleTypeAttributeBuilder::aLongTextAttribute($attributeTemplate);
                     break;
             }
 

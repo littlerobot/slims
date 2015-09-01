@@ -12,14 +12,19 @@ Ext.define('Slims.controller.Main', {
         var response = Ext.decode(xhr.responseText);
 
         if (response && response.errors) {
-            var title = response.errors.message || 'Error appeared!',
+            var title = response.errors.message || '',
                 message = 'Server returned an error.';
 
-            if (response.errors.errors && response.errors.errors.length) {
-                message = '';
-                Ext.each(response.errors.errors, function(m) {
-                    message += m + "</br> ";
-                });
+            if (response.errors.children) {
+                message = '<ul>';
+                var errorsList = response.errors.children;
+                for (var fname in errorsList) {
+                    var errors = errorsList[fname].errors;
+                    Ext.each(errors, function(m) {
+                        message += Ext.String.format('<li>{0}</li>', m);
+                    });
+                }
+                message += '</ul>';
             }
         } else {
             var title = 'Internal error',
@@ -33,9 +38,8 @@ Ext.define('Slims.controller.Main', {
         Ext.Msg.show({
             title: title,
             msg: message,
-            width: 300,
-            buttons: Ext.Msg.OK,
-            icon: Ext.Msg.ERROR
+            width: 400,
+            buttons: Ext.Msg.OK
         });
     }
 });

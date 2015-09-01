@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Validation;
 class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
 {
     /**
-     * {@inheritdoc}
+     * @return string
      */
     protected function getApiVersion()
     {
@@ -18,7 +18,7 @@ class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
     }
 
     /**
-     * {@inheritdoc}
+     * @return OptionAllowedValidator
      */
     protected function createValidator()
     {

@@ -1,16 +1,34 @@
 <?xml version="1.0" ?>
 
 <container xmlns="http://symfony.com/schema/dic/services"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
 
     <services>
-        <service id="sample_type_attribute.url.generator" class="Cscr\SlimsApiBundle\Service\SampleTypeDocumentAttributeUrlGenerator">
-            <argument type="service" id="router" />
+        <!-- URL generation for attributes with documents -->
+        <service id="slims.downloadable_entity_url_generator_registry"
+                 class="Cscr\SlimsApiBundle\Service\DownloadableEntityUrlGeneratorRegistry">
         </service>
-        <service id="sample_type_attribute.event_listener" class="Cscr\SlimsApiBundle\EventListener\SampleTypeAttributeListener">
-            <argument type="service" id="sample_type_attribute.url.generator" />
-            <tag name="doctrine.event_listener" event="postLoad" />
+        <service id="slims.sample_type_attribute.url.generator"
+                 class="Cscr\SlimsApiBundle\Service\SampleTypeAttributeDocumentUrlGenerator">
+            <argument type="service" id="router"/>
+            <tag name="slims.downloadable_entity_url_generator"/>
+        </service>
+        <service id="slims.downloadable_entity_url_populater"
+                 class="Cscr\SlimsApiBundle\EventListener\DownloadableEntityUrlPopulater">
+            <argument type="service" id="slims.downloadable_entity_url_generator_registry"/>
+            <tag name="doctrine.event_listener" event="postLoad"/>
+        </service>
+
+        <!-- Responses -->
+        <service class="Cscr\SlimsApiBundle\Service\ResponseRepository"
+                 id="slims.service.response_repository"/>
+
+        <!-- Form processing -->
+        <service class="Cscr\SlimsApiBundle\Service\FormProcessor" id="cscr_slims_api.service.form_processor">
+            <argument id="doctrine.orm.entity_manager" type="service"/>
+            <argument id="slims.service.response_repository" type="service"/>
+            <argument id="form.factory" type="service"/>
         </service>
     </services>
 </container>

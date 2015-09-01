@@ -1,8 +1,8 @@
 {
-    "name": "symfony/framework-standard-edition",
-    "license": "MIT",
+    "name": "littlerobot/slims",
+    "license": "GPL-3.0",
     "type": "project",
-    "description": "The \"Symfony Standard Edition\" distribution",
+    "description": "Sally's Laboratory Information System",
     "autoload": {
         "psr-0": { "": "src/", "SymfonyStandard": "app/" }
     },
@@ -18,13 +18,11 @@
         "sensio/distribution-bundle": "~3.0",
         "sensio/framework-extra-bundle": "~3.0",
         "incenteev/composer-parameter-handler": "~2.0",
-        "misd/raven-bundle": "~1.0",
-        "friendsofsymfony/rest-bundle": "1.4.*",
-        "jms/serializer-bundle": "~0.13",
-        "doctrine/migrations": "1.0.*@dev",
-        "doctrine/doctrine-migrations-bundle": "2.1.*@dev",
-        "beberlei/assert": "~2.0.1",
-        "hautelook/alice-bundle": "~0.2",
+        "misd/raven-bundle": "^1.1",
+        "friendsofsymfony/rest-bundle": "^1.7",
+        "doctrine/migrations": "^1.0@RC",
+        "doctrine/doctrine-migrations-bundle": "^1.0",
+        "beberlei/assert": "^2.3",
         "symfony/icu": "1.0.*"
     },
     "require-dev": {

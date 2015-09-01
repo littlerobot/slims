@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="sample_type_attribute")
  * @ORM\Entity()
  */
-class SampleTypeAttribute
+class SampleTypeAttribute implements Downloadable
 {
     /**
      * @var int

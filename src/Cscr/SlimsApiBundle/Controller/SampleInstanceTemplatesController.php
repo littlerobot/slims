@@ -38,10 +38,11 @@ class SampleInstanceTemplatesController extends FOSRestController
      */
     public function createAction(Request $request)
     {
-        $template = new SampleInstanceTemplate();
-        $form = new SampleInstanceTemplateType();
-
-        return $this->processForm($template, $form, $request);
+        return $this->get('cscr_slims_api.service.form_processor')->processForm(
+            new SampleInstanceTemplateType(),
+            new SampleInstanceTemplate(),
+            $request
+        );
     }
 
     /**
@@ -68,34 +69,17 @@ class SampleInstanceTemplatesController extends FOSRestController
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $this->removeDeletedAttributes($originalStoredAttributes, $template->getStoredAttributes()->toArray(), $manager);
-            $this->removeDeletedAttributes($originalRemovedAttributes, $template->getRemovedAttributes()->toArray(), $manager);
+            $this->removeDeletedAttributes(
+                $originalStoredAttributes,
+                $template->getStoredAttributes()->toArray(),
+                $manager
+            );
+            $this->removeDeletedAttributes(
+                $originalRemovedAttributes,
+                $template->getRemovedAttributes()->toArray(),
+                $manager
+            );
 
-            $manager->persist($template);
-            $manager->flush();
-
-            // ExtJS doesn't work with RESTful APIs, as far as I can see.
-            // Return the object and a 200.
-            return View::create(new SampleInstanceTemplateResponse($template), Response::HTTP_OK);
-        }
-
-        return View::create($form, Response::HTTP_BAD_REQUEST);
-    }
-
-    /**
-     * @param  SampleInstanceTemplate $template
-     * @param  FormTypeInterface $formType
-     * @param  Request $request
-     * @return View
-     */
-    private function processForm(SampleInstanceTemplate $template, FormTypeInterface $formType, Request $request)
-    {
-        $manager = $this->getDoctrine()->getManager();
-
-        $form = $this->get('form.factory')->createNamed('', $formType, $template);
-        $form->handleRequest($request);
-
-        if ($form->isValid()) {
             $manager->persist($template);
             $manager->flush();
 

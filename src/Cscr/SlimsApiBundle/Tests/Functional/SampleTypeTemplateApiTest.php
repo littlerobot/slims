@@ -53,19 +53,20 @@ class SampleTypeTemplateApiTest extends WebTestCase
         $template = $this->getTemplateByName($name);
         $this->assertNotNull($template, 'Template was not saved to database');
 
-        $url = sprintf('/api/sample-type-template/%d', $template->getId());
+        $url = sprintf('/api/sample-type-templates/%d', $template->getId());
         $builder->switchOrderOfFirstAndLastAttributes();
         $content = SampleTypeTemplateRenderer::renderAsJson($builder->build());
 
         $this->client->request('POST', $url, [], [], [], $content);
+        $this->assertJsonResponse($this->client->getResponse());
 
         $this->clearDoctrineCache();
         $template = $this->getTemplateByName($name);
         $attributes = $template->getAttributes();
 
         $this->assertLessThan(
-            $attributes->last()->getOrder(),
             $attributes->first()->getOrder(),
+            $attributes->last()->getOrder(),
             'Attributes were not re-ordered'
         );
     }
@@ -108,8 +109,7 @@ class SampleTypeTemplateApiTest extends WebTestCase
             ->getRepository('CscrSlimsApiBundle:SampleTypeTemplate')
             ->findOneBy([
                 'name' => $name,
-            ])
-        ;
+            ]);
     }
 
     /**
@@ -126,7 +126,6 @@ class SampleTypeTemplateApiTest extends WebTestCase
             ->withAttribute(SampleTypeTemplateAttributeBuilder::aDocumentAttribute()->withOrder(4))
             ->withAttribute(SampleTypeTemplateAttributeBuilder::aDateAttribute()->withOrder(5))
             ->withAttribute(SampleTypeTemplateAttributeBuilder::aColourAttribute()->withOrder(6))
-            ->withAttribute(SampleTypeTemplateAttributeBuilder::aUserAttribute()->withOrder(7))
-        ;
+            ->withAttribute(SampleTypeTemplateAttributeBuilder::aUserAttribute()->withOrder(7));
     }
 }
