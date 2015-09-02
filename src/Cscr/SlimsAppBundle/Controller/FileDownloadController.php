@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\BinaryFileResponse;
 class FileDownloadController extends Controller
 {
     /**
-     * @Route("download/{id}/{filename}", name="sample_type_attribute_download")
+     * @Route("download/{id}/{filename}", methods={"GET"}, name="sample_type_attribute_download")
      *
      * @param SampleTypeAttribute $attribute
      *

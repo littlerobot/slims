@@ -9,7 +9,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 class ApplicationController extends Controller
 {
     /**
-     * @Route("/", name="app_home")
+     * @Route("/", methods={"GET"}, name="app_home")
      * @Template()
      */
     public function indexAction()
@@ -18,7 +18,7 @@ class ApplicationController extends Controller
     }
 
     /**
-     * @Route("dashboard", name="app_dashboard")
+     * @Route("dashboard", methods={"GET"}, name="app_dashboard")
      * @Template()
      */
     public function dashboardAction()
