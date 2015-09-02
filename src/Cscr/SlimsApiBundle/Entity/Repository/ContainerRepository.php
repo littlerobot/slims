@@ -26,7 +26,7 @@ class ContainerRepository extends EntityRepository
         try {
             $containers = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $containers;
@@ -34,7 +34,9 @@ class ContainerRepository extends EntityRepository
 
     /**
      * @param int $id
+     *
      * @return Container|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function find($id)

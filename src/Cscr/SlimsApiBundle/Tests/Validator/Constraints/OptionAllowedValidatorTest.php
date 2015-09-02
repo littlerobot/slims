@@ -1,4 +1,5 @@
 <?php
+
 namespace Cscr\SlimsApiBundle\Tests\Validator\Constraints;
 
 use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
@@ -27,6 +28,7 @@ class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
 
     /**
      * @dataProvider getValidValues
+     *
      * @param SampleTypeTemplateAttribute $object The object to validate.
      */
     public function testValidValues($object)
@@ -42,19 +44,20 @@ class OptionAllowedValidatorTest extends AbstractConstraintValidatorTest
             [
                 (new SampleTypeTemplateAttribute())
                     ->setType(SampleTypeTemplateAttribute::TYPE_OPTION)
-                    ->setOptions([1, 2])
+                    ->setOptions([1, 2]),
             ],
             [
                 (new SampleTypeTemplateAttribute())
-                    ->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT)
+                    ->setType(SampleTypeTemplateAttribute::TYPE_BRIEF_TEXT),
             ],
         );
     }
 
     /**
      * @dataProvider getInvalidValues
-     * @param SampleTypeTemplateAttribute $object The object to validate.
-     * @param string $message The validation error message.
+     *
+     * @param SampleTypeTemplateAttribute $object  The object to validate.
+     * @param string                      $message The validation error message.
      */
     public function testInvalidValues($object, $message)
     {

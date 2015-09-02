@@ -7,7 +7,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class User
+ * Class User.
  *
  * @ORM\Table(name="slims_user")
  * @ORM\Entity(repositoryClass="Cscr\SlimsUserBundle\Entity\Repository\UserRepository")
@@ -38,7 +38,7 @@ class User implements UserInterface, \Serializable
     private $name;
 
     /**
-     * @var boolean
+     * @var bool
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
@@ -61,7 +61,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isActive()
     {
@@ -69,7 +69,7 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param boolean $active
+     * @param bool $active
      *
      * @return User
      */
@@ -183,7 +183,8 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param  ResearchGroup $researchGroup
+     * @param ResearchGroup $researchGroup
+     *
      * @return User
      */
     public function setResearchGroup(ResearchGroup $researchGroup)

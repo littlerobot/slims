@@ -45,17 +45,20 @@ class SampleInstanceTemplateAttributeBuilder
 
     /**
      * @param array $options
+     *
      * @return $this
      */
     public function withOptions(array $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
     public function withOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 

@@ -38,13 +38,14 @@ class ContainersController extends FOSRestController
         $form = new CreateContainerType();
 
         $processor = $this->get('cscr_slims_api.service.form_processor');
+
         return $processor->processForm($form, $container, $request);
     }
 
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return View

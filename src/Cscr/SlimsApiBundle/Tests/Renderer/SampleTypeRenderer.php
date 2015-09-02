@@ -13,6 +13,7 @@ class SampleTypeRenderer
 
     /**
      * @param SampleType $type
+     *
      * @return array
      */
     private static function renderAsArray(SampleType $type)

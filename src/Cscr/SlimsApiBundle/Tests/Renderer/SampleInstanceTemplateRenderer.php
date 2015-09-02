@@ -34,6 +34,7 @@ class SampleInstanceTemplateRenderer
 
     /**
      * @param AbstractSampleInstanceTemplateAttribute[]|ArrayCollection $attributes
+     *
      * @return array
      */
     private static function renderAttributesAsArray(ArrayCollection $attributes)
@@ -43,6 +44,7 @@ class SampleInstanceTemplateRenderer
         foreach ($attributes as $attribute) {
             $array[] = SampleInstanceTemplateAttributeRenderer::renderAsArray($attribute);
         }
+
         return $array;
     }
 }

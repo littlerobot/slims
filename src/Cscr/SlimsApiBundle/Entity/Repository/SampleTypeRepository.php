@@ -27,7 +27,7 @@ class SampleTypeRepository extends EntityRepository
         try {
             $types = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $types;

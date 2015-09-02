@@ -121,31 +121,37 @@ class SampleTypeTemplateAttributeBuilder
 
     /**
      * @param string $label
+     *
      * @return $this
      */
     public function withLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
     /**
      * @param string $type
+     *
      * @return $this
      */
     public function withType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
     /**
      * @param array $options
+     *
      * @return $this
      */
     public function withOptions(array $options)
     {
         $this->options = $options;
+
         return $this;
     }
 
@@ -157,16 +163,19 @@ class SampleTypeTemplateAttributeBuilder
     public function withoutOptions()
     {
         $this->options = null;
+
         return $this;
     }
 
     /**
      * @param int $order
+     *
      * @return $this
      */
     public function withOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 }

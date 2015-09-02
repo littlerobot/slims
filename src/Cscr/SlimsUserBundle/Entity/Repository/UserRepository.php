@@ -71,7 +71,7 @@ class UserRepository extends EntityRepository implements UserProviderInterface
         try {
             $users = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $users;

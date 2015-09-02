@@ -25,8 +25,8 @@ class FormProcessor
     private $factory;
 
     /**
-     * @param ObjectManager $manager
-     * @param ResponseRepository $repository
+     * @param ObjectManager        $manager
+     * @param ResponseRepository   $repository
      * @param FormFactoryInterface $factory
      */
     public function __construct(ObjectManager $manager, ResponseRepository $repository, FormFactoryInterface $factory)
@@ -40,6 +40,7 @@ class FormProcessor
      * @param FormTypeInterface $formType
      * @param $entity
      * @param Request $request
+     *
      * @return View
      */
     public function processForm(FormTypeInterface $formType, $entity, Request $request)

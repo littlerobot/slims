@@ -14,6 +14,7 @@ class SampleRepository extends EntityRepository
      * @param null|string $container
      * @param null|string $storedFrom
      * @param null|string $storedTo
+     *
      * @return Sample[]
      */
     public function filter(
@@ -88,6 +89,7 @@ class SampleRepository extends EntityRepository
 
     /**
      * @param string $string
+     *
      * @return string
      */
     private function getLikePattern($string)

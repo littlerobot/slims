@@ -11,7 +11,9 @@ class FileDownloadController extends Controller
 {
     /**
      * @Route("download/{id}/{filename}", name="sample_type_attribute_download")
+     *
      * @param SampleTypeAttribute $attribute
+     *
      * @return BinaryFileResponse
      */
     public function downloadAction(SampleTypeAttribute $attribute)

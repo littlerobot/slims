@@ -17,6 +17,7 @@ class ContainerSamplesController extends FOSRestController
 {
     /**
      * @param int $id Container ID.
+     *
      * @return SamplesResponse
      *
      * @Rest\Route("")
@@ -30,11 +31,12 @@ class ContainerSamplesController extends FOSRestController
     }
 
     /**
-     * @param int $id Container ID.
+     * @param int     $id      Container ID.
      * @param Request $request
      *
      * @Rest\Post("")
      * @Rest\View()
+     *
      * @return View
      */
     public function storeSamplesAction($id, Request $request)
@@ -46,7 +48,9 @@ class ContainerSamplesController extends FOSRestController
 
     /**
      * @param int $id Container ID.
+     *
      * @return Container
+     *
      * @throws NotFoundHttpException
      */
     private function findContainer($id)
@@ -59,9 +63,10 @@ class ContainerSamplesController extends FOSRestController
     }
 
     /**
-     * @param Container $container
-     * @param  FormTypeInterface $formType
-     * @param  Request $request
+     * @param Container         $container
+     * @param FormTypeInterface $formType
+     * @param Request           $request
+     *
      * @return View
      */
     private function processForm(Container $container, FormTypeInterface $formType, Request $request)

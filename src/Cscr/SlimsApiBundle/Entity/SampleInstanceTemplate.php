@@ -72,11 +72,13 @@ class SampleInstanceTemplate
 
     /**
      * @param string $name
+     *
      * @return SampleInstanceTemplate
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 

@@ -23,7 +23,7 @@ class ResearchGroupType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
             'csrf_protection' => false,
         ));
     }

@@ -35,8 +35,9 @@ class SampleInstanceTemplateBuilder
     }
 
     /**
-     * @param string $type
+     * @param string                                   $type
      * @param SampleInstanceTemplateAttributeBuilder[] $attributes
+     *
      * @return array|null
      */
     private function buildAttributes($type, array $attributes)
@@ -56,6 +57,7 @@ class SampleInstanceTemplateBuilder
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function withName($name)
@@ -67,6 +69,7 @@ class SampleInstanceTemplateBuilder
 
     /**
      * @param SampleInstanceTemplateAttributeBuilder $attribute
+     *
      * @return $this
      */
     public function withStoredAttribute(SampleInstanceTemplateAttributeBuilder $attribute)
@@ -78,6 +81,7 @@ class SampleInstanceTemplateBuilder
 
     /**
      * @param SampleInstanceTemplateAttributeBuilder $attribute
+     *
      * @return $this
      */
     public function withRemovedAttribute(SampleInstanceTemplateAttributeBuilder $attribute)
@@ -107,11 +111,12 @@ class SampleInstanceTemplateBuilder
 
     /**
      * @param string $name Template name
+     *
      * @return SampleInstanceTemplateBuilder
      */
     public static function buildBuilderWithAllAttributeTypes($name)
     {
-        return (new SampleInstanceTemplateBuilder())
+        return (new self())
             ->withName($name)
             ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aBriefTextAttribute()->withOrder(1))
             ->withStoredAttribute(SampleInstanceTemplateAttributeBuilder::aLongTextAttribute()->withOrder(2))

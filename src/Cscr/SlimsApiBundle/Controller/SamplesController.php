@@ -19,6 +19,7 @@ class SamplesController extends FOSRestController
      * @Rest\QueryParam(name="stored_end", requirements="[0-9]{2}/[0-9]{2}/[0-9]{4}", nullable=true)
      *
      * @param ParamFetcher $paramFetcher
+     *
      * @return FilteredSamplesResponse
      */
     public function filterAction(ParamFetcher $paramFetcher)

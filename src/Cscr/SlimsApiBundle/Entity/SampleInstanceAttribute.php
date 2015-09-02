@@ -33,7 +33,6 @@ class SampleInstanceAttribute
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $filename;
 
@@ -83,6 +82,7 @@ class SampleInstanceAttribute
 
     /**
      * @param Sample $parent
+     *
      * @return SampleInstanceAttribute
      */
     public function setParent(Sample $parent)
@@ -102,6 +102,7 @@ class SampleInstanceAttribute
 
     /**
      * @param SampleInstanceTemplateStoredAttribute $template
+     *
      * @return SampleInstanceAttribute
      */
     public function setTemplate($template)
@@ -121,6 +122,7 @@ class SampleInstanceAttribute
 
     /**
      * @param string $value
+     *
      * @return SampleInstanceAttribute
      */
     public function setValue($value)
@@ -140,6 +142,7 @@ class SampleInstanceAttribute
 
     /**
      * @param null|string $mimeType
+     *
      * @return SampleInstanceAttribute
      */
     public function setMimeType($mimeType)
@@ -159,6 +162,7 @@ class SampleInstanceAttribute
 
     /**
      * @param null|string $filename
+     *
      * @return SampleInstanceAttribute
      */
     public function setFilename($filename)
@@ -171,7 +175,7 @@ class SampleInstanceAttribute
     public function getNonBinaryValue()
     {
         if ($this->filename) {
-            return null;
+            return;
         }
 
         return $this->value;

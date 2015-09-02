@@ -31,7 +31,7 @@ class CreateContainerType extends AbstractType
                 'choices' => [
                     Container::STORES_CONTAINERS => 'Containers',
                     Container::STORES_SAMPLES => 'Samples',
-                ]
+                ],
             ])
             ->add('comment', 'text')
             ->add('colour', 'text')
@@ -44,7 +44,7 @@ class CreateContainerType extends AbstractType
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setDefaults(array(
-            'data_class'      => 'Cscr\SlimsApiBundle\Entity\Container',
+            'data_class' => 'Cscr\SlimsApiBundle\Entity\Container',
             'csrf_protection' => false,
         ));
     }

@@ -21,7 +21,7 @@ class SampleTypeTemplateAttribute
     const TYPE_USER = 'user';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -30,7 +30,7 @@ class SampleTypeTemplateAttribute
     private $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="sequence", type="smallint")
      */
@@ -72,31 +72,37 @@ class SampleTypeTemplateAttribute
     public function setParent(SampleTypeTemplate $parent)
     {
         $this->parent = $parent;
+
         return $this;
     }
 
     /**
      * @param int $order
+     *
      * @return SampleTypeTemplateAttribute
      */
     public function setOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 
     /**
      * @param string $label
+     *
      * @return SampleTypeTemplateAttribute
      */
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
     /**
      * @param string $type
+     *
      * @return SampleTypeTemplateAttribute
      */
     public function setType($type)
@@ -113,6 +119,7 @@ class SampleTypeTemplateAttribute
 
     /**
      * @param array|\string[]|null $options
+     *
      * @return SampleTypeTemplateAttribute
      */
     public function setOptions(array $options = null)
@@ -125,10 +132,12 @@ class SampleTypeTemplateAttribute
         // Stop an empty array being set as this will make the output a bit funky.
         if (empty($options)) {
             $this->options = null;
+
             return $this;
         }
 
         $this->options = $options;
+
         return $this;
     }
 

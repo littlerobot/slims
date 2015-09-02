@@ -173,6 +173,7 @@ class Sample
 
     /**
      * @param string $colour
+     *
      * @return Sample
      */
     public function setColour($colour)
@@ -184,6 +185,7 @@ class Sample
 
     /**
      * @param Container $container
+     *
      * @return Sample
      */
     public function setContainer(Container $container)
@@ -195,6 +197,7 @@ class Sample
 
     /**
      * @param int $row
+     *
      * @return Sample
      */
     public function setRow($row)
@@ -209,6 +212,7 @@ class Sample
 
     /**
      * @param int $column
+     *
      * @return Sample
      */
     public function setColumn($column)
@@ -223,6 +227,7 @@ class Sample
 
     /**
      * @param SampleType $type
+     *
      * @return Sample
      */
     public function setType(SampleType $type)
@@ -234,6 +239,7 @@ class Sample
 
     /**
      * @param SampleInstanceTemplate $template
+     *
      * @return Sample
      */
     public function setTemplate(SampleInstanceTemplate $template)
@@ -270,6 +276,7 @@ class Sample
 
     /**
      * @param string $state
+     *
      * @return Sample
      */
     public function setState($state)

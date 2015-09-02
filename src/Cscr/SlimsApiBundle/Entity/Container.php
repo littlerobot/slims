@@ -16,7 +16,7 @@ class Container
     const STORES_SAMPLES = 'samples';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,7 +28,6 @@ class Container
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $name;
 
@@ -50,14 +49,14 @@ class Container
     private $researchGroup;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="smallint")
      */
     private $rows;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="smallint")
      */
@@ -190,7 +189,8 @@ class Container
      * Will not add a container that is already a child of this container. There are no checks to ensure the container
      * is not already stored elsewhere.
      *
-     * @param  Container $container
+     * @param Container $container
+     *
      * @return $this
      */
     public function storeContainerInside(Container $container)
@@ -216,7 +216,8 @@ class Container
     }
 
     /**
-     * @param  string    $name
+     * @param string $name
+     *
      * @return Container
      */
     public function setName($name)
@@ -245,7 +246,8 @@ class Container
     /**
      * Specify the owner of the container.
      *
-     * @param  ResearchGroup $researchGroup The research group.
+     * @param ResearchGroup $researchGroup The research group.
+     *
      * @return $this
      */
     public function setResearchGroup(ResearchGroup $researchGroup)
@@ -264,7 +266,8 @@ class Container
     }
 
     /**
-     * @param  int       $rows
+     * @param int $rows
+     *
      * @return Container
      */
     public function setRows($rows)
@@ -283,7 +286,8 @@ class Container
     }
 
     /**
-     * @param  int       $columns
+     * @param int $columns
+     *
      * @return Container
      */
     public function setColumns($columns)
@@ -302,7 +306,8 @@ class Container
     }
 
     /**
-     * @param  string    $stores
+     * @param string $stores
+     *
      * @return Container
      */
     public function setStores($stores)
@@ -323,7 +328,8 @@ class Container
     /**
      * Specify a comment for the container.
      *
-     * @param  string $comment
+     * @param string $comment
+     *
      * @return $this
      */
     public function setComment($comment)
@@ -344,7 +350,8 @@ class Container
     /**
      * Specify the colour of the container.
      *
-     * @param  string $colour A hexadecimal colour, prefixed with #
+     * @param string $colour A hexadecimal colour, prefixed with #
+     *
      * @return $this
      */
     public function setColour($colour)

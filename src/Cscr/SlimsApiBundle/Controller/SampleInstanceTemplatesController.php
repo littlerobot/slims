@@ -12,7 +12,6 @@ use Doctrine\Common\Persistence\ObjectManager;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\View\View;
-use Symfony\Component\Form\FormTypeInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -26,6 +25,7 @@ class SampleInstanceTemplatesController extends FOSRestController
     public function getSampleInstanceTemplatesAction()
     {
         $templates = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:SampleInstanceTemplate')->findAll();
+
         return new SampleInstanceTemplateCollectionResponse($templates);
     }
 
@@ -48,7 +48,7 @@ class SampleInstanceTemplatesController extends FOSRestController
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return View
@@ -97,7 +97,7 @@ class SampleInstanceTemplatesController extends FOSRestController
      *
      * @param AbstractSampleInstanceTemplateAttribute[] $originalAttributes
      * @param AbstractSampleInstanceTemplateAttribute[] $newAttributes
-     * @param ObjectManager $manager
+     * @param ObjectManager                             $manager
      */
     private function removeDeletedAttributes(
         array $originalAttributes,

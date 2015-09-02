@@ -25,12 +25,13 @@ class SampleTypeBuilder
 
     /**
      * @param SampleTypeTemplate $sampleTypeTemplate
-     * @param string $name
+     * @param string             $name
+     *
      * @return SampleTypeBuilder
      */
     public static function buildSampleTypeBuilderWithAttributes(SampleTypeTemplate $sampleTypeTemplate, $name)
     {
-        $builder = (new SampleTypeBuilder())
+        $builder = (new self())
             ->withName($name)
             ->withTemplate($sampleTypeTemplate);
 

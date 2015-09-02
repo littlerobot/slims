@@ -33,7 +33,6 @@ class SampleTypeAttribute implements Downloadable
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $filename;
 
@@ -85,7 +84,7 @@ class SampleTypeAttribute implements Downloadable
     public function getNonBinaryValue()
     {
         if ($this->filename) {
-            return null;
+            return;
         }
 
         return $this->value;
@@ -115,6 +114,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param string $url
+     *
      * @return $this
      */
     public function setUrl($url)
@@ -134,6 +134,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param SampleTypeTemplateAttribute $template
+     *
      * @return SampleTypeAttribute
      */
     public function setTemplate(SampleTypeTemplateAttribute $template)
@@ -153,6 +154,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param string $value
+     *
      * @return SampleTypeAttribute
      */
     public function setValue($value)
@@ -164,6 +166,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param null|string $filename
+     *
      * @return SampleTypeAttribute
      */
     public function setFilename($filename)
@@ -175,6 +178,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param null|string $mimeType
+     *
      * @return SampleTypeAttribute
      */
     public function setMimeType($mimeType)
@@ -194,6 +198,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param SampleType $parent
+     *
      * @return SampleTypeAttribute
      */
     public function setParent(SampleType $parent)

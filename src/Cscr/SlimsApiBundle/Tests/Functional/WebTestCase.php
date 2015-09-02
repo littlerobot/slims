@@ -28,11 +28,11 @@ abstract class WebTestCase extends BaseWebTestCase
         $this->assertEquals(
             $statusCode,
             $response->getStatusCode(),
-            "Incorrect status code:\n" . $response->getContent()
+            "Incorrect status code:\n".$response->getContent()
         );
         $this->assertTrue(
             $response->headers->contains('Content-Type', 'application/json'),
-            "Missing 'Content-Type' header:\n" . $response->headers
+            "Missing 'Content-Type' header:\n".$response->headers
         );
         $this->assertJson($response->getContent(), 'Response is not in JSON format');
     }

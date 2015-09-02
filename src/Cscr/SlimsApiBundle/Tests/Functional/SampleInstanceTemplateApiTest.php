@@ -42,8 +42,8 @@ class SampleInstanceTemplateApiTest extends WebTestCase
             'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleInstanceTemplateApi\LoadSampleInstanceTemplateData',
         ]);
 
-        $createName = self::TEMPLATE_NAME . '-create';
-        $updateName = self::TEMPLATE_NAME . '-update';
+        $createName = self::TEMPLATE_NAME.'-create';
+        $updateName = self::TEMPLATE_NAME.'-update';
         $updateBuilder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes($updateName)
             ->shuffleAttributes();
         $updateContent = SampleInstanceTemplateRenderer::renderAsJson($updateBuilder->build());
@@ -64,6 +64,7 @@ class SampleInstanceTemplateApiTest extends WebTestCase
 
     /**
      * @param string $name
+     *
      * @return \Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate|null
      */
     private function getTemplateByName($name)

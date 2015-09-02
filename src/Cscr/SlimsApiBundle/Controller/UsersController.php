@@ -10,7 +10,6 @@ use FOS\RestBundle\Controller\FOSRestController;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class UsersController extends FOSRestController
@@ -55,7 +54,7 @@ class UsersController extends FOSRestController
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return View

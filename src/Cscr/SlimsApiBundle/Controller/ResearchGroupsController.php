@@ -5,12 +5,10 @@ namespace Cscr\SlimsApiBundle\Controller;
 use Cscr\SlimsApiBundle\Entity\ResearchGroup;
 use Cscr\SlimsApiBundle\Form\Type\ResearchGroupType;
 use Cscr\SlimsApiBundle\Response\ResearchGroupCollectionResponse;
-use Cscr\SlimsApiBundle\Response\ResearchGroupResponse;
 use FOS\RestBundle\Controller\Annotations as Rest;
 use FOS\RestBundle\View\View;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ResearchGroupsController extends Controller
@@ -45,7 +43,7 @@ class ResearchGroupsController extends Controller
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return View

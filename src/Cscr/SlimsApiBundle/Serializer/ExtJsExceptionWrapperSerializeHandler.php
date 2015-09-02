@@ -11,16 +11,17 @@ class ExtJsExceptionWrapperSerializeHandler extends ExceptionWrapperSerializeHan
     /**
      * Adds 'success': false element.
      *
-     * @param  ExceptionWrapper $exceptionWrapper
+     * @param ExceptionWrapper $exceptionWrapper
+     *
      * @return array
      */
     protected function convertToArray(ExceptionWrapper $exceptionWrapper)
     {
         return array(
             'success' => false,
-            'code'    => $exceptionWrapper->getCode(),
+            'code' => $exceptionWrapper->getCode(),
             'message' => $exceptionWrapper->getMessage(),
-            'errors'  => $exceptionWrapper->getErrors(),
+            'errors' => $exceptionWrapper->getErrors(),
         );
     }
 }
