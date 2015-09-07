@@ -84,8 +84,8 @@ class SampleTest extends \PHPUnit_Framework_TestCase
         $sample = (new Sample())
             ->setPosition('1:2');
 
-        $parent->storeContainerInside($child);
-        $child->addSample($sample);
+        $child->addSample($sample)
+              ->setParent($parent);
 
         $this->assertEquals('Parent > Child [12]', $sample->getHierarchy());
     }

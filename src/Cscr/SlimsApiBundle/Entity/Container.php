@@ -184,24 +184,28 @@ class Container
     }
 
     /**
-     * Store a child container inside this one.
+     * Set the parent container for this one.
      *
-     * Will not add a container that is already a child of this container. There are no checks to ensure the container
+     * Creates the two-way association between the two containers.
+     *
+     * Will not add a container that is already a parent of this one. There are no checks to ensure the container
      * is not already stored elsewhere.
      *
-     * @param Container $container
+     * @param Container $parent
      *
      * @return $this
      */
-    public function storeContainerInside(Container $container)
+    public function setParent(Container $parent)
     {
-        if ($this->isLeaf()) {
-            throw new \LogicException('A container cannot store other containers if it is configured to store samples.');
+        if ($parent->isLeaf()) {
+            throw new \LogicException(
+                'A container cannot store other containers if it is configured to store samples.'
+            );
         }
 
-        if (!$this->children->contains($container)) {
-            $this->children->add($container);
-            $container->parent = $this;
+        if (!$parent->children->contains($this)) {
+            $parent->children->add($this);
+            $this->parent = $parent;
         }
 
         return $this;
