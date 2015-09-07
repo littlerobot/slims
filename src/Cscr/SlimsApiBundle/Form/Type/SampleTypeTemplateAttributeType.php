@@ -5,7 +5,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 use Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SampleTypeTemplateAttributeType extends AbstractType
 {
@@ -14,22 +14,31 @@ class SampleTypeTemplateAttributeType extends AbstractType
         $builder
             ->add('order', 'integer')
             ->add('label')
-            ->add('type', 'choice', [
-                'choices' => $this->getChoices(),
-            ])
-            ->add('options', 'collection', [
-                'type' => 'text',
-                'allow_add' => true,
-            ])
-        ;
+            ->add(
+                'type',
+                'choice',
+                [
+                    'choices' => $this->getChoices(),
+                ]
+            )
+            ->add(
+                'options',
+                'collection',
+                [
+                    'type' => 'text',
+                    'allow_add' => true,
+                ]
+            );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
+                'csrf_protection' => false,
+            ]
+        );
     }
 
     /**
@@ -42,6 +51,9 @@ class SampleTypeTemplateAttributeType extends AbstractType
 
     private function getChoices()
     {
-        return array_combine(SampleTypeTemplateAttribute::getValidChoices(), SampleTypeTemplateAttribute::getValidChoices());
+        return array_combine(
+            SampleTypeTemplateAttribute::getValidChoices(),
+            SampleTypeTemplateAttribute::getValidChoices()
+        );
     }
 }

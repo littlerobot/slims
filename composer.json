@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=5.3.3",
-        "symfony/symfony": "2.6.*",
+        "symfony/symfony": "2.7.*",
         "doctrine/orm": "~2.2,>=2.2.3",
         "doctrine/doctrine-bundle": "~1.2",
         "twig/extensions": "~1.0",
@@ -20,11 +20,12 @@
         "incenteev/composer-parameter-handler": "~2.0",
         "misd/raven-bundle": "^1.1",
         "friendsofsymfony/rest-bundle": "^1.7",
-        "doctrine/migrations": "^1.0@RC",
+        "doctrine/migrations": "^1.0",
         "doctrine/doctrine-migrations-bundle": "^1.0",
         "beberlei/assert": "^2.3",
         "symfony/icu": "1.0.*",
-        "jms/serializer-bundle": "~0.13.0"
+        "jms/serializer-bundle": "~0.13.0",
+        "doctrine/doctrine-fixtures-bundle": "^2.2"
     },
     "require-dev": {
         "sensio/generator-bundle": "~2.3",

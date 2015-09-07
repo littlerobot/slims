@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
@@ -16,23 +16,28 @@ class UserType extends AbstractType
         $builder
             ->add('name', 'text')
             ->add('username', 'text')
-            ->add('research_group', 'entity', [
-                'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
-                'property' => 'id',
-            ])
-            ->add('is_active', 'checkbox')
-        ;
+            ->add(
+                'research_group',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+                    'choice_label' => 'id',
+                ]
+            )
+            ->add('is_active', 'checkbox');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults(array(
-            'data_class' => 'Cscr\SlimsUserBundle\Entity\User',
-            'csrf_protection' => false,
-        ));
+        $resolver->setDefaults(
+            array(
+                'data_class' => 'Cscr\SlimsUserBundle\Entity\User',
+                'csrf_protection' => false,
+            )
+        );
     }
 
     /**
