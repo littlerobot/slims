@@ -216,6 +216,28 @@ class Container
     }
 
     /**
+     * Calculates the parent hierarchy of the current container.
+     *
+     * Only traverses up the hierarchy - child containers will NOT be included.
+     *
+     * @return array
+     */
+    public function getContainerHierarchy()
+    {
+        $containers = [];
+
+        $container = $this;
+        $containers[] = $container;
+
+        while ($container = $container->getParent()) {
+            $containers[] = $container;
+        }
+
+        // The containers will be in reverse order as we traverse backwards. Fix that.
+        return array_reverse($containers);
+    }
+
+    /**
      * @param string $name
      *
      * @return Container

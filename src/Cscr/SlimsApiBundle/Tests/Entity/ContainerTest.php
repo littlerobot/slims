@@ -117,4 +117,19 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $sampleContainer->storeContainerInside($anotherContainer);
     }
+
+    public function testGetContainerHierarchy()
+    {
+        $parent = (new ContainerBuilder())
+            ->withName('Parent')
+            ->build();
+
+        $child = (new ContainerBuilder())
+            ->withName('Child')
+            ->build();
+
+        $parent->storeContainerInside($child);
+
+        $this->assertEquals([$parent, $child], $child->getContainerHierarchy());
+    }
 }

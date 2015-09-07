@@ -301,4 +301,41 @@ class Sample
     {
         return $this->position;
     }
+
+    /**
+     *
+     */
+    public function getIndex()
+    {
+        if (!$this->getContainer()) {
+            throw new \LogicException('Cannot calculate the position of a sample that is not in a container.');
+        }
+
+        return ($this->container->getColumns() * $this->getRow()) + $this->getColumn() + 1;
+    }
+
+    /**
+     * Returns a text respresentation of the sample hierarchy.
+     *
+     * E.g. Parent container > Child container [1], where [1] is the position of the sample.
+     *
+     * @return string
+     */
+    public function getHierarchy()
+    {
+        $container = $this->getContainer();
+
+        $hierarchy = implode(
+            ' > ',
+            array_map(
+                function (Container $container) {
+                    return $container->getName();
+                },
+                $container->getContainerHierarchy()
+            )
+        );
+
+        return sprintf('%s [%d]', $hierarchy, $this->getIndex());
+    }
+
 }

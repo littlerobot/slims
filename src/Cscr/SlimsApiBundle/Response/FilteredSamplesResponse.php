@@ -38,7 +38,7 @@ class FilteredSamplesResponse
             $sampleInstanceTemplate = $sample->getTemplate();
             $result = [
                 'container' => $container->getId(),
-                'container_name' => $container->getName(),
+                'container_name' => $sample->getHierarchy(),
                 'row' => $sample->getRow(),
                 'column' => $sample->getColumn(),
                 'colour' => $sample->getColour(),
