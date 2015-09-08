@@ -224,4 +224,12 @@ class SampleTypeAttribute implements Downloadable
     {
         return SampleTypeTemplateAttribute::TYPE_DOCUMENT === $this->template->getType();
     }
+
+    /**
+     * @return null|string
+     */
+    public function getUrl()
+    {
+        return $this->url;
+    }
 }

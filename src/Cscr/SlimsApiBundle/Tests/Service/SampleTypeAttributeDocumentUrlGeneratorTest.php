@@ -6,7 +6,7 @@ use Cscr\SlimsApiBundle\Entity\SampleTypeAttribute;
 use Cscr\SlimsApiBundle\Service\SampleTypeAttributeDocumentUrlGenerator;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
-class SampleTypeTemplateDocumentUrlGeneratorTest extends \PHPUnit_Framework_TestCase
+class SampleTypeAttributeDocumentUrlGeneratorTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Router|\PHPUnit_Framework_MockObject_MockObject */
     private $router;

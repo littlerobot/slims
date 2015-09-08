@@ -5,9 +5,9 @@ namespace Cscr\SlimsApiBundle\Service;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Generates a URL that can be used to download a document associated with a {@see SampleTypeAttri}.
+ * Generates a URL that can be used to download a document associated with a {@see SampleInstanceAttribute}.
  */
-class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGeneratorInterface
+class SampleInstanceAttributeDocumentUrlGenerator implements DownloadableEntityUrlGeneratorInterface
 {
     /**
      * @var Router
@@ -31,10 +31,13 @@ class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGe
             throw new \InvalidArgumentException('Attribute must have a filename.');
         }
 
-        return $this->router->generate('sample_type_attribute_download', [
-            'id' => $id,
-            'filename' => $filename,
-        ]);
+        return $this->router->generate(
+            'sample_instance_attribute_download',
+            [
+                'id' => $id,
+                'filename' => $filename,
+            ]
+        );
     }
 
     /**
@@ -42,6 +45,6 @@ class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGe
      */
     public function canGenerateFor($namespace)
     {
-        return 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute' === $namespace;
+        return 'Cscr\SlimsApiBundle\Entity\SampleInstanceAttribute' === $namespace;
     }
 }

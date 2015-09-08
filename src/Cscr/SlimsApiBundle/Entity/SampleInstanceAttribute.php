@@ -9,7 +9,7 @@ use JMS\Serializer\Annotation as JMS;
  * @ORM\Table(name="sample_instance_attribute")
  * @ORM\Entity()
  */
-class SampleInstanceAttribute
+class SampleInstanceAttribute implements Downloadable
 {
     /**
      * @var int
@@ -179,5 +179,30 @@ class SampleInstanceAttribute
         }
 
         return $this->value;
+    }
+
+    public function getBinaryContent()
+    {
+        if (!$this->getFilename()) {
+            throw new \RuntimeException('Cannot get file content for non-file attributes.');
+        }
+
+        return base64_decode($this->value);
+    }
+
+    /**
+     * @param string $url
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

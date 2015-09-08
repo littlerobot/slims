@@ -14,6 +14,11 @@
             <argument type="service" id="router"/>
             <tag name="slims.downloadable_entity_url_generator"/>
         </service>
+        <service id="slims.sample_instance_attribute.url.generator"
+                 class="Cscr\SlimsApiBundle\Service\SampleInstanceAttributeDocumentUrlGenerator">
+            <argument type="service" id="router"/>
+            <tag name="slims.downloadable_entity_url_generator"/>
+        </service>
         <service id="slims.downloadable_entity_url_populater"
                  class="Cscr\SlimsApiBundle\EventListener\DownloadableEntityUrlPopulater">
             <argument type="service" id="slims.downloadable_entity_url_generator_registry"/>

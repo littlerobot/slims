@@ -57,7 +57,7 @@ class FilteredSamplesResponse
                     'label' => $sampleInstanceTemplateStoredAttribute->getLabel(),
                     'type' => $sampleInstanceTemplateStoredAttribute->getType(),
                     'value' => $instanceAttribute->getNonBinaryValue(),
-                    // TODO: Output document data.
+                    'url' => $instanceAttribute->getUrl(),
                 ];
             }
 
@@ -68,7 +68,7 @@ class FilteredSamplesResponse
                     'label' => $sampleTypeTemplateAttribute->getLabel(),
                     'type' => $sampleTypeTemplateAttribute->getType(),
                     'value' => $typeAttribute->getNonBinaryValue(),
-                    // TODO: Output document data.
+                    'url' => $typeAttribute->getUrl(),
                 ];
             }
 
