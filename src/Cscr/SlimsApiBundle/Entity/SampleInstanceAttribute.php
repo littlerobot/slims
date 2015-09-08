@@ -192,10 +192,14 @@ class SampleInstanceAttribute implements Downloadable
 
     /**
      * @param string $url
+     *
+     * @return $this
      */
     public function setUrl($url)
     {
         $this->url = $url;
+
+        return $this;
     }
 
     /**
