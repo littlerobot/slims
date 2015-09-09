@@ -5,22 +5,14 @@ namespace Cscr\SlimsApiBundle\Tests\Entity;
 use Cscr\SlimsApiBundle\Entity\Container;
 use Cscr\SlimsApiBundle\Entity\Sample;
 use Cscr\SlimsApiBundle\Tests\Builder\ContainerBuilder;
+use Cscr\SlimsApiBundle\ValueObject\SamplePosition;
 
 class SampleTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * @expectedException \RuntimeException
-     */
-    public function testAPositionMustIncludeAColon()
-    {
-        $sample = new Sample();
-        $sample->setPosition('11');
-    }
-
     public function testRowAndColumnIsSetFromPosition()
     {
         $sample = new Sample();
-        $sample->setPosition('1:2');
+        $sample->setPosition(SamplePosition::fromCoordinates('1:2'));
         $this->assertEquals(1, $sample->getRow());
         $this->assertEquals(2, $sample->getColumn());
     }
@@ -28,12 +20,12 @@ class SampleTest extends \PHPUnit_Framework_TestCase
     /**
      * @dataProvider getIndexDataProvider
      *
-     * @param int    $containerRows
-     * @param int    $containerColumns
-     * @param string $position
-     * @param int    $index
+     * @param int            $containerRows
+     * @param int            $containerColumns
+     * @param SamplePosition $position
+     * @param int            $index
      */
-    public function testGetIndex($containerRows, $containerColumns, $position, $index)
+    public function testGetIndex($containerRows, $containerColumns, SamplePosition $position, $index)
     {
         $container = new Container();
         $container
@@ -51,11 +43,11 @@ class SampleTest extends \PHPUnit_Framework_TestCase
     {
         // Container rows, container columns, position, index
         return [
-            [9, 9, '0:0', 1],
-            [9, 9, '0:1', 2],
-            [9, 9, '0:8', 9],
-            [9, 9, '1:0', 10],
-            [10, 10, '1:0', 11],
+            [9, 9, SamplePosition::fromCoordinates('0:0'), 1],
+            [9, 9, SamplePosition::fromCoordinates('0:1'), 2],
+            [9, 9, SamplePosition::fromCoordinates('0:8'), 9],
+            [9, 9, SamplePosition::fromCoordinates('1:0'), 10],
+            [10, 10, SamplePosition::fromCoordinates('1:0'), 11],
         ];
     }
 
@@ -82,7 +74,7 @@ class SampleTest extends \PHPUnit_Framework_TestCase
             ->build();
 
         $sample = (new Sample())
-            ->setPosition('1:2');
+            ->setPosition(SamplePosition::fromCoordinates('1:2'));
 
         $child->addSample($sample)
               ->setParent($parent);

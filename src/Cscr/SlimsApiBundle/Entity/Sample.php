@@ -2,6 +2,8 @@
 
 namespace Cscr\SlimsApiBundle\Entity;
 
+use Cscr\SlimsApiBundle\ValueObject\Colour;
+use Cscr\SlimsApiBundle\ValueObject\SamplePosition;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -27,7 +29,7 @@ class Sample
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", length=7, nullable=true)
      */
@@ -107,28 +109,30 @@ class Sample
         $this->attributes = new ArrayCollection();
     }
 
-    public function setPosition($position)
+    /**
+     * @param SamplePosition $position
+     *
+     * @return $this
+     */
+    public function setPosition(SamplePosition $position)
     {
-        if (false === stripos($position, ':')) {
-            throw new \RuntimeException('A sample position must include a colon, to separate the row and column.');
-        }
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        list($row, $column) = explode(':', $position);
-
-        $this->row = $row;
-        $this->column = $column;
-        $this->position = $position;
+        $this->row = $position->getRow();
+        $this->column = $position->getColumn();
+        $this->position = $position->getAsCoordinates();
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return Colour|null
      */
     public function getColour()
     {
-        return $this->colour;
+        if (!$this->colour) {
+            return null;
+        }
+
+        return Colour::fromHex($this->colour);
     }
 
     /**
@@ -172,13 +176,13 @@ class Sample
     }
 
     /**
-     * @param string $colour
+     * @param Colour|null $colour
      *
      * @return Sample
      */
-    public function setColour($colour)
+    public function setColour(Colour $colour = null)
     {
-        $this->colour = $colour;
+        $this->colour = $colour ? $colour->getAsHex() : null;
 
         return $this;
     }
@@ -191,36 +195,6 @@ class Sample
     public function setContainer(Container $container)
     {
         $this->container = $container;
-
-        return $this;
-    }
-
-    /**
-     * @param int $row
-     *
-     * @return Sample
-     */
-    public function setRow($row)
-    {
-        $this->row = $row;
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
-
-        return $this;
-    }
-
-    /**
-     * @param int $column
-     *
-     * @return Sample
-     */
-    public function setColumn($column)
-    {
-        $this->column = $column;
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
 
         return $this;
     }
@@ -295,11 +269,11 @@ class Sample
     }
 
     /**
-     * @return string
+     * @return SamplePosition
      */
     public function getPosition()
     {
-        return $this->position;
+        return SamplePosition::fromCoordinates($this->position);
     }
 
     /**
