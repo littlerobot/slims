@@ -37,7 +37,7 @@ class LoadUserData extends AbstractFixture implements FixtureInterface, OrderedF
             $user
                 ->setUsername(sprintf('test%04d', $counter))
                 ->setName($this->faker->name)
-                ->setIsActive(true)
+                ->setActive(true)
                 ->setResearchGroup($group)
             ;
             $this->manager->persist($user);

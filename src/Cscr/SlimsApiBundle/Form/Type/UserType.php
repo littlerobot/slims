@@ -24,7 +24,14 @@ class UserType extends AbstractType
                     'choice_label' => 'id',
                 ]
             )
-            ->add('is_active', 'checkbox');
+            ->add(
+                'is_active',
+                'checkbox',
+                [
+                    // Backwards compatibility with previous version of API.
+                    'property_path' => 'active',
+                ]
+            );
     }
 
     /**

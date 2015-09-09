@@ -73,7 +73,7 @@ class User implements UserInterface, \Serializable
      *
      * @return User
      */
-    public function setIsActive($active)
+    public function setActive($active)
     {
         $this->isActive = $active;
 
