@@ -33,6 +33,9 @@
                 <option name="type">bool</option>
                 <option name="message">Active state must be either "true" or "false".</option>
             </constraint>
+            <constraint name="NotBlank">
+                <option name="message">Is active status must be set.</option>
+            </constraint>
         </property>
         <property name="researchGroup">
             <constraint name="Type">
