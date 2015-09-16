@@ -61,7 +61,7 @@ class FilteredSamplesResponse
                 ];
             }
 
-            foreach ($sample->getType()->getAttributes() as $typeAttribute) {
+            foreach ($sampleType->getAttributes() as $typeAttribute) {
                 $sampleTypeTemplateAttribute = $typeAttribute->getTemplate();
                 $result['type_attributes'][] = [
                     'id' => $typeAttribute->getId(),

@@ -12,7 +12,7 @@ class SamplesController extends FOSRestController
     /**
      * @Rest\Get("")
      * @Rest\QueryParam(name="name", nullable=true)
-     * @Rest\QueryParam(name="type", nullable=true)
+     * @Rest\QueryParam(name="passage_number", nullable=true)
      * @Rest\QueryParam(name="user", nullable=true)
      * @Rest\QueryParam(name="container", nullable=true)
      * @Rest\QueryParam(name="stored_start", requirements="[0-9]{2}/[0-9]{2}/[0-9]{4}", nullable=true)
@@ -28,7 +28,7 @@ class SamplesController extends FOSRestController
             ->getRepository('CscrSlimsApiBundle:Sample')
             ->filter(
                 $paramFetcher->get('name'),
-                $paramFetcher->get('type'),
+                $paramFetcher->get('passage_number'),
                 $paramFetcher->get('user'),
                 $paramFetcher->get('container'),
                 $paramFetcher->get('stored_start'),
