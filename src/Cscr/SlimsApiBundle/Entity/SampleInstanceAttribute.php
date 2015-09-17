@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
 /**
  * @ORM\Table(name="sample_instance_attribute")
@@ -117,6 +118,11 @@ class SampleInstanceAttribute implements Downloadable
      */
     public function getValue()
     {
+        if ($this->getTemplate()->isDate() && null !== $this->value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
+            return $transformer->reverseTransform($this->value)->format('d/m/Y');
+        }
+
         return $this->value;
     }
 
@@ -127,6 +133,11 @@ class SampleInstanceAttribute implements Downloadable
      */
     public function setValue($value)
     {
+        if ($this->getTemplate()->isDate() && null !== $value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'd/m/Y');
+            $value = $transformer->reverseTransform($value)->format('Y-m-d');
+        }
+
         $this->value = $value;
 
         return $this;
@@ -178,7 +189,7 @@ class SampleInstanceAttribute implements Downloadable
             return;
         }
 
-        return $this->value;
+        return $this->getValue();
     }
 
     public function getBinaryContent()

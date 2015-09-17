@@ -218,4 +218,12 @@ abstract class AbstractSampleInstanceTemplateAttribute
             self::TYPE_USER,
         ];
     }
+
+    /**
+     * @return bool
+     */
+    public function isDate()
+    {
+        return self::TYPE_DATE === $this->getType();
+    }
 }

@@ -206,4 +206,12 @@ class SampleTypeTemplateAttribute
             self::TYPE_USER,
         ];
     }
+
+    /**
+     * @return bool
+     */
+    public function isDate()
+    {
+        return self::TYPE_DATE === $this->getType();
+    }
 }

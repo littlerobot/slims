@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Entity\Repository;
 
 use Cscr\SlimsApiBundle\Entity\Sample;
 use Doctrine\ORM\EntityRepository;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
 class SampleRepository extends EntityRepository
 {
@@ -27,17 +28,17 @@ class SampleRepository extends EntityRepository
     ) {
         $q = $this->createQueryBuilder('sample')
                   ->select(
-                      'sample, container, sample_instance_template, sample_type, sample_type_template'
+                      'sample, container, sample_instance_template, sample_type, sample_type_template, sample_attributes'
                   )
                   ->innerJoin('sample.container', 'container')
                   ->innerJoin('sample.template', 'sample_instance_template')
                   ->innerJoin('sample.type', 'sample_type')
-                  ->innerJoin('sample_type.template', 'sample_type_template');
+                  ->innerJoin('sample_type.template', 'sample_type_template')
+                  ->innerJoin('sample.attributes', 'sample_attributes');
 
         if ($name) {
             $nameLike = $this->getLikePattern($name);
             $q
-                ->addSelect('instance_attributes_name, instance_template_attribute_name')
                 ->innerJoin('sample.attributes', 'instance_attributes_name')
                 ->innerJoin('instance_attributes_name.template', 'instance_template_attribute_name')
                 ->andWhere("instance_template_attribute_name.label = 'Sample/cell line name'")
@@ -47,7 +48,6 @@ class SampleRepository extends EntityRepository
 
         if (null !== $passageNumber) {
             $q
-                ->addSelect('instance_attributes_passage_number, instance_template_passage_number')
                 ->innerJoin('sample.attributes', 'instance_attributes_passage_number')
                 ->innerJoin('instance_attributes_passage_number.template', 'instance_template_passage_number')
                 ->andWhere("instance_template_passage_number.label = 'Passage number'")
@@ -58,7 +58,6 @@ class SampleRepository extends EntityRepository
         if ($user) {
             $userLike = $this->getLikePattern($user);
             $q
-                ->addSelect('instance_attributes_user, instance_template_attribute_user')
                 ->innerJoin('sample.attributes', 'instance_attributes_user')
                 ->innerJoin('instance_attributes_user.template', 'instance_template_attribute_user')
                 ->andWhere("instance_template_attribute_user.label = 'User Name'")
@@ -67,14 +66,17 @@ class SampleRepository extends EntityRepository
         }
 
         if ($storedFrom && $storedTo) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'd/m/Y');
+            $storedFromDate = $transformer->reverseTransform($storedFrom)->format('Y-m-d');
+            $storedToDate = $transformer->reverseTransform($storedTo)->format('Y-m-d');
+
             $q
-                ->addSelect('instance_attributes_stored, instance_template_attribute_stored')
                 ->innerJoin('sample.attributes', 'instance_attributes_stored')
                 ->innerJoin('instance_attributes_stored.template', 'instance_template_attribute_stored')
                 ->andWhere("instance_template_attribute_stored.label = 'Date frozen'")
                 ->andWhere('instance_attributes_stored.value BETWEEN :storedFrom AND :storedTo')
-                ->setParameter('storedFrom', $storedFrom)
-                ->setParameter('storedTo', $storedTo);
+                ->setParameter('storedFrom', $storedFromDate)
+                ->setParameter('storedTo', $storedToDate);
         }
 
         if ($container) {
