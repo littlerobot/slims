@@ -67,10 +67,10 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
             columnsCount = this.selectedContainer.get('columns'),
             rowsCount = this.selectedContainer.get('rows');
 
-        for (var i=0;i<columnsCount;i++) {
+        for (var i = 0; i < rowsCount; i++) {
             var items = [];
 
-            for (var j=0;j<rowsCount;j++) {
+            for (var j = 0; j < columnsCount; j++) {
                 var positionId = i+':'+j,
                     sample = samples[positionId], cb, tipHtml = null;
 
