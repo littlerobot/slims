@@ -61,8 +61,6 @@ Ext.define('Slims.view.sample.search.Grid', {
             return sample;
         });
 
-        console.log(instanceColumns);
-        console.log(typeColumns);
         var columns = this.getDefaultColumns(),
             fields = columns.concat(typeColumns).concat(instanceColumns).map(function(column) { return column.dataIndex; }),
             columnModel = columns.concat({
