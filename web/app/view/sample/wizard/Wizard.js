@@ -91,7 +91,6 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                 scope: this
             }, '->', {
                 text: 'Save',
-                name: 'save',
                 handler: this.saveChanges,
                 scope: this
             }]
@@ -109,8 +108,13 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     },
 
     saveChanges: function() {
-        this.data.storeAtrributesValues = this.down('attributesform').getValues();
-        this.data.samplesColor = this.down('attributesform').down('[name=samplesColor]').getValue();
+        var attributesForm = this.down('attributesform');
+
+        if (!attributesForm.getForm().isValid())
+            return;
+
+        this.data.storeAtrributesValues = attributesForm.getValues();
+        this.data.samplesColor = attributesForm.down('[name=samplesColor]').getValue();
         this.fireEvent('save', this.data);
 
         this.close();

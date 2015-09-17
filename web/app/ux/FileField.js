@@ -5,7 +5,6 @@ Ext.define('Slims.ux.FileField', {
     buttonText: 'Select',
 
     initComponent: function() {
-
         this.on('change', this.readFile, this);
         this.callParent();
     },

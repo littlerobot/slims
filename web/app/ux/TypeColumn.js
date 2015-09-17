@@ -54,7 +54,7 @@ Ext.define('Slims.ux.TypeColumn', {
     },
 
     documentRenderer: function(value) {
-        return value ? '[' + value.name + ']' : '';
+        return value.file ? '[' + value.name + ']' : '';
     },
 
     optionRenderer: function(value) {
