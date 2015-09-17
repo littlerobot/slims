@@ -38,11 +38,11 @@ EOF;
     public function build()
     {
         return (new SampleTypeAttribute())
+            ->setTemplate($this->template)
             ->setValue($this->value)
             ->setFilename($this->filename)
             ->setMimeType($this->mimeType)
             ->setUrl($this->url)
-            ->setTemplate($this->template)
         ;
     }
 
