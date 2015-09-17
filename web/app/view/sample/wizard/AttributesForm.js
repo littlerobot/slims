@@ -1,7 +1,7 @@
 Ext.define('Slims.view.sample.wizard.AttributesForm', {
     extend: 'Ext.form.Panel',
     xtype: 'attributesform',
-    layout: 'vbox',
+    autoScroll: true,
 
     initComponent: function() {
         this.buildItems();

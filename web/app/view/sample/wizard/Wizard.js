@@ -8,6 +8,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
     width: 600,
     height: 500,
     modal: true,
+    resizable: false,
 
     requires: [
         'Ext.form.field.Checkbox',
