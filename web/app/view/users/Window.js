@@ -51,7 +51,8 @@ Ext.define('Slims.view.users.Window', {
             }, {
                 xtype: 'checkbox',
                 name: 'is_active',
-                fieldLabel: 'Is Active'
+                fieldLabel: 'Is Active',
+                inputValue: true
             }]
         }];
 
