@@ -109,6 +109,7 @@ Ext.define('Slims.view.home.container.Window', {
                 }, {
                     xtype: 'numberfield',
                     name: 'number',
+                    hidden: true,
                     disabled: this.isEditMode(),
                     fieldLabel: 'Number of containers to create',
                     labelWidth: 190,
