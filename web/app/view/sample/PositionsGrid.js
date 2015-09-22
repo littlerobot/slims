@@ -63,11 +63,19 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         this.callParent();
     },
 
+    refreshStoreAttributes: function() {
+        if (this.configureData) {
+            this.buildStoreAttributes(this.configureData);
+        }
+    },
+
     buildStoreAttributes: function(data) {
         data = data || {
             storeAttributes: [],
             storeAtrributesValues: {}
         };
+        this.configureData = data;
+
         var extraColumns = [];
         Ext.each(data.storeAttributes, function(attr) {
             extraColumns.push({
@@ -101,10 +109,10 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         // copy attributes data into each sample
         var data = storeItems.map(function(record) {
             var vals = record.data;
-            vals.sampleInstanceTemplate = data.sampleInstanceId || '';
-            vals.sampleType = data.sampleType || '';
-            vals.samplesColor = data.samplesColor || vals.samplesColor;
-            vals.attributes = attributes;
+            vals.sampleInstanceTemplate = vals.sampleInstanceTemplate || data.sampleInstanceId || '';
+            vals.sampleType = vals.sampleType || data.sampleType || '';
+            vals.samplesColor = vals.samplesColor || data.samplesColor;
+            vals.attributes = vals.attributes || attributes;
             return vals;
         });
 
