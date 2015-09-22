@@ -52,6 +52,9 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             menuDisabled: true,
             tooltip: 'Edit',
             scope: this,
+            isDisabled: function(view, rowIndex, colIndex, item, record) {
+                return !record.get('samplesColor');
+            },
             handler: function(grid, rowIndex) {
                 var rec = grid.getStore().getAt(rowIndex);
                 this.fireEvent('editrecord', rec);
