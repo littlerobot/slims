@@ -15,7 +15,7 @@ Ext.define('Slims.controller.Main', {
                 message = 'Server returned an error.';
 
             if (response.errors.children) {
-                message = '<ul>';
+                message = '';
                 var errorsList = response.errors.children;
                 for (var fname in errorsList) {
                     var errors = errorsList[fname].errors;
@@ -23,7 +23,11 @@ Ext.define('Slims.controller.Main', {
                         message += Ext.String.format('<li>{0}</li>', m);
                     });
                 }
-                message += '</ul>';
+                if (message) {
+                    message += '<ul>' + message + '</ul>';
+                } else {
+                    message = 'Server returned an error.'
+                }
             }
         } else {
             var title = 'Internal error',
