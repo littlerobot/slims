@@ -129,7 +129,7 @@ class Sample
     public function getColour()
     {
         if (!$this->colour) {
-            return null;
+            return;
         }
 
         return Colour::fromHex($this->colour);
@@ -311,5 +311,4 @@ class Sample
 
         return sprintf('%s [%d]', $hierarchy, $this->getIndex());
     }
-
 }

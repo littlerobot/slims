@@ -38,7 +38,6 @@ class SampleTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($index, $sample->getIndex());
     }
 
-
     public function getIndexDataProvider()
     {
         // Container rows, container columns, position, index

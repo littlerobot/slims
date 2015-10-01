@@ -34,6 +34,6 @@ class ColourTest extends \PHPUnit_Framework_TestCase
         $hex = '#aabbcc';
         $colour = Colour::fromHex($hex);
 
-        $this->assertEquals($hex, (string)$colour);
+        $this->assertEquals($hex, (string) $colour);
     }
 }

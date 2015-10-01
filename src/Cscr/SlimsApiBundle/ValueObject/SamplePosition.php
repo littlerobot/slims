@@ -27,8 +27,8 @@ class SamplePosition
         Assertion::range($row, 0, 99);
         Assertion::range($column, 0, 99);
 
-        $this->row = (int)$row;
-        $this->column = (int)$column;
+        $this->row = (int) $row;
+        $this->column = (int) $column;
     }
 
     /**

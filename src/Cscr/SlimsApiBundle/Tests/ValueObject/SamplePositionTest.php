@@ -60,7 +60,7 @@ class SamplePositionTest extends \PHPUnit_Framework_TestCase
     {
         $position = SamplePosition::fromRowAndColumn(1, 2);
 
-        $this->assertEquals('1:2', (string)$position);
+        $this->assertEquals('1:2', (string) $position);
     }
 
     public function testGetCoordinates()

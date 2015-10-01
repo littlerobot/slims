@@ -120,6 +120,7 @@ class SampleInstanceAttribute implements Downloadable
     {
         if ($this->getTemplate()->isDate() && null !== $this->value) {
             $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
+
             return $transformer->reverseTransform($this->value)->format('d/m/Y');
         }
 

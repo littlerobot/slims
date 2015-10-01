@@ -75,7 +75,7 @@ class StoreSampleType extends AbstractType
                     }
 
                     return $sample;
-                }
+                },
             ]
         );
     }
