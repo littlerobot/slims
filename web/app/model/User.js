@@ -8,6 +8,8 @@ Ext.define('Slims.model.User', {
         name: 'name'
     }, {
         name: 'research_group',
+        type: 'string',
+        useNull: true,
         defaultValue: null
     }, {
         name: 'is_active',

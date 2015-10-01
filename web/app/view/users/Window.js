@@ -71,6 +71,10 @@ Ext.define('Slims.view.users.Window', {
 
                 var formValues = this.down('form').getForm().getValues();
 
+                if (!formValues.research_group) {
+                    formValues.research_group = null;
+                }
+
                 if (!user) {
                     user = Ext.create('Slims.model.User', formValues);
                 } else {
