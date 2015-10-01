@@ -1,0 +1,27 @@
+name: slims
+
+type: php
+build:
+    flavor: symfony
+
+relationships:
+    database: "mysql:mysql"
+
+web:
+    document_root: "/web"
+    passthru: "/app.php"
+
+disk: 2048
+
+mounts:
+    "/app/cache": "shared:files/cache"
+    "/app/logs": "shared:files/logs"
+
+hooks:
+    build: |
+      sed 's/"%database_driver%"/"%database_driver%"\n        server_version: 5.6/g' -i app/config/config.yml
+      rm web/app_dev.php
+      app/console --env=prod assetic:dump --no-debug
+    deploy: |
+      app/console --env=prod cache:clear
+      app/console --env=prod doctrine:migrations:migrate -n
