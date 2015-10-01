@@ -42,7 +42,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="is_active", type="boolean")
      */
-    private $isActive;
+    private $isActive = false;
 
     /**
      * @var ResearchGroup
