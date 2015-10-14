@@ -171,8 +171,8 @@ Ext.define('Slims.controller.SampleTemplates', {
         if (template.getId()) {
             url = Slims.Url.getRoute('setsampleinstancetemplate', [template.getId()]);
 
-            jsonData.store  = this.prepareAttributeParams(template.get('store' ));
             jsonData.remove = this.prepareAttributeParams(template.get('remove'));
+            jsonData.store  = this.prepareAttributeParams(template.get('store'));
         } else {
             url = Slims.Url.getRoute('createsampleinstancetemplate');
         }
@@ -214,6 +214,7 @@ Ext.define('Slims.controller.SampleTemplates', {
                 delete attribute.options;
 
             delete attribute.id;
+            delete attribute.activity;
         });
         return attributes;
     },
