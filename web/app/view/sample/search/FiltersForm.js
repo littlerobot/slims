@@ -5,6 +5,7 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
     width: '100%',
     layout: 'hbox',
     bodyPadding: 5,
+    MIN_TEXT_LENGTH: 1,
 
     initComponent: function() {
         this.items = [{
@@ -21,13 +22,13 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
                 xtype: 'textfield',
                 name: 'name',
                 fieldLabel: 'Sample Name',
-                minLength: 3,
+                minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
                 name: 'user',
                 fieldLabel: 'User Name',
-                minLength: 3,
+                minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
@@ -47,15 +48,15 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             layout: 'vbox',
             items: [{
                 xtype: 'textfield',
-                name: 'type',
-                fieldLabel: 'Sample Type',
-                minLength: 3,
+                name: 'passage_number',
+                fieldLabel: 'Passage number',
+                minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
                 name: 'container',
                 fieldLabel: 'Container Name',
-                minLength: 3,
+                minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'datefield',
