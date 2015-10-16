@@ -142,7 +142,7 @@ Ext.define('Slims.view.sample.typetemplates.AttributeWindow', {
                         rowEditor.cancelEdit();
 
                         // add item to store
-                        this.down('grid').getStore().insert(0, {name: 'New option'});
+                        this.down('grid').getStore().insert(0, {name: ''});
                         rowEditor.startEdit(0, 0);
                     }
                 }]
