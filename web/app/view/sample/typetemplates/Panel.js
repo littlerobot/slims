@@ -1,12 +1,12 @@
-Ext.define('Slims.view.templates.Panel', {
+Ext.define('Slims.view.sample.typetemplates.Panel', {
     extend: 'Ext.panel.Panel',
     xtype: 'templatespage',
 
     layout: 'fit',
 
     requires: [
-        'Slims.view.templates.TemplatesGrid',
-        'Slims.view.templates.AttributesGrid'
+        'Slims.view.sample.typetemplates.TemplatesGrid',
+        'Slims.view.sample.typetemplates.AttributesGrid'
     ],
 
     initComponent: function() {

@@ -27,8 +27,8 @@ Ext.define('Slims.Application', {
         'Home',
         'ResearchGroups',
         'Users',
-        'Templates',
-        'SampleTemplates',
+        'TypeTemplates',
+        'InstanceTemplates',
         'SampleTypes',
         'Samples',
         'SamplesSearch'

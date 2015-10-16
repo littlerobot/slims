@@ -1,4 +1,4 @@
-Ext.define('Slims.controller.SampleTemplates', {
+Ext.define('Slims.controller.InstanceTemplates', {
     extend: 'Ext.app.Controller',
 
     views: [

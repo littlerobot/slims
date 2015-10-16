@@ -94,13 +94,18 @@ Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
                     data: [],
                     fields: ['name']
                 },
+                listeners: {
+                    validateedit: function(editor, context) {
+                        return !!editor.editor.getValues().name.length;
+                    },
+                    scope: this
+                },
                 columns: [{
                     text: 'Name',
                     flex: 1,
                     dataIndex: 'name',
                     editor: {
-                        xtype: 'textfield',
-                        allowBlank: false
+                        xtype: 'textfield'
                     }
                 }, {
                     xtype: 'actioncolumn',

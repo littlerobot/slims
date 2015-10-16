@@ -2419,13 +2419,13 @@ Ext.ClassManager.addNameAlternateMappings({
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Home": [],
+  "Slims.controller.InstanceTemplates": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
-  "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
   "Slims.controller.Samples": [],
   "Slims.controller.SamplesSearch": [],
-  "Slims.controller.Templates": [],
+  "Slims.controller.TypeTemplates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
   "Slims.model.Container": [],
@@ -2477,16 +2477,16 @@ Ext.ClassManager.addNameAlternateMappings({
   "Slims.view.sample.types.Grid": [],
   "Slims.view.sample.types.Panel": [],
   "Slims.view.sample.types.Window": [],
+  "Slims.view.sample.typetemplates.AttributeWindow": [],
+  "Slims.view.sample.typetemplates.AttributesGrid": [],
+  "Slims.view.sample.typetemplates.Panel": [],
+  "Slims.view.sample.typetemplates.TemplateWindow": [],
+  "Slims.view.sample.typetemplates.TemplatesGrid": [],
   "Slims.view.sample.wizard.AttributesForm": [],
   "Slims.view.sample.wizard.PositionsPanel": [],
   "Slims.view.sample.wizard.SampleInstancePanel": [],
   "Slims.view.sample.wizard.SampleTypePanel": [],
   "Slims.view.sample.wizard.Wizard": [],
-  "Slims.view.templates.AttributeWindow": [],
-  "Slims.view.templates.AttributesGrid": [],
-  "Slims.view.templates.Panel": [],
-  "Slims.view.templates.TemplateWindow": [],
-  "Slims.view.templates.TemplatesGrid": [],
   "Slims.view.users.Grid": [],
   "Slims.view.users.Window": []
 });
@@ -3497,13 +3497,13 @@ Ext.ClassManager.addNameAliasMappings({
   "ExtThemeNeptune.toolbar.Toolbar": [],
   "Slims.Application": [],
   "Slims.controller.Home": [],
+  "Slims.controller.InstanceTemplates": [],
   "Slims.controller.Main": [],
   "Slims.controller.ResearchGroups": [],
-  "Slims.controller.SampleTemplates": [],
   "Slims.controller.SampleTypes": [],
   "Slims.controller.Samples": [],
   "Slims.controller.SamplesSearch": [],
-  "Slims.controller.Templates": [],
+  "Slims.controller.TypeTemplates": [],
   "Slims.controller.Users": [],
   "Slims.model.Attribute": [],
   "Slims.model.Container": [],
@@ -3597,6 +3597,21 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.sample.types.Window": [
     "widget.sampletypewindow"
   ],
+  "Slims.view.sample.typetemplates.AttributeWindow": [
+    "widget.attributewindow"
+  ],
+  "Slims.view.sample.typetemplates.AttributesGrid": [
+    "widget.attributesgrid"
+  ],
+  "Slims.view.sample.typetemplates.Panel": [
+    "widget.templatespage"
+  ],
+  "Slims.view.sample.typetemplates.TemplateWindow": [
+    "widget.templatewindow"
+  ],
+  "Slims.view.sample.typetemplates.TemplatesGrid": [
+    "widget.templatesgrid"
+  ],
   "Slims.view.sample.wizard.AttributesForm": [
     "widget.attributesform"
   ],
@@ -3607,21 +3622,6 @@ Ext.ClassManager.addNameAliasMappings({
   "Slims.view.sample.wizard.SampleTypePanel": [],
   "Slims.view.sample.wizard.Wizard": [
     "widget.samplewizard"
-  ],
-  "Slims.view.templates.AttributeWindow": [
-    "widget.attributewindow"
-  ],
-  "Slims.view.templates.AttributesGrid": [
-    "widget.attributesgrid"
-  ],
-  "Slims.view.templates.Panel": [
-    "widget.templatespage"
-  ],
-  "Slims.view.templates.TemplateWindow": [
-    "widget.templatewindow"
-  ],
-  "Slims.view.templates.TemplatesGrid": [
-    "widget.templatesgrid"
   ],
   "Slims.view.users.Grid": [
     "widget.usersgrid"

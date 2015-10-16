@@ -1,4 +1,4 @@
-Ext.define('Slims.view.templates.TemplatesGrid', {
+Ext.define('Slims.view.sample.typetemplates.TemplatesGrid', {
     extend: 'Ext.grid.Panel',
     xtype: 'templatesgrid',
 

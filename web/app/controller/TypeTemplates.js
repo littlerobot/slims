@@ -1,10 +1,10 @@
-Ext.define('Slims.controller.Templates', {
+Ext.define('Slims.controller.TypeTemplates', {
     extend: 'Ext.app.Controller',
 
     views: [
-        'templates.Panel',
-        'templates.TemplateWindow',
-        'templates.AttributeWindow'
+        'sample.typetemplates.Panel',
+        'sample.typetemplates.TemplateWindow',
+        'sample.typetemplates.AttributeWindow'
     ],
 
     stores: ['Templates', 'Attributes', 'AttributeTypes'],
@@ -75,13 +75,13 @@ Ext.define('Slims.controller.Templates', {
     },
 
     openAddTemplateWindow: function() {
-        var window = Ext.create('Slims.view.templates.TemplateWindow');
+        var window = Ext.create('Slims.view.sample.typetemplates.TemplateWindow');
 
         window.show();
     },
 
     openEditTemplateWindow: function(template) {
-        var window = Ext.create('Slims.view.templates.TemplateWindow', {
+        var window = Ext.create('Slims.view.sample.typetemplates.TemplateWindow', {
             record: template
         });
 
@@ -89,7 +89,7 @@ Ext.define('Slims.controller.Templates', {
     },
 
     openAddAttributeWindow: function() {
-        var window = Ext.create('Slims.view.templates.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.typetemplates.AttributeWindow', {
             usedLabels: this.getUsedAttrLabels()
         });
 
@@ -97,7 +97,7 @@ Ext.define('Slims.controller.Templates', {
     },
 
     editAttribute: function(attribute) {
-        var window = Ext.create('Slims.view.templates.AttributeWindow', {
+        var window = Ext.create('Slims.view.sample.typetemplates.AttributeWindow', {
             attribute: attribute,
             usedLabels: this.getUsedAttrLabels()
         });
