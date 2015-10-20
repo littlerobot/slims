@@ -56,7 +56,13 @@ Ext.define('Slims.view.home.container.Window', {
                     }, {
                         boxLabel: 'Stored inside',
                         name: 'holds_other_containers',
-                        inputValue: true
+                        inputValue: true,
+                        listeners: {
+                            change: function(radio, newValue) {
+                                this.down('treepanel').setDisabled(!newValue);
+                            },
+                            scope: this
+                        }
                     }]
                 }, {
                     xtype: 'treepanel',
@@ -64,6 +70,7 @@ Ext.define('Slims.view.home.container.Window', {
                     name: 'storesInside',
                     style: 'padding-left: 20px;',
                     border: true,
+                    disabled: true,
                     height: 150,
                     width: '100%',
                     displayField: 'name',
@@ -143,7 +150,13 @@ Ext.define('Slims.view.home.container.Window', {
                 boxLabel: 'Nobody',
                 name: 'belongs_to',
                 inputValue: 'no',
-                checked: true
+                checked: true,
+                listeners: {
+                    change: function(radio, newValue) {
+                        this.down('combobox[name=research_group]').setDisabled(newValue);
+                    },
+                    scope: this
+                }
             }, {
                 xtype: 'fieldcontainer',
                 width: '100%',
@@ -156,6 +169,7 @@ Ext.define('Slims.view.home.container.Window', {
                     xtype: 'combobox',
                     name: 'research_group',
                     style: 'margin-left: 5px;',
+                    disabled: true,
                     flex: 1,
                     emptyText: 'Select research group',
                     editable: false,
@@ -340,6 +354,7 @@ Ext.define('Slims.view.home.container.Window', {
 
         var treePanel = this.down('treepanel');
         this.down('treepanel').expandPath(this.record.getPath(), 'id', '/', function() { treePanel.selModel.select(treePanel.store.getNodeById(parentId)); });
+        treePanel.setDisabled(true);
     },
 
     getParentContainerId: function() {

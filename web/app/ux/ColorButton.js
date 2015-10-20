@@ -107,5 +107,9 @@ Ext.define('Slims.ux.ColorButton', {
 
     validate: function() {
         return true;
+    },
+
+    isDirty: function() {
+        return false;
     }
 });
