@@ -4,6 +4,7 @@ Ext.define('Slims.controller.Main', {
     init: function() {
         Ext.tip.QuickTipManager.init();
         Ext.Ajax.on('requestexception', this.handleAjaxErrors, this);
+        Ext.Ajax.defaultHeaders = {Accept: 'application/json'};
 
         Ext.form.field.Date.prototype.format = 'd/m/Y';
     },
