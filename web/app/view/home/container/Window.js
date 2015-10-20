@@ -205,6 +205,7 @@ Ext.define('Slims.view.home.container.Window', {
                 name: 'rows',
                 disabled: this.isEditMode(),
                 minValue: 1,
+                maxValue: 100,
                 value: 1,
                 listeners: {
                     change: updateTotal,
@@ -222,6 +223,7 @@ Ext.define('Slims.view.home.container.Window', {
                 name: 'columns',
                 value: 1,
                 minValue: 1,
+                maxValue: 100,
                 flex: 1,
                 listeners: {
                     change: updateTotal,
