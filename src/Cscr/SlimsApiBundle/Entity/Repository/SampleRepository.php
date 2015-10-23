@@ -46,7 +46,7 @@ class SampleRepository extends EntityRepository
                 ->setParameter('name', $nameLike);
         }
 
-        if (null !== $passageNumber) {
+        if ($passageNumber) {
             $q
                 ->innerJoin('sample.attributes', 'instance_attributes_passage_number')
                 ->innerJoin('instance_attributes_passage_number.template', 'instance_template_passage_number')
