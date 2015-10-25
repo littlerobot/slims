@@ -47,7 +47,7 @@ Ext.define('Slims.view.sample.search.Grid', {
                 // prevent default renderer for document
                 if (attr.type == 'document') {
                     delete column.type;
-                    sample[id] = Ext.String.format(FILE_HTML, attr.url);
+                    sample[id] = attr.url ? Ext.String.format(FILE_HTML, attr.url) : '';
                 } else {
                     sample[id] = attr.value;
                 }
@@ -71,7 +71,7 @@ Ext.define('Slims.view.sample.search.Grid', {
                 // prevent default renderer for document
                 if (attr.type == 'document') {
                     delete column.type;
-                    sample[id] = Ext.String.format(FILE_HTML, attr.url);
+                    sample[id] = attr.url ? Ext.String.format(FILE_HTML, attr.url) : '';
                 } else {
                     sample[id] = attr.value;
                 }
