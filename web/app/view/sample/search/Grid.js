@@ -18,25 +18,41 @@ Ext.define('Slims.view.sample.search.Grid', {
         this.callParent();
     },
 
+    viewConfig: {
+        listeners: {
+            refresh: function(dataview) {
+                dataview.panel.columns[1].autoSize();
+            }
+        }
+    },
+
     showSearchResults: function(results) {
         var instanceColumns = [],
             typeColumns = [],
             attributes = {},
-            attributesColumns = [];
+            FILE_HTML = '<a href="{0}" target="_blank">Open file</a>';
 
         var data = results.map(function(sample) {
             Ext.each(sample.instance_attributes, function(attr) {
                 var lbl = attr.label.split(' ').join('');
                 var id = lbl+attr.type,
                     column = {
+                        xtype: 'typecolumn',
+                        type: attr.type,
                         dataIndex: id,
                         text: attr.label,
                         width: 150
                     };
 
-                sample[id] = attr.value;
+                // prevent default renderer for document
+                if (attr.type == 'document') {
+                    delete column.type;
+                    sample[id] = Ext.String.format(FILE_HTML, attr.url);
+                } else {
+                    sample[id] = attr.value;
+                }
+
                 if (!attributes[id]) {
-                    attributesColumns.push(column);
                     instanceColumns.push(column);
                     attributes[id] = attr.value || true;
                 }
@@ -45,14 +61,22 @@ Ext.define('Slims.view.sample.search.Grid', {
             Ext.each(sample.type_attributes, function(attr) {
                 var id = 'ta'+attr.id,
                     column = {
+                        xtype: 'typecolumn',
+                        type: attr.type,
                         dataIndex: id,
                         text: attr.label,
                         width: 150
                     };
 
-                sample[id] = attr.value;
+                // prevent default renderer for document
+                if (attr.type == 'document') {
+                    delete column.type;
+                    sample[id] = Ext.String.format(FILE_HTML, attr.url);
+                } else {
+                    sample[id] = attr.value;
+                }
+
                 if (!attributes[id]) {
-                    attributesColumns.push(column);
                     typeColumns.push(column);
                     attributes[id] = attr.value || true;
                 }

@@ -35,10 +35,10 @@ Ext.define('Slims.controller.Main', {
                 message = 'Server returned an error.';
         }
 
-        this.error(title, message);
+        this.showError(title, message);
     },
 
-    error: function(title, message) {
+    showError: function(title, message) {
         Ext.Msg.show({
             title: title,
             msg: message,

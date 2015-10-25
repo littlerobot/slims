@@ -47,6 +47,7 @@ Ext.define('Slims.view.home.container.Window', {
                     xtype: 'radiogroup',
                     disabled: this.isEditMode(),
                     name: 'holds_other_containers',
+                    width: '100%',
                     layout: 'vbox',
                     items: [{
                         boxLabel: 'Only holds other containers',
