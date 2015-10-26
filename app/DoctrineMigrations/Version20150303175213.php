@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Rename SampleTypeAttribute to SampleTypeTemplateAttribute
+ * Rename SampleTypeAttribute to SampleTypeTemplateAttribute.
  */
 class Version20150303175213 extends AbstractMigration
 {

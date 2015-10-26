@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Change container rows and columns to be smallints
+ * Change container rows and columns to be smallints.
  */
 class Version20141224082647 extends AbstractMigration
 {

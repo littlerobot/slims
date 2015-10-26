@@ -1,6 +1,6 @@
 <?php
 
-$relationships = getenv("PLATFORM_RELATIONSHIPS");
+$relationships = getenv('PLATFORM_RELATIONSHIPS');
 if (!$relationships) {
     return;
 }
@@ -12,7 +12,7 @@ foreach ($relationships['database'] as $endpoint) {
         continue;
     }
 
-    $container->setParameter('database_driver', 'pdo_' . $endpoint['scheme']);
+    $container->setParameter('database_driver', 'pdo_'.$endpoint['scheme']);
     $container->setParameter('database_host', $endpoint['host']);
     $container->setParameter('database_port', $endpoint['port']);
     $container->setParameter('database_name', $endpoint['path']);

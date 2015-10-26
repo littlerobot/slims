@@ -3,7 +3,6 @@
 namespace spec\Cscr\SlimsApiBundle\Entity;
 
 use PhpSpec\ObjectBehavior;
-use Prophecy\Argument;
 
 class SampleTypeSpec extends ObjectBehavior
 {

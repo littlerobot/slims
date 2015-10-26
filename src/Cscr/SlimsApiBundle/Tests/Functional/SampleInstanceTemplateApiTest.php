@@ -24,6 +24,7 @@ class SampleInstanceTemplateApiTest extends WebTestCase
         $template = $this->getTemplateByName(self::TEMPLATE_NAME);
         $this->assertNotNull($template, 'Template was not saved to database');
     }
+
     public function testCreateSampleInstanceTemplateWithOneOfEachAttribute()
     {
         $builder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes(self::TEMPLATE_NAME);
