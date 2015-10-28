@@ -95,10 +95,11 @@ Ext.define('Slims.view.sample.search.Grid', {
                 columns: typeColumns
             })
         }
-            columnModel = columnModel.concat({
-                text: 'Instance attributes',
-                columns: instanceColumns
-            });
+
+        columnModel = columnModel.concat({
+            text: 'Instance attributes',
+            columns: instanceColumns
+        });
 
         var store = Ext.create('Ext.data.Store', {
             fields: fields,
