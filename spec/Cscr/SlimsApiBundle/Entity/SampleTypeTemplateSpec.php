@@ -7,14 +7,14 @@ use PhpSpec\ObjectBehavior;
 
 class SampleTypeTemplateSpec extends ObjectBehavior
 {
-    function it_has_a_name()
+    public function it_has_a_name()
     {
         $name = 'Template name';
         $this->setName($name);
         $this->getName()->shouldReturn($name);
     }
 
-    function it_has_one_or_more_sample_type_template_attributes(
+    public function it_has_one_or_more_sample_type_template_attributes(
         SampleTypeTemplateAttribute $attribute1,
         SampleTypeTemplateAttribute $attribute2
     ) {
@@ -23,7 +23,7 @@ class SampleTypeTemplateSpec extends ObjectBehavior
         $this->getAttributes()->shouldHaveCount(2);
     }
 
-    function it_should_not_add_the_same_sample_type_template_attribute_more_than_once(
+    public function it_should_not_add_the_same_sample_type_template_attribute_more_than_once(
         SampleTypeTemplateAttribute $attribute
     ) {
         $this->addAttribute($attribute)

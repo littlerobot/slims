@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Create container table
+ * Create container table.
  */
 class Version20141007203911 extends AbstractMigration
 {

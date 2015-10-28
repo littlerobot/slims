@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Add colour to container
+ * Add colour to container.
  */
 class Version20141106183926 extends AbstractMigration
 {

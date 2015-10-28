@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Create research_group table
+ * Create research_group table.
  */
 class Version20141213132602 extends AbstractMigration
 {
