@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SampleTypeType extends AbstractType
 {
@@ -15,28 +15,37 @@ class SampleTypeType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('sample_type_template', 'entity', [
-                'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplate',
-                'property' => 'id',
-                'property_path' => 'template',
-            ])
-            ->add('attributes', 'collection', [
-                'type' => new SampleTypeAttributeType(),
-                'allow_add' => true,
-                'by_reference' => false,
-            ])
-        ;
+            ->add(
+                'sample_type_template',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplate',
+                    'choice_label' => 'id',
+                    'property_path' => 'template',
+                ]
+            )
+            ->add(
+                'attributes',
+                'collection',
+                [
+                    'type' => new SampleTypeAttributeType(),
+                    'allow_add' => true,
+                    'by_reference' => false,
+                ]
+            );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleType',
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleType',
+                'csrf_protection' => false,
+            ]
+        );
     }
 
     /**

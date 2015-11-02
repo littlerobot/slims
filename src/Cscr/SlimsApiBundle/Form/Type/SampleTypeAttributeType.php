@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SampleTypeAttributeType extends AbstractType
 {
@@ -14,28 +14,37 @@ class SampleTypeAttributeType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $config)
     {
         $builder
-            ->add('id', 'entity', [
-                'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
-                'property' => 'id',
-                'property_path' => 'template',
-            ])
+            ->add(
+                'id',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplateAttribute',
+                    'choice_label' => 'id',
+                    'property_path' => 'template',
+                ]
+            )
             ->add('value')
-            ->add('mime_type', 'text', [
-                'property_path' => 'mimeType',
-            ])
-            ->add('filename')
-        ;
+            ->add(
+                'mime_type',
+                'text',
+                [
+                    'property_path' => 'mimeType',
+                ]
+            )
+            ->add('filename');
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute',
-            'cscr_protection' => false,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeAttribute',
+                'cscr_protection' => false,
+            ]
+        );
     }
 
     /**

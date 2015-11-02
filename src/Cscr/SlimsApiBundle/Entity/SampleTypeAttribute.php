@@ -4,6 +4,7 @@ namespace Cscr\SlimsApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
 /**
  * @ORM\Table(name="sample_type_attribute")
@@ -33,7 +34,6 @@ class SampleTypeAttribute implements Downloadable
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $filename;
 
@@ -85,10 +85,10 @@ class SampleTypeAttribute implements Downloadable
     public function getNonBinaryValue()
     {
         if ($this->filename) {
-            return null;
+            return;
         }
 
-        return $this->value;
+        return $this->getValue();
     }
 
     /**
@@ -115,6 +115,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param string $url
+     *
      * @return $this
      */
     public function setUrl($url)
@@ -134,6 +135,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param SampleTypeTemplateAttribute $template
+     *
      * @return SampleTypeAttribute
      */
     public function setTemplate(SampleTypeTemplateAttribute $template)
@@ -148,15 +150,27 @@ class SampleTypeAttribute implements Downloadable
      */
     public function getValue()
     {
+        if ($this->getTemplate()->isDate() && null !== $this->value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
+
+            return $transformer->reverseTransform($this->value)->format('d/m/Y');
+        }
+
         return $this->value;
     }
 
     /**
      * @param string $value
+     *
      * @return SampleTypeAttribute
      */
     public function setValue($value)
     {
+        if ($this->getTemplate()->isDate() && null !== $value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'd/m/Y');
+            $value = $transformer->reverseTransform($value)->format('Y-m-d');
+        }
+
         $this->value = $value;
 
         return $this;
@@ -164,6 +178,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param null|string $filename
+     *
      * @return SampleTypeAttribute
      */
     public function setFilename($filename)
@@ -175,6 +190,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param null|string $mimeType
+     *
      * @return SampleTypeAttribute
      */
     public function setMimeType($mimeType)
@@ -194,6 +210,7 @@ class SampleTypeAttribute implements Downloadable
 
     /**
      * @param SampleType $parent
+     *
      * @return SampleTypeAttribute
      */
     public function setParent(SampleType $parent)
@@ -215,8 +232,19 @@ class SampleTypeAttribute implements Downloadable
         return $this->template->getLabel();
     }
 
+    /**
+     * @return bool
+     */
     public function isDocument()
     {
         return SampleTypeTemplateAttribute::TYPE_DOCUMENT === $this->template->getType();
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

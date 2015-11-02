@@ -8,6 +8,7 @@ class ContainerRenderer
 {
     /**
      * @param Container $container
+     *
      * @return string
      */
     public static function renderCreateAsJson(Container $container)
@@ -17,6 +18,7 @@ class ContainerRenderer
 
     /**
      * @param Container $container
+     *
      * @return string
      */
     public static function renderUpdateAsJson(Container $container)
@@ -26,6 +28,7 @@ class ContainerRenderer
 
     /**
      * @param Container $container
+     *
      * @return array
      */
     public static function renderCreateAsArray(Container $container)
@@ -42,6 +45,7 @@ class ContainerRenderer
 
     /**
      * @param Container $container
+     *
      * @return array
      */
     public static function renderUpdateAsArray(Container $container)

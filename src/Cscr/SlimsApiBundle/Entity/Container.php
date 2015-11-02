@@ -16,7 +16,7 @@ class Container
     const STORES_SAMPLES = 'samples';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -28,7 +28,6 @@ class Container
      * @var string
      *
      * @ORM\Column(type="string", length=255)
-     *
      */
     private $name;
 
@@ -50,14 +49,14 @@ class Container
     private $researchGroup;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="smallint")
      */
     private $rows;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(type="smallint")
      */
@@ -185,23 +184,28 @@ class Container
     }
 
     /**
-     * Store a child container inside this one.
+     * Set the parent container for this one.
      *
-     * Will not add a container that is already a child of this container. There are no checks to ensure the container
+     * Creates the two-way association between the two containers.
+     *
+     * Will not add a container that is already a parent of this one. There are no checks to ensure the container
      * is not already stored elsewhere.
      *
-     * @param  Container $container
+     * @param Container $parent
+     *
      * @return $this
      */
-    public function storeContainerInside(Container $container)
+    public function setParent(Container $parent)
     {
-        if ($this->isLeaf()) {
-            throw new \LogicException('A container cannot store other containers if it is configured to store samples.');
+        if ($parent->isLeaf()) {
+            throw new \LogicException(
+                'A container cannot store other containers if it is configured to store samples.'
+            );
         }
 
-        if (!$this->children->contains($container)) {
-            $this->children->add($container);
-            $container->parent = $this;
+        if (!$parent->children->contains($this)) {
+            $parent->children->add($this);
+            $this->parent = $parent;
         }
 
         return $this;
@@ -216,7 +220,30 @@ class Container
     }
 
     /**
-     * @param  string    $name
+     * Calculates the parent hierarchy of the current container.
+     *
+     * Only traverses up the hierarchy - child containers will NOT be included.
+     *
+     * @return array
+     */
+    public function getContainerHierarchy()
+    {
+        $containers = [];
+
+        $container = $this;
+        $containers[] = $container;
+
+        while ($container = $container->getParent()) {
+            $containers[] = $container;
+        }
+
+        // The containers will be in reverse order as we traverse backwards. Fix that.
+        return array_reverse($containers);
+    }
+
+    /**
+     * @param string $name
+     *
      * @return Container
      */
     public function setName($name)
@@ -245,7 +272,8 @@ class Container
     /**
      * Specify the owner of the container.
      *
-     * @param  ResearchGroup $researchGroup The research group.
+     * @param ResearchGroup $researchGroup The research group.
+     *
      * @return $this
      */
     public function setResearchGroup(ResearchGroup $researchGroup)
@@ -264,7 +292,8 @@ class Container
     }
 
     /**
-     * @param  int       $rows
+     * @param int $rows
+     *
      * @return Container
      */
     public function setRows($rows)
@@ -283,7 +312,8 @@ class Container
     }
 
     /**
-     * @param  int       $columns
+     * @param int $columns
+     *
      * @return Container
      */
     public function setColumns($columns)
@@ -302,7 +332,8 @@ class Container
     }
 
     /**
-     * @param  string    $stores
+     * @param string $stores
+     *
      * @return Container
      */
     public function setStores($stores)
@@ -323,7 +354,8 @@ class Container
     /**
      * Specify a comment for the container.
      *
-     * @param  string $comment
+     * @param string $comment
+     *
      * @return $this
      */
     public function setComment($comment)
@@ -344,7 +376,8 @@ class Container
     /**
      * Specify the colour of the container.
      *
-     * @param  string $colour A hexadecimal colour, prefixed with #
+     * @param string $colour A hexadecimal colour, prefixed with #
+     *
      * @return $this
      */
     public function setColour($colour)
@@ -378,7 +411,7 @@ class Container
     public function addSample(Sample $sample)
     {
         if (!$this->getSamples()->contains($sample)) {
-            $this->samples[$sample->getPosition()] = $sample;
+            $this->samples[$sample->getPosition()->getAsCoordinates()] = $sample;
             $sample->setContainer($this);
         }
 

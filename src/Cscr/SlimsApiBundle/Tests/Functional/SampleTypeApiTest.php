@@ -65,6 +65,7 @@ class SampleTypeApiTest extends WebTestCase
 
     /**
      * @param string $name
+     *
      * @return SampleType
      */
     private function findSampleTypeByName($name)
@@ -80,6 +81,7 @@ class SampleTypeApiTest extends WebTestCase
 
     /**
      * @param string $name
+     *
      * @return SampleTypeTemplate
      */
     private function findSampleTypeTemplate($name)

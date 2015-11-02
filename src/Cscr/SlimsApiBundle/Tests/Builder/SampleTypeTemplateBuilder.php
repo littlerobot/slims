@@ -24,11 +24,12 @@ class SampleTypeTemplateBuilder
 
     /**
      * @param string $name
+     *
      * @return SampleTypeTemplateBuilder
      */
     public static function buildBasicSampleTypeTemplateWithAttributes($name)
     {
-        $template = (new SampleTypeTemplateBuilder())
+        $template = (new self())
             ->withName($name)
             ->withAttribute(SampleTypeTemplateAttributeBuilder::aBriefTextAttribute())
             ->withAttribute(SampleTypeTemplateAttributeBuilder::aLongTextAttribute());
@@ -53,16 +54,19 @@ class SampleTypeTemplateBuilder
 
     /**
      * @param SampleTypeTemplateAttributeBuilder $builder
+     *
      * @return $this
      */
     public function withAttribute(SampleTypeTemplateAttributeBuilder $builder)
     {
         $this->attributes->add($builder);
+
         return $this;
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return SampleTypeTemplateBuilder
      */
     public function withName($name)

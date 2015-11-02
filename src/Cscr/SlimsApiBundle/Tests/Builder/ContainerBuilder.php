@@ -30,7 +30,8 @@ class ContainerBuilder
     }
 
     /**
-     * @param  string           $stores
+     * @param string $stores
+     *
      * @return ContainerBuilder
      */
     public function withStores($stores)
@@ -41,7 +42,8 @@ class ContainerBuilder
     }
 
     /**
-     * @param  int   $rows
+     * @param int $rows
+     *
      * @return ContainerBuilder
      */
     public function withRows($rows)
@@ -52,7 +54,8 @@ class ContainerBuilder
     }
 
     /**
-     * @param  int   $columns
+     * @param int $columns
+     *
      * @return ContainerBuilder
      */
     public function withColumns($columns)
@@ -63,7 +66,8 @@ class ContainerBuilder
     }
 
     /**
-     * @param  string $name
+     * @param string $name
+     *
      * @return ContainerBuilder
      */
     public function withName($name)

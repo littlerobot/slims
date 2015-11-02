@@ -16,18 +16,18 @@ class SampleTypeRepository extends EntityRepository
     public function findAll()
     {
         $q = $this
-            ->createQueryBuilder('s')
-            ->select('s, attributes, attribute_template, template')
-            ->innerJoin('s.attributes', 'attributes')
-            ->innerJoin('attributes.template', 'attribute_template')
-            ->innerJoin('s.template', 'template')
-            ->orderBy('s.name')
+            ->createQueryBuilder('t')
+            ->select('t, attributes, attribute_template, template')
+            ->leftJoin('t.attributes', 'attributes')
+            ->leftJoin('attributes.template', 'attribute_template')
+            ->leftJoin('t.template', 'template')
+            ->orderBy('t.name')
             ->getQuery();
 
         try {
             $types = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $types;

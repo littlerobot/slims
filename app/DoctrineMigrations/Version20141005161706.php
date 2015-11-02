@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Add research group column to user
+ * Add research group column to user.
  */
 class Version20141005161706 extends AbstractMigration
 {

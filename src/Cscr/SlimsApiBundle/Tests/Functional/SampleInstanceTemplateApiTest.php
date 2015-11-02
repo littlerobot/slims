@@ -24,6 +24,7 @@ class SampleInstanceTemplateApiTest extends WebTestCase
         $template = $this->getTemplateByName(self::TEMPLATE_NAME);
         $this->assertNotNull($template, 'Template was not saved to database');
     }
+
     public function testCreateSampleInstanceTemplateWithOneOfEachAttribute()
     {
         $builder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes(self::TEMPLATE_NAME);
@@ -42,8 +43,8 @@ class SampleInstanceTemplateApiTest extends WebTestCase
             'Cscr\SlimsApiBundle\DataFixtures\ORM\Tests\Functional\SampleInstanceTemplateApi\LoadSampleInstanceTemplateData',
         ]);
 
-        $createName = self::TEMPLATE_NAME . '-create';
-        $updateName = self::TEMPLATE_NAME . '-update';
+        $createName = self::TEMPLATE_NAME.'-create';
+        $updateName = self::TEMPLATE_NAME.'-update';
         $updateBuilder = SampleInstanceTemplateBuilder::buildBuilderWithAllAttributeTypes($updateName)
             ->shuffleAttributes();
         $updateContent = SampleInstanceTemplateRenderer::renderAsJson($updateBuilder->build());
@@ -64,6 +65,7 @@ class SampleInstanceTemplateApiTest extends WebTestCase
 
     /**
      * @param string $name
+     *
      * @return \Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate|null
      */
     private function getTemplateByName($name)

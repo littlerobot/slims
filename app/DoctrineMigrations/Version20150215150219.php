@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Add relationship between {@see SampleTypeAttribute} and {@see SampleType}
+ * Add relationship between {@see SampleTypeAttribute} and {@see SampleType}.
  */
 class Version20150215150219 extends AbstractMigration
 {

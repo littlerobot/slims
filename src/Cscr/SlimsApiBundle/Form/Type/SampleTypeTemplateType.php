@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SampleTypeTemplateType extends AbstractType
 {
@@ -14,24 +14,29 @@ class SampleTypeTemplateType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('name')
-            ->add('attributes', 'collection', [
-                'type' => new SampleTypeTemplateAttributeType(),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-            ])
-        ;
+                ->add(
+                    'attributes',
+                    'collection',
+                    [
+                        'type' => new SampleTypeTemplateAttributeType(),
+                        'allow_add' => true,
+                        'allow_delete' => true,
+                        'by_reference' => false,
+                    ]
+                );
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplate',
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleTypeTemplate',
+                'csrf_protection' => false,
+            ]
+        );
     }
 
     /**

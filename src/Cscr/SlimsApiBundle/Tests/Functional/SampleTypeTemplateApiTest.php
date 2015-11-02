@@ -99,6 +99,7 @@ class SampleTypeTemplateApiTest extends WebTestCase
 
     /**
      * @param string $name
+     *
      * @return SampleTypeTemplate
      */
     private function getTemplateByName($name)
@@ -114,6 +115,7 @@ class SampleTypeTemplateApiTest extends WebTestCase
 
     /**
      * @param $name
+     *
      * @return SampleTypeTemplateBuilder
      */
     private function buildBuilderWithAllAttributeTypes($name)

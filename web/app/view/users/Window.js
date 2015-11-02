@@ -51,7 +51,8 @@ Ext.define('Slims.view.users.Window', {
             }, {
                 xtype: 'checkbox',
                 name: 'is_active',
-                fieldLabel: 'Is Active'
+                fieldLabel: 'Is Active',
+                inputValue: true
             }]
         }];
 
@@ -69,6 +70,10 @@ Ext.define('Slims.view.users.Window', {
                     return;
 
                 var formValues = this.down('form').getForm().getValues();
+
+                if (!formValues.research_group) {
+                    formValues.research_group = null;
+                }
 
                 if (!user) {
                     user = Ext.create('Slims.model.User', formValues);

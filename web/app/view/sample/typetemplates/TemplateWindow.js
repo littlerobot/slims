@@ -1,4 +1,4 @@
-Ext.define('Slims.view.templates.TemplateWindow', {
+Ext.define('Slims.view.sample.typetemplates.TemplateWindow', {
     extend: 'Ext.window.Window',
     xtype: 'templatewindow',
 

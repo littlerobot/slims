@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 class ResearchGroup
 {
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -36,11 +36,13 @@ class ResearchGroup
 
     /**
      * @param string $name
+     *
      * @return ResearchGroup
      */
     public function setName($name)
     {
         $this->name = $name;
+
         return $this;
     }
 
@@ -54,11 +56,13 @@ class ResearchGroup
 
     /**
      * @param int $id
+     *
      * @return ResearchGroup
      */
     public function setId($id)
     {
         $this->id = $id;
+
         return $this;
     }
 }

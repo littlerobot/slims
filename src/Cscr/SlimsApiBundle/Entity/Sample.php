@@ -2,6 +2,8 @@
 
 namespace Cscr\SlimsApiBundle\Entity;
 
+use Cscr\SlimsApiBundle\ValueObject\Colour;
+use Cscr\SlimsApiBundle\ValueObject\SamplePosition;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
@@ -27,7 +29,7 @@ class Sample
     private $id;
 
     /**
-     * @var string
+     * @var string|null
      *
      * @ORM\Column(type="string", length=7, nullable=true)
      */
@@ -107,28 +109,30 @@ class Sample
         $this->attributes = new ArrayCollection();
     }
 
-    public function setPosition($position)
+    /**
+     * @param SamplePosition $position
+     *
+     * @return $this
+     */
+    public function setPosition(SamplePosition $position)
     {
-        if (false === stripos($position, ':')) {
-            throw new \RuntimeException('A sample position must include a colon, to separate the row and column.');
-        }
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        list($row, $column) = explode(':', $position);
-
-        $this->row = $row;
-        $this->column = $column;
-        $this->position = $position;
+        $this->row = $position->getRow();
+        $this->column = $position->getColumn();
+        $this->position = $position->getAsCoordinates();
 
         return $this;
     }
 
     /**
-     * @return string
+     * @return Colour|null
      */
     public function getColour()
     {
-        return $this->colour;
+        if (!$this->colour) {
+            return;
+        }
+
+        return Colour::fromHex($this->colour);
     }
 
     /**
@@ -172,18 +176,20 @@ class Sample
     }
 
     /**
-     * @param string $colour
+     * @param Colour|null $colour
+     *
      * @return Sample
      */
-    public function setColour($colour)
+    public function setColour(Colour $colour = null)
     {
-        $this->colour = $colour;
+        $this->colour = $colour ? $colour->getAsHex() : null;
 
         return $this;
     }
 
     /**
      * @param Container $container
+     *
      * @return Sample
      */
     public function setContainer(Container $container)
@@ -194,35 +200,8 @@ class Sample
     }
 
     /**
-     * @param int $row
-     * @return Sample
-     */
-    public function setRow($row)
-    {
-        $this->row = $row;
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
-
-        return $this;
-    }
-
-    /**
-     * @param int $column
-     * @return Sample
-     */
-    public function setColumn($column)
-    {
-        $this->column = $column;
-
-        // FIXME: Yucky way to set values until it's decoupled from form component.
-        $this->setPosition(sprintf('%d:%d', $this->row, $this->column));
-
-        return $this;
-    }
-
-    /**
      * @param SampleType $type
+     *
      * @return Sample
      */
     public function setType(SampleType $type)
@@ -234,6 +213,7 @@ class Sample
 
     /**
      * @param SampleInstanceTemplate $template
+     *
      * @return Sample
      */
     public function setTemplate(SampleInstanceTemplate $template)
@@ -270,6 +250,7 @@ class Sample
 
     /**
      * @param string $state
+     *
      * @return Sample
      */
     public function setState($state)
@@ -288,10 +269,46 @@ class Sample
     }
 
     /**
-     * @return string
+     * @return SamplePosition
      */
     public function getPosition()
     {
-        return $this->position;
+        return SamplePosition::fromCoordinates($this->position);
+    }
+
+    /**
+     *
+     */
+    public function getIndex()
+    {
+        if (!$this->getContainer()) {
+            throw new \LogicException('Cannot calculate the position of a sample that is not in a container.');
+        }
+
+        return ($this->container->getColumns() * $this->getRow()) + $this->getColumn() + 1;
+    }
+
+    /**
+     * Returns a text respresentation of the sample hierarchy.
+     *
+     * E.g. Parent container > Child container [1], where [1] is the position of the sample.
+     *
+     * @return string
+     */
+    public function getHierarchy()
+    {
+        $container = $this->getContainer();
+
+        $hierarchy = implode(
+            ' > ',
+            array_map(
+                function (Container $container) {
+                    return $container->getName();
+                },
+                $container->getContainerHierarchy()
+            )
+        );
+
+        return sprintf('%s [%d]', $hierarchy, $this->getIndex());
     }
 }

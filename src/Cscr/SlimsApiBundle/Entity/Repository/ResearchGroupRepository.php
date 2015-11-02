@@ -23,7 +23,7 @@ class ResearchGroupRepository extends EntityRepository
         try {
             $groups = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $groups;

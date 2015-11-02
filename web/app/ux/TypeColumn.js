@@ -13,8 +13,39 @@ Ext.define('Slims.ux.TypeColumn', {
     type: 'brief-text',
     initComponent: function() {
         this.selectRendererByType();
+        this.on('afterrender', this.setTypeWidth, this);
 
         this.callParent();
+    },
+
+    setTypeWidth: function() {
+        var width = this.getWidth();
+
+        switch (this.type) {
+            case 'colour':
+                width = 120;
+                break;
+            case 'document':
+                width = 250;
+                break;
+            case 'option':
+                width = 350;
+                break;
+            case 'date':
+                width = 100;
+                break;
+            case 'user':
+                width = 120;
+                break;
+            case 'long-text':
+                width = 300;
+                break;
+            case 'brief-text':
+                width = 180;
+                break;
+        }
+
+        this.setWidth(width);
     },
 
     selectRendererByType: function() {
@@ -37,6 +68,8 @@ Ext.define('Slims.ux.TypeColumn', {
                 rendererFn = this.userRenderer;
                 break;
             case 'long-text':
+                rendererFn = this.longTextRenderer;
+                break;
             case 'brief-text':
                 rendererFn = this.simpleRenderer;
                 break;
@@ -53,8 +86,16 @@ Ext.define('Slims.ux.TypeColumn', {
         return Ext.String.format('<div style="width: 15px; height: 15px; background-color: {0}; border: 1px solid black;">&nbsp;</div>', hex);
     },
 
+    longTextRenderer: function(value, metaData) {
+        if (value.length > 40) {
+            metaData.tdAttr = 'data-qtip="' + value + '"';
+        }
+
+        return value;
+    },
+
     documentRenderer: function(value) {
-        return value ? '[' + value.name + ']' : '';
+        return value.file ? '[' + value.name + ']' : '';
     },
 
     optionRenderer: function(value) {

@@ -10,7 +10,7 @@ class OptionAllowedValidator extends ConstraintValidator
 {
     /**
      * @param SampleTypeTemplateAttribute $object
-     * @param Constraint $constraint
+     * @param Constraint                  $constraint
      */
     public function validate($object, Constraint $constraint)
     {
@@ -18,6 +18,7 @@ class OptionAllowedValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->optionMessage)
                 ->addViolation();
+
             return;
         }
 
@@ -25,6 +26,7 @@ class OptionAllowedValidator extends ConstraintValidator
             $this->context
                 ->buildViolation($constraint->nonOptionMessage)
                 ->addViolation();
+
             return;
         }
     }

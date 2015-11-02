@@ -17,16 +17,18 @@ class ContainerRepository extends EntityRepository
     {
         $q = $this
             ->createQueryBuilder('c')
-            ->select('c, children, researchGroup')
+            ->select('c, children, children_children, researchGroup')
             ->where('c.parent IS NULL')
             ->leftJoin('c.children', 'children')
+            ->leftJoin('children.children', 'children_children')
             ->leftJoin('c.researchGroup', 'researchGroup')
+            ->orderBy('c.name, children.name, children_children.name')
             ->getQuery();
 
         try {
             $containers = $q->getResult();
         } catch (NoResultException $e) {
-            return null;
+            return;
         }
 
         return $containers;
@@ -34,7 +36,9 @@ class ContainerRepository extends EntityRepository
 
     /**
      * @param int $id
+     *
      * @return Container|null
+     *
      * @throws \Doctrine\ORM\NonUniqueResultException
      */
     public function find($id)

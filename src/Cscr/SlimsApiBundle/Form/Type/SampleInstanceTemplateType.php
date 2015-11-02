@@ -4,7 +4,7 @@ namespace Cscr\SlimsApiBundle\Form\Type;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class SampleInstanceTemplateType extends AbstractType
 {
@@ -12,29 +12,38 @@ class SampleInstanceTemplateType extends AbstractType
     {
         $builder
             ->add('name')
-            ->add('store', 'collection', [
-                'type' => new SampleInstanceTemplateStoredAttributeType(),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'property_path' => 'storedAttributes',
-            ])
-            ->add('remove', 'collection', [
-                'type' => new SampleInstanceTemplateRemovedAttributeType(),
-                'allow_add' => true,
-                'allow_delete' => true,
-                'by_reference' => false,
-                'property_path' => 'removedAttributes',
-            ])
-        ;
+            ->add(
+                'store',
+                'collection',
+                [
+                    'type' => new SampleInstanceTemplateStoredAttributeType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'property_path' => 'storedAttributes',
+                ]
+            )
+            ->add(
+                'remove',
+                'collection',
+                [
+                    'type' => new SampleInstanceTemplateRemovedAttributeType(),
+                    'allow_add' => true,
+                    'allow_delete' => true,
+                    'by_reference' => false,
+                    'property_path' => 'removedAttributes',
+                ]
+            );
     }
 
-    public function setDefaultOptions(OptionsResolverInterface $resolver)
+    public function configureOptions(OptionsResolver $resolver)
     {
-        $resolver->setDefaults([
-            'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate',
-            'csrf_protection' => false,
-        ]);
+        $resolver->setDefaults(
+            [
+                'data_class' => 'Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate',
+                'csrf_protection' => false,
+            ]
+        );
     }
 
     public function getName()

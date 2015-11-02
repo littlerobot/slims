@@ -7,8 +7,9 @@ interface DownloadableEntityUrlGeneratorInterface
     /**
      * Generate a URL for the given ID and filename.
      *
-     * @param int $id
+     * @param int    $id
      * @param string $filename
+     *
      * @return string
      */
     public function generateUrl($id, $filename);
@@ -17,6 +18,7 @@ interface DownloadableEntityUrlGeneratorInterface
      * Can the generator generate a URL for the specified class?
      *
      * @param string $namespace Full namespace for the class.
+     *
      * @return bool
      */
     public function canGenerateFor($namespace);

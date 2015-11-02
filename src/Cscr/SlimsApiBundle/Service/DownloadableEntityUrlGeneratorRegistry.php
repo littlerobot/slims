@@ -25,6 +25,7 @@ class DownloadableEntityUrlGeneratorRegistry
      * If no matching generators are available, null is returned.
      *
      * @param Downloadable $object
+     *
      * @return DownloadableEntityUrlGeneratorInterface|null
      */
     public function getGeneratorFor(Downloadable $object)
@@ -37,6 +38,6 @@ class DownloadableEntityUrlGeneratorRegistry
             }
         }
 
-        return null;
+        return;
     }
 }

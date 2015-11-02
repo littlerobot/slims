@@ -15,7 +15,9 @@ class ResponseRepository
 
     /**
      * @param mixed $object
+     *
      * @return ExtJsResponse
+     *
      * @throws \InvalidArgumentException If there is no matching response type for the passed object.
      */
     public function getFor($object)

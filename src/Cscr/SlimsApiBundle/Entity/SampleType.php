@@ -58,6 +58,7 @@ class SampleType
 
     /**
      * @param string $name
+     *
      * @return $this
      */
     public function setName($name)
@@ -85,6 +86,7 @@ class SampleType
 
     /**
      * @param SampleTypeTemplate $template
+     *
      * @return SampleType
      */
     public function setTemplate(SampleTypeTemplate $template)
@@ -127,6 +129,7 @@ class SampleType
 
     /**
      * @param SampleTypeAttribute $attribute
+     *
      * @return $this
      */
     public function addAttribute(SampleTypeAttribute $attribute)
@@ -141,6 +144,7 @@ class SampleType
 
     /**
      * @param SampleTypeAttribute $attribute
+     *
      * @return $this
      */
     public function removeAttribute(SampleTypeAttribute $attribute)

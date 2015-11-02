@@ -155,6 +155,7 @@ Ext.define('Slims.controller.Home', {
                 positionId: positionId
             });
             this.getPositionsGrid().getStore().add(position);
+            this.getPositionsGrid().refreshStoreAttributes();
         } else {
             var id = this.getPositionsGrid().getStore().find('positionId', positionId);
             var record = this.getPositionsGrid().getStore().getAt(id);
@@ -243,6 +244,11 @@ Ext.define('Slims.controller.Home', {
     },
 
     editPositionSample: function(sample) {
+        if (!this.getPositionsGrid().configured) {
+            Ext.Msg.alert('Samples not configured', 'Please, configure samples before editing');
+            return;
+        }
+
         var editSampleWindow = Ext.create('Slims.view.sample.EditAttributesWindow', {
             mode: 'store',
             sample: sample

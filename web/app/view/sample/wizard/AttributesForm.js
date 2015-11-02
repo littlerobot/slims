@@ -1,7 +1,7 @@
 Ext.define('Slims.view.sample.wizard.AttributesForm', {
     extend: 'Ext.form.Panel',
     xtype: 'attributesform',
-    layout: 'vbox',
+    autoScroll: true,
 
     initComponent: function() {
         this.buildItems();
@@ -74,7 +74,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
                 generalParameters = {
                     name: 'id-'+attribute.id,
                     padding: 3,
-                    allowBlank: false,
+                    allowBlank: true,
                     anchor: '100%',
                     labelWidth: 180,
                     fieldLabel: attribute.label,

@@ -51,7 +51,8 @@ class ContainerApiTest extends WebTestCase
     }
 
     /**
-     * @param  string    $name
+     * @param string $name
+     *
      * @return Container
      */
     private function getContainerByName($name)

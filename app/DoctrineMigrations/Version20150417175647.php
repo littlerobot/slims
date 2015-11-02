@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Add state to {@see Sample}
+ * Add state to {@see Sample}.
  */
 class Version20150417175647 extends AbstractMigration
 {

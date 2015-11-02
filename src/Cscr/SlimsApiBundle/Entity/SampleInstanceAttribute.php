@@ -4,12 +4,13 @@ namespace Cscr\SlimsApiBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
+use Symfony\Component\Form\Extension\Core\DataTransformer\DateTimeToStringTransformer;
 
 /**
  * @ORM\Table(name="sample_instance_attribute")
  * @ORM\Entity()
  */
-class SampleInstanceAttribute
+class SampleInstanceAttribute implements Downloadable
 {
     /**
      * @var int
@@ -33,7 +34,6 @@ class SampleInstanceAttribute
      * @var string|null
      *
      * @ORM\Column(type="string", length=255, nullable=true)
-     *
      */
     private $filename;
 
@@ -83,6 +83,7 @@ class SampleInstanceAttribute
 
     /**
      * @param Sample $parent
+     *
      * @return SampleInstanceAttribute
      */
     public function setParent(Sample $parent)
@@ -102,6 +103,7 @@ class SampleInstanceAttribute
 
     /**
      * @param SampleInstanceTemplateStoredAttribute $template
+     *
      * @return SampleInstanceAttribute
      */
     public function setTemplate($template)
@@ -116,15 +118,27 @@ class SampleInstanceAttribute
      */
     public function getValue()
     {
+        if ($this->getTemplate()->isDate() && null !== $this->value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
+
+            return $transformer->reverseTransform($this->value)->format('d/m/Y');
+        }
+
         return $this->value;
     }
 
     /**
      * @param string $value
+     *
      * @return SampleInstanceAttribute
      */
     public function setValue($value)
     {
+        if ($this->getTemplate()->isDate() && null !== $value) {
+            $transformer = new DateTimeToStringTransformer(null, null, 'd/m/Y');
+            $value = $transformer->reverseTransform($value)->format('Y-m-d');
+        }
+
         $this->value = $value;
 
         return $this;
@@ -140,6 +154,7 @@ class SampleInstanceAttribute
 
     /**
      * @param null|string $mimeType
+     *
      * @return SampleInstanceAttribute
      */
     public function setMimeType($mimeType)
@@ -159,6 +174,7 @@ class SampleInstanceAttribute
 
     /**
      * @param null|string $filename
+     *
      * @return SampleInstanceAttribute
      */
     public function setFilename($filename)
@@ -171,9 +187,38 @@ class SampleInstanceAttribute
     public function getNonBinaryValue()
     {
         if ($this->filename) {
-            return null;
+            return;
         }
 
-        return $this->value;
+        return $this->getValue();
+    }
+
+    public function getBinaryContent()
+    {
+        if (!$this->getFilename()) {
+            throw new \RuntimeException('Cannot get file content for non-file attributes.');
+        }
+
+        return base64_decode($this->value);
+    }
+
+    /**
+     * @param string $url
+     *
+     * @return $this
+     */
+    public function setUrl($url)
+    {
+        $this->url = $url;
+
+        return $this;
+    }
+
+    /**
+     * @return null|string
+     */
+    public function getUrl()
+    {
+        return $this->url;
     }
 }

@@ -10,7 +10,7 @@ Ext.define('Slims.ux.ColorButton', {
     },
     labelWidth: 0,
     fieldLabel: '',
-    buttonText: 'Select color',
+    buttonText: 'Select colour',
 
     initComponent: function() {
         this.items = [{
@@ -107,5 +107,9 @@ Ext.define('Slims.ux.ColorButton', {
 
     validate: function() {
         return true;
+    },
+
+    isDirty: function() {
+        return false;
     }
 });

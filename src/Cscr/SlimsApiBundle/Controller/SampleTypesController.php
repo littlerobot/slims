@@ -27,13 +27,16 @@ class SampleTypesController extends FOSRestController
     public function getSampleTypesAction()
     {
         $templates = $this->getDoctrine()->getRepository('CscrSlimsApiBundle:SampleType')->findAll();
+
         return new SampleTypeCollectionResponse($templates);
     }
 
     /**
      * @Rest\Route("/{id}")
      * @Rest\View
+     *
      * @param SampleType $type
+     *
      * @return SampleTypeResponse
      */
     public function getSampleTypeAction(SampleType $type)
@@ -59,7 +62,7 @@ class SampleTypesController extends FOSRestController
     /**
      * @Rest\Post("/{id}")
      *
-     * @param int $id
+     * @param int     $id
      * @param Request $request
      *
      * @return View
@@ -79,10 +82,10 @@ class SampleTypesController extends FOSRestController
     }
 
     /**
-     * @param SampleType $type
+     * @param SampleType        $type
      * @param FormTypeInterface $formType
-     * @param Request $request
-     * @param array $originalAttributes Optional, attributes that were present in the original sample type (for updates)
+     * @param Request           $request
+     * @param array             $originalAttributes Optional, attributes that were present in the original sample type (for updates)
      *
      * @return View
      */
@@ -124,8 +127,8 @@ class SampleTypesController extends FOSRestController
      * Remove deleted {@see SampleTypeAttribute}s from the {@see ObjectManager} if they are no longer associated
      * with the {@see SampleType}.
      *
-     * @param array $originalAttributes
-     * @param SampleType $type
+     * @param array         $originalAttributes
+     * @param SampleType    $type
      * @param ObjectManager $manager
      */
     private function removeDeletedAttributes(
@@ -144,12 +147,13 @@ class SampleTypesController extends FOSRestController
      * Get the MIME type for an uploaded {@SampleTypeAttribute} which is a document.
      *
      * @param SampleTypeAttribute $attribute
+     *
      * @return string|null MIME type or null if the attribute is not a document.
      */
     private function getMimeType(SampleTypeAttribute $attribute)
     {
         if (!$attribute->isDocument()) {
-            return null;
+            return;
         }
 
         $path = tempnam(sys_get_temp_dir(), 'upload');

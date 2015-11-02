@@ -26,7 +26,16 @@ Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
 
         var rowEditor = Ext.create('Ext.grid.plugin.RowEditing', {
             clicksToMoveEditor: 1,
-            autoCancel: false
+            autoCancel: false,
+            listeners: {
+                canceledit: function(editor, context) {
+                    var attribute = context.record;
+                    if (attribute.get('name').length < 1) {
+                        context.grid.getStore().removeAt(context.rowIdx);
+                    }
+                },
+                scope: this
+            }
         });
 
         this.items = [{
@@ -85,6 +94,12 @@ Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
                     data: [],
                     fields: ['name']
                 },
+                listeners: {
+                    validateedit: function(editor, context) {
+                        return !!editor.editor.getValues().name.length;
+                    },
+                    scope: this
+                },
                 columns: [{
                     text: 'Name',
                     flex: 1,
@@ -121,10 +136,13 @@ Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
                     name: 'addOption',
                     scope: this,
                     handler: function() {
+                        if (rowEditor.editor.isVisible()) {
+                            rowEditor.editor.focus();
+                            return;
+                        }
                         rowEditor.cancelEdit();
-
                         // add item to store
-                        this.down('grid').getStore().insert(0, {name: 'New option'});
+                        this.down('grid').getStore().insert(0, {name: ''});
                         rowEditor.startEdit(0, 0);
                     }
                 }]

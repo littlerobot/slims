@@ -31,6 +31,7 @@ abstract class ExtJsResponse
      * Does the response support the object type?
      *
      * @param $object
+     *
      * @return bool
      */
     public static function supports($object)

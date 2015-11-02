@@ -6,7 +6,6 @@ use Doctrine\ORM\Mapping as ORM;
 use JMS\Serializer\Annotation as JMS;
 
 /**
- *
  * @ORM\Table("sample_instance_template_attribute")
  * @ORM\Entity()
  * @ORM\InheritanceType("SINGLE_TABLE")
@@ -31,17 +30,16 @@ abstract class AbstractSampleInstanceTemplateAttribute
     const TYPE_USER = 'user';
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     *
      */
     protected $id;
 
     /**
-     * @var integer
+     * @var int
      *
      * @ORM\Column(name="sequence", type="smallint")
      */
@@ -74,9 +72,9 @@ abstract class AbstractSampleInstanceTemplateAttribute
     protected $parent;
 
     /**
-     * Get id
+     * Get id.
      *
-     * @return integer
+     * @return int
      */
     public function getId()
     {
@@ -93,11 +91,13 @@ abstract class AbstractSampleInstanceTemplateAttribute
 
     /**
      * @param int $order
+     *
      * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setOrder($order)
     {
         $this->order = $order;
+
         return $this;
     }
 
@@ -111,11 +111,13 @@ abstract class AbstractSampleInstanceTemplateAttribute
 
     /**
      * @param string $label
+     *
      * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setLabel($label)
     {
         $this->label = $label;
+
         return $this;
     }
 
@@ -129,11 +131,13 @@ abstract class AbstractSampleInstanceTemplateAttribute
 
     /**
      * @param string $type
+     *
      * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setType($type)
     {
         $this->type = $type;
+
         return $this;
     }
 
@@ -147,6 +151,7 @@ abstract class AbstractSampleInstanceTemplateAttribute
 
     /**
      * @param string[]|null $options
+     *
      * @return AbstractSampleInstanceTemplateAttribute
      */
     public function setOptions(array $options = null)
@@ -159,6 +164,7 @@ abstract class AbstractSampleInstanceTemplateAttribute
         // Stop an empty array being set as this will make the output a bit funky.
         if (empty($options)) {
             $this->options = null;
+
             return $this;
         }
 
@@ -177,11 +183,13 @@ abstract class AbstractSampleInstanceTemplateAttribute
 
     /**
      * @param SampleInstanceTemplate $parent
+     *
      * @return SampleInstanceTemplateRemovedAttribute
      */
     public function setParent(SampleInstanceTemplate $parent)
     {
         $this->parent = $parent;
+
         return $this;
     }
 
@@ -209,5 +217,13 @@ abstract class AbstractSampleInstanceTemplateAttribute
             self::TYPE_OPTION,
             self::TYPE_USER,
         ];
+    }
+
+    /**
+     * @return bool
+     */
+    public function isDate()
+    {
+        return self::TYPE_DATE === $this->getType();
     }
 }

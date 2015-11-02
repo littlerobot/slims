@@ -4,6 +4,7 @@ Ext.define('Slims.controller.Main', {
     init: function() {
         Ext.tip.QuickTipManager.init();
         Ext.Ajax.on('requestexception', this.handleAjaxErrors, this);
+        Ext.Ajax.defaultHeaders = {Accept: 'application/json'};
 
         Ext.form.field.Date.prototype.format = 'd/m/Y';
     },
@@ -15,7 +16,7 @@ Ext.define('Slims.controller.Main', {
                 message = 'Server returned an error.';
 
             if (response.errors.children) {
-                message = '<ul>';
+                message = '';
                 var errorsList = response.errors.children;
                 for (var fname in errorsList) {
                     var errors = errorsList[fname].errors;
@@ -23,17 +24,21 @@ Ext.define('Slims.controller.Main', {
                         message += Ext.String.format('<li>{0}</li>', m);
                     });
                 }
-                message += '</ul>';
+                if (message) {
+                    message += '<ul>' + message + '</ul>';
+                } else {
+                    message = 'Server returned an error.'
+                }
             }
         } else {
             var title = 'Internal error',
                 message = 'Server returned an error.';
         }
 
-        this.error(title, message);
+        this.showError(title, message);
     },
 
-    error: function(title, message) {
+    showError: function(title, message) {
         Ext.Msg.show({
             title: title,
             msg: message,

@@ -5,7 +5,7 @@ namespace Cscr\SlimsApiBundle\Service;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 
 /**
- * Generates a URL that can be used to download a document associated with a {@see SampleType}
+ * Generates a URL that can be used to download a document associated with a {@see SampleTypeAttri}.
  */
 class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGeneratorInterface
 {
@@ -20,8 +20,9 @@ class SampleTypeAttributeDocumentUrlGenerator implements DownloadableEntityUrlGe
     }
 
     /**
-     * @param int $id
+     * @param int    $id
      * @param string $filename
+     *
      * @return string
      */
     public function generateUrl($id, $filename)

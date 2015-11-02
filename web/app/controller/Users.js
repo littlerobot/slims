@@ -57,7 +57,7 @@ Ext.define('Slims.controller.Users', {
         Ext.Ajax.request({
             url: url,
             method: 'POST',
-            params: userData,
+            jsonData: userData,
             scope: this,
             success: function() {
                 this.getUsersGrid().getStore().load();

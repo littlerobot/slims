@@ -51,8 +51,9 @@ class SampleInstanceTemplateStoredAttributeTest extends \PHPUnit_Framework_TestC
 
     /**
      * @dataProvider onlyOptionTypeAllowsOptionsToBeSpecifiedProvider
+     *
      * @param string $type
-     * @param bool $optionsAllowed
+     * @param bool   $optionsAllowed
      */
     public function testOnlyOptionTypeAllowsOptionsToBeSpecified($type, $optionsAllowed)
     {

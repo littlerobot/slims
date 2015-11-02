@@ -8,8 +8,6 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\FixtureInterface;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Faker\Factory;
-use Faker\Generator;
 
 class LoadContainerData extends AbstractFixture implements FixtureInterface, OrderedFixtureInterface
 {
@@ -32,7 +30,6 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
      */
     public function load(ObjectManager $manager)
     {
-        $this->faker = Factory::create();
         $this->manager = $manager;
 
         $this->persistRootContainerFixtures();
@@ -54,15 +51,16 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
     private function persistSecondLevelContainerFixtures()
     {
         foreach (range(1, self::NUMBER_OF_SECOND_LEVEL_CONTAINERS) as $id) {
+            $colour = rand(0, 1) ? '#a4d11c' : null;
             $container = $this->buildContainerThatStoresContainers()
-                ->setColour($this->faker->optional(0.5)->hexcolor)
+                ->setColour($colour)
             ;
             /** @var Container $parentContainer */
             $parentContainer = $this->getReference(
                 sprintf('root_container_%d', rand(1, self::NUMBER_OF_ROOT_CONTAINERS))
             );
             $this->setReference(sprintf('second_level_container_%d', $id), $container);
-            $parentContainer->storeContainerInside($container);
+            $container->setParent($parentContainer);
             $this->manager->persist($container);
         }
     }
@@ -75,16 +73,16 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
             $parentContainer = $this->getReference(
                 sprintf('second_level_container_%d', rand(1, self::NUMBER_OF_SECOND_LEVEL_CONTAINERS))
             );
-            $parentContainer->storeContainerInside($container);
+            $container->setParent($parentContainer);
             $this->manager->persist($container);
         }
     }
 
     private function buildContainerThatStoresSamples()
     {
-        $name = $this->faker->sentence(2);
-        $rows = $this->faker->numberBetween(1, 10);
-        $columns = $this->faker->numberBetween(1, 10);
+        $name = sprintf('Container %d', time());
+        $rows = rand(1, 10);
+        $columns = rand(1, 0);
         $stores = Container::STORES_SAMPLES;
         $container = new Container();
         $container
@@ -92,9 +90,7 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
             ->setRows($rows)
             ->setColumns($columns)
             ->setStores($stores)
-            ->setResearchGroup($this->getRandomResearchGroup())
-            ->setColour($this->faker->optional(0.75)->hexcolor)
-            ->setComment($this->faker->text(50));
+            ->setResearchGroup($this->getRandomResearchGroup());
 
         return $container;
     }
@@ -104,9 +100,9 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
      */
     private function buildContainerThatStoresContainers()
     {
-        $name = $this->faker->sentence(2);
-        $rows = $this->faker->numberBetween(1, 10);
-        $columns = $this->faker->numberBetween(1, 10);
+        $name = sprintf('Container %d', time());
+        $rows = rand(1, 10);
+        $columns = rand(1, 0);
         $stores = Container::STORES_CONTAINERS;
         $container = new Container();
         $container
@@ -114,9 +110,7 @@ class LoadContainerData extends AbstractFixture implements FixtureInterface, Ord
             ->setRows($rows)
             ->setColumns($columns)
             ->setStores($stores)
-            ->setResearchGroup($this->getRandomResearchGroup())
-            ->setColour($this->faker->optional(0.25)->hexcolor)
-            ->setComment($this->faker->text(50));
+            ->setResearchGroup($this->getRandomResearchGroup());
 
         return $container;
     }

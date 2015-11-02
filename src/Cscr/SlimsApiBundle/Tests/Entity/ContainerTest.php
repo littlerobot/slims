@@ -18,15 +18,14 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
         $child1 = $builder->withStores(Container::STORES_SAMPLES)
             ->withRows(10)
             ->withColumns(10)
-            ->build();
+            ->build()
+            ->setParent($parent);
 
         $child2 = $builder->withStores(Container::STORES_SAMPLES)
             ->withRows(1)
             ->withColumns(1)
-            ->build();
-
-        $parent->storeContainerInside($child1)
-            ->storeContainerInside($child2);
+            ->build()
+            ->setParent($parent);
 
         $this->assertEquals((10 * 10) + (1 * 1), $parent->getTotalSampleCapacity());
     }
@@ -58,17 +57,15 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             ->withStores(Container::STORES_SAMPLES)
             ->withRows(1)
             ->withColumns(1)
-            ->build();
+            ->build()
+            ->setParent($parent);
 
         $childB = (new ContainerBuilder())
             ->withStores(Container::STORES_SAMPLES)
             ->withRows(2)
             ->withColumns(2)
-            ->build();
-
-        $parent
-            ->storeContainerInside($childA)
-            ->storeContainerInside($childB);
+            ->build()
+            ->setParent($parent);
 
         $this->assertEquals(5, $parent->getTotalSampleCapacity());
     }
@@ -86,18 +83,16 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
             ->withRows(1)
             ->withColumns(1)
             ->build()
-            ->addSample((new SampleBuilder())->build());
+            ->addSample((new SampleBuilder())->build())
+            ->setParent($parent);
 
         $childB = (new ContainerBuilder())
             ->withStores(Container::STORES_SAMPLES)
             ->withRows(2)
             ->withColumns(2)
             ->build()
-            ->addSample((new SampleBuilder())->build());
-
-        $parent
-            ->storeContainerInside($childA)
-            ->storeContainerInside($childB);
+            ->addSample((new SampleBuilder())->build())
+            ->setParent($parent);
 
         $this->assertEquals(2, $parent->getNumberOfStoredSamples());
     }
@@ -115,6 +110,21 @@ class ContainerTest extends \PHPUnit_Framework_TestCase
 
         $anotherContainer = clone $sampleContainer;
 
-        $sampleContainer->storeContainerInside($anotherContainer);
+        $anotherContainer->setParent($sampleContainer);
+    }
+
+    public function testGetContainerHierarchy()
+    {
+        $parent = (new ContainerBuilder())
+            ->withName('Parent')
+            ->build();
+
+        $child = (new ContainerBuilder())
+            ->withName('Child')
+            ->build();
+
+        $child->setParent($parent);
+
+        $this->assertEquals([$parent, $child], $child->getContainerHierarchy());
     }
 }

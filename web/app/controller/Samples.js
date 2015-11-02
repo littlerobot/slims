@@ -43,7 +43,7 @@ Ext.define('Slims.controller.Samples', {
             return;
         }
 
-        var  storeAttributes = attributesForm.form.getValues(),
+        var storeAttributes = attributesForm.form.getValues(),
             colour = storeAttributes.samplesColor;
 
         delete storeAttributes.samplesColor;

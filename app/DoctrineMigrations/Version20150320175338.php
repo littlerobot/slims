@@ -6,7 +6,7 @@ use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 /**
- * Fix incorrectly named column in sample_type_attribute table
+ * Fix incorrectly named column in sample_type_attribute table.
  */
 class Version20150320175338 extends AbstractMigration
 {

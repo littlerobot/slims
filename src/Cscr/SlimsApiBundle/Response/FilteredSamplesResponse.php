@@ -38,7 +38,7 @@ class FilteredSamplesResponse
             $sampleInstanceTemplate = $sample->getTemplate();
             $result = [
                 'container' => $container->getId(),
-                'container_name' => $container->getName(),
+                'container_name' => $sample->getHierarchy(),
                 'row' => $sample->getRow(),
                 'column' => $sample->getColumn(),
                 'colour' => $sample->getColour(),
@@ -57,18 +57,18 @@ class FilteredSamplesResponse
                     'label' => $sampleInstanceTemplateStoredAttribute->getLabel(),
                     'type' => $sampleInstanceTemplateStoredAttribute->getType(),
                     'value' => $instanceAttribute->getNonBinaryValue(),
-                    // TODO: Output document data.
+                    'url' => $instanceAttribute->getUrl(),
                 ];
             }
 
-            foreach ($sample->getType()->getAttributes() as $typeAttribute) {
+            foreach ($sampleType->getAttributes() as $typeAttribute) {
                 $sampleTypeTemplateAttribute = $typeAttribute->getTemplate();
                 $result['type_attributes'][] = [
                     'id' => $typeAttribute->getId(),
                     'label' => $sampleTypeTemplateAttribute->getLabel(),
                     'type' => $sampleTypeTemplateAttribute->getType(),
                     'value' => $typeAttribute->getNonBinaryValue(),
-                    // TODO: Output document data.
+                    'url' => $typeAttribute->getUrl(),
                 ];
             }
 
