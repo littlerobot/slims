@@ -289,9 +289,11 @@ class Sample
     }
 
     /**
-     * Returns a text respresentation of the sample hierarchy.
+     * Returns a text representation of the sample hierarchy.
      *
-     * E.g. Parent container > Child container [1], where [1] is the position of the sample.
+     * E.g. Parent container → Child container [1], where [1] is the position of the sample.
+     *
+     * The position will be left padded to the length of the maximum position in the container.
      *
      * @return string
      */
@@ -300,7 +302,7 @@ class Sample
         $container = $this->getContainer();
 
         $hierarchy = implode(
-            ' > ',
+            ' → ',
             array_map(
                 function (Container $container) {
                     return $container->getName();
@@ -309,6 +311,10 @@ class Sample
             )
         );
 
-        return sprintf('%s [%d]', $hierarchy, $this->getIndex());
+        return sprintf(
+            '%s [%s]',
+            $hierarchy,
+            str_pad($this->getIndex(), strlen($this->getContainer()->getTotalSampleCapacity()), 0, STR_PAD_LEFT)
+        );
     }
 }
