@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "c2371a356b7dba6b8e9b1fb7b1b98d42",
-    "content-hash": "76e27e6c4b17b123dac0adec4a03db14",
+    "hash": "0491fd4a1454d3a512c6539440def675",
+    "content-hash": "054f941b656ee161c96faeb6de06b33b",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1556,43 +1556,45 @@
         },
         {
             "name": "misd/raven-bundle",
-            "version": "v1.1.0",
-            "target-dir": "Misd/RavenBundle",
+            "version": "1.2.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/misd-service-development/raven-bundle.git",
-                "reference": "af5015d8456dedbcee6c3a2e24115fbd95b0f4e9"
+                "url": "https://github.com/littlerobot/raven-bundle.git",
+                "reference": "73049ef6517091cac643babfa35f8d8cf78ca131"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/misd-service-development/raven-bundle/zipball/af5015d8456dedbcee6c3a2e24115fbd95b0f4e9",
-                "reference": "af5015d8456dedbcee6c3a2e24115fbd95b0f4e9",
+                "url": "https://api.github.com/repos/littlerobot/raven-bundle/zipball/73049ef6517091cac643babfa35f8d8cf78ca131",
+                "reference": "73049ef6517091cac643babfa35f8d8cf78ca131",
                 "shasum": ""
             },
             "require": {
                 "ext-openssl": "*",
                 "php": ">=5.3.3",
-                "symfony/framework-bundle": "~2.2",
-                "symfony/security-bundle": "~2.2"
+                "symfony/framework-bundle": "~2.7|~3.0",
+                "symfony/security-bundle": "~2.7|~3.0"
             },
             "require-dev": {
-                "symfony/browser-kit": "~2.2",
-                "symfony/form": "~2.2",
-                "symfony/process": "~2.2",
-                "symfony/yaml": "~2.2"
+                "phpunit/phpunit": "~4.0",
+                "symfony/browser-kit": "~2.7|~3.0",
+                "symfony/css-selector": "~2.7|~3.0",
+                "symfony/dependency-injection": "~2.7|~3.0",
+                "symfony/dom-crawler": "~2.7|~3.0",
+                "symfony/phpunit-bridge": "^3.0",
+                "symfony/routing": "~2.7|~3.0",
+                "symfony/yaml": "~2.7|~3.0"
             },
             "type": "symfony-bundle",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "1.1-dev"
+                    "dev-master": "1.1.x-dev"
                 }
             },
             "autoload": {
-                "psr-0": {
-                    "Misd\\RavenBundle": ""
+                "psr-4": {
+                    "Misd\\RavenBundle\\": ""
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -1605,11 +1607,15 @@
             "description": "Adds Raven authentication to your Symfony2 application",
             "homepage": "https://github.com/misd-service-development/raven-bundle",
             "keywords": [
-                "Authentication",
                 "University of Cambridge",
+                "authentication",
                 "bundle"
             ],
-            "time": "2013-03-08 16:07:07"
+            "support": {
+                "issues": "https://github.com/misd-service-development/raven-bundle/issues",
+                "source": "https://github.com/littlerobot/raven-bundle/tree/1.2.0"
+            },
+            "time": "2015-12-08 09:15:58"
         },
         {
             "name": "monolog/monolog",
