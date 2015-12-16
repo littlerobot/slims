@@ -141,7 +141,6 @@ Ext.define('Slims.view.home.container.Window', {
         return {
             xtype: 'radiogroup',
             name: 'belongs_to',
-            disabled: this.isEditMode(),
             style: 'margin-top: 10px;',
             layout: 'vbox',
             width: '100%',

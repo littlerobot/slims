@@ -110,17 +110,25 @@ Ext.define('Slims.controller.Home', {
 
     extractContainerData: function(container) {
         var allData = container.data,
+            researchGroupId = null,
             trueData = {
                 name: allData.name,
                 comment: allData.comment,
                 colour: allData.colour
             };
 
+        if (null !== allData.owner) {
+            researchGroupId = allData.research_group.hasOwnProperty("id") ? allData.research_group.id : allData.researchGroup;
+
+            Ext.apply(trueData, {
+               research_group: researchGroupId
+            });
+        }
+
         // if create mode
         if (!container.data.id) {
             Ext.apply(trueData, {
                 parent: allData.parent,
-                research_group: allData.research_group,
                 rows: allData.rows,
                 columns: allData.columns,
                 stores: allData.stores

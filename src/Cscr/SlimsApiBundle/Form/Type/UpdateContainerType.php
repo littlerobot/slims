@@ -15,6 +15,14 @@ class UpdateContainerType extends AbstractType
     {
         $builder
             ->add('name', 'text')
+            ->add(
+                'research_group',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+                    'choice_label' => 'id',
+                ]
+            )
             ->add('comment', 'text')
             ->add('colour', 'text');
     }

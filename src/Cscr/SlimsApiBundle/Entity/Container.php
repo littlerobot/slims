@@ -276,7 +276,7 @@ class Container
      *
      * @return $this
      */
-    public function setResearchGroup(ResearchGroup $researchGroup)
+    public function setResearchGroup(ResearchGroup $researchGroup = null)
     {
         $this->researchGroup = $researchGroup;
 
