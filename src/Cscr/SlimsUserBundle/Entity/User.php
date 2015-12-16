@@ -183,11 +183,11 @@ class User implements UserInterface, \Serializable
     }
 
     /**
-     * @param ResearchGroup $researchGroup
+     * @param ResearchGroup|null $researchGroup
      *
      * @return User
      */
-    public function setResearchGroup(ResearchGroup $researchGroup)
+    public function setResearchGroup(ResearchGroup $researchGroup = null)
     {
         $this->researchGroup = $researchGroup;
 
