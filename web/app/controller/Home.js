@@ -112,6 +112,7 @@ Ext.define('Slims.controller.Home', {
         var allData = container.data,
             researchGroupId = null,
             trueData = {
+                parent: allData.parent,
                 name: allData.name,
                 comment: allData.comment,
                 colour: allData.colour
@@ -128,7 +129,6 @@ Ext.define('Slims.controller.Home', {
         // if create mode
         if (!container.data.id) {
             Ext.apply(trueData, {
-                parent: allData.parent,
                 rows: allData.rows,
                 columns: allData.columns,
                 stores: allData.stores
