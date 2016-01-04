@@ -23,7 +23,7 @@ Ext.define('Slims.ux.TypeColumn', {
 
         switch (this.type) {
             case 'colour':
-                width = 120;
+                width = 35;
                 break;
             case 'document':
                 width = 250;
