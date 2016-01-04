@@ -36,6 +36,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
             $this->data[] = [
                 'id' => $template->getId(),
                 'name' => $template->getName(),
+                'editable' => $template->isEditable(),
                 'store' => $this->mapAttributes($template->getStoredAttributes()),
                 'remove' => $this->mapAttributes($template->getRemovedAttributes()),
             ];
