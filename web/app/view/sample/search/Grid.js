@@ -41,7 +41,8 @@ Ext.define('Slims.view.sample.search.Grid', {
                         type: attr.type,
                         dataIndex: id,
                         text: attr.label,
-                        width: 150
+                        width: 150,
+                        sortable: true
                     };
 
                 // prevent default renderer for document
