@@ -55,7 +55,9 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             }, {
                 xtype: 'textfield',
                 name: 'container',
-                fieldLabel: 'Container Name',
+                fieldLabel: 'Container mame',
+                emptyText: 'e.g. Dewey: Stack 01: Box 09',
+                submitEmptyText: false,
                 minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {

@@ -20,6 +20,7 @@ class UpdateContainerType extends AbstractType
                 [
                     'class' => 'Cscr\SlimsApiBundle\Entity\Container',
                     'choice_label' => 'id',
+                    'by_reference' => true,
                 ]
             )
             ->add('name', 'text')
