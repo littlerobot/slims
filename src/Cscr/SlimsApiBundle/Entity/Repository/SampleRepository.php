@@ -82,7 +82,7 @@ class SampleRepository extends EntityRepository
         if ($container) {
             $containerLike = $this->getLikePattern($container);
             $q
-                ->andWhere('container.name LIKE :container')
+                ->andWhere('container.hierarchy LIKE :container')
                 ->setParameter('container', $containerLike);
         }
 

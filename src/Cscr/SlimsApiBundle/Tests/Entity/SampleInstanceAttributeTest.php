@@ -19,6 +19,6 @@ class SampleInstanceAttributeTest extends \PHPUnit_Framework_TestCase
             ->setTemplate($template)
             ->setValue($date);
 
-        $this->assertEquals($date, $attribute->getValue());
+        $this->assertEquals('1982-08-22', $attribute->getValue());
     }
 }

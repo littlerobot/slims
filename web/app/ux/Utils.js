@@ -4,6 +4,8 @@ Ext.define('Slims.ux.Utils', {
     singleton: true,
 
     getFieldByType: function(type, config) {
+        var field;
+
         switch (type) {
             case 'option':
                 field = Ext.create('Ext.form.field.ComboBox', Ext.apply(config, {
@@ -19,7 +21,7 @@ Ext.define('Slims.ux.Utils', {
                 }));
                 break;
             case 'date':
-                field = Ext.create('Ext.form.field.Date', config)
+                field = Ext.create('Ext.form.field.Date', config);
                 break;
             case 'colour':
                 field = Ext.create('Slims.ux.ColorButton', config);
@@ -31,7 +33,7 @@ Ext.define('Slims.ux.Utils', {
                 field = Ext.create('Ext.form.field.Text', config);
                 break;
         }
-        return field;
 
+        return field;
     }
 });

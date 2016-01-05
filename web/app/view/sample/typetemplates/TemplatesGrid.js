@@ -32,8 +32,7 @@ Ext.define('Slims.view.sample.typetemplates.TemplatesGrid', {
                 icon: '/resources/images/edit.png',
                 tooltip: 'Edit name',
                 isDisabled: function(view, col, row, item, record) {
-                    var isDisabled = !record.get('editable');
-                    return isDisabled;
+                    return !record.get('editable');
                 },
                 scope: this,
                 handler: function(grid, rowIndex, colIndex) {

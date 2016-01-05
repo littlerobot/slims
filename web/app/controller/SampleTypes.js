@@ -58,7 +58,7 @@ Ext.define('Slims.controller.SampleTypes', {
     },
 
     saveSampleType: function(sampleType, wnd) {
-        this.getTab().setLoading('Saving. Please, wait...');
+        this.getTab().setLoading('Saving. Please wait.');
 
         var url;
         if (sampleType.getId()) {
@@ -68,7 +68,7 @@ Ext.define('Slims.controller.SampleTypes', {
         }
 
         if (wnd) {
-            wnd.setLoading(true);
+            wnd.setLoading('Saving. Please wait.');
         }
         var jsonData = {
             name: sampleType.get('name'),

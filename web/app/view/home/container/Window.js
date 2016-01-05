@@ -45,15 +45,13 @@ Ext.define('Slims.view.home.container.Window', {
                     fieldLabel: 'Name'
                 }, {
                     xtype: 'radiogroup',
-                    disabled: this.isEditMode(),
                     name: 'holds_other_containers',
                     width: '100%',
                     layout: 'vbox',
                     items: [{
                         boxLabel: 'Only holds other containers',
                         name: 'holds_other_containers',
-                        inputValue: false,
-                        checked: true
+                        inputValue: false
                     }, {
                         boxLabel: 'Stored inside',
                         name: 'holds_other_containers',
@@ -67,11 +65,9 @@ Ext.define('Slims.view.home.container.Window', {
                     }]
                 }, {
                     xtype: 'treepanel',
-                    disabled: this.isEditMode(),
                     name: 'storesInside',
                     style: 'padding-left: 20px;',
                     border: true,
-                    disabled: true,
                     height: 150,
                     width: '100%',
                     displayField: 'name',
@@ -141,7 +137,6 @@ Ext.define('Slims.view.home.container.Window', {
         return {
             xtype: 'radiogroup',
             name: 'belongs_to',
-            disabled: this.isEditMode(),
             style: 'margin-top: 10px;',
             layout: 'vbox',
             width: '100%',
@@ -289,7 +284,7 @@ Ext.define('Slims.view.home.container.Window', {
         if (this.down('radiogroup[name=belongs_to]').getValue().belongs_to == 'group') {
             var research_group = this.down('combobox[name=research_group]').getValue();
             if (!research_group) {
-                Ext.Msg.alert('Select research group', 'Please, select research group before saving.');
+                Ext.Msg.alert('Select research group', 'Please select a research group before saving.');
                 return;
             }
         }
@@ -350,14 +345,12 @@ Ext.define('Slims.view.home.container.Window', {
     },
 
     setParentContainer: function(parentId) {
-        if (!parentId)
-            return;
+        var holdsOtherContainers = parentId !== 'root';
 
-        this.down('radiogroup[name=holds_other_containers]').setValue({holds_other_containers: true});
+        this.down('radiogroup[name=holds_other_containers]').setValue({holds_other_containers: holdsOtherContainers});
 
         var treePanel = this.down('treepanel');
         this.down('treepanel').expandPath(this.record.getPath(), 'id', '/', function() { treePanel.selModel.select(treePanel.store.getNodeById(parentId)); });
-        treePanel.setDisabled(true);
     },
 
     getParentContainerId: function() {
@@ -366,7 +359,7 @@ Ext.define('Slims.view.home.container.Window', {
 
         var container = this.down('treepanel').selModel.selected.get(0);
         if (!container) {
-            Ext.Msg.alert('Select parent container', 'Parent container for "Stored Inside" field not selected.');
+            Ext.Msg.alert('Select parent container', 'The parent container for "Stored Inside" field must be selected.');
             return false;
         }
 

@@ -4,7 +4,6 @@ namespace Cscr\SlimsApiBundle\Response;
 
 use Cscr\SlimsApiBundle\Entity\AbstractSampleInstanceTemplateAttribute;
 use Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Selectable;
 use JMS\Serializer\Annotation as JMS;
 
@@ -18,7 +17,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
     protected $data;
 
     /**
-     * @param ArrayCollection|SampleInstanceTemplate[] $templates
+     * @param SampleInstanceTemplate[] $templates
      */
     public function __construct(array $templates)
     {
@@ -28,7 +27,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
     }
 
     /**
-     * @param array|SampleInstanceTemplate[] $templates
+     * @param SampleInstanceTemplate[] $templates
      */
     private function map(array $templates)
     {
@@ -36,6 +35,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
             $this->data[] = [
                 'id' => $template->getId(),
                 'name' => $template->getName(),
+                'editable' => $template->isEditable(),
                 'store' => $this->mapAttributes($template->getStoredAttributes()),
                 'remove' => $this->mapAttributes($template->getRemovedAttributes()),
             ];

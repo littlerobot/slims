@@ -5,13 +5,8 @@ namespace Cscr\SlimsApiBundle\Response;
 use Cscr\SlimsApiBundle\Entity\Sample;
 use JMS\Serializer\Annotation as JMS;
 
-class FilteredSamplesResponse
+class FilteredSamplesResponse extends ExtJsResponse
 {
-    /**
-     * @var bool
-     */
-    protected $success = false;
-
     /**
      * @var mixed
      *
@@ -19,17 +14,15 @@ class FilteredSamplesResponse
      */
     protected $data;
 
-    public function __construct(array $results)
+    public function __construct(array $data)
     {
-        if (!empty($results)) {
-            $this->success = true;
-
-            $this->map($results);
-        }
+        parent::__construct($this->map($data));
     }
 
     private function map(array $results)
     {
+        $data = [];
+
         /** @var Sample $sample */
         foreach ($results as $sample) {
             $container = $sample->getContainer();
@@ -72,7 +65,9 @@ class FilteredSamplesResponse
                 ];
             }
 
-            $this->data[] = $result;
+            $data[] = $result;
         }
+
+        return $data;
     }
 }

@@ -14,7 +14,24 @@ class UpdateContainerType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
+            ->add(
+                'parent',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\Container',
+                    'choice_label' => 'id',
+                    'by_reference' => true,
+                ]
+            )
             ->add('name', 'text')
+            ->add(
+                'research_group',
+                'entity',
+                [
+                    'class' => 'Cscr\SlimsApiBundle\Entity\ResearchGroup',
+                    'choice_label' => 'id',
+                ]
+            )
             ->add('comment', 'text')
             ->add('colour', 'text');
     }

@@ -66,7 +66,7 @@ Ext.define('Slims.view.sample.instancetemplates.AttributesGrid', {
         this.viewConfig = this.viewConfig || {};
 
         this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
-            dragText: 'Just drop in a new place'
+            dragText: 'Drop on a new place to change the order'
         });
 
         this.viewConfig = {
@@ -81,8 +81,8 @@ Ext.define('Slims.view.sample.instancetemplates.AttributesGrid', {
 
                     var abort = function() {
                         dropHandlers.cancelDrop();
-                        Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
-                    }
+                        Ext.Msg.alert('Operation cancelled', 'Each attribute label must be unique in the template.');
+                    };
                     Ext.each(this.getStore().data.items, function(item, i) {
                         if (item.get('label') == label) {
                             if (data.view.id == this.view.id) {

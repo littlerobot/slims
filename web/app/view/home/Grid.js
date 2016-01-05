@@ -47,18 +47,21 @@ Ext.define('Slims.view.home.Grid', {
             style: 'text-align: middle;',
             columns: [{
                 text: 'Remaining',
-                width: 85,
+                width: 100,
+                sortable: true,
                 dataIndex: 'sample_remaining_capacity'
             }, {
                 text: 'Total',
-                width: 55,
+                width: 65,
+                sortable: true,
                 dataIndex: 'sample_total_capacity'
             }]
         }, {
             xtype: 'typecolumn',
             type: 'colour',
-            width: 30,
-            dataIndex: 'colour'
+            dataIndex: 'colour',
+            sortable: false,
+            menuDisabled: true
         }];
 
         if (!this.readOnly) {
@@ -66,7 +69,7 @@ Ext.define('Slims.view.home.Grid', {
                 xtype: 'actioncolumn',
                 hidden: this.readOnly,
                 icon: '/resources/images/edit.png',
-                width: 30,
+                width: 35,
                 menuDisabled: true,
                 tooltip: 'Edit container',
                 scope: this,

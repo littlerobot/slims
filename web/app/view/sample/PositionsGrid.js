@@ -11,12 +11,12 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         });
 
         this.tbar = [{
-            text: 'Configure Samples',
+            text: 'Configure samples',
             handler: function() {
                 if (this.getStore().data.length > 0) {
                     this.fireEvent('configure', this);
                 } else {
-                    Ext.Msg.alert('Grid is empty', 'No data to configure. Please, select postitons first.');
+                    Ext.Msg.alert('The grid is empty', 'No data to configure. Please select positions first.');
                 }
             },
             scope: this
@@ -34,7 +34,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
             hidden: true,
             dataIndex: 'sampleType'
         }, {
-            text: 'Instance Template',
+            text: 'Instance template',
             width: 140,
             hidden: true,
             dataIndex: 'sampleInstanceTemplate'
@@ -75,7 +75,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
     buildStoreAttributes: function(data) {
         data = data || {
             storeAttributes: [],
-            storeAtrributesValues: {}
+            storeAttributesValues: {}
         };
         this.configureData = data;
 
@@ -103,12 +103,12 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         var store = Ext.create('Ext.data.Store', {fields: storeFields});
         var storeItems = this.getStore().data.items;
 
-        var attributesValues = data ? data.storeAtrributesValues : {},
+        var attributesValues = data ? data.storeAttributesValues : {},
             attributes = {};
 
         for (var id in attributesValues) {
             attributes['id'+id] = attributesValues[id];
-        };
+        }
         // copy attributes data into each sample
         var data = storeItems.map(function(record) {
             var vals = record.data;

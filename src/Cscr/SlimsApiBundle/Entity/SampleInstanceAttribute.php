@@ -64,7 +64,7 @@ class SampleInstanceAttribute implements Downloadable
     private $parent;
 
     /**
-     * @var SampleInstanceTemplateStoredAttribute
+     * @var AbstractSampleInstanceTemplateAttribute
      *
      * @ORM\ManyToOne(targetEntity="SampleInstanceTemplateStoredAttribute")
      * @ORM\JoinColumn(name="sample_instance_template_attribute_id", nullable=false)
@@ -94,7 +94,7 @@ class SampleInstanceAttribute implements Downloadable
     }
 
     /**
-     * @return SampleInstanceTemplateStoredAttribute
+     * @return AbstractSampleInstanceTemplateAttribute
      */
     public function getTemplate()
     {
@@ -102,11 +102,11 @@ class SampleInstanceAttribute implements Downloadable
     }
 
     /**
-     * @param SampleInstanceTemplateStoredAttribute $template
+     * @param AbstractSampleInstanceTemplateAttribute $template
      *
      * @return SampleInstanceAttribute
      */
-    public function setTemplate($template)
+    public function setTemplate(AbstractSampleInstanceTemplateAttribute $template)
     {
         $this->template = $template;
 
@@ -118,12 +118,6 @@ class SampleInstanceAttribute implements Downloadable
      */
     public function getValue()
     {
-        if ($this->getTemplate()->isDate() && null !== $this->value) {
-            $transformer = new DateTimeToStringTransformer(null, null, 'Y-m-d');
-
-            return $transformer->reverseTransform($this->value)->format('d/m/Y');
-        }
-
         return $this->value;
     }
 
@@ -220,5 +214,13 @@ class SampleInstanceAttribute implements Downloadable
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     */
+    public function getLabel()
+    {
+        return $this->getTemplate()->getLabel();
     }
 }

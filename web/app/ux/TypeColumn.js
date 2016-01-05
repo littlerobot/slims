@@ -23,7 +23,7 @@ Ext.define('Slims.ux.TypeColumn', {
 
         switch (this.type) {
             case 'colour':
-                width = 120;
+                width = 35;
                 break;
             case 'document':
                 width = 250;
@@ -62,7 +62,7 @@ Ext.define('Slims.ux.TypeColumn', {
                 rendererFn = this.optionRenderer;
                 break;
             case 'date':
-                rendererFn = this.dateRenderer;
+                rendererFn = Ext.util.Format.dateRenderer('d/m/Y');
                 break;
             case 'user':
                 rendererFn = this.userRenderer;
@@ -99,10 +99,6 @@ Ext.define('Slims.ux.TypeColumn', {
     },
 
     optionRenderer: function(value) {
-        return value;
-    },
-
-    dateRenderer: function(value) {
         return value;
     },
 

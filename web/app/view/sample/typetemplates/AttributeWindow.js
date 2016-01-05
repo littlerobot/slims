@@ -196,7 +196,7 @@ Ext.define('Slims.view.sample.typetemplates.AttributeWindow', {
                 options = [];
 
             if (storeItems.length == 0) {
-                Slims.app.getMainController().error('Validation error.', 'Add at least one option in the table, or select a different type.');
+                Slims.app.getMainController().error('Validation error', 'The option type requires at least one option to be defined.');
                 return;
             }
             for (var i  in storeItems) options.push(storeItems[i].get('name'))

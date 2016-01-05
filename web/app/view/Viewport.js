@@ -15,7 +15,7 @@ Ext.define('Slims.view.Viewport', {
     initComponent: function() {
         this.items = [{
             xtype: 'tabpanel',
-            title: '<span id="title">Slims</span>',
+            title: '<span id="title">SLIMS</span>',
             items: [{
                 xtype: 'homepage',
                 title: 'Home',
@@ -24,7 +24,7 @@ Ext.define('Slims.view.Viewport', {
                 xtype: 'groupsgrid',
                 padding: 5,
                 border: true,
-                title: 'Research Groups',
+                title: 'Research groups',
                 icon: '/resources/images/groups.png'
             }, {
                 xtype: 'usersgrid',

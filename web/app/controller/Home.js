@@ -82,7 +82,7 @@ Ext.define('Slims.controller.Home', {
     },
 
     saveContainer: function(container, dialog) {
-        dialog.setLoading('Please, wait...');
+        dialog.setLoading('Saving. Please wait.');
 
         var url;
         if (container.getId()) {
@@ -110,17 +110,25 @@ Ext.define('Slims.controller.Home', {
 
     extractContainerData: function(container) {
         var allData = container.data,
+            researchGroupId = null,
             trueData = {
+                parent: allData.parent,
                 name: allData.name,
                 comment: allData.comment,
                 colour: allData.colour
             };
 
+        if (null !== allData.owner) {
+            researchGroupId = allData.research_group.hasOwnProperty("id") ? allData.research_group.id : allData.researchGroup;
+
+            Ext.apply(trueData, {
+               research_group: researchGroupId
+            });
+        }
+
         // if create mode
         if (!container.data.id) {
             Ext.apply(trueData, {
-                parent: allData.parent,
-                research_group: allData.research_group,
                 rows: allData.rows,
                 columns: allData.columns,
                 stores: allData.stores
@@ -175,12 +183,12 @@ Ext.define('Slims.controller.Home', {
             samplesGridData = this.getPositionsGrid().getStore().data.items;
 
         if (!currentContainer || !samplesGridData.length) {
-            Ext.Msg.alert('No data to storing', 'Please, select postitions in container and configure them before storing.');
+            Ext.Msg.alert('No data to save', 'Please select positions in container and configure them before saving.');
             return;
         }
 
         if (!configured) {
-            Ext.Msg.alert('Samples not configured', 'Please, configure samples before saving');
+            Ext.Msg.alert('Samples not configured', 'Please configure samples before saving.');
             return;
         }
 
@@ -225,7 +233,7 @@ Ext.define('Slims.controller.Home', {
             };
         });
 
-        this.getPositionsGrid().setLoading('Saving...');
+        this.getPositionsGrid().setLoading('Saving. Please wait.');
 
         Ext.Ajax.request({
             url: Slims.Url.getRoute('setsamples', [containerId]),
@@ -245,7 +253,7 @@ Ext.define('Slims.controller.Home', {
 
     editPositionSample: function(sample) {
         if (!this.getPositionsGrid().configured) {
-            Ext.Msg.alert('Samples not configured', 'Please, configure samples before editing');
+            Ext.Msg.alert('Samples not configured', 'Please configure samples before editing.');
             return;
         }
 

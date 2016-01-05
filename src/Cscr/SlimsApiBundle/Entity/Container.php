@@ -84,6 +84,15 @@ class Container
     private $colour;
 
     /**
+     * @var string
+     *
+     * A string representation of this container in the hierarchy.
+     *
+     * @ORM\Column(type="string", nullable=false)
+     */
+    private $hierarchy;
+
+    /**
      * @var ArrayCollection<Container>
      *
      * @ORM\OneToMany(targetEntity="Container", mappedBy="parent", fetch="EAGER")
@@ -195,8 +204,12 @@ class Container
      *
      * @return $this
      */
-    public function setParent(Container $parent)
+    public function setParent(Container $parent = null)
     {
+        if (null === $parent) {
+            return;
+        }
+
         if ($parent->isLeaf()) {
             throw new \LogicException(
                 'A container cannot store other containers if it is configured to store samples.'
@@ -207,6 +220,8 @@ class Container
             $parent->children->add($this);
             $this->parent = $parent;
         }
+
+        $this->setHierarchy();
 
         return $this;
     }
@@ -224,7 +239,7 @@ class Container
      *
      * Only traverses up the hierarchy - child containers will NOT be included.
      *
-     * @return array
+     * @return Container[]
      */
     public function getContainerHierarchy()
     {
@@ -249,6 +264,8 @@ class Container
     public function setName($name)
     {
         $this->name = $name;
+
+        $this->setHierarchy();
 
         return $this;
     }
@@ -276,7 +293,7 @@ class Container
      *
      * @return $this
      */
-    public function setResearchGroup(ResearchGroup $researchGroup)
+    public function setResearchGroup(ResearchGroup $researchGroup = null)
     {
         $this->researchGroup = $researchGroup;
 
@@ -423,5 +440,18 @@ class Container
         $this->samples->removeElement($sample);
 
         return $this;
+    }
+
+    private function setHierarchy()
+    {
+        $this->hierarchy = implode(
+            ': ',
+            array_map(
+                function (Container $container) {
+                    return $container->getName();
+                },
+                $this->getContainerHierarchy()
+            )
+        );
     }
 }

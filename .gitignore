@@ -21,16 +21,5 @@ web/build/.sass-cache
 web/build/temp
 web/build/testing
 
-.vagrant/machines/default/virtualbox/action_provision
-
-.vagrant/machines/default/virtualbox/action_set_name
-
-.vagrant/machines/default/virtualbox/id
-
-.vagrant/machines/default/virtualbox/index_uuid
-
-.vagrant/machines/default/virtualbox/private_key
-
-.vagrant/machines/default/virtualbox/synced_folders
-
-html/index.html
+# php-cs-fixer
+.php_cs.cache

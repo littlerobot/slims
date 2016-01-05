@@ -21,7 +21,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
             name: 'samplesColor',
             labelWidth: 180,
             margin: 20,
-            fieldLabel: 'Color for new samples'
+            fieldLabel: 'Colour for new samples'
         });
 
         this.items = [attributesFieldset, colorPicker];
@@ -44,8 +44,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
     },
 
     getColor: function() {
-        var color = this.down('[name=samplesColor]').getValue();
-        return color;
+        return this.down('[name=samplesColor]').getValue();
     },
 
     getValues: function() {

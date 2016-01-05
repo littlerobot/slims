@@ -10,6 +10,7 @@ Ext.define('Slims.view.sample.types.Grid', {
             getAttributesHtml: function(attributes, sample_type_template) {
                 var html = '';
                 var template = Ext.StoreMgr.get('templates').findRecord('id', sample_type_template);
+
                 Ext.each(attributes, function(attr,i) {
                     var type = template.get('attributes')[i].type,
                         val = attr.value;
@@ -22,9 +23,9 @@ Ext.define('Slims.view.sample.types.Grid', {
                     if (type == 'document') {
                         val = Ext.String.format('<a href="{0}" target="_blank">{1}</a>', attr.url, attr.filename);
                     }
-                    var string = Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, val);
-                    html += string;
+                    html += Ext.String.format('<div style="padding: 3px;"><b>{0}:</b> {1}</div>', attr.label, val);
                 }, this);
+
                 return html;
             }
         }]

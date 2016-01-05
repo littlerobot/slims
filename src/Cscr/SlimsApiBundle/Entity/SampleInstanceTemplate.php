@@ -139,4 +139,15 @@ class SampleInstanceTemplate
     {
         return $this->id;
     }
+
+    /**
+     * The template can be edited as long as no
+     * {@see SampleInstanceTemplateStoredAttributes}s have been saved using it.
+     *
+     * @return bool true if the template can be edited, false otherwise.
+     */
+    public function isEditable()
+    {
+        return $this->storedAttributes->isEmpty() && $this->removedAttributes->isEmpty();
+    }
 }

@@ -6,10 +6,10 @@ Ext.define('Slims.view.sample.Grid', {
     border: false,
 
     initComponent: function() {
-        this.store = Ext.create('Slims.store.sample.Samples')
+        this.store = Ext.create('Slims.store.sample.Samples');
         this.columns = [{
-            text: 'contaner',
-            dataIndex: 'contaner'
+            text: 'container',
+            dataIndex: 'container'
         }];
 
         this.callParent();

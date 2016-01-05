@@ -18,7 +18,7 @@ Ext.define('Slims.view.users.Grid', {
             dataIndex: 'name',
             flex: 1
         }, {
-            text: 'Research Group',
+            text: 'Research group',
             dataIndex: 'research_group',
             flex: 1,
             renderer: function(value) {

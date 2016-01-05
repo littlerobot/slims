@@ -10,5 +10,17 @@ Ext.define('Slims.store.ResearchGroups', {
             type: 'json',
             root: 'groups'
         }
+    },
+
+    listeners: {
+        load: function (store) {
+            var model = Ext.create('Slims.model.ResearchGroup', {
+                id: null,
+                name: 'None'
+            });
+
+            store.autoSync = false;
+            store.insert(0, model);
+        }
     }
 });

@@ -40,7 +40,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         this.items.add(Ext.create('Ext.form.Label', {
             padding: 10,
             width: '100%',
-            html: '<center style="color: red;">Error occured.</center>'
+            html: '<center style="color: red;">An error occurred.</center>'
         }));
         this.doLayout();
     },
@@ -62,6 +62,18 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         this.doLayout();
     },
 
+    getSampleName: function (sample) {
+        for (var i = 0; i < sample.attributes.length; i++) {
+            var attribute = sample.attributes[i];
+
+            if (attribute.label === 'Sample/cell line name') {
+                return attribute.value;
+            }
+        }
+
+        return 'Sample has an unknown name';
+    },
+
     getPositionsItems: function(samples) {
         var colsItems = [],
             columnsCount = this.selectedContainer.get('columns'),
@@ -76,9 +88,9 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
 
                 if (sample) {
                     tipHtml = [
-                        '<b><i>Sample Type:</i></b> ' + sample.type.name,
-                        '<b><i>Sample Template:</i></b> ' + sample.template.name
-                    ].join('</br>');
+                        '<b>' + this.getSampleName(sample) + '</b>',
+                        '<b><i>Type:</i></b> ' + sample.type.name
+                    ].join('<br />');
                 } else {
                     cb = Ext.create('Ext.form.field.Checkbox',  {
                         name: positionId,

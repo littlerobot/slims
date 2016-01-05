@@ -63,7 +63,7 @@ Ext.define('Slims.view.sample.typetemplates.AttributesGrid', {
         this.viewConfig = this.viewConfig || {};
 
         this.ddPlugin = Ext.create('Ext.grid.plugin.DragDrop', {
-            dragText: 'Drop on a new place to change order'
+            dragText: 'Drop on a new place to change the order'
         });
 
         this.viewConfig.plugins = this.ddPlugin;
