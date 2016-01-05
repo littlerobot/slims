@@ -122,7 +122,7 @@ Ext.define('Slims.view.sample.search.Grid', {
         return [{
             dataIndex: 'container_name',
             text: 'Container',
-            width: 150
+            width: 350
         }, {
             dataIndex: 'type_name',
             text: 'Sample Type',
