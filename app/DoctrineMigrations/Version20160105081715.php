@@ -66,7 +66,6 @@ class Version20160105081715 extends AbstractMigration implements ContainerAwareI
         parent::postUp($schema);
     }
 
-
     /**
      * Sets the container.
      *
