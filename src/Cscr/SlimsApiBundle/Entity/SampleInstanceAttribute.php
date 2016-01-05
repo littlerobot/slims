@@ -94,7 +94,7 @@ class SampleInstanceAttribute implements Downloadable
     }
 
     /**
-     * @return SampleInstanceTemplateStoredAttribute
+     * @return AbstractSampleInstanceTemplateAttribute
      */
     public function getTemplate()
     {
@@ -102,11 +102,11 @@ class SampleInstanceAttribute implements Downloadable
     }
 
     /**
-     * @param SampleInstanceTemplateStoredAttribute $template
+     * @param AbstractSampleInstanceTemplateAttribute $template
      *
      * @return SampleInstanceAttribute
      */
-    public function setTemplate($template)
+    public function setTemplate(AbstractSampleInstanceTemplateAttribute $template)
     {
         $this->template = $template;
 
