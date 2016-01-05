@@ -89,7 +89,7 @@ Ext.define('Slims.view.sample.Page', {
             xtype: 'sampletypespage',
             border: true,
             padding: '0 5 5 5'
-        }]
+        }];
 
         this.callParent();
     },

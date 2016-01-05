@@ -44,8 +44,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
                     var sampleTypePanel = this.down('panel[name=cardPanel]').layout.getActiveItem();
                     var valid = sampleTypePanel.form.isValid();
                     if (valid) {
-                        var sampleType = sampleTypePanel.down('combo').getValue();
-                        this.data.sampleType = sampleType;
+                        this.data.sampleType = sampleTypePanel.down('combo').getValue();
                         this.nextTab();
                     }
                 },
@@ -113,7 +112,7 @@ Ext.define('Slims.view.sample.wizard.Wizard', {
         if (!attributesForm.getForm().isValid())
             return;
 
-        this.data.storeAtrributesValues = attributesForm.getValues();
+        this.data.storeAttributesValues = attributesForm.getValues();
         this.data.samplesColor = attributesForm.down('[name=samplesColor]').getValue();
         this.fireEvent('save', this.data);
 

@@ -89,7 +89,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
                 if (sample) {
                     tipHtml = [
                         '<b>' + this.getSampleName(sample) + '</b>',
-                        '<b><i>Type:</i></b> ' + sample.type.name,
+                        '<b><i>Type:</i></b> ' + sample.type.name
                     ].join('<br />');
                 } else {
                     cb = Ext.create('Ext.form.field.Checkbox',  {

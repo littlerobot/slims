@@ -82,7 +82,7 @@ Ext.define('Slims.view.sample.instancetemplates.AttributesGrid', {
                     var abort = function() {
                         dropHandlers.cancelDrop();
                         Ext.Msg.alert('Operation canceled', 'Template cannot have attributes with equal labels.');
-                    }
+                    };
                     Ext.each(this.getStore().data.items, function(item, i) {
                         if (item.get('label') == label) {
                             if (data.view.id == this.view.id) {

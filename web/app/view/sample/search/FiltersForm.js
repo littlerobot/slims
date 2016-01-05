@@ -78,7 +78,7 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             name: 'search',
             handler: this.validateAndSearch,
             scope: this
-        }]
+        }];
 
         this.callParent();
     },

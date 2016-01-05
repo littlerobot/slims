@@ -178,7 +178,7 @@ Ext.define('Slims.controller.TypeTemplates', {
     reloadGrids: function() {
         var selectedTemplate = this.getTemplatesGrid().selModel.selected.get(0),
             selectedAttribute = this.getAttributesGrid().selModel.selected.get(0);
-            loadCallback = Ext.bind(function() {
+            var loadCallback = Ext.bind(function() {
                 if (selectedTemplate)
                     this.loadTemplateAttributes(selectedTemplate, selectedAttribute);
             }, this);

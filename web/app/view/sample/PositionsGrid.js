@@ -75,7 +75,7 @@ Ext.define('Slims.view.sample.PositionsGrid', {
     buildStoreAttributes: function(data) {
         data = data || {
             storeAttributes: [],
-            storeAtrributesValues: {}
+            storeAttributesValues: {}
         };
         this.configureData = data;
 
@@ -103,12 +103,12 @@ Ext.define('Slims.view.sample.PositionsGrid', {
         var store = Ext.create('Ext.data.Store', {fields: storeFields});
         var storeItems = this.getStore().data.items;
 
-        var attributesValues = data ? data.storeAtrributesValues : {},
+        var attributesValues = data ? data.storeAttributesValues : {},
             attributes = {};
 
         for (var id in attributesValues) {
             attributes['id'+id] = attributesValues[id];
-        };
+        }
         // copy attributes data into each sample
         var data = storeItems.map(function(record) {
             var vals = record.data;

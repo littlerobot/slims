@@ -44,8 +44,7 @@ Ext.define('Slims.view.sample.wizard.AttributesForm', {
     },
 
     getColor: function() {
-        var color = this.down('[name=samplesColor]').getValue();
-        return color;
+        return this.down('[name=samplesColor]').getValue();
     },
 
     getValues: function() {

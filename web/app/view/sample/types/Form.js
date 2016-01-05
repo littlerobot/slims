@@ -76,7 +76,7 @@ Ext.define('Slims.view.sample.types.Form', {
     setData: function(data) {
         this.down('[name=name]').setValue(data.name);
 
-        attributesFieldset = this.down('[name=attributesFieldset]');
+        var attributesFieldset = this.down('[name=attributesFieldset]');
         Ext.each(data.attributes, function(attribute) {
             var fieldName = attribute.sample_type_template,
                 field = attributesFieldset.down('[name='+fieldName+']');
