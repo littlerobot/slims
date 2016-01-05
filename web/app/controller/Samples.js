@@ -48,7 +48,7 @@ Ext.define('Slims.controller.Samples', {
 
         delete storeAttributes.samplesColor;
 
-        wizard.setLoading('Saving...');
+        wizard.setLoading('Saving. Please wait.');
         Ext.Ajax.request({
             url: Slims.Url.getRoute('setsamples'),
             method: 'POST',

@@ -284,7 +284,7 @@ Ext.define('Slims.view.home.container.Window', {
         if (this.down('radiogroup[name=belongs_to]').getValue().belongs_to == 'group') {
             var research_group = this.down('combobox[name=research_group]').getValue();
             if (!research_group) {
-                Ext.Msg.alert('Select research group', 'Please, select research group before saving.');
+                Ext.Msg.alert('Select research group', 'Please select a research group before saving.');
                 return;
             }
         }
@@ -359,7 +359,7 @@ Ext.define('Slims.view.home.container.Window', {
 
         var container = this.down('treepanel').selModel.selected.get(0);
         if (!container) {
-            Ext.Msg.alert('Select parent container', 'Parent container for "Stored Inside" field not selected.');
+            Ext.Msg.alert('Select parent container', 'The parent container for "Stored Inside" field must be selected.');
             return false;
         }
 

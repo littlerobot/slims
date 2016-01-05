@@ -162,7 +162,7 @@ Ext.define('Slims.controller.InstanceTemplates', {
     },
 
     saveTemplate: function(template, dialog) {
-        this.getTab().setLoading('Saving. Please, wait...');
+        this.getTab().setLoading('Saving. Please wait.');
 
         var jsonData = {
                 name: template.get('name')
@@ -178,7 +178,7 @@ Ext.define('Slims.controller.InstanceTemplates', {
         }
 
         if (dialog) {
-            dialog.setLoading(true);
+            dialog.setLoading('Saving. Please wait.');
         }
 
         Ext.Ajax.request({

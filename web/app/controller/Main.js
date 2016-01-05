@@ -13,7 +13,7 @@ Ext.define('Slims.controller.Main', {
         var response = Ext.decode(xhr.responseText);
         if (response && response.errors) {
             var title = response.errors.message || '',
-                message = 'Server returned an error.';
+                message = 'The server returned an error.';
 
             if (response.errors.children) {
                 message = '';
@@ -27,12 +27,12 @@ Ext.define('Slims.controller.Main', {
                 if (message) {
                     message += '<ul>' + message + '</ul>';
                 } else {
-                    message = 'Server returned an error.'
+                    message = 'The server returned an error.'
                 }
             }
         } else {
-            var title = 'Internal error',
-                message = 'Server returned an error.';
+            var title = 'Server error',
+                message = 'The server returned an error.';
         }
 
         this.showError(title, message);

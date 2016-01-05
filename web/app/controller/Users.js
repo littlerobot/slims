@@ -42,7 +42,7 @@ Ext.define('Slims.controller.Users', {
     },
 
     saveUser: function(user, dialog) {
-        dialog.setLoading(true);
+        dialog.setLoading('Saving. Please wait.');
 
         var url;
         if (user.getId()) {

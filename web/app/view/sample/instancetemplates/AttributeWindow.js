@@ -55,7 +55,7 @@ Ext.define('Slims.view.sample.instancetemplates.AttributeWindow', {
                     if (this.up('instancetemplatesattrwindow').usedLabels.indexOf(val.trim()) == -1) {
                         return true;
                     } else {
-                        return 'This label already in use in this template.';
+                        return 'This label is already in use in this template.';
                     }
                 }
             }, {

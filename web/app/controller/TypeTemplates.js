@@ -115,8 +115,8 @@ Ext.define('Slims.controller.TypeTemplates', {
     },
 
     commitAttributes: function(attributes) {
-        this.getAttributesGrid().setLoading(true);
-        this.getTemplatesGrid().setLoading(true);
+        this.getAttributesGrid().setLoading('Saving. Please wait.');
+        this.getTemplatesGrid().setLoading('Loading...');
 
         var template = this.getTemplatesGrid().selModel.selected.get(0);
         template.set('attributes', attributes);

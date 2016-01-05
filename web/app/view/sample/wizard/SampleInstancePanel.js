@@ -60,7 +60,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
             items: [{
                 xtype: 'grid',
                 style: 'border-right: 1px solid #99BBE8;',
-                title: 'Store Attributes',
+                title: 'Store attributes',
                 name: 'storeAttributesGrid',
                 height: '100%',
                 flex: 1,
@@ -86,7 +86,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
                 }
             }, {
                 xtype: 'grid',
-                title: 'Remove Attributes',
+                title: 'Remove attributes',
                 name: 'removeAttributesGrid',
                 height: '100%',
                 flex: 1,
@@ -132,8 +132,7 @@ Ext.define('Slims.view.sample.wizard.SampleInstancePanel', {
         });
 
         if (instanseTemplatesWithAttributes.length == 0) {
-            Ext.Msg.alert('Cannot configure samples', 'You haven\'t instance templates with store and remove attributes, please add one at least to continue.');
-            // this.up('samplewizard').close();
+            Ext.Msg.alert('Cannot configure samples', "A template must include attributes for both store and remove.");
         }
 
         comboStore.loadData(instanseTemplatesWithAttributes);

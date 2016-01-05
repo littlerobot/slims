@@ -21,13 +21,13 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             items: [{
                 xtype: 'textfield',
                 name: 'name',
-                fieldLabel: 'Sample Name',
+                fieldLabel: 'Sample name',
                 minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
                 xtype: 'textfield',
                 name: 'user',
-                fieldLabel: 'User Name',
+                fieldLabel: 'User name',
                 minLength: this.MIN_TEXT_LENGTH,
                 plugins: ['clearbutton']
             }, {
@@ -63,7 +63,7 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             }, {
                 xtype: 'datefield',
                 name: 'stored_end',
-                fieldLabel: 'Date stored till',
+                fieldLabel: 'Date stored to',
                 plugins: ['clearbutton']
             }, {
                 align: 'left',
@@ -107,14 +107,12 @@ Ext.define('Slims.view.sample.search.FiltersForm', {
             }
         }
         if (!hasValue) {
-            // this.showError('Please, type filter parameter(s) before searching');
-            Ext.Msg.alert('Filter is empty', 'Please, type filter parameter(s) before searching');
+            Ext.Msg.alert('Filter is empty', 'Please enter at least one search parameter before searching.');
             return;
         }
 
         if (fValues.stored_end && !fValues.stored_start || fValues.stored_start && !fValues.stored_end) {
-            // this.showError('Please, fill in or clear both "Date stored from" and "Date stored till" fields');
-            Ext.Msg.alert('Use both dates', 'Please, fill in or clear both "Date stored from" and "Date stored till" fields');
+            Ext.Msg.alert('Both dates must be entered', 'Both date fields must be populated to search for matching samples.');
             return;
         }
 

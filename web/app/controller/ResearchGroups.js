@@ -53,41 +53,8 @@ Ext.define('Slims.controller.ResearchGroups', {
         addGroupWindow.show();
     },
 
-    // Waiting for client's answer
-
-    // confirmDeleteAction: function(group) {
-    //     var title = 'Delete confirmation',
-    //         msg = Ext.String.format('Are you sure you want to delete group "{0}"?', group.get('name'));
-
-    //     Ext.Msg.confirm(title, msg, function(btn) {
-    //         if (btn == 'yes') {
-    //             this.deleteGroup(group);
-    //         }
-    //     }, this);
-    // },
-
-    // deleteGroup: function(group) {
-    //     this.getGroupsGrid().setLoading(true);
-
-    //     Ext.Ajax.request({
-    //         url: Slims.Url.getRoute('deletegroup'),
-    //         method: 'POST',
-    //         params: {
-    //             id: group.getId()
-    //         },
-    //         scope: this,
-    //         success: function() {
-    //             this.getGroupsGrid().getStore().load();
-    //             this.getGroupsGrid().setLoading(false);
-    //         },
-    //         failure: function() {
-    //             this.getGroupsGrid().setLoading(false);
-    //         }
-    //     });
-    // },
-
     saveGroup: function(group, dialog) {
-        dialog.setLoading(true);
+        dialog.setLoading('Saving. Please wait.');
 
         var url;
         if (group.getId()) {

@@ -40,7 +40,7 @@ Ext.define('Slims.view.sample.wizard.PositionsPanel', {
         this.items.add(Ext.create('Ext.form.Label', {
             padding: 10,
             width: '100%',
-            html: '<center style="color: red;">Error occured.</center>'
+            html: '<center style="color: red;">An error occurred.</center>'
         }));
         this.doLayout();
     },

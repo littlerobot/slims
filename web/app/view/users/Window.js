@@ -42,7 +42,7 @@ Ext.define('Slims.view.users.Window', {
             }, {
                 xtype: 'combobox',
                 name: 'research_group',
-                fieldLabel: 'Research Group',
+                fieldLabel: 'Research group',
                 editable: false,
                 store: Ext.StoreMgr.get('researchGroups'),
                 queryMode: 'local',
@@ -51,7 +51,7 @@ Ext.define('Slims.view.users.Window', {
             }, {
                 xtype: 'checkbox',
                 name: 'is_active',
-                fieldLabel: 'Is Active',
+                fieldLabel: 'Is active',
                 inputValue: true
             }]
         }];
