@@ -4,7 +4,6 @@ namespace Cscr\SlimsApiBundle\Response;
 
 use Cscr\SlimsApiBundle\Entity\AbstractSampleInstanceTemplateAttribute;
 use Cscr\SlimsApiBundle\Entity\SampleInstanceTemplate;
-use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Selectable;
 use JMS\Serializer\Annotation as JMS;
 
