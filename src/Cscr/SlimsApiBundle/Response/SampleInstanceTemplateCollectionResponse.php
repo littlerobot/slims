@@ -18,7 +18,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
     protected $data;
 
     /**
-     * @param ArrayCollection|SampleInstanceTemplate[] $templates
+     * @param SampleInstanceTemplate[] $templates
      */
     public function __construct(array $templates)
     {
@@ -28,7 +28,7 @@ class SampleInstanceTemplateCollectionResponse extends ExtJsResponse
     }
 
     /**
-     * @param array|SampleInstanceTemplate[] $templates
+     * @param SampleInstanceTemplate[] $templates
      */
     private function map(array $templates)
     {

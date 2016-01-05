@@ -239,7 +239,7 @@ class Container
      *
      * Only traverses up the hierarchy - child containers will NOT be included.
      *
-     * @return array
+     * @return Container[]
      */
     public function getContainerHierarchy()
     {
