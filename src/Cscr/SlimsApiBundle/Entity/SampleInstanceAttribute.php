@@ -64,7 +64,7 @@ class SampleInstanceAttribute implements Downloadable
     private $parent;
 
     /**
-     * @var SampleInstanceTemplateStoredAttribute
+     * @var AbstractSampleInstanceTemplateAttribute
      *
      * @ORM\ManyToOne(targetEntity="SampleInstanceTemplateStoredAttribute")
      * @ORM\JoinColumn(name="sample_instance_template_attribute_id", nullable=false)
@@ -214,5 +214,13 @@ class SampleInstanceAttribute implements Downloadable
     public function getUrl()
     {
         return $this->url;
+    }
+
+    /**
+     * @JMS\VirtualProperty()
+     */
+    public function getLabel()
+    {
+        return $this->getTemplate()->getLabel();
     }
 }
