@@ -4,7 +4,10 @@
     "type": "project",
     "description": "Sally's Laboratory Information System",
     "autoload": {
-        "psr-0": { "": "src/", "SymfonyStandard": "app/" }
+        "psr-0": {
+            "Cscr\\": "src/",
+            "SymfonyStandard": "app/"
+        }
     },
     "repositories": [
         {
