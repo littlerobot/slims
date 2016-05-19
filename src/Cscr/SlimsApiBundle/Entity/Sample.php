@@ -276,9 +276,6 @@ class Sample
         return SamplePosition::fromCoordinates($this->position);
     }
 
-    /**
-     *
-     */
     public function getIndex()
     {
         if (!$this->getContainer()) {
